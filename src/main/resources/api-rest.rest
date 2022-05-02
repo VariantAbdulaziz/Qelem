@@ -1,0 +1,40 @@
+POST  http://localhost:8080/api/v1/authenticate
+###
+GET http://localhost:8080/api/v1/questions?all
+
+###
+
+GET http://localhost:8080/api/v1/questions/2
+
+###
+POST http://localhost:8080/api/v1/questions
+Content-Type: application/json
+
+{
+  "id": 4,
+  "topic": "are",
+  "content": "we",
+  "user": {
+    "id": 2,
+    "username": "user_name",
+    "password": "password",
+    "firstName": "first_name",
+    "lastName": "secon_name",
+    "role": "MEMBER",
+    "profilePicture": "/user-photos/2/abebe.jpeg",
+    "vote": []
+  },
+  "status": "UNANSWERED",
+  "tags": {
+    "id": 2,
+    "tag": "#Biology"
+  },
+  "answer": []
+}
+###
+
+DELETE http://localhost:8080/api/v1/questions/6
+###
+
+PATCH http://localhost:8080/api/v1/questions/2
+###
