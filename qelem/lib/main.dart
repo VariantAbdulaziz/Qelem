@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:qelem/screens/registerUser.dart';
+import 'package:qelem/screens/login.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    initialRoute: '/register',
+    routes: {
+      '/register': (context) => const registerUser(),
+      '/login': (context) => const Login(),
+    },
+  ));
 }
 
 class MyApp extends StatelessWidget {
