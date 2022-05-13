@@ -27,7 +27,9 @@ jobs:
             cache-key: flutter
             cache-path: ${{ runner.tool_cache }}/flutter
             architecture: x64
+        - run: pwd
         - run: cd qelem
+        - run: pwd
         - run: flutter pub get
         - run: flutter test
         - run: flutter build apk
@@ -45,7 +47,9 @@ jobs:
         cache-key: flutter
         cache-path: ${{ runner.tool_cache }}/flutter
         architecture: x64
+    - run: pwd
     - run: cd qelem
+    - run: pwd
     - run: flutter pub get
     - run: flutter test
     - run: flutter build ios --release --no-codesign
