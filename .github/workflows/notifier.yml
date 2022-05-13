@@ -13,6 +13,7 @@ on:
   pull_request_review_comment:
     types: [created]
   push:
+    branches: [ dev, main ]
 
 jobs:
   build:
