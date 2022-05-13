@@ -12,7 +12,9 @@ on:
 jobs:
   build_android:
     runs-on: ubuntu-latest
-
+    defaults:
+      run:
+        working-directory: ./qelem
     steps:
         - uses: actions/checkout@v3
         - uses: actions/setup-java@v2
@@ -27,9 +29,6 @@ jobs:
             cache-key: flutter
             cache-path: ${{ runner.tool_cache }}/flutter
             architecture: x64
-        - run: pwd
-        - run: cd qelem
-        - run: pwd
         - run: flutter pub get
         - run: flutter test
         - run: flutter build apk
@@ -37,6 +36,9 @@ jobs:
   
   build_ios:
     runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: ./qelem
     steps:
     - uses: actions/checkout@v3
     - uses: subosito/flutter-action@v2
@@ -47,9 +49,6 @@ jobs:
         cache-key: flutter
         cache-path: ${{ runner.tool_cache }}/flutter
         architecture: x64
-    - run: pwd
-    - run: cd qelem
-    - run: pwd
     - run: flutter pub get
     - run: flutter test
     - run: flutter build ios --release --no-codesign
