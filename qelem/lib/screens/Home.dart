@@ -1,48 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:qelem/common/AppPalette.dart';
+import 'package:qelem/common/Constants.dart';
 
 
 
 class Home extends StatelessWidget {
-  // Todo: is there a better way
-  static MaterialColor? purple = const MaterialColor(
-    0xFF6E00EE,
-    <int, Color>{
-      50: Color(0xffce5641 ),//10%
-      100: Color(0xFFEA80FC),//20%
-      200: Color(0xffa04332),//30%
-      300: Color(0xff89392b),//40%
-      400: Color(0xffD500F9),//50%
-      500: Color(0xff6E00ee),//60%
-      600: Color(0xff5600e8),//70%
-      700: Color(0xff3700b3),//80%
-      800: Color(0xff30009c),//90%
-      900: Color(0xff23036a),//100%
-    },
-  );
+  const Home({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Home',
+      title: Constants.home,
       theme: ThemeData(
         // fontFamily: 'Roboto',
-        primarySwatch: purple,
+        primarySwatch: AppPalette.qelemPurple,
       ),
-      home: MyHomePage(),
+      home: const HomePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
 
   @override
-  _MyHomePageState createState()
+  _HomePageState createState()
   {
-    return _MyHomePageState();
+    return _HomePageState();
   }
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomePageState extends State<HomePage> {
 
   int _selectedIndex = 0;
 
@@ -50,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home"),
+        title: const Text(Constants.home),
       ),
       bottomNavigationBar: bottomNav(),
     );
@@ -59,19 +49,19 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget bottomNav()
   {
     return BottomNavigationBar(
-      backgroundColor: Home.purple,
+      backgroundColor: AppPalette.qelemPurple,
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
-          label: 'Home',
+          label: Constants.home,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.question_mark),
-          label: 'My Questions',
+          icon: Icon(Icons.help),
+          label: Constants.myQuestions,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person),
-          label: 'Profile',
+          label: Constants.profile,
         ),
       ],
       currentIndex: _selectedIndex,
