@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qelem/screens/post_question_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,9 +13,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Qelem',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.deepPurple,
       ),
-      home: const MyHomePage(title: 'Qelem'),
+      home: const PostQuestionScreen(),
     );
   }
 }
