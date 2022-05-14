@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
-import 'package:qelem/main.dart';
 import 'package:qelem/screens/registerUser.dart';
 
 class Login extends StatefulWidget {
@@ -50,7 +49,7 @@ class _LoginState extends State<Login> {
   TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    TextStyle? textStyle = Theme.of(context).textTheme.subtitle2;
+    TextStyle? textStyle = Theme.of(context).textTheme.subtitle1;
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -62,7 +61,8 @@ class _LoginState extends State<Login> {
               ),
               Text(
                 "Sign In",
-                style: GoogleFonts.comfortaa(textStyle: textStyle),
+                style:
+                    GoogleFonts.comfortaa(textStyle: textStyle, fontSize: 35),
               ),
             ],
           ),
@@ -75,7 +75,12 @@ class _LoginState extends State<Login> {
               style: GoogleFonts.comfortaa(textStyle: textStyle),
             ),
             TextButton(
-                child: const Text("SIGN UP"),
+                child: const Text(
+                  "SIGN UP",
+                  style: TextStyle(
+                    color: Color.fromRGBO(98, 0, 238, 1),
+                  ),
+                ),
                 onPressed: () {
                   Navigator.push(
                       context,
@@ -85,7 +90,7 @@ class _LoginState extends State<Login> {
           ]),
           Padding(
             padding:
-                const EdgeInsets.symmetric(vertical: 20.0, horizontal: 8.0),
+                const EdgeInsets.symmetric(vertical: 20.0, horizontal: 15.0),
             child: TextFormField(
               style: textStyle,
               controller: usernameController,
@@ -104,7 +109,7 @@ class _LoginState extends State<Login> {
           ),
           Padding(
             padding:
-                const EdgeInsets.symmetric(vertical: 20.0, horizontal: 8.0),
+                const EdgeInsets.symmetric(vertical: 20.0, horizontal: 15.0),
             child: TextFormField(
               style: textStyle,
               obscureText: _isObscure,
@@ -134,6 +139,7 @@ class _LoginState extends State<Login> {
             children: [
               Checkbox(
                   value: isChecked,
+                  activeColor: const Color.fromRGBO(98, 0, 238, 1),
                   onChanged: (bool? value) {
                     setState(() {
                       isChecked = value!;
@@ -141,17 +147,23 @@ class _LoginState extends State<Login> {
                   }),
               Text(
                 "Remember Me",
-                style: GoogleFonts.comfortaa(textStyle: textStyle),
+                style: GoogleFonts.comfortaa(
+                  textStyle: textStyle,
+                ),
               )
             ],
           ),
+          const SizedBox(
+            height: 15.0,
+          ),
           SizedBox(
-            width: 390.0,
+            width: 370.0,
             child: FloatingActionButton.extended(
               heroTag: "btn1",
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10)),
-              label: const Text("Login"),
+              label: const Text("SIGN IN"),
+              backgroundColor: const Color.fromRGBO(98, 0, 238, 1),
               onPressed: () async {
                 String username = usernameController.text;
                 String password = passwordController.text;

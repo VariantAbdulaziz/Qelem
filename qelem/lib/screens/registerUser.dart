@@ -77,7 +77,7 @@ jsonToFormData(http.MultipartRequest request, Map<String, dynamic> data) {
 
 class _registerUserState extends State<registerUser> {
   bool _isObscure = true;
-  final minimumPadding = 5.0;
+  final minimumPadding = 10.0;
   final ImagePicker _imagePicker = ImagePicker();
   File? file;
   Future getImage(ImageSource imageSource) async {
@@ -141,20 +141,27 @@ class _registerUserState extends State<registerUser> {
                                 MainMenuFloatingActionButton(
                               isExtended: true,
                               mini: false,
+                              backgroundColor: Color.fromRGBO(98, 0, 238, 1),
                               child: const Icon(Icons.camera),
                               onPressed: () {},
                               closeMenuChild: const Icon(Icons.close),
                               closeMenuForegroundColor: Colors.white,
+                              closeMenuBackgroundColor:
+                                  Color.fromRGBO(98, 0, 238, 1),
                             ),
                             floatingActionButtonWidgetChildren: [
                               FloatingActionButton.extended(
                                   icon: const Icon(Icons.camera),
                                   label: const Text("Camera"),
+                                  backgroundColor:
+                                      Color.fromRGBO(98, 0, 238, 1),
                                   onPressed: () =>
                                       {getImage(ImageSource.camera)}),
                               FloatingActionButton.extended(
                                   icon: const Icon(Icons.browse_gallery),
                                   label: const Text("Galley"),
+                                  backgroundColor:
+                                      Color.fromRGBO(98, 0, 238, 1),
                                   onPressed: () =>
                                       {getImage(ImageSource.gallery)})
                             ],
@@ -171,7 +178,7 @@ class _registerUserState extends State<registerUser> {
                 ),
               ),
               const SizedBox(
-                height: 20.0,
+                height: 10.0,
               ),
               Center(
                 child: Text(
@@ -179,7 +186,9 @@ class _registerUserState extends State<registerUser> {
                   style: GoogleFonts.comfortaa(textStyle: headline4),
                 ),
               ),
-
+              const SizedBox(
+                height: 15.0,
+              ),
               Padding(
                   padding: EdgeInsets.only(
                       top: minimumPadding, bottom: minimumPadding),
@@ -270,6 +279,7 @@ class _registerUserState extends State<registerUser> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
                   label: const Text('SIGN UP'),
+                  backgroundColor: Color.fromRGBO(98, 0, 238, 1),
                   onPressed: () async {
                     String firstName = firstController.text;
                     String lastName = lastController.text;
@@ -298,6 +308,9 @@ class _registerUserState extends State<registerUser> {
                   TextButton(
                       child: const Text(
                         "SIGN IN",
+                      ),
+                      style: TextButton.styleFrom(
+                        primary: Color.fromRGBO(98, 0, 238, 1),
                       ),
                       onPressed: () {
                         Navigator.push(
