@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qelem/widgets/discard_question_edit_dialog.dart';
 
 class EditQuestionScreen extends StatefulWidget {
   const EditQuestionScreen({Key? key}) : super(key: key);
@@ -17,59 +18,45 @@ class _EditQuestionScreenState extends State<EditQuestionScreen> {
             onPressed: () {
               showDialog<void>(
                   context: context,
-                  builder: (context) => discardEditDialog(context));
+                  builder: (context) => const DiscardQuestionEditDialog());
             },
             icon: const Icon(Icons.chevron_left)),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            TextFormField(
-              initialValue: '',
-              decoration: const InputDecoration(
-                labelText: 'Topic',
-                border: OutlineInputBorder(),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              TextFormField(
+                initialValue: '',
+                decoration: const InputDecoration(
+                  labelText: 'Topic',
+                  border: OutlineInputBorder(),
+                ),
               ),
-            ),
-            const SizedBox(height: 16.0),
-            TextFormField(
-              initialValue: '',
-              decoration: const InputDecoration(
-                labelText: 'Content',
-                border: OutlineInputBorder(),
-                alignLabelWithHint: true,
+              const SizedBox(height: 16.0),
+              TextFormField(
+                initialValue: '',
+                decoration: const InputDecoration(
+                  labelText: 'Content',
+                  border: OutlineInputBorder(),
+                  alignLabelWithHint: true,
+                ),
+                maxLines: 20,
+                textAlignVertical: TextAlignVertical.top,
               ),
-              maxLines: 20,
-              textAlignVertical: TextAlignVertical.top,
-            ),
-            const SizedBox(height: 25.0),
-            ElevatedButton(
-              onPressed: () {
-                // Respond to button press
-              },
-              child: const Text('SAVE'),
-            ),
-          ],
+              const SizedBox(height: 25.0),
+              ElevatedButton(
+                onPressed: () {
+                  // Respond to button press
+                },
+                child: const Text('SAVE'),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
-}
-
-AlertDialog discardEditDialog(BuildContext context) {
-  return AlertDialog(
-    title: const Text('Discard edit?'),
-    actions: [
-      TextButton(
-        onPressed: () {},
-        child: const Text('YES'),
-      ),
-      TextButton(
-        onPressed: () {},
-        child: const Text('NO'),
-      ),
-    ],
-  );
 }
