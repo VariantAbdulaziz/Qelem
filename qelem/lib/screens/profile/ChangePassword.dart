@@ -9,34 +9,34 @@ class ChangePassword extends StatefulWidget {
 }
 
 class _ChangePasswordState extends State<ChangePassword> {
-  bool currentHidden = true;
+	bool currentHidden = true;
 	bool newHidden = true;
 	bool confirmHidden = true;
-	
-  TextEditingController currentPasswordController = TextEditingController();
+
+	TextEditingController currentPasswordController = TextEditingController();
 	TextEditingController newPasswordController = TextEditingController();
 	TextEditingController confirmPasswordController = TextEditingController();
-  
-  @override
-  Widget build(BuildContext context) {
-    TextStyle? textStyle = Theme.of(context).textTheme.subtitle1;
-    return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-            child: TextFormField(
-              style: textStyle,
-              obscureText: currentHidden,
-              controller: currentPasswordController,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Please enter your current password';
-                }
-              },
-              decoration: InputDecoration(
+
+	@override
+	Widget build(BuildContext context) {
+		TextStyle? textStyle = Theme.of(context).textTheme.subtitle1;
+		return Scaffold(
+			body: Column(
+				mainAxisAlignment: MainAxisAlignment.start,
+				children: [
+					Padding(
+						padding:
+								const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+						child: TextFormField(
+							style: textStyle,
+							obscureText: currentHidden,
+							controller: currentPasswordController,
+							validator: (value) {
+								if (value!.isEmpty) {
+									return 'Please enter your current password';
+								}
+							},
+							decoration: InputDecoration(
 								labelText: 'Current Password',
 								suffixIcon: IconButton(
 									icon: Icon(
@@ -53,21 +53,21 @@ class _ChangePasswordState extends State<ChangePassword> {
 										borderRadius: BorderRadius.circular(5.0)
 								)
 							),
-            ),
-          ),
+						),
+					),
 					Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-            child: TextFormField(
-              style: textStyle,
-              obscureText: newHidden,
-              controller: newPasswordController,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Please enter your new password';
-                }
-              },
-              decoration: InputDecoration(
+						padding:
+								const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+						child: TextFormField(
+							style: textStyle,
+							obscureText: newHidden,
+							controller: newPasswordController,
+							validator: (value) {
+								if (value!.isEmpty) {
+									return 'Please enter your new password';
+								}
+							},
+							decoration: InputDecoration(
 								labelText: 'New Password',
 								suffixIcon: IconButton(
 									icon: Icon(
@@ -84,23 +84,23 @@ class _ChangePasswordState extends State<ChangePassword> {
 										borderRadius: BorderRadius.circular(5.0)
 								)
 							),
-            ),
-          ),
+						),
+					),
 					Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-            child: TextFormField(
-              style: textStyle,
-              obscureText: confirmHidden,
-              controller: confirmPasswordController,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Please confirm your current password';
-                } else if(value != newPasswordController.text) {
+						padding:
+								const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+						child: TextFormField(
+							style: textStyle,
+							obscureText: confirmHidden,
+							controller: confirmPasswordController,
+							validator: (value) {
+								if (value!.isEmpty) {
+									return 'Please confirm your current password';
+								} else if(value != newPasswordController.text) {
 									return 'Passwords don\'t match';
 								}
-              },
-              decoration: InputDecoration(
+							},
+							decoration: InputDecoration(
 								labelText: 'New Password (again)',
 								suffixIcon: IconButton(
 									icon: Icon(
@@ -117,8 +117,8 @@ class _ChangePasswordState extends State<ChangePassword> {
 										borderRadius: BorderRadius.circular(5.0)
 								)
 							),
-            ),
-          ),
+						),
+					),
 					Container(
 						margin: const EdgeInsets.only(right: 15.0, top: 15.0),
 						child: Align(
@@ -134,7 +134,7 @@ class _ChangePasswordState extends State<ChangePassword> {
 										'UPDATE',
 										style: GoogleFonts.comfortaa(
 											color: Colors.white,
-											textStyle: textStyle, 
+											textStyle: textStyle,
 											fontSize: 16,
 											letterSpacing: 2
 										),
@@ -145,8 +145,8 @@ class _ChangePasswordState extends State<ChangePassword> {
 							),
 						)
 					)
-        ],
-      ),
-    );
-  }
+				],
+			),
+		);
+	}
 }
