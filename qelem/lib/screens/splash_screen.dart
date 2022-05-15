@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
-class Splash extends StatefulWidget {
-  const Splash({Key? key, required Widget this.nextScreen}) : super(key: key);
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({Key? key, required Widget this.nextScreen})
+      : super(key: key);
   final nextScreen;
 
   @override
-  State<Splash> createState() => _SplashState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashState extends State<Splash> {
+class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     _navigateToHome();
