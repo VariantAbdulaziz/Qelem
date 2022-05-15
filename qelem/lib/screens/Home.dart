@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:qelem/common/AppPalette.dart';
 import 'package:qelem/common/Constants.dart';
+import 'package:qelem/common/QelemTheme.dart';
 import 'package:qelem/widgets/HomeAppBar.dart';
 
 class Home extends StatelessWidget {
@@ -11,10 +11,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: Constants.home,
-      theme: ThemeData(
-        textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme),
-        primarySwatch: AppPalette.qelemPurple,
-      ),
+      theme: QelemTheme.qelemTheme,
       home: const HomePage(),
     );
   }
@@ -60,10 +57,8 @@ class _HomePageState extends State<HomePage> {
         ),
       ],
       currentIndex: _selectedIndex,
-      selectedLabelStyle:
-          GoogleFonts.comfortaa(color: Colors.white, fontSize: 13),
-      unselectedLabelStyle:
-          GoogleFonts.comfortaa(color: Colors.grey, fontSize: 13),
+      selectedLabelStyle: QelemTheme.bottomNavSelected,
+      unselectedLabelStyle: QelemTheme.bottomNavUnselected,
       selectedItemColor: Colors.white,
       unselectedItemColor: Colors.grey,
       onTap: _onTap,
