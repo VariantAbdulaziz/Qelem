@@ -12,7 +12,7 @@ class RegisterLoginScreen extends StatelessWidget {
     final additionalIntrosStyle = Theme.of(context).textTheme.subtitle1;
     const signInButtonText = "SIGN IN";
     const createAccButtonText = "CREATE AN ACCOUNT";
-    const imagePath = "";
+    const imagePath = "assets/newbies_motivator.png";
     const mainWelcomeText = "Hey! Welcome";
     const additionalIntros =
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam egestas rhoncus lectus rhoncus, tempor. ";
@@ -27,7 +27,7 @@ class RegisterLoginScreen extends StatelessWidget {
             height: imageHeight,
             child: const Image(
               image: AssetImage(imagePath),
-              fit: BoxFit.fill,
+              fit: BoxFit.contain,
             ),
           ),
           Column(
