@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     final productNameStyle = Theme.of(context).primaryTextTheme.headline1;
-    final ownerStyle = Theme.of(context).primaryTextTheme.subtitle2;
+    final ownerStyle = Theme.of(context).primaryTextTheme.subtitle1;
     const productName = "Qelem";
     const owner = "owner";
 
