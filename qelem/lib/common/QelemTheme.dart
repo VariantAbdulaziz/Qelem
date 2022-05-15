@@ -7,10 +7,15 @@ class QelemTheme {
   static ThemeData qelemTheme = ThemeData(
     textTheme: GoogleFonts.robotoTextTheme(),
     primarySwatch: AppPalette.qelemPurple,
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      selectedLabelStyle: GoogleFonts.comfortaa(color: Colors.white, fontSize: 13),
+      unselectedLabelStyle: GoogleFonts.comfortaa(color: Colors.grey, fontSize: 13),
+      selectedItemColor: Colors.white,
+      unselectedItemColor: Colors.grey,
+    ),
+    appBarTheme: AppBarTheme(
+        titleTextStyle: GoogleFonts.comfortaa(color: Colors.white, fontSize: 20.0)
+    )
   );
 
-  static TextStyle appBarText = GoogleFonts.comfortaa(color: Colors.white);
-
-  static TextStyle bottomNavSelected = GoogleFonts.comfortaa(color: Colors.white, fontSize: 13);
-  static TextStyle bottomNavUnselected = GoogleFonts.comfortaa(color: Colors.grey, fontSize: 13);
 }

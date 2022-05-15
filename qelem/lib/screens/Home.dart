@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qelem/common/AppPalette.dart';
 import 'package:qelem/common/Constants.dart';
-import 'package:qelem/common/QelemTheme.dart';
 import 'package:qelem/widgets/HomeAppBar.dart';
 
 class Home extends StatelessWidget {
@@ -53,10 +52,6 @@ class _HomePageState extends State<HomePage> {
         ),
       ],
       currentIndex: _selectedIndex,
-      selectedLabelStyle: QelemTheme.bottomNavSelected,
-      unselectedLabelStyle: QelemTheme.bottomNavUnselected,
-      selectedItemColor: Colors.white,
-      unselectedItemColor: Colors.grey,
       onTap: _onTap,
     );
   }
