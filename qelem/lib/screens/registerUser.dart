@@ -20,22 +20,6 @@ class registerUser extends StatefulWidget {
 registerUsers(String firstName, String lastName, String username,
     String password, File? file, BuildContext context) async {
   var url = "http://127.0.0.1adb reverse tcp:8000 tcp:8000:8080/api/v1/users";
-  // var response = await http.post(Uri.parse(url),
-  //     headers: headers,
-  //     body: jsonEncode(<String, String>{
-  //       "firstName": firstName,
-  //       "lastName": lastName,
-  //       "username": username,
-  //       "password": password,
-  //     }));
-  // String responseString = response.body;
-  // if (response.statusCode == 200) {
-  //   showDialog(
-  //     context: context,
-  //     builder: (BuildContext dialogContext) {
-  //       return MyAlertDialog(title: 'Backend Response', content: response.body);
-  //     },
-  //   );
   final tempUser = {
     "firstName": firstName,
     "lastName": lastName,
