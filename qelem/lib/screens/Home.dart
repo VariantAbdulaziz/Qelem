@@ -9,11 +9,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: Constants.home,
-      theme: QelemTheme.qelemTheme,
-      home: const HomePage(),
-    );
+    return const HomePage();
   }
 }
 
