@@ -5,7 +5,7 @@ AppBar homeAppBar(String _title) {
   return AppBar(
     title: Text(
       _title,
-      style: QelemTheme.appBar,
+      style: QelemTheme.appBarText,
     ),
     actions: [
       IconButton(onPressed: () => {}, icon: const Icon(Icons.search))
