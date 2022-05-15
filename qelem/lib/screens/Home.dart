@@ -3,19 +3,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:qelem/common/AppPalette.dart';
 import 'package:qelem/common/Constants.dart';
 
-
-
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: Constants.home,
       theme: ThemeData(
+        textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme),
         primarySwatch: AppPalette.qelemPurple,
-
       ),
       home: const HomePage(),
     );
@@ -25,16 +22,13 @@ class Home extends StatelessWidget {
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
-
   @override
-  _HomePageState createState()
-  {
+  _HomePageState createState() {
     return _HomePageState();
   }
 }
 
 class _HomePageState extends State<HomePage> {
-
   int _selectedIndex = 0;
 
   @override
@@ -47,8 +41,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget bottomNav()
-  {
+  Widget bottomNav() {
     return BottomNavigationBar(
       backgroundColor: AppPalette.qelemPurple,
       items: const [
@@ -67,20 +60,17 @@ class _HomePageState extends State<HomePage> {
       ],
       currentIndex: _selectedIndex,
       selectedLabelStyle:
-      GoogleFonts.comfortaa(color: Colors.white, fontSize: 13),
+          GoogleFonts.comfortaa(color: Colors.white, fontSize: 13),
       unselectedLabelStyle:
-      GoogleFonts.comfortaa(color: Colors.grey, fontSize: 13),
+          GoogleFonts.comfortaa(color: Colors.grey, fontSize: 13),
       selectedItemColor: Colors.white,
       unselectedItemColor: Colors.grey,
       onTap: _onTap,
     );
   }
 
-  void _onTap(int index)
-  {
+  void _onTap(int index) {
     _selectedIndex = index;
-    setState(() {
-
-    });
+    setState(() {});
   }
 }
