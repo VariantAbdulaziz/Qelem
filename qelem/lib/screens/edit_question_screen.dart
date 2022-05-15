@@ -13,6 +13,13 @@ class _EditQuestionScreenState extends State<EditQuestionScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Edit"),
+        leading: IconButton(
+            onPressed: () {
+              showDialog<void>(
+                  context: context,
+                  builder: (context) => discardEditDialog(context));
+            },
+            icon: const Icon(Icons.chevron_left)),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
@@ -34,7 +41,7 @@ class _EditQuestionScreenState extends State<EditQuestionScreen> {
                 border: OutlineInputBorder(),
                 alignLabelWithHint: true,
               ),
-              maxLines: 10,
+              maxLines: 20,
               textAlignVertical: TextAlignVertical.top,
             ),
             const SizedBox(height: 25.0),
@@ -42,11 +49,27 @@ class _EditQuestionScreenState extends State<EditQuestionScreen> {
               onPressed: () {
                 // Respond to button press
               },
-              child: const Text('POST'),
+              child: const Text('SAVE'),
             ),
           ],
         ),
       ),
     );
   }
+}
+
+AlertDialog discardEditDialog(BuildContext context) {
+  return AlertDialog(
+    title: const Text('Discard edit?'),
+    actions: [
+      TextButton(
+        onPressed: () {},
+        child: const Text('YES'),
+      ),
+      TextButton(
+        onPressed: () {},
+        child: const Text('NO'),
+      ),
+    ],
+  );
 }
