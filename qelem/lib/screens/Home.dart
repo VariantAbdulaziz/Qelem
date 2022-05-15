@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:qelem/common/AppPalette.dart';
 import 'package:qelem/common/Constants.dart';
+import 'package:qelem/widgets/HomeAppBar.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -30,13 +31,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
+  String _title = Constants.home;
+  AppBar _appBar = homeAppBar(Constants.home);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(Constants.home),
-      ),
+      appBar: _appBar,
       bottomNavigationBar: bottomNav(),
     );
   }
@@ -71,6 +72,24 @@ class _HomePageState extends State<HomePage> {
 
   void _onTap(int index) {
     _selectedIndex = index;
+    switch (index) {
+      case 0:
+        {
+          _title = Constants.home;
+          _appBar = homeAppBar(_title);
+        }
+        break;
+      case 1:
+        {
+          _title = Constants.myQuestions;
+        }
+        break;
+      case 2:
+        {
+          _title = Constants.profile;
+        }
+        break;
+    }
     setState(() {});
   }
 }
