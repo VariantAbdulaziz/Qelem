@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:qelem/common/constants.dart';
 import 'package:qelem/screens/Home.dart';
-import 'common/constants.dart';
 import 'common/qelem_theme.dart';
 
 void main() {
