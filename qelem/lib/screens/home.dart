@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:qelem/common/AppPalette.dart';
-import 'package:qelem/common/Constants.dart';
-import 'package:qelem/widgets/HomeAppBar.dart';
-import 'package:qelem/widgets/CommonAppBar.dart';
+import 'package:qelem/common/app_palette.dart';
+import 'package:qelem/common/constants.dart';
+import 'package:qelem/widgets/home_app_bar.dart';
+import 'package:qelem/widgets/common_app_bar.dart';
 
-import '../domain/models/QuestionModel.dart';
-import '../widgets/QuestionCard.dart';
+import '../domain/models/question_model.dart';
+import '../widgets/question_card.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);

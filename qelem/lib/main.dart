@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:qelem/screens/Home.dart';
-import 'common/Constants.dart';
-import 'common/QelemTheme.dart';
+import 'package:qelem/screens/home.dart';
+import 'common/constants.dart';
+import 'common/qelem_theme.dart';
 
 void main() {
   runApp(const App());

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qelem/domain/models/QuestionModel.dart';
+import 'package:qelem/domain/models/question_model.dart';
 
 class QuestionCard extends StatelessWidget {
   final QuestionModel question;
