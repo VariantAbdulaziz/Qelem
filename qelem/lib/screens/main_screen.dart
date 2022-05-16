@@ -1,27 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:qelem/common/AppPalette.dart';
-import 'package:qelem/common/Constants.dart';
-import 'package:qelem/widgets/HomeAppBar.dart';
+import 'package:qelem/common/app_palette.dart';
+import 'package:qelem/common/constants.dart';
+import 'package:qelem/screens/home_screen.dart';
+import 'package:qelem/screens/my_questions_screen.dart';
+import 'package:qelem/widgets/home_app_bar.dart';
+import 'package:qelem/widgets/common_app_bar.dart';
 
-class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+
+class Main extends StatelessWidget {
+  const Main({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const HomePage();
+    return const MainScreen();
   }
 }
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class MainScreen extends StatefulWidget {
+  const MainScreen({Key? key}) : super(key: key);
 
   @override
-  _HomePageState createState() {
-    return _HomePageState();
+  _MainScreenState createState() {
+    return _MainScreenState();
   }
 }
 
-class _HomePageState extends State<HomePage> {
+class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
   String _title = Constants.home;
   AppBar _appBar = homeAppBar(Constants.home);
@@ -30,6 +34,15 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBar,
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: [
+          HomeScreen(),
+          MyQuestionsScreen(),
+          Container()
+          // Nazrawi needs to add his screen here too.
+        ],
+      ),
       bottomNavigationBar: bottomNav(),
     );
   }
@@ -68,11 +81,13 @@ class _HomePageState extends State<HomePage> {
       case 1:
         {
           _title = Constants.myQuestions;
+          _appBar = commonAppBar(_title);
         }
         break;
       case 2:
         {
           _title = Constants.profile;
+          _appBar = commonAppBar(_title);
         }
         break;
     }

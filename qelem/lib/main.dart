@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:qelem/screens/Home.dart';
-import 'common/Constants.dart';
-import 'common/QelemTheme.dart';
+import 'package:qelem/screens/main_screen.dart';
+import 'common/constants.dart';
+import 'common/qelem_theme.dart';
 
 void main() {
   runApp(const App());
@@ -15,7 +15,8 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: Constants.home,
       theme: QelemTheme.qelemTheme,
-      home: const Home(),
+      debugShowCheckedModeBanner: false,
+      home: const Main(),
     );
   }
 }
