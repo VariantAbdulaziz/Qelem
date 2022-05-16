@@ -15,7 +15,21 @@ class QelemTheme {
     ),
     appBarTheme: AppBarTheme(
         titleTextStyle: GoogleFonts.comfortaa(color: Colors.white, fontSize: 20.0)
+    ),
+    cardTheme: CardTheme(
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(4),
+        side: const BorderSide(
+          color: Colors.black12,
+          width: 1
+        )
+      ),
     )
   );
+
+  // static ThemeData questionCardTheme = ThemeData(
+  //
+  // );
 
 }
