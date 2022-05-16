@@ -5,10 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_arc_speed_dial/flutter_speed_dial_menu_button.dart';
 import 'package:flutter_arc_speed_dial/main_menu_floating_action_button.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:qelem/domain/models/UserModel.dart';
-import 'package:qelem/screens/login.dart';
 
 class registerUser extends StatefulWidget {
   const registerUser({Key? key}) : super(key: key);
@@ -218,21 +216,7 @@ class _registerUserState extends State<registerUser> {
                       borderRadius: BorderRadius.circular(10)),
                   label: const Text('SIGN UP'),
                   backgroundColor: Color.fromRGBO(98, 0, 238, 1),
-                  onPressed: () async {
-                    String firstName = firstController.text;
-                    String lastName = lastController.text;
-                    String username = usernameController.text;
-                    String password = passwordController.text;
-                    UserModel users = await registerUsers(
-                        firstName, lastName, username, password, file, context);
-                    firstController.text = '';
-                    lastController.text = '';
-                    usernameController.text = '';
-                    passwordController.text = '';
-                    setState(() {
-                      user = users;
-                    });
-                  }),
+                  onPressed: () => {}),
               const SizedBox(
                 height: 2.0,
               ),
@@ -248,14 +232,9 @@ class _registerUserState extends State<registerUser> {
                         "SIGN IN",
                       ),
                       style: TextButton.styleFrom(
-                        primary: Color.fromRGBO(98, 0, 238, 1),
+                        primary: const Color.fromRGBO(98, 0, 238, 1),
                       ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Login()));
-                      })
+                      onPressed: () {})
                 ],
               ),
             ],
