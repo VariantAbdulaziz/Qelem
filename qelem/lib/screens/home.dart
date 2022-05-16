@@ -37,8 +37,6 @@ class _HomePageState extends State<HomePage> {
       body: ListView.builder(
         itemCount: 20,
         itemBuilder: (context, position) {
-          // These is a testing data to be removed once you
-          // guys review my request. Remind me to remove it.
           return QuestionCard(QuestionModel(
               "What is the best way to manage state in flutter",
               "Emre Varol",
