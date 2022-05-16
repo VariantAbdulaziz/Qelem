@@ -17,48 +17,6 @@ class registerUser extends StatefulWidget {
   State<registerUser> createState() => _registerUserState();
 }
 
-registerUsers(String firstName, String lastName, String username,
-    String password, File? file, BuildContext context) async {
-  var url = "http://127.0.0.1adb reverse tcp:8000 tcp:8000:8080/api/v1/users";
-  final tempUser = {
-    "firstName": firstName,
-    "lastName": lastName,
-    "username": username,
-    "password": password,
-  };
-
-  final parsedUri = Uri.http("127.0.0.1:8080", "/api/v1/users", tempUser);
-  var request = http.MultipartRequest('POST', parsedUri);
-  request = jsonToFormData(request, tempUser);
-  request.headers;
-  if (file != null) {
-    request.files
-        .add(await http.MultipartFile.fromPath("multipartFile", file.path));
-  }
-  final response = await request.send();
-  final responseData = await response.stream.toBytes();
-  final responseString = String.fromCharCodes(responseData);
-  if (response.statusCode == 201) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const Login()));
-  } else {
-    showDialog(
-      context: context,
-      builder: (BuildContext dialogContext) {
-        return MyAlertDialog(
-            title: 'Backend Response', content: responseString);
-      },
-    );
-  }
-}
-
-jsonToFormData(http.MultipartRequest request, Map<String, dynamic> data) {
-  for (var key in data.keys) {
-    request.fields[key] = data[key].toString();
-  }
-  return request;
-}
-
 class _registerUserState extends State<registerUser> {
   bool _isObscure = true;
   final minimumPadding = 10.0;
@@ -76,10 +34,6 @@ class _registerUserState extends State<registerUser> {
       file = File(pickedFile!.path);
     });
   }
-
-  // final path = image.path;
-  // final bytes = await File(path).readAsBytes();
-  // final img.Image image = img.decodeImage(bytes);
 
   TextEditingController firstController = TextEditingController();
   TextEditingController lastController = TextEditingController();
@@ -304,16 +258,6 @@ class _registerUserState extends State<registerUser> {
                       })
                 ],
               ),
-
-              // FloatingActionButton.extended(
-              //     heroTag: "login_btn",
-              //     label: const Text('Login'),
-              //     onPressed: () {
-              //       Navigator.push(
-              //           context,
-              //           MaterialPageRoute(
-              //               builder: (context) => const Login()));
-              //     })
             ],
           ),
         ),
