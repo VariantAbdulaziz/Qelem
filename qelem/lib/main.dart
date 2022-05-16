@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qelem/screens/home.dart';
+import 'package:qelem/screens/main_screen.dart';
 import 'common/constants.dart';
 import 'common/qelem_theme.dart';
 
@@ -16,7 +16,7 @@ class App extends StatelessWidget {
       title: Constants.home,
       theme: QelemTheme.qelemTheme,
       debugShowCheckedModeBanner: false,
-      home: const Home(),
+      home: const Main(),
     );
   }
 }
