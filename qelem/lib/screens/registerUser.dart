@@ -1,11 +1,4 @@
-import 'dart:core';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_arc_speed_dial/flutter_speed_dial_menu_button.dart';
-import 'package:flutter_arc_speed_dial/main_menu_floating_action_button.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:qelem/domain/models/UserModel.dart';
 
 class registerUser extends StatefulWidget {
@@ -17,21 +10,6 @@ class registerUser extends StatefulWidget {
 
 class _registerUserState extends State<registerUser> {
   bool _isObscure = true;
-  final minimumPadding = 10.0;
-  final ImagePicker _imagePicker = ImagePicker();
-  File? file;
-  Future getImage(ImageSource imageSource) async {
-    var source = imageSource == ImageSource.camera
-        ? ImageSource.camera
-        : ImageSource.gallery;
-    var pickedFile = await _imagePicker.pickImage(
-        source: source,
-        preferredCameraDevice: CameraDevice.front,
-        imageQuality: 100);
-    setState(() {
-      file = File(pickedFile!.path);
-    });
-  }
 
   TextEditingController firstController = TextEditingController();
   TextEditingController lastController = TextEditingController();
@@ -42,231 +20,110 @@ class _registerUserState extends State<registerUser> {
 
   @override
   Widget build(BuildContext context) {
-    final TextStyle headline4 = Theme.of(context).textTheme.headline4!;
-    TextStyle? textStyle = Theme.of(context).textTheme.subtitle2;
     return Scaffold(
       body: Form(
         child: Padding(
-          padding: EdgeInsets.all(minimumPadding * 2),
-          child: ListView(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 40.0,
-                      ),
-                      Stack(children: [
-                        Center(
-                          child: CircleAvatar(
-                            backgroundImage: file != null
-                                ? FileImage(file!) as ImageProvider
-                                : const AssetImage("assets/abebe.jpeg"),
-                            radius: 100,
-                          ),
-                        ),
-                        Positioned(
-                          right: 70.0,
-                          top: -100.0,
-                          width: 200.0,
-                          height: 300.0,
-                          child: SpeedDialMenuButton(
-                            mainMenuFloatingActionButton:
-                                MainMenuFloatingActionButton(
-                              isExtended: true,
-                              mini: false,
-                              backgroundColor: Color.fromRGBO(98, 0, 238, 1),
-                              child: const Icon(Icons.camera),
-                              onPressed: () {},
-                              closeMenuChild: const Icon(Icons.close),
-                              closeMenuForegroundColor: Colors.white,
-                              closeMenuBackgroundColor:
-                                  Color.fromRGBO(98, 0, 238, 1),
-                            ),
-                            floatingActionButtonWidgetChildren: [
-                              FloatingActionButton.extended(
-                                  icon: const Icon(Icons.camera),
-                                  label: const Text("Camera"),
-                                  backgroundColor:
-                                      Color.fromRGBO(98, 0, 238, 1),
-                                  onPressed: () =>
-                                      {getImage(ImageSource.camera)}),
-                              FloatingActionButton.extended(
-                                  icon: const Icon(Icons.browse_gallery),
-                                  label: const Text("Galley"),
-                                  backgroundColor:
-                                      Color.fromRGBO(98, 0, 238, 1),
-                                  onPressed: () =>
-                                      {getImage(ImageSource.gallery)})
-                            ],
-                            isMainFABMini: false,
-                            isSpeedDialFABsMini: false,
-                          ),
-                        )
-                      ]),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                    ],
-                  ),
-                ),
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                "Create Your Account",
+                style: Theme.of(context).textTheme.headline5,
               ),
-              const SizedBox(
-                height: 10.0,
-              ),
-              Center(
-                child: Text(
-                  "Create Your Account",
-                  style: GoogleFonts.comfortaa(textStyle: headline4),
-                ),
-              ),
-              const SizedBox(
-                height: 15.0,
-              ),
-              Padding(
-                  padding: EdgeInsets.only(
-                      top: minimumPadding, bottom: minimumPadding),
-                  child: TextFormField(
-                    style: textStyle,
-                    controller: firstController,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'please enter your name';
-                      }
-                    },
-                    decoration: InputDecoration(
-                        labelText: 'First Name',
-                        hintText: 'Enter Your First Name',
-                        labelStyle: GoogleFonts.comfortaa(textStyle: textStyle),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5.0))),
-                  )),
-              Padding(
-                  padding: EdgeInsets.only(
-                      top: minimumPadding, bottom: minimumPadding),
-                  child: TextFormField(
-                    style: textStyle,
-                    controller: lastController,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'please enter your name';
-                      }
-                    },
-                    decoration: InputDecoration(
-                        labelText: 'Last Name',
-                        hintText: 'Enter Your First Name',
-                        labelStyle: GoogleFonts.comfortaa(textStyle: textStyle),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5.0))),
-                  )),
-              Padding(
-                  padding: EdgeInsets.only(
-                      top: minimumPadding, bottom: minimumPadding),
-                  child: TextFormField(
-                    style: textStyle,
-                    controller: usernameController,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'please enter your name';
-                      }
-                    },
-                    decoration: InputDecoration(
-                        labelText: 'username',
-                        hintText: 'Enter a username',
-                        labelStyle: GoogleFonts.comfortaa(textStyle: textStyle),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5.0))),
-                  )),
-              Padding(
-                  padding: EdgeInsets.only(
-                      top: minimumPadding, bottom: minimumPadding),
-                  child: TextFormField(
-                    style: textStyle,
-                    controller: passwordController,
-                    obscureText: _isObscure,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'please enter your name';
-                      }
-                    },
-                    decoration: InputDecoration(
-                        labelText: 'password',
-                        hintText: 'Enter a password',
-                        suffixIcon: IconButton(
-                            icon: Icon(_isObscure
-                                ? Icons.visibility
-                                : Icons.visibility_off),
-                            onPressed: () {
-                              setState(() {
-                                _isObscure = !_isObscure;
-                              });
-                            }),
-                        labelStyle: GoogleFonts.comfortaa(textStyle: textStyle),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5.0))),
-                  )),
-              const SizedBox(
-                height: 60.0,
-              ),
-              FloatingActionButton.extended(
-                  heroTag: "reg_btn",
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  label: const Text('SIGN UP'),
-                  backgroundColor: Color.fromRGBO(98, 0, 238, 1),
-                  onPressed: () => {}),
-              const SizedBox(
-                height: 2.0,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              Wrap(
+                crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
                   Text(
                     "Do you already have an account?",
-                    style: GoogleFonts.comfortaa(textStyle: textStyle),
+                    style: Theme.of(context).textTheme.subtitle2,
                   ),
                   TextButton(
-                      child: const Text(
-                        "SIGN IN",
-                      ),
-                      style: TextButton.styleFrom(
-                        primary: const Color.fromRGBO(98, 0, 238, 1),
-                      ),
-                      onPressed: () {})
+                    child: const Text("SIGN IN"),
+                    onPressed: () {},
+                  )
                 ],
+              ),
+              const SizedBox(height: 30.0),
+              TextFormField(
+                controller: firstController,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please enter your first name';
+                  }
+                },
+                decoration: const InputDecoration(
+                  labelText: 'First Name',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 30.0),
+              TextFormField(
+                controller: lastController,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'please enter your name';
+                  }
+                },
+                decoration: const InputDecoration(
+                  labelText: 'Last Name',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 30.0),
+              TextFormField(
+                controller: usernameController,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'please enter your name';
+                  }
+                },
+                decoration: const InputDecoration(
+                  labelText: 'User Name',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 30.0),
+              TextFormField(
+                controller: passwordController,
+                obscureText: _isObscure,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'please enter your name';
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                  suffixIcon: IconButton(
+                      icon: Icon(
+                          _isObscure ? Icons.visibility : Icons.visibility_off),
+                      onPressed: () {
+                        setState(() {
+                          _isObscure = !_isObscure;
+                        });
+                      }),
+                  border: const OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 90.0),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size.fromHeight(50), // NEW
+                  ),
+                  child: Text(
+                    "SIGN UP",
+                    style: Theme.of(context).primaryTextTheme.button,
+                  ),
+                ),
               ),
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class MyAlertDialog extends StatelessWidget {
-  final String title;
-  final String content;
-  final List<Widget> actions;
-
-  MyAlertDialog({
-    required this.title,
-    required this.content,
-    this.actions = const [],
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text(
-        this.title,
-        style: Theme.of(context).textTheme.titleMedium,
-      ),
-      actions: this.actions,
-      content: Text(
-        this.content,
-        style: Theme.of(context).textTheme.bodyMedium,
       ),
     );
   }
