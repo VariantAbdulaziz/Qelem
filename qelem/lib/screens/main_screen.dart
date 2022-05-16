@@ -3,6 +3,7 @@ import 'package:qelem/common/app_palette.dart';
 import 'package:qelem/common/constants.dart';
 import 'package:qelem/screens/home_screen.dart';
 import 'package:qelem/screens/my_questions_screen.dart';
+import 'package:qelem/screens/profile/Profile.dart';
 import 'package:qelem/widgets/ProfileAppBar.dart';
 import 'package:qelem/widgets/home_app_bar.dart';
 import 'package:qelem/widgets/common_app_bar.dart';
@@ -40,8 +41,7 @@ class _MainScreenState extends State<MainScreen> {
         children: [
           HomeScreen(),
           MyQuestionsScreen(),
-          Container()
-          // Nazrawi needs to add his screen here too.
+          Profile()
         ],
       ),
       bottomNavigationBar: bottomNav(),
