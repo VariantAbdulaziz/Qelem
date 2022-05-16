@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:qelem/common/AppPalette.dart';
 import 'package:qelem/common/Constants.dart';
 
 class EditProfile extends StatefulWidget {
