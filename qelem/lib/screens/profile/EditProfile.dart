@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qelem/common/Constants.dart';
+import 'package:qelem/common/constants.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({Key? key}) : super(key: key);
@@ -15,7 +15,7 @@ class _EditProfileState extends State<EditProfile> {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle? textStyle = Theme.of(context).textTheme.subtitle1;
+    TextStyle? textStyle = Theme.of(context).textTheme.bodyMedium;
     return Scaffold(
         appBar: AppBar(
           title: const Text(Constants.editProfile),

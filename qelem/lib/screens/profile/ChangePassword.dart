@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qelem/common/Constants.dart';
+import 'package:qelem/common/constants.dart';
 
 class ChangePassword extends StatefulWidget {
   const ChangePassword({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class _ChangePasswordState extends State<ChangePassword> {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle? textStyle = Theme.of(context).textTheme.subtitle1;
+    TextStyle? textStyle = Theme.of(context).textTheme.bodyMedium;
     return Scaffold(
       appBar: AppBar(
         title: const Text(Constants.changePassword),
