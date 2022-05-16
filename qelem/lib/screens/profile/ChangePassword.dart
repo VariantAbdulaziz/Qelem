@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:qelem/common/Constants.dart';
 
 class ChangePassword extends StatefulWidget {
@@ -23,8 +22,8 @@ class _ChangePasswordState extends State<ChangePassword> {
     TextStyle? textStyle = Theme.of(context).textTheme.subtitle1;
     return Scaffold(
       appBar: AppBar(
-          title: const Text(Constants.changePassword),
-        ),
+        title: const Text(Constants.changePassword),
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -51,9 +50,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                           currentHidden = !currentHidden;
                         });
                       }),
-                  labelStyle: GoogleFonts.comfortaa(textStyle: textStyle),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5.0))),
+                  border: const OutlineInputBorder()),
             ),
           ),
           Padding(
@@ -78,9 +75,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                           newHidden = !newHidden;
                         });
                       }),
-                  labelStyle: GoogleFonts.comfortaa(textStyle: textStyle),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5.0))),
+                  border: const OutlineInputBorder()),
             ),
           ),
           Padding(
@@ -108,32 +103,19 @@ class _ChangePasswordState extends State<ChangePassword> {
                           confirmHidden = !confirmHidden;
                         });
                       }),
-                  labelStyle: GoogleFonts.comfortaa(textStyle: textStyle),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5.0))),
+                  border: const OutlineInputBorder()),
             ),
           ),
           Container(
               margin: const EdgeInsets.only(right: 15.0, top: 15.0),
               child: Align(
                 alignment: Alignment.centerRight,
-                child: SizedBox(
-                  width: 115.0,
-                  height: 45.0,
-                  child: MaterialButton(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5)),
-                    child: Text(
-                      'UPDATE',
-                      style: GoogleFonts.comfortaa(
-                          color: Colors.white,
-                          textStyle: textStyle,
-                          fontSize: 16,
-                          letterSpacing: 2),
-                    ),
-                    color: const Color.fromRGBO(98, 0, 238, 1),
-                    onPressed: () async {},
+                child: ElevatedButton(
+                  child: Text(
+                    'UPDATE',
+                    style: Theme.of(context).primaryTextTheme.button,
                   ),
+                  onPressed: () async {},
                 ),
               ))
         ],
