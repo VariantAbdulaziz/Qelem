@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qelem/common/Constants.dart';
+import 'package:qelem/common/constants.dart';
 
 class ChangePassword extends StatefulWidget {
   const ChangePassword({Key? key}) : super(key: key);
