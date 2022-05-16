@@ -96,18 +96,9 @@ class _EditProfileState extends State<EditProfile> {
             child: SizedBox(
               width: 115.0,
               height: 45.0,
-              child: MaterialButton(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5)),
-                child: Text(
-                  'UPDATE',
-                  style: GoogleFonts.comfortaa(
-                      color: Colors.white,
-                      textStyle: textStyle,
-                      fontSize: 16,
-                      letterSpacing: 2),
-                ),
-                color: const Color.fromRGBO(98, 0, 238, 1),
+              child: ElevatedButton(
+                child: Text('UPDATE',
+                    style: Theme.of(context).primaryTextTheme.button),
                 onPressed: () async {},
               ),
             ),
