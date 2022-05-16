@@ -7,35 +7,36 @@ class QuestionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(5.0),
-      child: Card(
+    return Card(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            ListTile(
-              leading: CircleAvatar(
-                backgroundImage: AssetImage(question.img),
-              ),
-              title: Text(question.heading,
-                  style: Theme.of(context).textTheme.headline6,
-                  textAlign: TextAlign.left
-              ),
-              subtitle: Text(
-                question.userName,
-                style: Theme.of(context).textTheme.bodyText2,
-                textAlign: TextAlign.left,
+            Container(
+              margin: const EdgeInsets.fromLTRB(0, 14, 16, 12),
+              child: ListTile(
+                leading: CircleAvatar(
+                  backgroundImage: AssetImage(question.img),
+                  radius: 40,
+                ),
+                title: Text(question.heading,
+                    style: Theme.of(context).textTheme.headline6,
+                    textAlign: TextAlign.left
+                ),
+                subtitle: Text(
+                  question.userName,
+                  style: Theme.of(context).textTheme.bodyText2,
+                  textAlign: TextAlign.left,
+                ),
               ),
             ),
             Container(
-              margin: const EdgeInsets.fromLTRB(0, 15.0, 0, 10.0),
-              padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+              margin: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+              alignment: Alignment.centerLeft,
               child: Text(question.questionDescription,
                   style: Theme.of(context).textTheme.subtitle2),
             )
           ],
         ),
-      ),
-    );
+      );
   }
 }

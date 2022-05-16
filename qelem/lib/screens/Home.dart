@@ -34,9 +34,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBar,
-
       body: ListView.builder(
-        // controller: _controller,
         itemCount: 20,
         itemBuilder: (context, position) {
           // These is a testing data to be removed once you
@@ -45,10 +43,9 @@ class _HomePageState extends State<HomePage> {
               "What is the best way to manage state in flutter",
               "Emre Varol",
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
-              "assets/images/1.png"));
+              "assets/images/default_profile_picture.jpeg"));
         },
       ),
-
       bottomNavigationBar: bottomNav(),
     );
   }

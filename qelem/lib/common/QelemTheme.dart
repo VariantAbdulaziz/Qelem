@@ -24,13 +24,13 @@ class QelemTheme {
               GoogleFonts.comfortaa(color: Colors.white, fontSize: 20.0)),
       cardTheme: CardTheme(
         elevation: 0,
+        margin: const EdgeInsets.fromLTRB(8, 8, 8, 8),
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(4),
             side: const BorderSide(color: Colors.black12, width: 1)),
-      ));
-
-  // static ThemeData questionCardTheme = ThemeData(
-  //
-  // );
-
+      ),
+      listTileTheme: const ListTileThemeData(
+          contentPadding: EdgeInsets.all(0),
+          horizontalTitleGap: 2,
+          minVerticalPadding: 2));
 }
