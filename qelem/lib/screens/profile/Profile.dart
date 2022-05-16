@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:qelem/screens/profile/ChangePassword.dart';
+import 'package:qelem/screens/profile/EditProfile.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -44,7 +46,10 @@ class _ProfileState extends State<Profile> {
         color: Colors.black45,
       ),
       InkWell(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context, MaterialPageRoute(builder: (context) => const EditProfile()));
+          },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Row(
@@ -73,7 +78,10 @@ class _ProfileState extends State<Profile> {
         color: Colors.black45,
       ),
       InkWell(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context, MaterialPageRoute(builder: (context) => const ChangePassword()));
+          },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Row(
