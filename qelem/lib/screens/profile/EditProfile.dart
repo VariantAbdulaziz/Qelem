@@ -90,14 +90,10 @@ class _EditProfileState extends State<EditProfile> {
               margin: const EdgeInsets.only(right: 15.0, top: 15.0),
               child: Align(
                 alignment: Alignment.centerRight,
-                child: SizedBox(
-                  width: 115.0,
-                  height: 45.0,
-                  child: ElevatedButton(
-                    child: Text('UPDATE',
-                        style: Theme.of(context).primaryTextTheme.button),
-                    onPressed: () async {},
-                  ),
+                child: ElevatedButton(
+                  child: Text('UPDATE',
+                      style: Theme.of(context).primaryTextTheme.button),
+                  onPressed: () async {},
                 ),
               ))
         ]));
