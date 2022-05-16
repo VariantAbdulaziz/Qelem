@@ -20,6 +20,7 @@ class QelemTheme {
         unselectedItemColor: Colors.grey,
       ),
       appBarTheme: AppBarTheme(
+          centerTitle: false,
           titleTextStyle:
               GoogleFonts.comfortaa(color: Colors.white, fontSize: 20.0)),
       cardTheme: CardTheme(
@@ -32,5 +33,25 @@ class QelemTheme {
       listTileTheme: const ListTileThemeData(
           contentPadding: EdgeInsets.all(0),
           horizontalTitleGap: 2,
-          minVerticalPadding: 2));
+          minVerticalPadding: 2),
+    actionsIconTheme: IconThemeData(
+      color: Colors.white.withOpacity(0.75),
+    ),
+  ),
+      buttonTheme: ButtonThemeData(
+  buttonColor: AppPalette.qelemPurple,
+  padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 14.0),
+  shape: RoundedRectangleBorder(
+  borderRadius: BorderRadius.circular(4.0),
+  ),
+  ),
+  bottomSheetTheme: const BottomSheetThemeData(
+  shape: RoundedRectangleBorder(
+  borderRadius: BorderRadius.only(
+  topLeft: Radius.circular(10.0),
+  topRight: Radius.circular(10.0),
+  ),
+  ),
+  ),
+  ));
 }

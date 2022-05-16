@@ -15,6 +15,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: Constants.home,
       theme: QelemTheme.qelemTheme,
+      debugShowCheckedModeBanner: false,
       home: const Home(),
     );
   }

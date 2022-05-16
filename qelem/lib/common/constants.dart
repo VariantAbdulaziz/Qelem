@@ -3,4 +3,5 @@ class Constants {
   static const myQuestions = "My Questions";
   static const profile = "Profile";
   static const create = "Create";
+  static const changePassword = "Change Password";
 }
