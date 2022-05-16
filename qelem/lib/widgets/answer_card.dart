@@ -6,15 +6,6 @@ class AnswerCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 0.0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(4.0), // if you need this
-        side: BorderSide(
-          color: Theme.of(context).colorScheme.outline,
-          width: 1,
-        ),
-      ),
-      clipBehavior: Clip.antiAlias,
       child: Column(
         children: [
           const ListTile(
