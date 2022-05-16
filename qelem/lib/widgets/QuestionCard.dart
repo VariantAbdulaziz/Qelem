@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:qelem/domain/models/QuestionModel.dart';
 
 class QuestionCard extends StatelessWidget {
@@ -19,14 +18,12 @@ class QuestionCard extends StatelessWidget {
                 backgroundImage: AssetImage(question.img),
               ),
               title: Text(question.heading,
-                  style: GoogleFonts.comfortaa(
-                      textStyle: Theme.of(context).textTheme.headline6,
-                      color: Colors.black87),
-                  textAlign: TextAlign.left),
-              subtitle: Text(question.userName,
-                  style: GoogleFonts.comfortaa(
-                      textStyle: Theme.of(context).textTheme.bodyText2,
-                      color: Colors.black87),
+                  style: Theme.of(context).textTheme.headline6,
+                  textAlign: TextAlign.left
+              ),
+              subtitle: Text(
+                question.userName,
+                style: Theme.of(context).textTheme.bodyText2,
                 textAlign: TextAlign.left,
               ),
             ),
@@ -34,10 +31,7 @@ class QuestionCard extends StatelessWidget {
               margin: const EdgeInsets.fromLTRB(0, 15.0, 0, 10.0),
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
               child: Text(question.questionDescription,
-              style: GoogleFonts.comfortaa(
-                textStyle: Theme.of(context).textTheme.subtitle2,
-                color: Colors.black54
-              ),),
+                  style: Theme.of(context).textTheme.subtitle2),
             )
           ],
         ),

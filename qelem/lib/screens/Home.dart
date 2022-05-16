@@ -4,6 +4,9 @@ import 'package:qelem/common/Constants.dart';
 import 'package:qelem/widgets/HomeAppBar.dart';
 import 'package:qelem/widgets/CommonAppBar.dart';
 
+import '../domain/models/QuestionModel.dart';
+import '../widgets/QuestionCard.dart';
+
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -31,6 +34,21 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBar,
+
+      body: ListView.builder(
+        // controller: _controller,
+        itemCount: 20,
+        itemBuilder: (context, position) {
+          // These is a testing data to be removed once you
+          // guys review my request. Remind me to remove it.
+          return QuestionCard(QuestionModel(
+              "What is the best way to manage state in flutter",
+              "Emre Varol",
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+              "assets/images/1.png"));
+        },
+      ),
+
       bottomNavigationBar: bottomNav(),
     );
   }
