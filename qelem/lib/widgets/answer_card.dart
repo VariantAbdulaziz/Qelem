@@ -7,6 +7,7 @@ class AnswerCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const ListTile(
             leading: Icon(Icons.arrow_drop_down_circle),

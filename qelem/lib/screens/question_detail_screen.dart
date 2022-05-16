@@ -74,12 +74,6 @@ class _QuestionDetailScreenState extends State<QuestionDetailScreen> {
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
-              leading: IconButton(
-                icon: const Icon(Icons.chevron_left),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
               actions: [
                 // Shown when the user is the author of the question.
                 IconButton(
@@ -102,6 +96,7 @@ class _QuestionDetailScreenState extends State<QuestionDetailScreen> {
                       padding: const EdgeInsets.only(
                           top: 23.0, left: 16.0, right: 16.0),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             "What is the best way to manage state in flutter?",
