@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:qelem/common/AppPalette.dart';
-import 'package:qelem/common/Constants.dart';
+import 'package:qelem/common/app_palette.dart';
+import 'package:qelem/common/constants.dart';
 import 'package:qelem/widgets/HomeAppBar.dart';
 
 class Home extends StatelessWidget {
