@@ -37,20 +37,38 @@ class _EditProfileState extends State<EditProfile> {
                       height: 30,
                       width: 30,
                       decoration: BoxDecoration(
-                          color: AppPalette.qelemPurple![50],
+                          color: Theme.of(context).primaryColor,
                           borderRadius: BorderRadius.circular(3),
-                          boxShadow: const [
+                          boxShadow: [
                             BoxShadow(
-                              color: Colors.black45,
-                              offset: Offset(0.0, 1.0),
-                              blurRadius: 2.0,
-                              spreadRadius: 0.1,
+                              color: Colors.black.withOpacity(0.15),
+                              offset: const Offset(0.0, 4.0),
+                              blurRadius: 5.0,
+                              spreadRadius: 0.0,
+                            ),
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.12),
+                              offset: const Offset(0.0, 1.0),
+                              blurRadius: 10.0,
+                              spreadRadius: 0.0,
+                            ),
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.20),
+                              offset: const Offset(0.0, 2.0),
+                              blurRadius: 4.0,
+                              spreadRadius: 0.0,
                             )
                           ]),
-                      child: IconButton(
-                        padding: const EdgeInsets.all(0.0),
-                        icon: const Icon(Icons.camera_alt),
-                        onPressed: () {},
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.8),
+                          borderRadius: BorderRadius.circular(3),
+                        ),
+                        child: IconButton(
+                          padding: const EdgeInsets.all(0.0),
+                          icon: const Icon(Icons.camera_alt),
+                          onPressed: () {},
+                        ),
                       ),
                     ),
                   ],
