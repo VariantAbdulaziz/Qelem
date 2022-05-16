@@ -11,10 +11,8 @@ class QelemTheme {
         bodyText2: GoogleFonts.comfortaa(color: Colors.black87)),
     primarySwatch: AppPalette.qelemPurple,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      selectedLabelStyle:
-          GoogleFonts.comfortaa(color: Colors.white, fontSize: 13),
-      unselectedLabelStyle:
-          GoogleFonts.comfortaa(color: Colors.white.withOpacity(0.75), fontSize: 13),
+      selectedLabelStyle: const TextStyle(color: Colors.white),
+      unselectedLabelStyle: TextStyle(color: Colors.white.withOpacity(0.75)),
       selectedItemColor: Colors.white,
       unselectedItemColor: Colors.white.withOpacity(0.75),
     ),
