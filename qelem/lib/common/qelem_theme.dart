@@ -28,5 +28,13 @@ class QelemTheme {
         borderRadius: BorderRadius.circular(4.0),
       ),
     ),
+    bottomSheetTheme: const BottomSheetThemeData(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(10.0),
+          topRight: Radius.circular(10.0),
+        ),
+      ),
+    ),
   );
 }
