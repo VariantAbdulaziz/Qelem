@@ -6,7 +6,6 @@ import 'package:qelem/screens/my_questions_screen.dart';
 import 'package:qelem/widgets/home_app_bar.dart';
 import 'package:qelem/widgets/common_app_bar.dart';
 
-
 class Main extends StatelessWidget {
   const Main({Key? key}) : super(key: key);
 
@@ -44,6 +43,13 @@ class _MainScreenState extends State<MainScreen> {
         ],
       ),
       bottomNavigationBar: bottomNav(),
+      floatingActionButton: FloatingActionButton.extended(
+        icon: const Icon(Icons.add),
+        onPressed: () {},
+        label: const Text("Ask"),
+        backgroundColor: const Color(0xFF03DAC5),
+        foregroundColor: Colors.black,
+      ),
     );
   }
 
