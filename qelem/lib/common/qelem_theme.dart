@@ -14,9 +14,9 @@ class QelemTheme {
       selectedLabelStyle:
           GoogleFonts.comfortaa(color: Colors.white, fontSize: 13),
       unselectedLabelStyle:
-          GoogleFonts.comfortaa(color: Colors.grey, fontSize: 13),
+          GoogleFonts.comfortaa(color: Colors.white.withOpacity(0.75), fontSize: 13),
       selectedItemColor: Colors.white,
-      unselectedItemColor: Colors.grey,
+      unselectedItemColor: Colors.white.withOpacity(0.75),
     ),
     appBarTheme: AppBarTheme(
       centerTitle: false,
