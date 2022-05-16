@@ -12,36 +12,6 @@ class Login extends StatefulWidget {
   State<Login> createState() => _LoginState();
 }
 
-login(String username, String password, BuildContext context) async {
-  var url = "http://127.0.0.1:8080/api/v1/authenticate";
-  Map<String, String> loginRequest = {
-    "username": username,
-    "password": password
-  };
-  final headers = {'Content-Type': 'application/json'};
-  String jsonBody = json.encode(loginRequest);
-  final encoding = Encoding.getByName('utf-8');
-  var response = await post(Uri.parse(url),
-      headers: headers, body: jsonBody, encoding: encoding);
-  if (response.statusCode == 200) {
-    var jsonResponse = jsonDecode(response.body);
-    var _token = jsonResponse['jwt'];
-
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => const Login(),
-            settings: RouteSettings(arguments: _token)));
-  } else {
-    showDialog(
-      context: context,
-      builder: (BuildContext dialogContext) {
-        return MyAlertDialog(title: 'Backend Response', content: response.body);
-      },
-    );
-  }
-}
-
 class _LoginState extends State<Login> {
   bool isChecked = false;
   bool _isObscure = true;
@@ -164,10 +134,9 @@ class _LoginState extends State<Login> {
                   borderRadius: BorderRadius.circular(10)),
               label: const Text("SIGN IN"),
               backgroundColor: const Color.fromRGBO(98, 0, 238, 1),
-              onPressed: () async {
+              onPressed: () {
                 String username = usernameController.text;
                 String password = passwordController.text;
-                await login(username, password, context);
               },
             ),
           ),
