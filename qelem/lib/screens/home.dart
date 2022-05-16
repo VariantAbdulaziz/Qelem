@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:qelem/common/app_palette.dart';
-import 'package:qelem/widgets/HomeAppBar.dart';
+import 'package:qelem/common/constants.dart';
+import 'package:qelem/widgets/home_app_bar.dart';
+import 'package:qelem/widgets/common_app_bar.dart';
 
-import '../common/Constants.dart';
+import '../domain/models/question_model.dart';
+import '../widgets/question_card.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -31,6 +34,16 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBar,
+      body: ListView.builder(
+        itemCount: 20,
+        itemBuilder: (context, position) {
+          return QuestionCard(QuestionModel(
+              "What is the best way to manage state in flutter",
+              "Emre Varol",
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+              "assets/images/default_profile_picture.jpeg"));
+        },
+      ),
       bottomNavigationBar: bottomNav(),
     );
   }
@@ -69,11 +82,13 @@ class _HomePageState extends State<HomePage> {
       case 1:
         {
           _title = Constants.myQuestions;
+          _appBar = commonAppBar(_title);
         }
         break;
       case 2:
         {
           _title = Constants.profile;
+          _appBar = commonAppBar(_title);
         }
         break;
     }
