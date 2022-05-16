@@ -26,6 +26,10 @@ class AnswerBottomSheet extends StatelessWidget {
               maxLines: 14,
               textAlignVertical: TextAlignVertical.top,
             ),
+            const SizedBox(
+              height: 20,
+              width: 10,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [

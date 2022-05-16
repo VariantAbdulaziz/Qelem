@@ -83,20 +83,10 @@ class _QuestionDetailScreenState extends State<QuestionDetailScreen> {
               actions: [
                 // Shown when the user is the author of the question.
                 IconButton(
-                  color: Theme.of(context)
-                      .primaryTextTheme
-                      .bodyText1
-                      ?.color
-                      ?.withOpacity(0.74),
                   icon: const Icon(Icons.edit),
                   onPressed: () {},
                 ),
                 IconButton(
-                  color: Theme.of(context)
-                      .primaryTextTheme
-                      .bodyText1
-                      ?.color
-                      ?.withOpacity(0.74),
                   icon: const Icon(Icons.delete),
                   onPressed: () {},
                 ),
@@ -105,7 +95,7 @@ class _QuestionDetailScreenState extends State<QuestionDetailScreen> {
               forceElevated: innerBoxIsScrolled,
             ),
             SliverPadding(
-                padding: EdgeInsets.all(0.0),
+                padding: const EdgeInsets.all(0.0),
                 sliver: SliverList(
                   delegate: SliverChildListDelegate([
                     Padding(
