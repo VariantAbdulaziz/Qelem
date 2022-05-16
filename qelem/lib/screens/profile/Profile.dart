@@ -12,8 +12,7 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     TextStyle? textStyle = Theme.of(context).textTheme.bodyMedium;
 
-    return Scaffold(
-        body: Column(children: [
+    return Column(children: [
       Row(
         children: [
           const Padding(
@@ -102,6 +101,6 @@ class _ProfileState extends State<Profile> {
         endIndent: 20,
         color: Colors.black45,
       ),
-    ]));
+    ]);
   }
 }
