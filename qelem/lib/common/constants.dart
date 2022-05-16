@@ -3,5 +3,6 @@ class Constants {
   static const myQuestions = "My Questions";
   static const profile = "Profile";
   static const create = "Create";
+  static const editProfile = "Edit Profile";
   static const changePassword = "Change Password";
 }
