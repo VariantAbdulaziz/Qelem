@@ -20,7 +20,7 @@ class _ProfileState extends State<Profile> {
           const Padding(
               padding: EdgeInsets.only(top: 15.0, left: 15.0, right: 25.0),
               child: CircleAvatar(
-                backgroundImage: AssetImage("abebe.jpeg"),
+                backgroundImage: AssetImage("assets/abebe.jpeg"),
                 radius: 60,
               )),
           Column(
