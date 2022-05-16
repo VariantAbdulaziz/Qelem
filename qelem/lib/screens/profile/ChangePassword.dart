@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:qelem/common/Constants.dart';
 
 class ChangePassword extends StatefulWidget {
   const ChangePassword({Key? key}) : super(key: key);
@@ -21,6 +22,9 @@ class _ChangePasswordState extends State<ChangePassword> {
   Widget build(BuildContext context) {
     TextStyle? textStyle = Theme.of(context).textTheme.subtitle1;
     return Scaffold(
+      appBar: AppBar(
+          title: const Text(Constants.changePassword),
+        ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
