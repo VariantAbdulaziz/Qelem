@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:qelem/common/AppPalette.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({Key? key}) : super(key: key);
@@ -33,7 +33,7 @@ class _EditProfileState extends State<EditProfile> {
                   height: 30,
                   width: 30,
                   decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 207, 165, 215),
+                      color: AppPalette.qelemPurple![50],
                       borderRadius: BorderRadius.circular(3),
                       boxShadow: const [
                         BoxShadow(
@@ -58,11 +58,8 @@ class _EditProfileState extends State<EditProfile> {
         child: TextFormField(
           style: textStyle,
           controller: userNameController,
-          decoration: InputDecoration(
-              labelText: 'User Name',
-              labelStyle: GoogleFonts.comfortaa(textStyle: textStyle),
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
+          decoration: const InputDecoration(
+              labelText: 'User Name', border: OutlineInputBorder()),
         ),
       ),
       Padding(
@@ -70,11 +67,8 @@ class _EditProfileState extends State<EditProfile> {
         child: TextFormField(
           style: textStyle,
           controller: firstNameController,
-          decoration: InputDecoration(
-              labelText: 'First Name',
-              labelStyle: GoogleFonts.comfortaa(textStyle: textStyle),
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
+          decoration: const InputDecoration(
+              labelText: 'First Name', border: OutlineInputBorder()),
         ),
       ),
       Padding(
@@ -82,11 +76,8 @@ class _EditProfileState extends State<EditProfile> {
         child: TextFormField(
           style: textStyle,
           controller: lastNameController,
-          decoration: InputDecoration(
-              labelText: 'Last Name',
-              labelStyle: GoogleFonts.comfortaa(textStyle: textStyle),
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
+          decoration: const InputDecoration(
+              labelText: 'Last Name', border: OutlineInputBorder()),
         ),
       ),
       Container(
