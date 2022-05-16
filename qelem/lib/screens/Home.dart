@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:qelem/common/app_palette.dart';
-import 'package:qelem/common/Constants.dart';
 import 'package:qelem/widgets/HomeAppBar.dart';
+
+import '../common/Constants.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
