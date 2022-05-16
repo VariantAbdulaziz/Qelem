@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:qelem/common/AppPalette.dart';
 import 'package:qelem/common/Constants.dart';
 import 'package:qelem/widgets/HomeAppBar.dart';
+import 'package:qelem/widgets/CommonAppBar.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -68,11 +69,13 @@ class _HomePageState extends State<HomePage> {
       case 1:
         {
           _title = Constants.myQuestions;
+          _appBar = commonAppBar(_title);
         }
         break;
       case 2:
         {
           _title = Constants.profile;
+          _appBar = commonAppBar(_title);
         }
         break;
     }
