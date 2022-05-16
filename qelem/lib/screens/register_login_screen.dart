@@ -8,8 +8,8 @@ class RegisterLoginScreen extends StatelessWidget {
     final pads = MediaQuery.of(context).size.height / 15;
     final buttonHeight = MediaQuery.of(context).size.height / 15;
     final imageHeight = MediaQuery.of(context).size.height / 2;
-    final mainWelcomeTextStyle = Theme.of(context).textTheme.titleMedium;
-    final additionalIntrosStyle = Theme.of(context).textTheme.subtitle1;
+    final mainWelcomeTextStyle = Theme.of(context).textTheme.headline5;
+    final additionalIntrosStyle = Theme.of(context).textTheme.bodyText2;
     const signInButtonText = "SIGN IN";
     const createAccButtonText = "CREATE AN ACCOUNT";
     const imagePath = "assets/newbies_motivator.png";
@@ -62,7 +62,6 @@ class RegisterLoginScreen extends StatelessWidget {
                   children: [
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: Theme.of(context).primaryColor,
                         minimumSize: Size(double.infinity, buttonHeight),
                       ),
                       onPressed: () {},
@@ -70,7 +69,6 @@ class RegisterLoginScreen extends StatelessWidget {
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: Theme.of(context).primaryColor,
                         minimumSize: Size(double.infinity, buttonHeight),
                       ),
                       onPressed: () {},
