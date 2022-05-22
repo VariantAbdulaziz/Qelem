@@ -10,7 +10,7 @@ String answerModelToJson(AnswerModel answerModel) =>
     json.encode(answerModel.toString());
 
 class AnswerModel {
-  QuestionModel questionModel;
+  question_model questionModel;
   String content;
   UserModel userModel;
   List<VoteModel>? vote;

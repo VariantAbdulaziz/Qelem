@@ -3,21 +3,20 @@ import 'dart:convert';
 import 'package:qelem/domain/models/UserModel.dart';
 import 'package:qelem/domain/models/AnswerModel.dart';
 
-QuestionModel questionModelJson(String str) =>
-    QuestionModel.fromJson(json.decode(str));
+question_model question_modelJson(String str) =>
+    question_model.fromJson(json.decode(str));
 
-String questionModelToJson(QuestionModel questionModel) =>
-    json.encode(questionModel.toString());
+String question_modelToJson(question_model question_model) =>
+    json.encode(question_model.toString());
 
-class QuestionModel {
+class question_model {
   String topic;
   String content;
   UserModel userModel;
   String status;
-  //TagModels tags;
   List<AnswerModel>? answer;
 
-  QuestionModel(
+  question_model(
       {required this.topic,
       required this.content,
       required this.userModel,
@@ -25,7 +24,7 @@ class QuestionModel {
       //TagModels tags;
       this.answer});
 
-  factory QuestionModel.fromJson(Map<String, dynamic> json) => QuestionModel(
+  factory question_model.fromJson(Map<String, dynamic> json) => question_model(
       topic: json["topic"],
       content: json["content"],
       userModel: json["user"],
