@@ -14,11 +14,11 @@ Widget HomeScreen() {
     itemCount: 20,
     itemBuilder: (context, position) {
       return QuestionCard(QuestionModel(
-        topic: "What is the best way to manage state in flutter",
-        userModel: user,
-        content:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
-      ));
+          topic: "What is the best way to manage state in flutter",
+          userModel: user,
+          content:
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+          img: "assets/images/default_profile_picture.jpeg"));
     },
   );
 }
