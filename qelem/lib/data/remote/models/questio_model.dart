@@ -14,17 +14,16 @@ class QuestionModel {
   String content;
   UserModel userModel;
   String status;
-  String? img;
   List<AnswerModel>? answer;
 
-  QuestionModel(
-      {required this.topic,
-      required this.content,
-      required this.userModel,
-      this.status = "UNANSWERED",
-      //TagModels tags;
-      this.answer,
-      this.img});
+  QuestionModel({
+    required this.topic,
+    required this.content,
+    required this.userModel,
+    this.status = "UNANSWERED",
+    //TagModels tags;
+    this.answer,
+  });
 
   factory QuestionModel.fromJson(Map<String, dynamic> json) => QuestionModel(
       topic: json["topic"],

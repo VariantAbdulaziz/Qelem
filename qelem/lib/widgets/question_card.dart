@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qelem/data/remote/models/question_model.dart';
+import 'package:qelem/domain/models/question_model.dart';
 
 class QuestionCard extends StatelessWidget {
   final QuestionModel question;
@@ -15,14 +15,14 @@ class QuestionCard extends StatelessWidget {
             margin: const EdgeInsets.fromLTRB(0, 14, 16, 12),
             child: ListTile(
               leading: CircleAvatar(
-                backgroundImage: AssetImage(question.userModel.profilePhoto),
+                backgroundImage: AssetImage(question.img),
                 radius: 40,
               ),
-              title: Text(question.topic,
+              title: Text(question.heading,
                   style: Theme.of(context).textTheme.headline6,
                   textAlign: TextAlign.left),
               subtitle: Text(
-                question.userModel.userName,
+                question.userName,
                 style: Theme.of(context).textTheme.bodyText2,
                 textAlign: TextAlign.left,
               ),
@@ -31,7 +31,7 @@ class QuestionCard extends StatelessWidget {
           Container(
             margin: const EdgeInsets.fromLTRB(16, 16, 16, 16),
             alignment: Alignment.centerLeft,
-            child: Text(question.content,
+            child: Text(question.questionDescription,
                 style: Theme.of(context).textTheme.subtitle2),
           )
         ],
