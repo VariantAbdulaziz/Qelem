@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:qelem/domain/models/UserModel.dart';
 
-class registerUser extends StatefulWidget {
-  const registerUser({Key? key}) : super(key: key);
+class RegistrationScreen extends StatefulWidget {
+  const RegistrationScreen({Key? key}) : super(key: key);
 
   @override
-  State<registerUser> createState() => _registerUserState();
+  State<RegistrationScreen> createState() => _RegistrationScreenState();
 }
 
-class _registerUserState extends State<registerUser> {
+class _RegistrationScreenState extends State<RegistrationScreen> {
   bool _isObscure = true;
 
   TextEditingController firstController = TextEditingController();
