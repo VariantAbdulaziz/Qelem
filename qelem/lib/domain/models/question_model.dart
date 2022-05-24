@@ -4,6 +4,6 @@ class QuestionModel {
   String questionDescription;
   String img;
 
-  QuestionModel(this.heading, this.userName, this.questionDescription, this.img);
-
+  QuestionModel(
+      this.heading, this.userName, this.questionDescription, this.img);
 }

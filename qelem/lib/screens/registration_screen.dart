@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qelem/domain/models/UserModel.dart';
+import 'package:qelem/data/remote/models/user_model.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
