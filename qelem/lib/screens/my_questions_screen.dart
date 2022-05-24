@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../domain/models/question_model.dart';
 import '../widgets/question_card.dart';
 
-Widget MyQuestionsScreen() {
+Widget myQuestionsScreen() {
   return ListView.builder(
     itemCount: 20,
     itemBuilder: (context, position) {
