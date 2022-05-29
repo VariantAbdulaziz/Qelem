@@ -124,9 +124,6 @@ public class UserRestController {
         if (user.getUsername() != null) {
             userModel.setUsername(user.getUsername());
         }
-        if (user.getPassword() != null) {
-            userModel.setPassword(user.getPassword());
-        }
         if (user.getFirstName() != null) {
             userModel.setFirstName(user.getFirstName());
         }
