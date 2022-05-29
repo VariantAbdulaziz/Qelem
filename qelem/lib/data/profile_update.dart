@@ -58,6 +58,33 @@ Future<UserModel> updateProfile(String url, String token, UserModel userModel) a
 }
 
 
+// change password 
+Future<UserModel> changePassword(String url, String token, String oldPassword, String newPassword) async {
+
+  HttpClient client = HttpClient();
+
+  HttpClientRequest request = await client.patchUrl(Uri.parse(url));
+  
+  request.headers.add(HttpHeaders.authorizationHeader, "Bearer " + token);
+
+  request.headers.add('content-type', 'application/json');
+  request.add(utf8.encode(json.encode({
+    "oldPassword": oldPassword,
+    "newPassword": newPassword
+  })));
+
+  HttpClientResponse response = await request.close();
+  if (response.statusCode == 200) {
+  
+    String responseBody = await response.transform(utf8.decoder).join();
+    return UserModel.fromJson(json.decode(responseBody));
+  
+  } else {
+    throw Exception('Failed to change password!');
+  }
+
+}
+
 // a function that retrievs access token form shared preferences
 getAccessToken() async {
   var sharedPreferences = await SharedPreferences.getInstance();
