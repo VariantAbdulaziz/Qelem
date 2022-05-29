@@ -1,52 +1,34 @@
 package com.qelem.api.controller;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import java.util.List;
 import java.util.Optional;
 
-import javax.annotation.Resource;
-import javax.annotation.Resources;
-import javax.validation.Valid;
-
-import com.qelem.api.Repo.QuizRepository;
 import com.qelem.api.Repo.QuizRepository;
 import com.qelem.api.model.QuizModel;
 import com.qelem.api.resources.QuizResources;
 import com.qelem.api.resources.QuizResourcesAssembler;
-import com.qelem.api.resources.QuizResourcesAssembler;
 
-import org.hibernate.annotations.Parameter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.Link;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 import lombok.RequiredArgsConstructor;
 
@@ -80,13 +62,12 @@ public class QuizRestController {
     @GetMapping("/{id}")
     public EntityModel<QuizModel> quizById(@PathVariable("id") Long id) {
         Optional<QuizModel> optQuiz = quizRepository.findById(id);
-        if(!optQuiz.isPresent()){
+        if (!optQuiz.isPresent()) {
             return null;
         }
         EntityModel<QuizModel> quizResource = EntityModel.of(optQuiz.get());
         WebMvcLinkBuilder linkTo = linkTo(methodOn(this.getClass()).quizById(id));
         quizResource.add(linkTo.withRel(String.format("Quizs  with id %s", id)));
-
 
         return quizResource;
     }
@@ -116,7 +97,7 @@ public class QuizRestController {
         if (quiz.getQuestion() != null) {
             quizModel.setQuestion(quiz.getQuestion());
         }
-      
+
         return quizRepository.save(quizModel);
     }
 
@@ -125,6 +106,7 @@ public class QuizRestController {
     public void deleteQuiz(@PathVariable("id") Long id) {
         try {
             quizRepository.deleteById(id);
-        } catch (EmptyResultDataAccessException e) {}
+        } catch (EmptyResultDataAccessException e) {
+        }
     }
 }

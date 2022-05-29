@@ -61,10 +61,11 @@ public class UserProfileController {
      * @return
      */
     @PostMapping("/update-userProfile/{id}")
-    public String updateUserProfile(@PathVariable String id, @Valid @ModelAttribute("currentlyLoggedInUser") UserModel currentlyLoggedInUser, Errors errors, Model model) {
+    public String updateUserProfile(@PathVariable String id,
+            @Valid @ModelAttribute("currentlyLoggedInUser") UserModel currentlyLoggedInUser, Errors errors,
+            Model model) {
 
         // UserModel currentlyLoggedInUser = this.loggedInUser();
-
 
         // checks if there are errors in validation
         if (null != errors && errors.getErrorCount() > 0) {
@@ -72,7 +73,6 @@ public class UserProfileController {
             model.addAttribute("currentlyLoggedInUser", currentlyLoggedInUser);
             return "current";
         }
-
 
         UserModel userModel = userRepository.findById(Long.parseLong(id)).get();
         // we actually don't need this statement
@@ -97,8 +97,7 @@ public class UserProfileController {
         if (currentlyLoggedInUser.getId() == userModel.getId()) {
             userRepository.delete(userModel);
             return "redirect:/logout";
-        }
-        else if (currentlyLoggedInUser.getRole().equals("ADMIN")) {
+        } else if (currentlyLoggedInUser.getRole().equals("ADMIN")) {
             userRepository.delete(userModel);
             return "redirect:/admin";
         }

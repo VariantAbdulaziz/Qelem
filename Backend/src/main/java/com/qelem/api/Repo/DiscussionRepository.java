@@ -10,9 +10,10 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface DiscussionRepository extends JpaRepository<DiscussionModel, Long> {
     List<DiscussionModel> findByAnswer(AnswerModel answer);
+
     List<DiscussionModel> findByAnswer_id(Long id);
-    @Query(value="SELECT answer_id FROM discussion_model WHERE id like %?1 ", nativeQuery=true)
+
+    @Query(value = "SELECT answer_id FROM discussion_model WHERE id like %?1 ", nativeQuery = true)
     Long findByDiscussion_id(Long discussion_id);
-    
 
 }

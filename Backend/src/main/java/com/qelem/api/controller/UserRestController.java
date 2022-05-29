@@ -1,10 +1,12 @@
 package com.qelem.api.controller;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Optional;
-
 
 import com.qelem.api.Repo.UserRepository;
 import com.qelem.api.model.RegistrationForm;
@@ -27,7 +29,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,18 +36,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-
 import lombok.RequiredArgsConstructor;
-import net.minidev.json.JSONObject;
-import net.minidev.json.JSONUtil;
-import net.minidev.json.parser.JSONParser;
 import net.minidev.json.parser.ParseException;
 
 @RestController
@@ -71,6 +65,7 @@ public class UserRestController {
         UserModel user = userRepository.findByUsername(username);
         return user;
     }
+
     /**
      * lists all the users in the system.
      * 
@@ -94,52 +89,44 @@ public class UserRestController {
     @GetMapping("/{id}")
     public EntityModel<UserModel> userById(@PathVariable("id") Long id) {
         Optional<UserModel> optUser = userRepository.findById(id);
-        if(!optUser.isPresent()){
+        if (!optUser.isPresent()) {
             return null;
         }
         EntityModel<UserModel> userResource = EntityModel.of(optUser.get());
         WebMvcLinkBuilder linkTo = linkTo(methodOn(this.getClass()).userById(id));
         userResource.add(linkTo.withRel(String.format("Users  with id %s", id)));
 
-
         return userResource;
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public UserModel postUser(@RequestParam LinkedHashMap tempUser, @RequestBody MultipartFile multipartFile) throws ParseException{
-        System.out.println("\n");
-        System.out.println("\n");
-        System.out.println("\n");
-        System.out.println("\n");
-        System.out.println("I was called...");
-        // JSONParser parser = new JSONParser();
-        // JSONObject json = (JSONObject) parser.parse(tempUser);
-        RegistrationForm form = new RegistrationForm();
-        form.setFirstName(tempUser.get("firstName").toString());
-        form.setLastName(tempUser.get("lastName").toString());
-        form.setPassword(tempUser.get("password").toString());
-        form.setUsername(tempUser.get("username").toString());
+    public UserModel postUser(@RequestParam LinkedHashMap<String, String> urlEncoddedForm,
+            @RequestBody MultipartFile multipartFile) throws ParseException {
 
-        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-        UserModel savedUser;
-        if (fileName.length() != 0) {
+        RegistrationForm form = new RegistrationForm();
+
+        form.setFirstName(urlEncoddedForm.get("firstName").toString());
+        form.setLastName(urlEncoddedForm.get("lastName").toString());
+        form.setPassword(urlEncoddedForm.get("password").toString());
+        form.setUsername(urlEncoddedForm.get("username").toString());
+
+        if (multipartFile != null && !multipartFile.isEmpty()) {
+            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
             UserModel user = form.toUser(passwordEncoder);
             user.setProfilePicture(fileName);
             user.getProfilePicture();
-            savedUser = userRepository.save(user);
-            String uploadDir = "src/main/resources/static/user-photos/" + savedUser.getId();
+            user = userRepository.save(user);
+            String uploadDir = "src/main/resources/static/user-photos/" + user.getId();
             try {
                 FileUpload.saveFile(uploadDir, fileName, multipartFile);
-            }catch (IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
-            return savedUser;
-        }else{
-            fileName = "";
+            return user;
+        } else {
             UserModel user = form.toUser(passwordEncoder);
-            user.setProfilePicture(fileName);
-
+            user.setProfilePicture("");
             return userRepository.save(user);
         }
     }
@@ -186,6 +173,7 @@ public class UserRestController {
     public void deleteUser(@PathVariable("id") Long id) {
         try {
             userRepository.deleteById(id);
-        } catch (EmptyResultDataAccessException e) {}
+        } catch (EmptyResultDataAccessException e) {
+        }
     }
 }

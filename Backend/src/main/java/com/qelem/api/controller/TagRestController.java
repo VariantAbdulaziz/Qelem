@@ -3,12 +3,10 @@ package com.qelem.api.controller;
 import java.util.List;
 import java.util.Optional;
 
-
 import com.qelem.api.Repo.TagRepository;
 import com.qelem.api.model.TagModel;
 import com.qelem.api.resources.TagResources;
 import com.qelem.api.resources.TagResourcesAssembler;
-
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.PageRequest;
@@ -63,13 +61,12 @@ public class TagRestController {
     @GetMapping("/{id}")
     public EntityModel<TagModel> tagById(@PathVariable("id") Long id) {
         Optional<TagModel> optTag = tagRepository.findById(id);
-        if(!optTag.isPresent()){
+        if (!optTag.isPresent()) {
             return null;
         }
         EntityModel<TagModel> tagResource = EntityModel.of(optTag.get());
         WebMvcLinkBuilder linkTo = linkTo(methodOn(this.getClass()).tagById(id));
         tagResource.add(linkTo.withRel(String.format("Tags  with id %s", id)));
-
 
         return tagResource;
     }
@@ -96,7 +93,7 @@ public class TagRestController {
         if (tag.getTag() != null) {
             tagModel.setTag(tag.getTag());
         }
-        
+
         return tagRepository.save(tagModel);
     }
 
@@ -105,6 +102,7 @@ public class TagRestController {
     public void deleteTag(@PathVariable("id") Long id) {
         try {
             tagRepository.deleteById(id);
-        } catch (EmptyResultDataAccessException e) {}
+        } catch (EmptyResultDataAccessException e) {
+        }
     }
 }

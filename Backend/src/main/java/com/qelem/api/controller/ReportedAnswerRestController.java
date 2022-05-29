@@ -3,12 +3,10 @@ package com.qelem.api.controller;
 import java.util.List;
 import java.util.Optional;
 
-
 import com.qelem.api.Repo.ReportedAnswerRepository;
 import com.qelem.api.model.ReportedAnswerModel;
 import com.qelem.api.resources.ReportedAnswerResources;
 import com.qelem.api.resources.ReportedAnswerResourcesAssembler;
-
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.PageRequest;
@@ -63,13 +61,12 @@ public class ReportedAnswerRestController {
     @GetMapping("/{id}")
     public EntityModel<ReportedAnswerModel> reportedAnswerById(@PathVariable("id") Long id) {
         Optional<ReportedAnswerModel> optReportedAnswer = reportedAnswerRepository.findById(id);
-        if(!optReportedAnswer.isPresent()){
+        if (!optReportedAnswer.isPresent()) {
             return null;
         }
         EntityModel<ReportedAnswerModel> reportedAnswerResource = EntityModel.of(optReportedAnswer.get());
         WebMvcLinkBuilder linkTo = linkTo(methodOn(this.getClass()).reportedAnswerById(id));
         reportedAnswerResource.add(linkTo.withRel(String.format("ReportedAnswers  with id %s", id)));
-
 
         return reportedAnswerResource;
     }
@@ -107,6 +104,7 @@ public class ReportedAnswerRestController {
     public void deleteReportedAnswer(@PathVariable("id") Long id) {
         try {
             reportedAnswerRepository.deleteById(id);
-        } catch (EmptyResultDataAccessException e) {}
+        } catch (EmptyResultDataAccessException e) {
+        }
     }
 }

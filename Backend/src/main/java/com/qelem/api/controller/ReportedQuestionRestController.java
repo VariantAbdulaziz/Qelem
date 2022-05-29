@@ -3,12 +3,10 @@ package com.qelem.api.controller;
 import java.util.List;
 import java.util.Optional;
 
-
 import com.qelem.api.Repo.ReportedQuestionRepository;
 import com.qelem.api.model.ReportedQuestionModel;
 import com.qelem.api.resources.ReportedQuestionResources;
 import com.qelem.api.resources.ReportedQuestionResourcesAssembler;
-
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.PageRequest;
@@ -63,13 +61,12 @@ public class ReportedQuestionRestController {
     @GetMapping("/{id}")
     public EntityModel<ReportedQuestionModel> reportedQuestionById(@PathVariable("id") Long id) {
         Optional<ReportedQuestionModel> optReportedQuestion = reportedQuestionRepository.findById(id);
-        if(!optReportedQuestion.isPresent()){
+        if (!optReportedQuestion.isPresent()) {
             return null;
         }
         EntityModel<ReportedQuestionModel> reportedQuestionResource = EntityModel.of(optReportedQuestion.get());
         WebMvcLinkBuilder linkTo = linkTo(methodOn(this.getClass()).reportedQuestionById(id));
         reportedQuestionResource.add(linkTo.withRel(String.format("ReportedQuestions  with id %s", id)));
-
 
         return reportedQuestionResource;
     }
@@ -107,6 +104,7 @@ public class ReportedQuestionRestController {
     public void deleteReportedQuestion(@PathVariable("id") Long id) {
         try {
             reportedQuestionRepository.deleteById(id);
-        } catch (EmptyResultDataAccessException e) {}
+        } catch (EmptyResultDataAccessException e) {
+        }
     }
 }

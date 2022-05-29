@@ -15,12 +15,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import net.minidev.json.JSONObject;
-import net.minidev.json.parser.JSONParser;
 
 @RestController
 @RequestMapping(path = "/api/v1", produces = "application/json")
@@ -35,9 +33,8 @@ public class AuthenticationController {
     private JwtUtil jwtUtil;
 
     @PostMapping(value = "/authenticate")
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody JSONObject loginRequest) throws Exception{
-       
-    
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody JSONObject loginRequest) throws Exception {
+
         AuthenticationRequest authenticationRequest = new AuthenticationRequest();
         authenticationRequest.setUsername(loginRequest.get("username").toString());
         System.out.println("\n");
@@ -53,11 +50,11 @@ public class AuthenticationController {
         System.out.println("\n");
         System.out.println(loginRequest.get("password").toString());
         System.out.println("I was called pass...");
-        try{
+        try {
             authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword())
-            );
-        }catch(BadCredentialsException e){
+                    new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(),
+                            authenticationRequest.getPassword()));
+        } catch (BadCredentialsException e) {
             throw new Exception("Incorrect usename or password", e);
         }
         final UserDetails userDetails = myUserDetailsService.loadUserByUsername(authenticationRequest.getPassword());

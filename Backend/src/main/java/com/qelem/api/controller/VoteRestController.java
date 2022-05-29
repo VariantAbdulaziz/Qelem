@@ -1,14 +1,15 @@
 package com.qelem.api.controller;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import java.util.List;
 import java.util.Optional;
-
 
 import com.qelem.api.Repo.VoteRepository;
 import com.qelem.api.model.VoteModel;
 import com.qelem.api.resources.VoteResources;
 import com.qelem.api.resources.VoteResourcesAssembler;
-
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.PageRequest;
@@ -28,8 +29,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 import lombok.RequiredArgsConstructor;
 
@@ -63,13 +62,12 @@ public class VoteRestController {
     @GetMapping("/{id}")
     public EntityModel<VoteModel> voteById(@PathVariable("id") Long id) {
         Optional<VoteModel> optVote = voteRepository.findById(id);
-        if(!optVote.isPresent()){
+        if (!optVote.isPresent()) {
             return null;
         }
         EntityModel<VoteModel> voteResource = EntityModel.of(optVote.get());
         WebMvcLinkBuilder linkTo = linkTo(methodOn(this.getClass()).voteById(id));
         voteResource.add(linkTo.withRel(String.format("Votes  with id %s", id)));
-
 
         return voteResource;
     }
@@ -105,7 +103,7 @@ public class VoteRestController {
         if (vote.getUserModel() != null) {
             voteModel.setUserModel(vote.getUserModel());
         }
-        
+
         return voteRepository.save(voteModel);
     }
 
@@ -114,6 +112,7 @@ public class VoteRestController {
     public void deleteVote(@PathVariable("id") Long id) {
         try {
             voteRepository.deleteById(id);
-        } catch (EmptyResultDataAccessException e) {}
+        } catch (EmptyResultDataAccessException e) {
+        }
     }
 }
