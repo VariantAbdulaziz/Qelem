@@ -1,24 +1,23 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:qelem/common/constants.dart';
 import 'package:qelem/data/remote/models/user_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 
 
 // get the user profile from the server
 Future<UserModel> getProfile(String url, String token) async {
-
   HttpClient client = HttpClient();
-  
-  HttpClientRequest request = await client.getUrl(Uri.parse(url));
+
+  HttpClientRequest request = await client.getUrl(
+      Uri.parse(Constants.BASE_URL + url));
 
   request.headers.add(HttpHeaders.authorizationHeader, "Bearer " + token);
-  
+
   HttpClientResponse response = await request.close();
 
   if (response.statusCode == 200) {
-
     String responseBody = await response.transform(utf8.decoder).join();
     return UserModel.fromJson(json.decode(responseBody));
 
@@ -32,10 +31,10 @@ Future<UserModel> getProfile(String url, String token) async {
 
 // update the user profile on the server from the user model object passed
 Future<UserModel> updateProfile(String url, String token, UserModel userModel) async {
-
   HttpClient client = HttpClient();
 
-  HttpClientRequest request = await client.patchUrl(Uri.parse(url));
+  HttpClientRequest request = await client.patchUrl(
+      Uri.parse(Constants.BASE_URL + url));
 
   request.headers.add(HttpHeaders.authorizationHeader, "Bearer " + token);
 
@@ -60,11 +59,11 @@ Future<UserModel> updateProfile(String url, String token, UserModel userModel) a
 
 // change password 
 Future<UserModel> changePassword(String url, String token, String oldPassword, String newPassword) async {
-
   HttpClient client = HttpClient();
 
-  HttpClientRequest request = await client.patchUrl(Uri.parse(url));
-  
+  HttpClientRequest request = await client.patchUrl(
+      Uri.parse(Constants.BASE_URL + url));
+
   request.headers.add(HttpHeaders.authorizationHeader, "Bearer " + token);
 
   request.headers.add('content-type', 'application/json');
