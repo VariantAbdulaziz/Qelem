@@ -15,14 +15,13 @@ public class VoteResources extends RepresentationModel<VoteResources> {
     private AnswerModel answerModel;
     private int upVote;
     private int downVote;
-    private UserModel userModel;
+    private UserModel author;
     
 
     public VoteResources(VoteModel vote){
         this.answerModel= vote.getAnswerModel();
         this.upVote = vote.getUpVote();
         this.downVote = vote.getDownVote();
-        this.userModel = vote.getUserModel();
-        
+        this.author = vote.getUserModel();
     }
 }

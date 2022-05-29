@@ -45,7 +45,7 @@ public class AnswerModel {
     @NotBlank(message="Content can't be blank")
     private String content;
     @ManyToOne(fetch = FetchType.LAZY)
-    private UserModel user;
+    private UserModel author;
     @OneToMany(mappedBy = "answerModel")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<VoteModel> vote;

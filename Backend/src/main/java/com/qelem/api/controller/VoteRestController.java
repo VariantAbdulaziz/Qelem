@@ -100,9 +100,8 @@ public class VoteRestController {
         if (vote.getDownVote() != 0) {
             voteModel.setDownVote(vote.getDownVote());
         }
-        if (vote.getUserModel() != null) {
-            voteModel.setUserModel(vote.getUserModel());
-        }
+
+        voteModel.setUserModel(vote.getUserModel());
 
         return voteRepository.save(voteModel);
     }

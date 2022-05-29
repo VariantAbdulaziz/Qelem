@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:qelem/data/remote/models/user_model.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -41,7 +42,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   ),
                   TextButton(
                     child: const Text("SIGN IN"),
-                    onPressed: () {},
+                    onPressed: () => context.go('/sign-in'),
                   )
                 ],
               ),

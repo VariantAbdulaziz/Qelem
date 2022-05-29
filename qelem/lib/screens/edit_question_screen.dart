@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:qelem/widgets/discard_question_edit_dialog.dart';
 
 class EditQuestionScreen extends StatefulWidget {
-  const EditQuestionScreen({Key? key}) : super(key: key);
+  const EditQuestionScreen({Key? key, required this.qid}) : super(key: key);
+
+  final int qid;
 
   @override
   State<EditQuestionScreen> createState() => _EditQuestionScreenState();

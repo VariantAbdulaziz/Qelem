@@ -17,14 +17,14 @@ public class AnswerResources extends RepresentationModel<AnswerResources> {
 
     private QuestionModel question;
     private String content;
-    private UserModel user; 
+    private UserModel author; 
     private List<VoteModel> vote;
     private ReportedAnswerModel reportedAnswerModel;
 
     public AnswerResources(AnswerModel answer){
         this.question = answer.getQuestion();
         this.content = answer.getContent();
-        this.user = answer.getUser();
+        this.author = answer.getAuthor();
         this.vote = answer.getVote();
         this.reportedAnswerModel = answer.getReportedAnswer();
     }
