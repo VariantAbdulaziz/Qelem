@@ -28,7 +28,7 @@ public class QuestionModel {
     }
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     Long id;
     @NotNull(message="The topic can't be null")
     @NotBlank(message="The topic can't be blank")
@@ -38,7 +38,7 @@ public class QuestionModel {
     @NotBlank(message="The content can't be blank")
     String content;
     @ManyToOne(fetch = FetchType.LAZY)
-    UserModel user;
+    UserModel author;
     String status; 
     @ManyToOne(fetch = FetchType.LAZY)
     private TagModel tags;

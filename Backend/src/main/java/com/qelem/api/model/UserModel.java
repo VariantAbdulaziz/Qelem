@@ -34,7 +34,7 @@ public class UserModel {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     @Column(unique = true)
     String username;

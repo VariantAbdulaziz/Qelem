@@ -99,8 +99,8 @@ public class AnswerRestController {
         if (answer.getQuestion() != null) {
             answerModel.setQuestion(answer.getQuestion());
         }
-        if (answer.getUser() != null) {
-            answerModel.setUser(answer.getUser());
+        if (answer.getAuthor() != null) {
+            answerModel.setAuthor(answer.getAuthor());
         }
         if (answer.getVote() != null) {
             answerModel.setVote(answer.getVote());

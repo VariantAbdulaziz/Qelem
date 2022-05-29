@@ -13,12 +13,12 @@ import lombok.Data;
 public class DiscussionResources extends RepresentationModel<DiscussionResources> {
 
     private String content;
-    private UserModel user;
+    private UserModel author;
     private AnswerModel answer;
 
     public DiscussionResources(DiscussionModel discussion){
         this.content = discussion.getContent();
         this.answer = discussion.getAnswer();
-        this.user = discussion.getUser();
+        this.author = discussion.getAuthor();
     }
 }

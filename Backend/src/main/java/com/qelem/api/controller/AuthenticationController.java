@@ -20,12 +20,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import net.minidev.json.JSONObject;
 
 @RestController
 @RequestMapping(path = "/api/v1", produces = "application/json")
 @CrossOrigin(origins = "*")
 @RequiredArgsConstructor
+@Slf4j
 public class AuthenticationController {
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -34,8 +36,10 @@ public class AuthenticationController {
     @Autowired
     private JwtUtil jwtUtil;
 
+
     @PostMapping(value = "/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JSONObject loginRequest) throws Exception {
+        log.debug("Login request {}", loginRequest.toJSONString());
 
         AuthenticationRequest authenticationRequest = new AuthenticationRequest();
 
@@ -49,10 +53,13 @@ public class AuthenticationController {
             final UserDetails userDetails = myUserDetailsService
                     .loadUserByUsername(authenticationRequest.getUsername());
             final String jwt = jwtUtil.generateToken(userDetails);
+            log.debug("User {} authenticated", authenticationRequest.getUsername());
             return ResponseEntity.ok(new AuthenticationResponse(jwt));
         } catch (BadCredentialsException e) {
+            log.debug("Bad credentials exception {}", e.getMessage());
             throw new KelemBadCredentialsException("Incorrect username or password");
         } catch (UsernameNotFoundException e) {
+            log.debug("Username not found exception {}", e.getMessage());
             throw new KelemBadCredentialsException("Incorrect username or password");
         }
     }

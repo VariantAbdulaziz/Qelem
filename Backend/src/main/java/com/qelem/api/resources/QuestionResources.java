@@ -13,17 +13,21 @@ import lombok.Data;
 @Data
 public class QuestionResources extends RepresentationModel<QuestionResources> {
 
+    private Long id;
     private String topic;
     private String content;
     private String status; 
-    private TagModel tags;
-    private List<AnswerModel> answer;
+    private String tag = null;
+    private List<AnswerModel> answers;
 
     public QuestionResources(QuestionModel question){
+        this.id = question.getId();
         this.topic = question.getTopic();
         this.content = question.getContent();
         this.status = question.getStatus();
-        this.tags = question.getTags();
-        this.answer = question.getAnswer();
+        if(question.getTags() != null) {
+            this.tag = question.getTags().getTag();
+        }
+        this.answers = question.getAnswer();
     }
 }
