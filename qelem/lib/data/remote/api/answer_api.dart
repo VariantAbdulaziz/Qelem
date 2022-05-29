@@ -67,4 +67,17 @@ class AnswerApi {
       throw Exception('Failed to update answer');
     }
   }
+
+  Future<http.Response> deleteAnswer(int answerId) async {
+    final url = Uri.parse(_answersRootUrl + "$answerId");
+
+    final http.Response response = await http.delete(
+      url,
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+      },
+    );
+
+    return response;
+  }
 }

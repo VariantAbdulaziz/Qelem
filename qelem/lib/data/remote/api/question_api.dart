@@ -75,7 +75,7 @@ class QuestionApi {
     final http.Response response = await http.delete(
       url,
       headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
+        'Content-Type': 'application/json',
       },
     );
 
