@@ -10,7 +10,7 @@ import 'package:qelem/main.dart';
 
 void main() {
   testWidgets('Home widget test', (WidgetTester tester) async {
-    await tester.pumpWidget(const App());
+    await tester.pumpWidget(App());
     expect(find.text('My Questions'), findsOneWidget);
   });
 }

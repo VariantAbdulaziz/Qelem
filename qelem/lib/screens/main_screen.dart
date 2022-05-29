@@ -6,6 +6,7 @@ import 'package:qelem/screens/my_questions_screen.dart';
 import 'package:qelem/widgets/profile_app_bar.dart';
 import 'package:qelem/widgets/home_app_bar.dart';
 import 'package:qelem/widgets/common_app_bar.dart';
+import 'package:go_router/go_router.dart';
 
 import 'my_profile_screen.dart';
 
@@ -34,7 +35,7 @@ class _MainScreenState extends State<MainScreen> {
       bottomNavigationBar: bottomNav(),
       floatingActionButton: FloatingActionButton.extended(
         icon: const Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () => context.push('/post-question'),
         label: const Text("Ask"),
         backgroundColor: const Color(0xFF03DAC5),
         foregroundColor: Colors.black,
