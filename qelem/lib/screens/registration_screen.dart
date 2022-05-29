@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qelem/data/remote/models/user_model.dart';
+import 'package:qelem/domain/repository/auth_repository.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
@@ -18,6 +19,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   TextEditingController passwordController = TextEditingController();
 
   late UserModel user;
+
+  final AuthRepository _authRepo = AuthRepository();
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +115,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    _authRepo.register(
+                        username: usernameController.text,
+                        firstName: firstController.text,
+                        lastName: lastController.text,
+                        password: passwordController.text);
+                  },
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size.fromHeight(50), // NEW
                   ),

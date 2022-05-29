@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:qelem/domain/repository/auth_repository.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -13,6 +14,8 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _isObscure = true;
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  final AuthRepository _authRepo = AuthRepository();
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +99,11 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 30.0,
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                _authRepo.login(
+                    username: usernameController.text,
+                    password: passwordController.text);
+              },
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size.fromHeight(50), // NEW
               ),

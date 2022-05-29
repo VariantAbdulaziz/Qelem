@@ -54,7 +54,7 @@ class AuthApi {
 
     final Map<String, dynamic> data = json.decode(response.body);
 
-    if (response.statusCode == 202) {
+    if (response.statusCode == 201) {
       return UserModel.fromJson(data);
     } else {
       throw Exception(data['message'] ?? "Unkown error");
