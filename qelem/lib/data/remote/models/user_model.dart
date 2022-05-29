@@ -5,7 +5,7 @@ UserModel userModelJson(String str) => UserModel.fromJson(json.decode(str));
 String userModelToJson(UserModel userModel) => json.encode(userModel.toJson());
 
 class UserModel {
-  String userName;
+  String username;
   String password;
   String firstName;
   String lastName;
@@ -13,25 +13,26 @@ class UserModel {
   String profilePhoto;
 
   UserModel(
-      {required this.userName,
-      required this.firstName,
-      required this.lastName,
-      required this.password,
+      { this.username = "",
+       this.firstName = "",
+       this.lastName = "",
+       this.password = "",
       this.role = "MEMBER",
-      required this.profilePhoto});
+       this.profilePhoto = ""});
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
       firstName: json["firstName"],
       lastName: json["lastName"],
-      userName: json["userName"],
+      username: json["username"],
       password: json["password"],
       role: json["role"],
-      profilePhoto: json["profilePhoto"]);
+      profilePhoto: json["profilePicture"]
+      );
 
   Map<String, dynamic> toJson() => {
         "firstName": firstName,
         "lastName": lastName,
-        "userName": userName,
+        "username": username,
         "password": password,
       };
 
