@@ -16,7 +16,7 @@ class AnswerApi {
     if (response.statusCode == 200) {
       return AnswerModel.fromJson(data);
     } else {
-      throw Exception('Failed to fetch quesion');
+      throw Exception(data['message'] ?? "Unkown error");
     }
   }
 
@@ -30,11 +30,11 @@ class AnswerApi {
       body: body,
     );
 
+    final Map<String, dynamic> data = json.decode(response.body);
     if (response.statusCode == 201) {
-      final Map<String, dynamic> data = json.decode(response.body);
       return AnswerModel.fromJson(data);
     } else {
-      throw Exception('Failed to post answer');
+      throw Exception(data['message'] ?? "Unkown error");
     }
   }
 
@@ -48,24 +48,27 @@ class AnswerApi {
       body: body,
     );
 
+    final Map<String, dynamic> data = json.decode(response.body);
     if (response.statusCode == 200) {
-      final Map<String, dynamic> data = json.decode(response.body);
       return AnswerModel.fromJson(data);
     } else {
-      throw Exception('Failed to update answer');
+      throw Exception(data['message'] ?? "Unkown error");
     }
   }
 
-  Future<http.Response> deleteAnswer(int answerId) async {
+  Future<void> deleteAnswer(int answerId) async {
     final url = Uri.parse(_answersRootUrl + "$answerId");
 
-    final http.Response response = await http.delete(
+    final response = await http.delete(
       url,
       headers: <String, String>{
         'Content-Type': 'application/json',
       },
     );
 
-    return response;
+    final Map<String, dynamic> data = json.decode(response.body);
+
+    if (response.statusCode != 200)
+      throw Exception(data['message'] ?? "Unkown error");
   }
 }
