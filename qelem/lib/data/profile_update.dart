@@ -84,10 +84,3 @@ Future<UserModel> changePassword(String url, String token, String oldPassword, S
   }
 
 }
-
-// a function that retrievs access token form shared preferences
-getAccessToken() async {
-  var sharedPreferences = await SharedPreferences.getInstance();
-  String accessToken = sharedPreferences.getString("access_token") ?? "";
-  return accessToken;
-}
