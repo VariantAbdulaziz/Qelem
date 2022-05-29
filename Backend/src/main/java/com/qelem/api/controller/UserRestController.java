@@ -9,10 +9,12 @@ import java.util.List;
 import java.util.Optional;
 
 import com.qelem.api.Repo.UserRepository;
+import com.qelem.api.model.ChangePasswordModel;
 import com.qelem.api.model.RegistrationForm;
 import com.qelem.api.model.UserModel;
 import com.qelem.api.resources.UserResources;
 import com.qelem.api.resources.UserResourcesAssembler;
+import com.qelem.api.util.PasswordException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -101,11 +103,34 @@ public class UserRestController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public UserModel postUser(@RequestBody RegistrationForm registrationForm) throws ParseException {
-        UserModel user = registrationForm.toUser(passwordEncoder);
-        user.setProfilePicture(null);
-        user.setRole("MEMBER");
-        return userRepository.save(user);
+    public UserModel postUser(@RequestParam LinkedHashMap<String, String> urlEncoddedForm,
+            @RequestBody MultipartFile multipartFile) throws ParseException {
+
+        RegistrationForm form = new RegistrationForm();
+
+        form.setFirstName(urlEncoddedForm.get("firstName").toString());
+        form.setLastName(urlEncoddedForm.get("lastName").toString());
+        form.setPassword(urlEncoddedForm.get("password").toString());
+        form.setUsername(urlEncoddedForm.get("username").toString());
+
+        if (multipartFile != null && !multipartFile.isEmpty()) {
+            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+            UserModel user = form.toUser(passwordEncoder);
+            user.setProfilePicture(fileName);
+            user.getProfilePicture();
+            user = userRepository.save(user);
+            String uploadDir = "src/main/resources/static/user-photos/" + user.getId();
+            try {
+                FileUpload.saveFile(uploadDir, fileName, multipartFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return user;
+        } else {
+            UserModel user = form.toUser(passwordEncoder);
+            user.setProfilePicture("");
+            return userRepository.save(user);
+        }
     }
 
     @PutMapping(path = "/{id}", consumes = "application/json")
@@ -142,6 +167,18 @@ public class UserRestController {
         if (user.getVote() != null) {
             userModel.setVote(user.getVote());
         }
+        return userRepository.save(userModel);
+    }
+
+    @PatchMapping(path = "changePassword/{id}", consumes = "application/json")
+    public UserModel changePassword(@PathVariable("id") Long id,
+            @RequestBody ChangePasswordModel user) throws PasswordException {
+
+        UserModel userModel = userRepository.findById(id).get();
+        if ( passwordEncoder.encode(user.getOldPassword())!= userModel.getPassword()) {
+            throw new PasswordException("Password doesn't match!");
+        }
+        userModel.setPassword(passwordEncoder.encode(user.getNewPassword()));
         return userRepository.save(userModel);
     }
 

@@ -7,7 +7,6 @@ import 'package:qelem/data/remote/models/user_model.dart';
 
 void main() {
   test("test user", () {
-    print("the ");
     final file =
         File('test/test_resources/random_user.json').readAsStringSync();
 
@@ -20,7 +19,7 @@ void main() {
     expect(user.lastName, "test_1");
     expect(user.password, "test_1");
     expect(user.role, "MEMBER");
-    expect(user.profilePhoto, "/user-photos/1/abebe.jpeg");
+    expect(user.profilePicture, "/user-photos/1/abebe.jpeg");
   });
 
   test("test question model", () {
