@@ -5,8 +5,6 @@ AppBar profileAppBar(String _title) {
     title: Text(
       _title,
     ),
-    actions: [
-      IconButton(onPressed: () => {}, icon: const Icon(Icons.logout))
-    ],
+    actions: [IconButton(onPressed: () => {}, icon: const Icon(Icons.logout))],
   );
 }

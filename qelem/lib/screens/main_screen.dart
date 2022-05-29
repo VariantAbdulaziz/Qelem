@@ -3,19 +3,11 @@ import 'package:qelem/common/app_palette.dart';
 import 'package:qelem/common/constants.dart';
 import 'package:qelem/screens/home_screen.dart';
 import 'package:qelem/screens/my_questions_screen.dart';
-import 'package:qelem/screens/profile/Profile.dart';
-import 'package:qelem/widgets/ProfileAppBar.dart';
+import 'package:qelem/widgets/profile_app_bar.dart';
 import 'package:qelem/widgets/home_app_bar.dart';
 import 'package:qelem/widgets/common_app_bar.dart';
 
-class Main extends StatelessWidget {
-  const Main({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const MainScreen();
-  }
-}
+import 'my_profile_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -37,11 +29,7 @@ class _MainScreenState extends State<MainScreen> {
       appBar: _appBar,
       body: IndexedStack(
         index: _selectedIndex,
-        children: [
-          HomeScreen(),
-          MyQuestionsScreen(),
-          Profile()
-        ],
+        children: [homeScreen(), myQuestionsScreen(), const MyProfileScreen()],
       ),
       bottomNavigationBar: bottomNav(),
       floatingActionButton: FloatingActionButton.extended(
