@@ -68,4 +68,17 @@ class QuestionApi {
       throw Exception('Failed to update quesion');
     }
   }
+
+  Future<http.Response> deleteQuestion(int questionId) async {
+    final url = Uri.parse(_questionsRootUrl + "$questionId");
+
+    final http.Response response = await http.delete(
+      url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+
+    return response;
+  }
 }
