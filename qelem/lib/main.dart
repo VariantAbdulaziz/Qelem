@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:qelem/screens/main_screen.dart';
 import 'common/constants.dart';
 import 'common/qelem_theme.dart';
 import 'package:go_router/go_router.dart';
@@ -43,6 +42,13 @@ class App extends StatelessWidget {
         builder: (context, state) {
           final qid = int.parse(state.params['qid']!);
           return EditQuestionScreen(qid: qid);
+        },
+      ),
+      GoRoute(
+        path: '/question-detail/:qid',
+        builder: (context, state) {
+          final qid = int.parse(state.params['qid']!);
+          return QuestionDetailScreen(qid: qid);
         },
       ),
     ],
