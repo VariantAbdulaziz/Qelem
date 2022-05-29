@@ -10,16 +10,15 @@ class UserModel {
   String firstName;
   String lastName;
   String role;
-  String profilePicture;
+  String profilePhoto;
 
   UserModel(
-      { this.username = "",
-       this.firstName = "",
-       this.lastName = "",
-       this.password = "",
+      {required this.username,
+      required this.firstName,
+      required this.lastName,
+      required this.password,
       this.role = "MEMBER",
-       this.profilePhoto = ""});
-
+      required this.profilePhoto});
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
       firstName: json["firstName"],
