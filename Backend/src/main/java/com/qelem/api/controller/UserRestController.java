@@ -9,10 +9,12 @@ import java.util.List;
 import java.util.Optional;
 
 import com.qelem.api.Repo.UserRepository;
+import com.qelem.api.model.ChangePasswordModel;
 import com.qelem.api.model.RegistrationForm;
 import com.qelem.api.model.UserModel;
 import com.qelem.api.resources.UserResources;
 import com.qelem.api.resources.UserResourcesAssembler;
+import com.qelem.api.util.PasswordException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -139,6 +141,36 @@ public class UserRestController {
         if (user.getVote() != null) {
             userModel.setVote(user.getVote());
         }
+        return userRepository.save(userModel);
+    }
+
+    @PatchMapping(path = "/changePassword/{id}", consumes = "application/json")
+    public UserModel changePassword(@PathVariable("id") Long id,
+            @RequestBody ChangePasswordModel user) {
+        System.out.println();
+        System.out.println("\n");
+        System.out.println("\n");
+        System.out.println("\n");
+        System.out.println("\n");
+        System.out.println("\n");System.out.println("\n");
+        System.out.println("\n");
+        System.out.println("\n");
+        System.out.println("the new old: " + passwordEncoder.encode(user.getOldPassword()));
+        
+        System.out.println("\n");
+        System.out.println("\n");
+        System.out.println("\n");System.out.println("\n");
+        System.out.println("\n");
+        System.out.println("\n");
+
+
+        UserModel userModel = userRepository.findById(id).get();
+        System.out.println("from database: " + userModel.getPassword());
+
+        if ( passwordEncoder.encode(user.getOldPassword()).matches(userModel.getPassword()) ) {
+            throw new PasswordException("Password doesn't match!");
+        }
+        userModel.setPassword(passwordEncoder.encode(user.getNewPassword()));
         return userRepository.save(userModel);
     }
 
