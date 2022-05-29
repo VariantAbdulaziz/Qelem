@@ -38,6 +38,13 @@ class App extends StatelessWidget {
         path: '/post-question',
         builder: (context, state) => const PostQuestionScreen(),
       ),
+      GoRoute(
+        path: '/edit-question/:qid',
+        builder: (context, state) {
+          final qid = int.parse(state.params['qid']!);
+          return EditQuestionScreen(qid: qid);
+        },
+      ),
     ],
   );
 
