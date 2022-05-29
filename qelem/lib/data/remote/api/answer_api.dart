@@ -7,18 +7,6 @@ import 'package:qelem/data/remote/models/answer_model.dart';
 class AnswerApi {
   static const String _answersRootUrl = "${Constants.BASE_URL}answers/";
 
-  Future<AnswerModel> getAnswers() async {
-    var response = await http.get(Uri.parse(_answersRootUrl));
-
-    final Map<String, dynamic> data = json.decode(response.body);
-
-    if (response.statusCode == 200) {
-      return AnswerModel.fromJson(data);
-    } else {
-      throw Exception('Failed to load quesions');
-    }
-  }
-
   Future<AnswerModel> getQuestion(int answerId) async {
     var url = Uri.parse(_answersRootUrl + "$answerId");
 
