@@ -30,6 +30,34 @@ Future<UserModel> getProfile(String url, String token) async {
 }
 
 
+// update the user profile on the server from the user model object passed
+Future<UserModel> updateProfile(String url, String token, UserModel userModel) async {
+
+  HttpClient client = HttpClient();
+
+  HttpClientRequest request = await client.patchUrl(Uri.parse(url));
+
+  request.headers.add(HttpHeaders.authorizationHeader, "Bearer " + token);
+
+  request.headers.add('content-type', 'application/json');
+
+  request.add(utf8.encode(json.encode(userModel.toJson())));
+
+  HttpClientResponse response = await request.close();
+
+  if (response.statusCode == 200) {
+
+    String responseBody = await response.transform(utf8.decoder).join();
+    return UserModel.fromJson(json.decode(responseBody));
+
+  } else {
+
+    throw Exception('Failed to update profile!');
+  }
+
+}
+
+
 // a function that retrievs access token form shared preferences
 getAccessToken() async {
   var sharedPreferences = await SharedPreferences.getInstance();
