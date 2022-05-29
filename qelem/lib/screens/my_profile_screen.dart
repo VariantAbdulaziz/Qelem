@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:qelem/screens/profile/ChangePassword.dart';
-import 'package:qelem/screens/profile/EditProfile.dart';
 
-class Profile extends StatefulWidget {
-  const Profile({Key? key}) : super(key: key);
+import 'change_password_screen.dart';
+import 'edit_profile_screen.dart';
+
+class MyProfileScreen extends StatefulWidget {
+  const MyProfileScreen({Key? key}) : super(key: key);
 
   @override
-  State<Profile> createState() => _ProfileState();
+  State<MyProfileScreen> createState() => _MyProfileScreenState();
 }
 
-class _ProfileState extends State<Profile> {
+class _MyProfileScreenState extends State<MyProfileScreen> {
   @override
   Widget build(BuildContext context) {
     TextStyle? textStyle = Theme.of(context).textTheme.bodyMedium;
@@ -48,7 +49,9 @@ class _ProfileState extends State<Profile> {
       InkWell(
           onTap: () {
             Navigator.push(
-              context, MaterialPageRoute(builder: (context) => const EditProfile()));
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const EditProfileScreen()));
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -80,7 +83,9 @@ class _ProfileState extends State<Profile> {
       InkWell(
           onTap: () {
             Navigator.push(
-              context, MaterialPageRoute(builder: (context) => const ChangePassword()));
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const ChangePasswordScreen()));
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
