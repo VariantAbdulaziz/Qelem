@@ -101,34 +101,11 @@ public class UserRestController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public UserModel postUser(@RequestParam LinkedHashMap<String, String> urlEncoddedForm,
-            @RequestBody MultipartFile multipartFile) throws ParseException {
-
-        RegistrationForm form = new RegistrationForm();
-
-        form.setFirstName(urlEncoddedForm.get("firstName").toString());
-        form.setLastName(urlEncoddedForm.get("lastName").toString());
-        form.setPassword(urlEncoddedForm.get("password").toString());
-        form.setUsername(urlEncoddedForm.get("username").toString());
-
-        if (multipartFile != null && !multipartFile.isEmpty()) {
-            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-            UserModel user = form.toUser(passwordEncoder);
-            user.setProfilePicture(fileName);
-            user.getProfilePicture();
-            user = userRepository.save(user);
-            String uploadDir = "src/main/resources/static/user-photos/" + user.getId();
-            try {
-                FileUpload.saveFile(uploadDir, fileName, multipartFile);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return user;
-        } else {
-            UserModel user = form.toUser(passwordEncoder);
-            user.setProfilePicture("");
-            return userRepository.save(user);
-        }
+    public UserModel postUser(@RequestBody RegistrationForm registrationForm) throws ParseException {
+        UserModel user = registrationForm.toUser(passwordEncoder);
+        user.setProfilePicture(null);
+        user.setRole("MEMBER");
+        return userRepository.save(user);
     }
 
     @PutMapping(path = "/{id}", consumes = "application/json")

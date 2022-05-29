@@ -37,13 +37,7 @@ public class RegistrationForm {
        user.setFirstName(this.firstName);
        user.setLastName(this.lastName);
        user.setUsername(this.username);
-       System.out.println("\n");
-       System.out.println("\n");
-       System.out.println("\n");
-       System.out.println("\n");
-       System.out.println(this.username);
        user.setPassword(encoder.encode(this.password));
-       user.setRole("MEMBER");
        return user;
    }
 }
