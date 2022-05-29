@@ -25,4 +25,11 @@ class AnswerModel {
       content: json["content"],
       userModel: json["user"],
       vote: json["vote"]);
+
+  Map<String, dynamic> toJson() => {
+        "questionModel": questionModel,
+        "content": content,
+        "user": userModel,
+        "vote": vote,
+      };
 }
