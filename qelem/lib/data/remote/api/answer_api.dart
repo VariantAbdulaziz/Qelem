@@ -49,4 +49,22 @@ class AnswerApi {
       throw Exception('Failed to post answer');
     }
   }
+
+  Future<AnswerModel> updateAnswer(AnswerModel answer) async {
+    final url = Uri.parse(_answersRootUrl);
+    final body = answer.toJson();
+
+    final response = await http.put(
+      url,
+      headers: {'Content-Type': "application/json"},
+      body: body,
+    );
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> data = json.decode(response.body);
+      return AnswerModel.fromJson(data);
+    } else {
+      throw Exception('Failed to update answer');
+    }
+  }
 }
