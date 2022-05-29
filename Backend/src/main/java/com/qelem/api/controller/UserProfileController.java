@@ -57,7 +57,7 @@ public class UserProfileController {
      * This is where the user updates a user profile they have previously raised.
      * 
      * @param id
-     * @param user
+     * @param author
      * @return
      */
     @PostMapping("/update-userProfile/{id}")

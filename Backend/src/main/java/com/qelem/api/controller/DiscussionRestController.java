@@ -94,12 +94,11 @@ public class DiscussionRestController {
         if (discussion.getContent() != null) {
             discussionModel.setContent(discussion.getContent());
         }
-        if (discussion.getUser() != null) {
-            discussionModel.setUser(discussion.getUser());
-        }
         if (discussion.getAnswer() != null) {
             discussionModel.setAnswer(discussion.getAnswer());
         }
+        
+        discussionModel.setAuthor(discussion.getAuthor());
         return discussionRepository.save(discussionModel);
     }
 

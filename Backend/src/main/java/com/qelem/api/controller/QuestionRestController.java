@@ -42,7 +42,7 @@ public class QuestionRestController {
      * lists all the questions in the system.
      * 
      */
-    @GetMapping(params = "all")
+    @GetMapping(produces = "application/json")
     public CollectionModel<QuestionResources> allQuestions() {
         PageRequest pageable = PageRequest.of(0, 12,
                 Sort.by("id").descending());
@@ -69,7 +69,7 @@ public class QuestionRestController {
         return questionResource;
     }
 
-    @PostMapping(consumes = "application/json")
+    @PostMapping(consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public QuestionModel postQuestion(@RequestBody QuestionModel question) {
         return questionRepository.save(question);
@@ -100,9 +100,8 @@ public class QuestionRestController {
         if (question.getTags() != null) {
             questionModel.setTags(question.getTags());
         }
-        if (question.getUser() != null) {
-            questionModel.setUser(question.getUser());
-        }
+
+        questionModel.setAuthor(question.getAuthor());
         return questionRepository.save(questionModel);
     }
 

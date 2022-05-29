@@ -15,25 +15,25 @@ import lombok.Data;
 @Data
 public class MyUserDetail implements UserDetails {
 
-    private UserModel user;
+    private UserModel author;
     public MyUserDetail(UserModel user) {
-        this.user = user;
+        this.author = user;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority("ROLE_" + this.user.role));
+        return Arrays.asList(new SimpleGrantedAuthority("ROLE_" + this.author.role));
     }
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return author.getPassword();
     }
 
     @Override
     public String getUsername() {
         // TODO Auto-generated method stub
-        return user.getUsername();
+        return author.getUsername();
     }
 
     @Override

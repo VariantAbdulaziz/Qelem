@@ -3,8 +3,6 @@ package com.qelem.api.controller;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
-import java.io.IOException;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,9 +10,12 @@ import com.qelem.api.Repo.UserRepository;
 import com.qelem.api.model.ChangePasswordModel;
 import com.qelem.api.model.RegistrationForm;
 import com.qelem.api.model.UserModel;
+import com.qelem.api.model.UserModel.ROLE;
 import com.qelem.api.resources.UserResources;
 import com.qelem.api.resources.UserResourcesAssembler;
-import com.qelem.api.util.PasswordException;
+import com.qelem.api.util.UnauthorizedAccess;
+import com.qelem.api.util.UserAlreadyExists;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -27,7 +28,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,18 +37,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import net.minidev.json.parser.ParseException;
 
 @RestController
 @RequestMapping(path = "/api/v1/users", produces = "application/json")
 @CrossOrigin(origins = "*")
 @RequiredArgsConstructor
+@Slf4j
 public class UserRestController {
     private final UserRepository userRepository;
     @Autowired
@@ -103,40 +103,33 @@ public class UserRestController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public UserModel postUser(@RequestParam LinkedHashMap<String, String> urlEncoddedForm,
-            @RequestBody MultipartFile multipartFile) throws ParseException {
+    public UserModel postUser(@RequestBody RegistrationForm registrationForm) throws ParseException {
+        log.debug("Register user with user form : {}", registrationForm);
 
-        RegistrationForm form = new RegistrationForm();
+        UserModel user = registrationForm.toUser(passwordEncoder);
+        user.setProfilePicture(null);
+        user.setRole("MEMBER");
 
-        form.setFirstName(urlEncoddedForm.get("firstName").toString());
-        form.setLastName(urlEncoddedForm.get("lastName").toString());
-        form.setPassword(urlEncoddedForm.get("password").toString());
-        form.setUsername(urlEncoddedForm.get("username").toString());
-
-        if (multipartFile != null && !multipartFile.isEmpty()) {
-            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-            UserModel user = form.toUser(passwordEncoder);
-            user.setProfilePicture(fileName);
-            user.getProfilePicture();
-            user = userRepository.save(user);
-            String uploadDir = "src/main/resources/static/user-photos/" + user.getId();
-            try {
-                FileUpload.saveFile(uploadDir, fileName, multipartFile);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return user;
-        } else {
-            UserModel user = form.toUser(passwordEncoder);
-            user.setProfilePicture("");
-            return userRepository.save(user);
+        if (userRepository.existsByUsername(user.getUsername())) {
+            log.error("User with username {} already exists", user.getUsername());
+            throw new UserAlreadyExists();
         }
+
+        log.debug("Saving user : {}", user);
+        return userRepository.save(user);
     }
 
     @PutMapping(path = "/{id}", consumes = "application/json")
     public UserModel putUser(
             @PathVariable("id") Long id,
             @RequestBody UserModel userModel) {
+        var isAuthorized = loggedInUser().getId().equals(id) || loggedInUser().getRole().equals("ADMIN");
+
+        if (!isAuthorized) {
+            log.error("User with id {} is not authorized to update user with id {}", loggedInUser().getId(), id);
+            throw new UnauthorizedAccess("User is not authorized to update user");
+        }
+
         userModel.setId(id);
         return userRepository.save(userModel);
     }
@@ -144,13 +137,16 @@ public class UserRestController {
     @PatchMapping(path = "/{id}", consumes = "application/json")
     public UserModel updateUser(@PathVariable("id") Long id,
             @RequestBody UserModel user) {
+        var isAuthorized = loggedInUser().getId().equals(id) || loggedInUser().getRole().equals("ADMIN");
+
+        if (!isAuthorized) {
+            log.error("User with id {} is not authorized to update user with id {}", loggedInUser().getId(), id);
+            throw new UnauthorizedAccess("User is not authorized to update user");
+        }
 
         UserModel userModel = userRepository.findById(id).get();
         if (user.getUsername() != null) {
             userModel.setUsername(user.getUsername());
-        }
-        if (user.getPassword() != null) {
-            userModel.setPassword(user.getPassword());
         }
         if (user.getFirstName() != null) {
             userModel.setFirstName(user.getFirstName());
@@ -167,6 +163,8 @@ public class UserRestController {
         if (user.getVote() != null) {
             userModel.setVote(user.getVote());
         }
+
+        userModel.setPassword(user.getPassword());
         return userRepository.save(userModel);
     }
 
@@ -185,6 +183,13 @@ public class UserRestController {
     @DeleteMapping("/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void deleteUser(@PathVariable("id") Long id) {
+        var isAuthorized = loggedInUser().getId().equals(id) || loggedInUser().getRole().equals("ADMIN");
+
+        if (!isAuthorized) {
+            log.error("User with id {} is not authorized to update user with id {}", loggedInUser().getId(), id);
+            throw new UnauthorizedAccess("User is not authorized to delete user");
+        }
+
         try {
             userRepository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
