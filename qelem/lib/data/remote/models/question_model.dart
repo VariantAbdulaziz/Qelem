@@ -35,7 +35,7 @@ class QuestionModel {
   Map<String, dynamic> toJson() => {
         "topic": topic,
         "content": content,
-        "user": userModel,
+        // "user": userModel,
         "status": status,
         "answer": answer
       };

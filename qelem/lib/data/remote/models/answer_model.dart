@@ -1,10 +1,11 @@
 import 'dart:convert';
 
 import 'package:qelem/data/remote/models/user_model.dart';
-import 'package:qelem/data/remote/models/questio_model.dart';
+import 'package:qelem/data/remote/models/question_model.dart';
 import 'package:qelem/data/remote/models/vote_model.dart';
 
-AnswerModel answerModel(String str) => AnswerModel.fromJson(json.decode(str));
+AnswerModel answerModelJson(String str) =>
+    AnswerModel.fromJson(json.decode(str));
 
 String answerModelToJson(AnswerModel answerModel) =>
     json.encode(answerModel.toString());
@@ -21,7 +22,7 @@ class AnswerModel {
       required this.userModel,
       this.vote});
   factory AnswerModel.fromJson(Map<String, dynamic> json) => AnswerModel(
-      questionModel: json["questionModel"],
+      questionModel: json["question"],
       content: json["content"],
       userModel: json["user"],
       vote: json["vote"]);

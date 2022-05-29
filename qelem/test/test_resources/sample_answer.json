@@ -1,0 +1,54 @@
+{
+    "question": {
+        "id": 2,
+        "topic": "the second question",
+        "content": "The second question",
+        "user": {
+            "id": 2,
+            "username": "second",
+            "password": "$2a$10$grK6.kpThDYdBSdFFJQZ9.kjwmg5YpB2E7ME0Rn6CUN8foxMSmxv2",
+            "firstName": "second",
+            "lastName": "second",
+            "role": "MEMBER",
+            "profilePicture": "/user-photos/2/abebe.jpg"
+        },
+        "status": "UNANSWERED",
+        "tags": {
+            "id": 2,
+            "tag": "#Biology"
+        },
+        "answer": [
+            {
+                "id": 2,
+                "content": "The second answer",
+                "user": {
+                    "id": 2,
+                    "username": "second",
+                    "password": "$2a$10$grK6.kpThDYdBSdFFJQZ9.kjwmg5YpB2E7ME0Rn6CUN8foxMSmxv2",
+                    "firstName": "second",
+                    "lastName": "second",
+                    "role": "MEMBER",
+                    "profilePicture": "/user-photos/2/abebe.jpg"
+                },
+                "reportedAnswer": null
+            }
+        ]
+    },
+    "content": "The second answer",
+    "user": {
+        "id": 2,
+        "username": "second",
+        "password": "$2a$10$grK6.kpThDYdBSdFFJQZ9.kjwmg5YpB2E7ME0Rn6CUN8foxMSmxv2",
+        "firstName": "second",
+        "lastName": "second",
+        "role": "MEMBER",
+        "profilePicture": "/user-photos/2/abebe.jpg"
+    },
+    "vote": [],
+    "reportedAnswerModel": null,
+    "_links": {
+        "self": {
+            "href": "http://localhost:8080/api/v1/answers/2"
+        }
+    }
+}

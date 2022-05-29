@@ -18,7 +18,7 @@ class UserModel {
       required this.lastName,
       required this.password,
       this.role = "MEMBER",
-      required this.profilePhoto});
+      this.profilePhoto = ""});
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
       firstName: json["firstName"],

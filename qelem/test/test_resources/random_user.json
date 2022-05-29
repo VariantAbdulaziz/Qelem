@@ -1,0 +1,14 @@
+{
+    "id": 3,
+    "userName": "test_1",
+    "password": "test_1",
+    "firstName": "test_1",
+    "lastName": "test_1",
+    "role": "MEMBER",
+    "profilePhoto": "/user-photos/1/abebe.jpeg",
+    "_links": {
+        "Users  with id 1": {
+            "href": "http://localhost:8080/api/v1/users/3"
+        }
+    }
+}
