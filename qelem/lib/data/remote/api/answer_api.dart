@@ -18,4 +18,17 @@ class AnswerApi {
       throw Exception('Failed to load quesions');
     }
   }
+
+  Future<AnswerModel> getQuestion(int answerId) async {
+    var url = Uri.parse(_answersRoot + "$answerId");
+
+    final response = await http.get(url);
+    final Map<String, dynamic> data = json.decode(response.body);
+
+    if (response.statusCode == 200) {
+      return AnswerModel.fromJson(data);
+    } else {
+      throw Exception('Failed to fetch quesion');
+    }
+  }
 }
