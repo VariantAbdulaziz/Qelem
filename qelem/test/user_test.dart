@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -12,9 +13,9 @@ void main() {
 
     print(file.runtimeType);
 
-    final user = userModelJson(file);
+    final user = UserModel.fromJson(json.decode(file));
 
-    expect(user.userName, "test_1");
+    expect(user.username, "test_1");
     expect(user.firstName, "test_1");
     expect(user.lastName, "test_1");
     expect(user.password, "test_1");
@@ -26,23 +27,21 @@ void main() {
     final file =
         File('test/test_resources/sample_question.json').readAsStringSync();
 
-    final question = questionModelJson(file);
+    final question = QuestionModel.fromJson(json.decode(file));
 
+    //excluded user model response and answer model response so as to test the
+    // on thier own. Inorder to test only the question model json parser we need
+    // to delete these models' from the question model temporerly(same for answer model)
     expect(question.content, "The second question");
     expect(question.status, "UNANSWERED");
     expect(question.topic, "the second question");
-    expect(question.answer, "");
-    expect(question.userModel, "");
   });
 
   test("test answer model", () {
     final file =
         File('test/test_resources/sample_answer.json').readAsStringSync();
-    final answer = answerModelJson(file);
+    final answer = AnswerModel.fromJson(json.decode(file));
 
-    expect(answer.content, "");
-    expect(answer.questionModel, "");
-    expect(answer.userModel, "");
-    expect(answer.vote, "");
+    expect(answer.content, "The second answer");
   });
 }

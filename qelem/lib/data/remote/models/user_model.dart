@@ -1,11 +1,9 @@
 import 'dart:convert';
 
-UserModel userModelJson(String str) => UserModel.fromJson(json.decode(str));
-
 String userModelToJson(UserModel userModel) => json.encode(userModel.toJson());
 
 class UserModel {
-  String userName;
+  String username;
   String password;
   String firstName;
   String lastName;
@@ -13,7 +11,7 @@ class UserModel {
   String profilePicture;
 
   UserModel(
-      {required this.userName,
+      {required this.username,
       required this.firstName,
       required this.lastName,
       required this.password,
@@ -23,7 +21,7 @@ class UserModel {
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
       firstName: json["firstName"],
       lastName: json["lastName"],
-      userName: json["username"],
+      username: json["username"],
       password: json["password"],
       role: json["role"],
       profilePicture: json["profilePicture"]);
@@ -31,7 +29,7 @@ class UserModel {
   Map<String, dynamic> toJson() => {
         "firstName": firstName,
         "lastName": lastName,
-        "username": userName,
+        "username": username,
         "password": password,
       };
 

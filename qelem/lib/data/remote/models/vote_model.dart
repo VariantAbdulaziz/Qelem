@@ -3,8 +3,6 @@ import 'dart:convert';
 import 'package:qelem/data/remote/models/user_model.dart';
 import 'package:qelem/data/remote/models/answer_model.dart';
 
-VoteModel voteModelJson(String str) => VoteModel.fromJson(json.decode(str));
-
 String voteModelToJson(VoteModel voteModel) => json.encode(voteModel.toJson());
 
 class VoteModel {

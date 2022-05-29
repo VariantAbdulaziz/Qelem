@@ -3,9 +3,6 @@ import 'dart:convert';
 import 'package:qelem/data/remote/models/user_model.dart';
 import 'package:qelem/data/remote/models/answer_model.dart';
 
-QuestionModel questionModelJson(String str) =>
-    QuestionModel.fromJson(json.decode(str));
-
 String questionModelToJson(QuestionModel questionModel) =>
     json.encode(questionModel.toString());
 
