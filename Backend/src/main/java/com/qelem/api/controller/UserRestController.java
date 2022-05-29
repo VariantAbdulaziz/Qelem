@@ -171,22 +171,6 @@ public class UserRestController {
     @PatchMapping(path = "/changePassword/{id}", consumes = "application/json")
     public UserModel changePassword(@PathVariable("id") Long id,
             @RequestBody ChangePasswordModel user) {
-        System.out.println();
-        System.out.println("\n");
-        System.out.println("\n");
-        System.out.println("\n");
-        System.out.println("\n");
-        System.out.println("\n");System.out.println("\n");
-        System.out.println("\n");
-        System.out.println("\n");
-        System.out.println("the new old: " + passwordEncoder.encode(user.getOldPassword()));
-        
-        System.out.println("\n");
-        System.out.println("\n");
-        System.out.println("\n");System.out.println("\n");
-        System.out.println("\n");
-        System.out.println("\n");
-
 
         UserModel userModel = userRepository.findById(id).get();
         System.out.println("from database: " + userModel.getPassword());
