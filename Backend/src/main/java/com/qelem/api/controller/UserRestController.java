@@ -40,6 +40,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -174,9 +175,24 @@ public class UserRestController {
     }
 
 
-    @PatchMapping(path = "/{id}", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
-    public UserModel updateUser(@PathVariable("id") Long id,
-            @RequestPart(name = "body") UserModel user, @RequestPart(name="profile", required=false) MultipartFile file) {
+    @PatchMapping(path="/{id}", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public UserModel updateUser(
+        @PathVariable("id") Long id,
+        @RequestParam(value = "firstName", required = false) String firstName,
+        @RequestParam(value = "lastName", required = false) String lastName,
+        @RequestPart(value = "profile", required = false) MultipartFile file) {
+
+            UserModel user = new UserModel();
+            user.setId(id);
+            user.setFirstName(firstName);
+            user.setLastName(lastName);
+
+            return updateUserHelper(id, user, file);
+
+        }
+
+
+    public UserModel updateUserHelper(Long id, UserModel user, MultipartFile file) {
         var isAuthorized = loggedInUser().getId().equals(id) || loggedInUser().getRole().equals("ADMIN");
 
         if (!isAuthorized) {
@@ -190,16 +206,7 @@ public class UserRestController {
         }
 
         UserModel userModel = userRepository.findById(id).get();
-        if (user.getUsername() != null && !user.getUsername().isEmpty()) {
-            if (!user.getUsername().equals(userModel.getUsername())) {
-                userModel.setUsername(user.getUsername());
-            } else {
-                if (userRepository.existsByUsername(user.getUsername())) {
-                    log.error("User with username {} already exists", user.getUsername());
-                    throw new UserAlreadyExists();
-                }
-            }
-        }
+
         if (user.getFirstName() != null && !user.getFirstName().isEmpty()) {
             userModel.setFirstName(user.getFirstName());
         }
@@ -216,7 +223,8 @@ public class UserRestController {
             userModel.setVote(user.getVote());
         }
 
-        userModel.setPassword(user.getPassword());
-        return userRepository.save(userModel);
+        UserModel res = userRepository.save(userModel);
+        res.setPassword(null);
+        return res;
     }
 }
