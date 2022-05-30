@@ -10,7 +10,7 @@ class UserModel {
   String firstName;
   String lastName;
   String role;
-  String profilePhoto;
+  String? profilePhoto;
 
   UserModel(
       {required this.username,
