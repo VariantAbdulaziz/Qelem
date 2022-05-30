@@ -1,5 +1,6 @@
 import 'package:qelem/data/remote/api/auth_api.dart';
 import 'package:qelem/data/remote/models/user_model.dart';
+import 'package:qelem/data/local/shared_prefs/shared_prefs_service.dart';
 
 class AuthRepository {
   Future<UserModel> register({
@@ -16,11 +17,16 @@ class AuthRepository {
     return user;
   }
 
-  Future<String> login({
+  void login({
     required String username,
     required String password,
   }) async {
     String token = await AuthApi.login(username: username, password: password);
-    return token;
+    SharedPrefsService.addToken(token);
+  }
+
+  static Future<bool> loggedIn() async {
+    String token = await SharedPrefsService.getToken();
+    return token != "";
   }
 }
