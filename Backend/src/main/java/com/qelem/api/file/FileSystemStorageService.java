@@ -27,6 +27,13 @@ public class FileSystemStorageService implements StorageService {
     @Autowired
     public FileSystemStorageService(FileStorageConfiguration configuration) {
         this.rootLocation = Paths.get(configuration.getUploadDir());
+        if (!Files.exists(rootLocation)) {
+            try {
+                Files.createDirectories(rootLocation);
+            } catch (IOException e) {
+                throw new StorageException("Could not initialize storage", e);
+            }
+        }
     }
 
     @Override
