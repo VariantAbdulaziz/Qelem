@@ -1,0 +1,20 @@
+
+{
+  "id": 6,
+  "topic": "asdfad",
+  "content": "this is the question's content",
+  "author": {
+    "id": 3,
+    "userName": "brukted",
+    "firstName": "bruk",
+    "lastName": "tedla",
+    "role": "MEMBER",
+    "profilePicture": "/user-photos/1/abebe.jpeg"
+  },
+  "createdAt": "2022-05-30T13:14:18.582299Z",
+  "updatedAt": "2022-05-30T13:14:18.582299Z",
+  "upVotes": 0,
+  "downVotes": 0,
+  "userVote": 0
+}
+    

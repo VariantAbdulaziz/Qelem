@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:qelem/common/constants.dart';
-import 'package:qelem/data/remote/models/questio_model.dart';
+import 'package:qelem/data/remote/models/question_model.dart';
 
 class QuestionApi {
   static const String _questionsRootUrl = "${Constants.BASE_URL}questions/";

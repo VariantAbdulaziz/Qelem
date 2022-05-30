@@ -95,6 +95,18 @@ public class UserRestController {
         return userRepository.save(userModel);
     }
 
+    @PatchMapping(path = "changePassword/{id}", consumes = "application/json")
+    public UserModel changePassword(@PathVariable("id") Long id,
+            @RequestBody ChangePasswordModel user) throws PasswordException {
+
+        UserModel userModel = userRepository.findById(id).get();
+        if ( passwordEncoder.encode(user.getOldPassword())!= userModel.getPassword()) {
+            throw new PasswordException("Password doesn't match!");
+        }
+        userModel.setPassword(passwordEncoder.encode(user.getNewPassword()));
+        return userRepository.save(userModel);
+    }
+
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable("id") Long id) {
         UserModel user = loggedInUser();

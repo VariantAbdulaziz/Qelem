@@ -21,7 +21,7 @@ class User {
         firstName: json["firstName"],
         lastName: json["lastName"],
         role: json["role"],
-        profilePicture: json["profilePhoto"],
+        profilePicture: json["profilePicture"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -30,6 +30,6 @@ class User {
         "firstName": firstName,
         "lastName": lastName,
         "role": role,
-        "profilePhoto": profilePicture,
+        "profilePicture": profilePicture,
       };
 }
