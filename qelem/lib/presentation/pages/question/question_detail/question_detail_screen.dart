@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:qelem/widgets/answer_card.dart';
-
-import '../widgets/answer_bottom_sheet.dart';
+import 'package:qelem/presentation/pages/answer/widgets/answer_bottom_sheet.dart';
+import 'package:qelem/presentation/pages/answer/widgets/answer_card.dart';
 
 class QuestionDetailScreen extends StatefulWidget {
   const QuestionDetailScreen({Key? key, required this.qid}) : super(key: key);

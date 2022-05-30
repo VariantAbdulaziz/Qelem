@@ -1,8 +1,9 @@
-import 'package:flutter/cupertino.dart';
-import '../domain/models/question_model.dart';
+import 'package:flutter/material.dart';
+
+import '../../../../domain/models/question_model.dart';
 import '../widgets/question_card.dart';
 
-Widget homeScreen() {
+Widget myQuestionsScreen() {
   return ListView.builder(
     itemCount: 20,
     itemBuilder: (context, position) {

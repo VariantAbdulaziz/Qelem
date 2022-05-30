@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:qelem/common/app_palette.dart';
 import 'package:qelem/common/constants.dart';
-import 'package:qelem/screens/home_screen.dart';
-import 'package:qelem/screens/my_questions_screen.dart';
-import 'package:qelem/widgets/profile_app_bar.dart';
-import 'package:qelem/widgets/home_app_bar.dart';
-import 'package:qelem/widgets/common_app_bar.dart';
+import 'package:qelem/presentation/pages/home_screen/home_screen.dart';
+import 'package:qelem/presentation/pages/question/my_questions_page/my_questions_screen.dart';
+import 'package:qelem/presentation/pages/my_profile/my_profile_overview/widgets/profile_app_bar.dart';
+import 'package:qelem/presentation/pages/home_screen/widgets/home_app_bar.dart';
+import 'package:qelem/presentation/pages/question/my_questions_page/widgets/common_app_bar.dart';
 import 'package:go_router/go_router.dart';
 
-import 'my_profile_screen.dart';
+import '../my_profile/my_profile_overview/my_profile_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
