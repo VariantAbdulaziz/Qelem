@@ -67,7 +67,7 @@ public class UserModel {
 
     @Transient
     public String getProfilePicture() {
-        return profilePicture == null ? "/user-photos/1/abebe.jpeg" : "/user-photos/" + id + "/" + profilePicture;
+        return profilePicture == null ? "/files/abebe.jpeg" : "/files/" + profilePicture;
     }
 
     public boolean isAdmin() {

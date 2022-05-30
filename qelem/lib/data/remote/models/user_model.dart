@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class User {
   int id;
   String userName;
@@ -11,7 +13,7 @@ class User {
     required this.userName,
     required this.firstName,
     required this.lastName,
-    this.role = "MEMBER",
+    required this.role,
     required this.profilePicture,
   });
 

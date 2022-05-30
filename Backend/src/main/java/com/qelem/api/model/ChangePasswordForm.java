@@ -5,7 +5,7 @@ import javax.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
-public class ChangePasswordModel {
+public class ChangePasswordForm {
     @NotBlank(message = "The old password can't be blank")
     private String oldPassword;
     @NotBlank(message = "The new password can't be blank")
