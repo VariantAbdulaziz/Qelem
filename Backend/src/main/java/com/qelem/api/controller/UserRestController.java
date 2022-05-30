@@ -1,15 +1,11 @@
 package com.qelem.api.controller;
 
-import java.util.List;
-
 import com.qelem.api.file.FileStorageConfiguration;
 import com.qelem.api.file.StorageService;
 import com.qelem.api.model.ChangePasswordModel;
-import com.qelem.api.model.RegistrationForm;
 import com.qelem.api.model.UserModel;
 import com.qelem.api.repository.UserRepository;
 import com.qelem.api.restdto.UserDto;
-import com.qelem.api.model.UserModel.ROLE;
 import com.qelem.api.util.PasswordException;
 import com.qelem.api.util.UnauthorizedAccess;
 import com.qelem.api.util.UserNotFoundException;
@@ -17,7 +13,6 @@ import com.qelem.api.util.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,9 +26,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -87,7 +83,7 @@ public class UserRestController {
 
     @PatchMapping(path = "/changePassword/{id}", consumes = "application/json")
     public UserModel changePassword(@PathVariable("id") Long id,
-            @RequestBody ChangePasswordModel user) {
+                                    @RequestBody ChangePasswordModel user) {
 
         UserModel userModel = userRepository.findById(id).get();
         System.out.println("from database: " + userModel.getPassword());
@@ -96,12 +92,14 @@ public class UserRestController {
             throw new PasswordException("Password doesn't match!");
         }
         userModel.setPassword(passwordEncoder.encode(user.getNewPassword()));
-        return userRepository.save(userModel);
+        UserModel res = userRepository.save(userModel);
+        res.setPassword("");
+        return res;
     }
 
     @PatchMapping(path = "/{id}", consumes = "application/json")
     public UserModel updateUser(@PathVariable("id") Long id,
-            @RequestBody UserModel user) {
+                                @RequestBody ChangePasswordModel user) {
         var isAuthorized = loggedInUser().getId().equals(id) || loggedInUser().isAdmin();
 
         if (!isAuthorized) {
@@ -116,9 +114,6 @@ public class UserRestController {
             throw new PasswordException("Password doesn't match!");
         }
         userModel.setPassword(passwordEncoder.encode(user.getNewPassword()));
-        if (user.getProfilePicture() != null) {
-            userModel.setProfilePicture(user.getProfilePicture());
-        }
 
         return userRepository.save(userModel);
     }
@@ -139,7 +134,7 @@ public class UserRestController {
         userRepository.deleteById(id);
     }
 
-    @PatchMapping(path = "/{id}", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+    @PatchMapping(path = "/{id}", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public UserModel updateUser(
             @PathVariable("id") Long id,
             @RequestParam(value = "firstName", required = false) String firstName,
@@ -182,9 +177,12 @@ public class UserRestController {
         if (user.getProfilePicture() != null && !user.getProfilePicture().isEmpty()) {
             userModel.setProfilePicture(user.getProfilePicture());
         }
-        if (user.getVote() != null && !user.getVote().isEmpty()) {
-            userModel.setVote(user.getVote());
-        }
+
+        // The user model doesn't have vote property. Why did you add it
+
+        // if (user.getVote() != null && !user.getVote().isEmpty()) {
+        //     userModel.setVote(user.getVote());
+        // }
 
         UserModel res = userRepository.save(userModel);
         res.setPassword("");
