@@ -2,7 +2,6 @@ package com.qelem.api.controller;
 
 import java.util.List;
 
-import com.qelem.api.Repo.UserRepository;
 import com.qelem.api.file.FileStorageConfiguration;
 import com.qelem.api.file.StorageService;
 import com.qelem.api.model.ChangePasswordModel;
@@ -11,21 +10,18 @@ import com.qelem.api.model.UserModel;
 import com.qelem.api.repository.UserRepository;
 import com.qelem.api.restdto.UserDto;
 import com.qelem.api.model.UserModel.ROLE;
-import com.qelem.api.resources.UserResources;
-import com.qelem.api.resources.UserResourcesAssembler;
 import com.qelem.api.util.PasswordException;
 import com.qelem.api.util.UnauthorizedAccess;
 import com.qelem.api.util.UserNotFoundException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -92,6 +88,17 @@ public class UserRestController {
     @PatchMapping(path = "/changePassword/{id}", consumes = "application/json")
     public UserModel changePassword(@PathVariable("id") Long id,
             @RequestBody ChangePasswordModel user) {
+
+        UserModel userModel = userRepository.findById(id).get();
+        System.out.println("from database: " + userModel.getPassword());
+
+        if (passwordEncoder.encode(user.getOldPassword()).matches(userModel.getPassword())) {
+            throw new PasswordException("Password doesn't match!");
+        }
+        userModel.setPassword(passwordEncoder.encode(user.getNewPassword()));
+        return userRepository.save(userModel);
+    }
+
     @PatchMapping(path = "/{id}", consumes = "application/json")
     public UserModel updateUser(@PathVariable("id") Long id,
             @RequestBody UserModel user) {
@@ -105,7 +112,7 @@ public class UserRestController {
         UserModel userModel = userRepository.findById(id).get();
         System.out.println("from database: " + userModel.getPassword());
 
-        if ( passwordEncoder.encode(user.getOldPassword()).matches(userModel.getPassword()) ) {
+        if (passwordEncoder.encode(user.getOldPassword()).matches(userModel.getPassword())) {
             throw new PasswordException("Password doesn't match!");
         }
         userModel.setPassword(passwordEncoder.encode(user.getNewPassword()));
@@ -132,23 +139,21 @@ public class UserRestController {
         userRepository.deleteById(id);
     }
 
-
-    @PatchMapping(path="/{id}", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    @PatchMapping(path = "/{id}", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
     public UserModel updateUser(
-        @PathVariable("id") Long id,
-        @RequestParam(value = "firstName", required = false) String firstName,
-        @RequestParam(value = "lastName", required = false) String lastName,
-        @RequestPart(value = "profile", required = false) MultipartFile file) {
+            @PathVariable("id") Long id,
+            @RequestParam(value = "firstName", required = false) String firstName,
+            @RequestParam(value = "lastName", required = false) String lastName,
+            @RequestPart(value = "profile", required = false) MultipartFile file) {
 
-            UserModel user = new UserModel();
-            user.setId(id);
-            user.setFirstName(firstName);
-            user.setLastName(lastName);
+        UserModel user = new UserModel();
+        user.setId(id);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
 
-            return updateUserHelper(id, user, file);
+        return updateUserHelper(id, user, file);
 
-        }
-
+    }
 
     public UserModel updateUserHelper(Long id, UserModel user, MultipartFile file) {
         var isAuthorized = loggedInUser().getId().equals(id) || loggedInUser().getRole().equals("ADMIN");
