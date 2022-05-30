@@ -6,14 +6,13 @@ class User {
   String role;
   String profilePicture;
 
-
   User({
     required this.id,
     required this.userName,
     required this.firstName,
     required this.lastName,
     this.role = "MEMBER",
-    required this.profilePhoto,
+    required this.profilePicture,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
@@ -22,7 +21,7 @@ class User {
         firstName: json["firstName"],
         lastName: json["lastName"],
         role: json["role"],
-        profilePhoto: json["profilePhoto"],
+        profilePicture: json["profilePhoto"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -31,6 +30,6 @@ class User {
         "firstName": firstName,
         "lastName": lastName,
         "role": role,
-        "profilePhoto": profilePhoto,
+        "profilePhoto": profilePicture,
       };
 }
