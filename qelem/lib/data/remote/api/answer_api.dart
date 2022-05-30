@@ -7,20 +7,20 @@ import 'package:qelem/data/remote/models/answer_model.dart';
 class AnswerApi {
   static const String _answersRootUrl = "${Constants.BASE_URL}answers/";
 
-  Future<AnswerModel> getQuestion(int answerId) async {
+  Future<Answer> getQuestion(int answerId) async {
     var url = Uri.parse(_answersRootUrl + "$answerId");
 
     final response = await http.get(url);
     final Map<String, dynamic> data = json.decode(response.body);
 
     if (response.statusCode == 200) {
-      return AnswerModel.fromJson(data);
+      return Answer.fromJson(data);
     } else {
       throw Exception(data['message'] ?? "Unkown error");
     }
   }
 
-  Future<AnswerModel> createAnswer(AnswerModel answer) async {
+  Future<Answer> createAnswer(Answer answer) async {
     final url = Uri.parse(_answersRootUrl);
     var body = answer.toJson();
 
@@ -32,13 +32,13 @@ class AnswerApi {
 
     final Map<String, dynamic> data = json.decode(response.body);
     if (response.statusCode == 201) {
-      return AnswerModel.fromJson(data);
+      return Answer.fromJson(data);
     } else {
       throw Exception(data['message'] ?? "Unkown error");
     }
   }
 
-  Future<AnswerModel> updateAnswer(AnswerModel answer) async {
+  Future<Answer> updateAnswer(Answer answer) async {
     final url = Uri.parse(_answersRootUrl);
     final body = answer.toJson();
 
@@ -50,7 +50,7 @@ class AnswerApi {
 
     final Map<String, dynamic> data = json.decode(response.body);
     if (response.statusCode == 200) {
-      return AnswerModel.fromJson(data);
+      return Answer.fromJson(data);
     } else {
       throw Exception(data['message'] ?? "Unkown error");
     }
@@ -68,7 +68,8 @@ class AnswerApi {
 
     final Map<String, dynamic> data = json.decode(response.body);
 
-    if (response.statusCode != 200)
+    if (response.statusCode != 200) {
       throw Exception(data['message'] ?? "Unkown error");
+    }
   }
 }
