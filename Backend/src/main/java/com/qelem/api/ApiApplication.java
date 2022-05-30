@@ -1,10 +1,10 @@
 package com.qelem.api;
 
-import com.qelem.api.Repo.TagRepository;
-import com.qelem.api.Repo.UserRepository;
 import com.qelem.api.model.TagModel;
 import com.qelem.api.model.UserModel;
 import com.qelem.api.model.UserModel.ROLE;
+import com.qelem.api.repository.TagRepository;
+import com.qelem.api.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -33,8 +33,8 @@ public class ApiApplication {
 	}
 
 	@Bean
-	public CommandLineRunner dataLoader(UserRepository repo) {
-		if (repo.count() == 0) {
+	public CommandLineRunner dataLoader(UserRepository userRepository) {
+		if (userRepository.count() == 0) {
 			UserModel admin = new UserModel();
 			admin.setUsername("admin");
 			admin.setPassword(encoder.encode("admin"));
@@ -43,7 +43,7 @@ public class ApiApplication {
 			admin.setRole(ROLE.ADMIN.name());
 			admin.setProfilePicture("abebe.jpeg");
 			return args -> {
-				repo.save(admin);
+				userRepository.save(admin);
 			};
 		}
 		return args ->{};

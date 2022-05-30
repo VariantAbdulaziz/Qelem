@@ -16,6 +16,6 @@ public class TagModel {
     @GeneratedValue
     private Long id;
     private String tag;
-    // @OneToMany(mappedBy="tags")
+    // @OneToMany(mappedBy="tag")
     // List<QuestionModel> questionModel;    
 }

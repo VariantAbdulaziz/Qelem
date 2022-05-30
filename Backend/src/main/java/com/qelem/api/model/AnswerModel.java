@@ -1,9 +1,12 @@
 package com.qelem.api.model;
 
-
+import java.time.Instant;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,53 +14,50 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.ToString.Exclude;
 
 @Data
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@JsonIgnoreProperties({"question", "vote"})
+@JsonIgnoreProperties({ "question", "vote" })
+@EntityListeners(AuditingEntityListener.class)
 public class AnswerModel {
-
-    // @Transient
-    // AnswerRepository answerRepository;
-    // @Transient
-    // private static VoteRepository voteRepository;
-
     @Id
     @GeneratedValue
     private Long id;
-    @ManyToOne
 
-    // @OnDelete(action = OnDeleteAction.CASCADE)
+    @ManyToOne(fetch = FetchType.LAZY)
     private QuestionModel question;
-    @NotNull(message="Content can't be null")
-    @NotBlank(message="Content can't be blank")
+
+    @NotBlank(message = "Content can't be blank")
     private String content;
+
+    @CreatedBy
     @ManyToOne(fetch = FetchType.LAZY)
     private UserModel author;
-    @OneToMany(mappedBy = "answerModel")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private List<VoteModel> vote;
 
-    // public Long upVote() {
-    //     return voteRepository.findUpVote(this.id);
-    // }
+    @OneToMany(mappedBy = "answer", cascade = CascadeType.REMOVE)
+    @Exclude
+    private List<AnswerVote> votes;
 
-    // public Long downVote() {
-    //     return voteRepository.findUpVote(this.id);
-    // }
-    @OneToOne
-    private ReportedAnswerModel reportedAnswer; 
-    
+    @CreatedDate
+    @Column(nullable = false, updatable = false)
+    private Instant createdAt;
+
+    @LastModifiedDate
+    @Column(nullable = false)
+    private Instant updatedAt;
+
+    @OneToOne(cascade = CascadeType.REMOVE)
+    @Exclude
+    private ReportedAnswerModel reportedAnswer;
+
 }
