@@ -224,7 +224,7 @@ public class UserRestController {
         }
 
         UserModel res = userRepository.save(userModel);
-        res.setPassword(null);
+        res.setPassword("");
         return res;
     }
 }
