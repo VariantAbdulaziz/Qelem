@@ -17,7 +17,7 @@ import lombok.Data;
 @Data
 public class ReportedAnswerModel {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     @OneToOne
     @OnDelete(action = OnDeleteAction.CASCADE)

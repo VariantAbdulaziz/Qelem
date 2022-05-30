@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'change_password_screen.dart';
-import 'edit_profile_screen.dart';
+import 'package:go_router/go_router.dart';
 
 class MyProfileScreen extends StatefulWidget {
   const MyProfileScreen({Key? key}) : super(key: key);
@@ -47,12 +45,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
         color: Colors.black45,
       ),
       InkWell(
-          onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const EditProfileScreen()));
-          },
+          onTap: () => context.push('/edit-profile'),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Row(
@@ -81,12 +74,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
         color: Colors.black45,
       ),
       InkWell(
-          onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const ChangePasswordScreen()));
-          },
+          onTap: () => context.push('/change-password'),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Row(
