@@ -86,7 +86,6 @@ public class UserRestController {
                                     @RequestBody ChangePasswordModel user) {
 
         UserModel userModel = userRepository.findById(id).get();
-        System.out.println("from database: " + userModel.getPassword());
 
         if (passwordEncoder.encode(user.getOldPassword()).matches(userModel.getPassword())) {
             throw new PasswordException("Password doesn't match!");
