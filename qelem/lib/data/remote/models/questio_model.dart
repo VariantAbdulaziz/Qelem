@@ -1,42 +1,49 @@
-import 'dart:convert';
-
 import 'package:qelem/data/remote/models/user_model.dart';
-import 'package:qelem/data/remote/models/answer_model.dart';
 
-QuestionModel questionModelJson(String str) =>
-    QuestionModel.fromJson(json.decode(str));
-
-String questionModelToJson(QuestionModel questionModel) =>
-    json.encode(questionModel.toString());
-
-class QuestionModel {
+class Question {
+  int id;
   String topic;
   String content;
-  UserModel userModel;
-  String status;
-  List<AnswerModel>? answer;
+  User author;
+  String createdAt;
+  String updatedAt;
+  int upVotes;
+  int downVotes;
+  int userVote;
 
-  QuestionModel({
+  Question({
+    required this.id,
     required this.topic,
     required this.content,
-    required this.userModel,
-    this.status = "UNANSWERED",
-    //TagModels tags;
-    this.answer,
+    required this.author,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.upVotes,
+    required this.downVotes,
+    required this.userVote,
   });
 
-  factory QuestionModel.fromJson(Map<String, dynamic> json) => QuestionModel(
-      topic: json["topic"],
-      content: json["content"],
-      userModel: json["user"],
-      status: json["status"],
-      answer: json["answer"]);
+  factory Question.fromJson(Map<String, dynamic> json) => Question(
+        id: json['id'],
+        topic: json['topic'],
+        content: json['content'],
+        author: User.fromJson(json['author']),
+        createdAt: json['createdAt'],
+        updatedAt: json['updatedAt'],
+        upVotes: json['upVotes'],
+        downVotes: json['downVotes'],
+        userVote: json['userVote'],
+      );
 
   Map<String, dynamic> toJson() => {
-        "topic": topic,
-        "content": content,
-        "user": userModel,
-        "status": status,
-        "answer": answer
+        'id': id,
+        'topic': topic,
+        'content': content,
+        'author': author.toJson(),
+        'createdAt': createdAt,
+        'updatedAt': updatedAt,
+        'upVotes': upVotes,
+        'downVotes': downVotes,
+        'userVote': userVote,
       };
 }
