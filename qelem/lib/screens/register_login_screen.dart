@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class RegisterLoginScreen extends StatelessWidget {
   const RegisterLoginScreen({Key? key}) : super(key: key);
@@ -64,14 +65,14 @@ class RegisterLoginScreen extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                         minimumSize: Size(double.infinity, buttonHeight),
                       ),
-                      onPressed: () {},
+                      onPressed: () => context.go('/sign-in'),
                       child: const Text(signInButtonText),
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         minimumSize: Size(double.infinity, buttonHeight),
                       ),
-                      onPressed: () {},
+                      onPressed: () => context.go('/register'),
                       child: const Text(createAccButtonText),
                     ),
                   ],

@@ -4,7 +4,9 @@ import 'package:qelem/widgets/answer_card.dart';
 import '../widgets/answer_bottom_sheet.dart';
 
 class QuestionDetailScreen extends StatefulWidget {
-  const QuestionDetailScreen({Key? key}) : super(key: key);
+  const QuestionDetailScreen({Key? key, required this.qid}) : super(key: key);
+
+  final int qid;
 
   @override
   State<QuestionDetailScreen> createState() => _QuestionDetailScreenState();

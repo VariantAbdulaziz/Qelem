@@ -2,8 +2,8 @@ package com.qelem.api.services;
 
 import java.util.List;
 
-import com.qelem.api.Repo.ReportedQuestionRepository;
 import com.qelem.api.model.ReportedQuestionModel;
+import com.qelem.api.repository.ReportedQuestionRepository;
 
 import org.springframework.stereotype.Service;
 
