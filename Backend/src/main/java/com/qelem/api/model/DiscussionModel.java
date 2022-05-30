@@ -13,12 +13,12 @@ import lombok.Data;
 @Data
 public class DiscussionModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     private AnswerModel answer;
     @ManyToOne
-    private UserModel user;
+    private UserModel author;
     private String content;
 
 }

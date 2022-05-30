@@ -4,7 +4,8 @@ class User {
   String firstName;
   String lastName;
   String role;
-  String profilePhoto;
+  String profilePicture;
+
 
   User({
     required this.id,

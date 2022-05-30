@@ -1,22 +1,14 @@
 package com.qelem.api.controller;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
-
 import java.util.List;
-import java.util.Optional;
 
-import com.qelem.api.Repo.QuizRepository;
 import com.qelem.api.model.QuizModel;
-import com.qelem.api.resources.QuizResources;
-import com.qelem.api.resources.QuizResourcesAssembler;
+import com.qelem.api.repository.QuizRepository;
+import com.qelem.api.util.ResourceNotFoundException;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -39,37 +31,21 @@ import lombok.RequiredArgsConstructor;
 public class QuizRestController {
     private final QuizRepository quizRepository;
 
-    /**
-     * lists all the quizs in the system.
-     * 
-     * @param model
-     * @return
-     */
     @GetMapping(params = "all")
-    public CollectionModel<QuizResources> allQuizs() {
+    public List<QuizModel> allQuizs() {
         PageRequest pageable = PageRequest.of(0, 12,
                 Sort.by("id").descending());
         List<QuizModel> quizModels = quizRepository.findAll(pageable).getContent();
-        CollectionModel<QuizResources> quizResources = new QuizResourcesAssembler()
-                .toCollectionModel(quizModels);
-        quizResources.add(
-                linkTo(methodOn(QuizRestController.class).allQuizs())
-                        .withRel("all"));
-        return quizResources;
 
+        return quizModels;
     }
 
     @GetMapping("/{id}")
-    public EntityModel<QuizModel> quizById(@PathVariable("id") Long id) {
-        Optional<QuizModel> optQuiz = quizRepository.findById(id);
-        if (!optQuiz.isPresent()) {
-            return null;
-        }
-        EntityModel<QuizModel> quizResource = EntityModel.of(optQuiz.get());
-        WebMvcLinkBuilder linkTo = linkTo(methodOn(this.getClass()).quizById(id));
-        quizResource.add(linkTo.withRel(String.format("Quizs  with id %s", id)));
+    public QuizModel quizById(@PathVariable("id") Long id) {
+        QuizModel optQuiz = quizRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Quiz not found"));
 
-        return quizResource;
+        return optQuiz;
     }
 
     @PostMapping(consumes = "application/json")

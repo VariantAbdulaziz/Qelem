@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -31,7 +32,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 "Do you have an account?",
                 style: Theme.of(context).textTheme.subtitle2,
               ),
-              TextButton(child: const Text("SIGN UP"), onPressed: () {}),
+              TextButton(
+                child: const Text("SIGN UP"),
+                onPressed: () => context.go('/register'),
+              ),
             ]),
             const SizedBox(height: 30.0),
             TextFormField(

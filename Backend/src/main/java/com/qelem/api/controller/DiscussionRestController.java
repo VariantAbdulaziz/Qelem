@@ -1,22 +1,14 @@
 package com.qelem.api.controller;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
-
 import java.util.List;
-import java.util.Optional;
 
-import com.qelem.api.Repo.DiscussionRepository;
 import com.qelem.api.model.DiscussionModel;
-import com.qelem.api.resources.DiscussionResources;
-import com.qelem.api.resources.DiscussionResourcesAssembler;
+import com.qelem.api.repository.DiscussionRepository;
+import com.qelem.api.util.ResourceNotFoundException;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -39,37 +31,21 @@ import lombok.RequiredArgsConstructor;
 public class DiscussionRestController {
     private final DiscussionRepository discussionRepository;
 
-    /**
-     * lists all the discussions in the system.
-     * 
-     * @param model
-     * @return
-     */
-    @GetMapping(params = "all")
-    public CollectionModel<DiscussionResources> allDiscussions() {
+    @GetMapping()
+    public List<DiscussionModel> allDiscussions() {
         PageRequest pageable = PageRequest.of(0, 12,
                 Sort.by("id").descending());
         List<DiscussionModel> discussionModels = discussionRepository.findAll(pageable).getContent();
-        CollectionModel<DiscussionResources> discussionResources = new DiscussionResourcesAssembler()
-                .toCollectionModel(discussionModels);
-        discussionResources.add(
-                linkTo(methodOn(DiscussionRestController.class).allDiscussions())
-                        .withRel("all"));
-        return discussionResources;
 
+        return discussionModels;
     }
 
     @GetMapping("/{id}")
-    public EntityModel<DiscussionModel> discussionById(@PathVariable("id") Long id) {
-        Optional<DiscussionModel> optDiscussion = discussionRepository.findById(id);
-        if (!optDiscussion.isPresent()) {
-            return null;
-        }
-        EntityModel<DiscussionModel> discussionResource = EntityModel.of(optDiscussion.get());
-        WebMvcLinkBuilder linkTo = linkTo(methodOn(this.getClass()).discussionById(id));
-        discussionResource.add(linkTo.withRel(String.format("Discussions  with id %s", id)));
+    public DiscussionModel discussionById(@PathVariable("id") Long id) {
+        DiscussionModel discussion = discussionRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Discussion not found"));
 
-        return discussionResource;
+        return discussion;
     }
 
     @PostMapping(consumes = "application/json")
@@ -94,12 +70,11 @@ public class DiscussionRestController {
         if (discussion.getContent() != null) {
             discussionModel.setContent(discussion.getContent());
         }
-        if (discussion.getUser() != null) {
-            discussionModel.setUser(discussion.getUser());
-        }
         if (discussion.getAnswer() != null) {
             discussionModel.setAnswer(discussion.getAnswer());
         }
+
+        discussionModel.setAuthor(discussion.getAuthor());
         return discussionRepository.save(discussionModel);
     }
 

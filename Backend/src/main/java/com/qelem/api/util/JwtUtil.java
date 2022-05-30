@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-
 import org.springframework.security.core.userdetails.UserDetails;
 
 import org.springframework.stereotype.Service;
@@ -16,7 +15,6 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 @Service
 public class JwtUtil {
-    private static final String token = null;
     private String Secret_Key = "keykeykey";
 
     public String extractUsername(String token) {
@@ -37,7 +35,6 @@ public class JwtUtil {
     }
 
     private Boolean isTokenExpired(String token) {
-        
         return extractExpiration(token).before(new Date());
     }
 
