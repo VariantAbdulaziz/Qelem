@@ -99,11 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 30.0,
             ),
             ElevatedButton(
-              onPressed: () {
-                _authRepo.login(
-                    username: usernameController.text,
-                    password: passwordController.text);
-              },
+              onPressed: () {},
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size.fromHeight(50), // NEW
               ),

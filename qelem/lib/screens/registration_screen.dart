@@ -115,13 +115,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: ElevatedButton(
-                  onPressed: () {
-                    _authRepo.register(
-                        username: usernameController.text,
-                        firstName: firstController.text,
-                        lastName: lastController.text,
-                        password: passwordController.text);
-                  },
+                  onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size.fromHeight(50), // NEW
                   ),
