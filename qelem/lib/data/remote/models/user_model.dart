@@ -1,41 +1,37 @@
 import 'dart:convert';
 
-UserModel userModelJson(String str) => UserModel.fromJson(json.decode(str));
-
-String userModelToJson(UserModel userModel) => json.encode(userModel.toJson());
-
-class UserModel {
-  String username;
-  String password;
+class User {
+  int id;
+  String userName;
   String firstName;
   String lastName;
   String role;
-  String? profilePhoto;
+  String profilePicture;
 
-  UserModel(
-      {required this.username,
-      required this.firstName,
-      required this.lastName,
-      required this.password,
-      this.role = "MEMBER",
-      required this.profilePhoto});
+  User({
+    required this.id,
+    required this.userName,
+    required this.firstName,
+    required this.lastName,
+    required this.role,
+    required this.profilePicture,
+  });
 
-  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-      firstName: json["firstName"],
-      lastName: json["lastName"],
-      username: json["username"],
-      password: json["password"],
-      role: json["role"],
-      profilePhoto: json["profilePicture"]
+  factory User.fromJson(Map<String, dynamic> json) => User(
+        id: json["id"],
+        userName: json["userName"],
+        firstName: json["firstName"],
+        lastName: json["lastName"],
+        role: json["role"],
+        profilePicture: json["profilePicture"],
       );
 
   Map<String, dynamic> toJson() => {
+        "id": id,
+        "userName": userName,
         "firstName": firstName,
         "lastName": lastName,
-        "username": username,
-        "password": password,
+        "role": role,
+        "profilePicture": profilePicture,
       };
-
-  String get firstname => firstName;
-  String get lastname => lastName;
 }

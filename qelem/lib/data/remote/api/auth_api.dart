@@ -33,7 +33,7 @@ class AuthApi {
     }
   }
 
-  static Future<UserModel> register({
+  static Future<User> register({
     required String username,
     required String firstName,
     required String lastName,
@@ -55,7 +55,7 @@ class AuthApi {
     final Map<String, dynamic> data = json.decode(response.body);
 
     if (response.statusCode == 202) {
-      return UserModel.fromJson(data);
+      return User.fromJson(data);
     } else {
       throw Exception(data['message'] ?? "Unkown error");
     }
