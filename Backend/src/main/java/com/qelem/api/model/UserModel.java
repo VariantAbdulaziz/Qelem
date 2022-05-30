@@ -58,13 +58,4 @@ public class UserModel {
     @OneToMany(mappedBy = "userModel")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<VoteModel> vote;
-
-    @Transient
-    public String getProfilePicture() {
-        if (profilePicture == null) {
-            return "/user-photos/1/abebe.jpeg";
-        }
-
-        return "/user-photos/" + id + "/" + profilePicture;
-    }
 }

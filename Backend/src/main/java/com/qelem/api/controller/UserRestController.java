@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 import com.qelem.api.Repo.UserRepository;
+import com.qelem.api.file.FileStorageConfiguration;
+import com.qelem.api.file.StorageService;
 import com.qelem.api.model.ChangePasswordModel;
 import com.qelem.api.model.RegistrationForm;
 import com.qelem.api.model.UserModel;
@@ -25,6 +27,7 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -37,8 +40,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -53,6 +58,10 @@ public class UserRestController {
     private final UserRepository userRepository;
     @Autowired
     private final PasswordEncoder passwordEncoder;
+    @Autowired
+    private final StorageService storageService;
+    @Autowired
+    FileStorageConfiguration configuration;
 
     private UserModel loggedInUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -134,40 +143,6 @@ public class UserRestController {
         return userRepository.save(userModel);
     }
 
-    @PatchMapping(path = "/{id}", consumes = "application/json")
-    public UserModel updateUser(@PathVariable("id") Long id,
-            @RequestBody UserModel user) {
-        var isAuthorized = loggedInUser().getId().equals(id) || loggedInUser().getRole().equals("ADMIN");
-
-        if (!isAuthorized) {
-            log.error("User with id {} is not authorized to update user with id {}", loggedInUser().getId(), id);
-            throw new UnauthorizedAccess("User is not authorized to update user");
-        }
-
-        UserModel userModel = userRepository.findById(id).get();
-        if (user.getUsername() != null) {
-            userModel.setUsername(user.getUsername());
-        }
-        if (user.getFirstName() != null) {
-            userModel.setFirstName(user.getFirstName());
-        }
-        if (user.getLastName() != null) {
-            userModel.setLastName(user.getLastName());
-        }
-        if (user.getRole() != null) {
-            userModel.setRole(user.getRole());
-        }
-        if (user.getProfilePicture() != null) {
-            userModel.setProfilePicture(user.getProfilePicture());
-        }
-        if (user.getVote() != null) {
-            userModel.setVote(user.getVote());
-        }
-
-        userModel.setPassword(user.getPassword());
-        return userRepository.save(userModel);
-    }
-
     @PatchMapping(path = "/changePassword/{id}", consumes = "application/json")
     public UserModel changePassword(@PathVariable("id") Long id,
             @RequestBody ChangePasswordModel user) {
@@ -196,5 +171,52 @@ public class UserRestController {
             userRepository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
         }
+    }
+
+
+    @PatchMapping(path = "/{id}", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+    public UserModel updateUser(@PathVariable("id") Long id,
+            @RequestPart(name = "body") UserModel user, @RequestPart(name="profile", required=false) MultipartFile file) {
+        var isAuthorized = loggedInUser().getId().equals(id) || loggedInUser().getRole().equals("ADMIN");
+
+        if (!isAuthorized) {
+            log.error("User with id {} is not authorized to update user with id {}", loggedInUser().getId(), id);
+            throw new UnauthorizedAccess("User is not authorized to update user");
+        }
+
+        if (file != null && !file.isEmpty()) {
+            var fileName = storageService.store(file);
+            user.setProfilePicture(fileName);
+        }
+
+        UserModel userModel = userRepository.findById(id).get();
+        if (user.getUsername() != null && !user.getUsername().isEmpty()) {
+            if (!user.getUsername().equals(userModel.getUsername())) {
+                userModel.setUsername(user.getUsername());
+            } else {
+                if (userRepository.existsByUsername(user.getUsername())) {
+                    log.error("User with username {} already exists", user.getUsername());
+                    throw new UserAlreadyExists();
+                }
+            }
+        }
+        if (user.getFirstName() != null && !user.getFirstName().isEmpty()) {
+            userModel.setFirstName(user.getFirstName());
+        }
+        if (user.getLastName() != null && !user.getLastName().isEmpty()) {
+            userModel.setLastName(user.getLastName());
+        }
+        if (user.getRole() != null && !user.getRole().isEmpty()) {
+            userModel.setRole(user.getRole());
+        }
+        if (user.getProfilePicture() != null && !user.getProfilePicture().isEmpty()) {
+            userModel.setProfilePicture(user.getProfilePicture());
+        }
+        if (user.getVote() != null && !user.getVote().isEmpty()) {
+            userModel.setVote(user.getVote());
+        }
+
+        userModel.setPassword(user.getPassword());
+        return userRepository.save(userModel);
     }
 }
