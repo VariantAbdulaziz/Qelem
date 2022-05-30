@@ -2,9 +2,10 @@ package com.qelem.api.controller;
 
 import javax.validation.Valid;
 
-import com.qelem.api.Repo.QuestionRepository;
-import com.qelem.api.Repo.UserRepository;
 import com.qelem.api.model.UserModel;
+import com.qelem.api.repository.QuestionRepository;
+import com.qelem.api.repository.UserRepository;
+import com.qelem.api.util.UnauthorizedAccess;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,8 +36,8 @@ public class UserProfileController {
             username = principal.toString();
         }
 
-        // finding the user from the user database based on the principal's name
-        UserModel user = userRepository.findByUsername(username);
+        UserModel user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UnauthorizedAccess("User not found"));
         return user;
     }
 
@@ -97,7 +98,7 @@ public class UserProfileController {
         if (currentlyLoggedInUser.getId() == userModel.getId()) {
             userRepository.delete(userModel);
             return "redirect:/logout";
-        } else if (currentlyLoggedInUser.getRole().equals("ADMIN")) {
+        } else if (currentlyLoggedInUser.isAdmin()) {
             userRepository.delete(userModel);
             return "redirect:/admin";
         }

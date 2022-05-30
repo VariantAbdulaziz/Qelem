@@ -2,8 +2,10 @@ package com.qelem.api.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,12 +16,10 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString.Exclude;
 
 @Data
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "vote" })
@@ -48,14 +48,29 @@ public class UserModel {
     String role;
     @Column(nullable = true, length = 255)
     private String profilePicture = null;
-    // @OneToMany(fetch = FetchType.LAZY)
-    // @OnDelete(action = OnDeleteAction.CASCADE)
-    // @JoinColumn(name="user")
-    // private List<QuestionModel> questionModel;
-    // @OneToMany(mappedBy="user")
-    // @OnDelete(action = OnDeleteAction.CASCADE)
-    // private List<AnswerModel> answerModel;
-    @OneToMany(mappedBy = "userModel")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private List<VoteModel> vote;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "author")
+    @Exclude
+    private List<QuestionModel> questionModel;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "author")
+    @Exclude
+    private List<AnswerModel> answerModel;
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE)
+    @Exclude
+    private List<QuestionVote> questionVotes;
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE)
+    @Exclude
+    private List<AnswerVote> answerVotes;
+
+    @Transient
+    public String getProfilePicture() {
+        return profilePicture == null ? "/user-photos/1/abebe.jpeg" : "/user-photos/" + id + "/" + profilePicture;
+    }
+
+    public boolean isAdmin() {
+        return role.equals("ADMIN");
+    }
 }

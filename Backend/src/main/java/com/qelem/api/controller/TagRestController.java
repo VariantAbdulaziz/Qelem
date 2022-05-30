@@ -1,19 +1,14 @@
 package com.qelem.api.controller;
 
 import java.util.List;
-import java.util.Optional;
 
-import com.qelem.api.Repo.TagRepository;
 import com.qelem.api.model.TagModel;
-import com.qelem.api.resources.TagResources;
-import com.qelem.api.resources.TagResourcesAssembler;
+import com.qelem.api.repository.TagRepository;
+import com.qelem.api.util.ResourceNotFoundException;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,8 +21,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 import lombok.RequiredArgsConstructor;
 
@@ -38,37 +31,20 @@ import lombok.RequiredArgsConstructor;
 public class TagRestController {
     private final TagRepository tagRepository;
 
-    /**
-     * lists all the tags in the system.
-     * 
-     * @param model
-     * @return
-     */
-    @GetMapping(params = "all")
-    public CollectionModel<TagResources> allTags() {
+    @GetMapping()
+    public List<TagModel> allTags() {
         PageRequest pageable = PageRequest.of(0, 12,
                 Sort.by("id").descending());
         List<TagModel> tagModels = tagRepository.findAll(pageable).getContent();
-        CollectionModel<TagResources> tagResources = new TagResourcesAssembler()
-                .toCollectionModel(tagModels);
-        tagResources.add(
-                linkTo(methodOn(TagRestController.class).allTags())
-                        .withRel("all"));
-        return tagResources;
 
+        return tagModels;
     }
 
     @GetMapping("/{id}")
-    public EntityModel<TagModel> tagById(@PathVariable("id") Long id) {
-        Optional<TagModel> optTag = tagRepository.findById(id);
-        if (!optTag.isPresent()) {
-            return null;
-        }
-        EntityModel<TagModel> tagResource = EntityModel.of(optTag.get());
-        WebMvcLinkBuilder linkTo = linkTo(methodOn(this.getClass()).tagById(id));
-        tagResource.add(linkTo.withRel(String.format("Tags  with id %s", id)));
+    public TagModel tagById(@PathVariable("id") Long id) {
+        TagModel optTag = tagRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Tag not found"));
 
-        return tagResource;
+        return optTag;
     }
 
     @PostMapping(consumes = "application/json")
