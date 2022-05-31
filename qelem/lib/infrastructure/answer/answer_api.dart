@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:qelem/infrastructure/answer/answer_dto.dart';
 import 'package:qelem/infrastructure/answer/answer_form_dto.dart';
+import 'package:qelem/infrastructure/common/qelem_http_exception.dart';
 import 'package:qelem/util/my_http_client.dart';
 
 class AnswerApi {
@@ -16,7 +17,9 @@ class AnswerApi {
     if (response.statusCode == 201) {
       return AnswerDto.fromJson(json.decode(response.body));
     } else {
-      throw Exception('Failed to create answer!');
+      throw QHttpException(
+          json.decode(response.body)['message'] ?? "Unknown error",
+          response.statusCode);
     }
   }
 
@@ -25,8 +28,10 @@ class AnswerApi {
 
     if (response.statusCode == 200) {
       return;
-    } else {
-      throw Exception('Failed to delete answer!');
+    } else if (response.statusCode == 404) {
+      throw QHttpException(
+          json.decode(response.body)['message'] ?? "Unknown error",
+          response.statusCode);
     }
   }
 
@@ -38,7 +43,9 @@ class AnswerApi {
     if (response.statusCode == 200) {
       return AnswerDto.fromJson(json.decode(response.body));
     } else {
-      throw Exception('Failed to update answer!');
+      throw QHttpException(
+          json.decode(response.body)['message'] ?? "Unknown error",
+          response.statusCode);
     }
   }
 
@@ -48,7 +55,9 @@ class AnswerApi {
     if (response.statusCode == 200) {
       return;
     } else {
-      throw Exception('Failed to upvote answer!');
+      throw QHttpException(
+          json.decode(response.body)['message'] ?? "Unknown error",
+          response.statusCode);
     }
   }
 
@@ -58,7 +67,9 @@ class AnswerApi {
     if (response.statusCode == 200) {
       return;
     } else {
-      throw Exception('Failed to downvote answer!');
+      throw QHttpException(
+          json.decode(response.body)['message'] ?? "Unknown error",
+          response.statusCode);
     }
   }
 
@@ -68,7 +79,9 @@ class AnswerApi {
     if (response.statusCode == 200) {
       return;
     } else {
-      throw Exception('Failed to unvote answer!');
+      throw QHttpException(
+          json.decode(response.body)['message'] ?? "Unknown error",
+          response.statusCode);
     }
   }
 }

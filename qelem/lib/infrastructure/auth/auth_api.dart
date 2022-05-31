@@ -4,6 +4,7 @@ import 'package:qelem/infrastructure/auth/auth_response_dto.dart';
 import 'package:qelem/infrastructure/auth/change_password_form_dto.dart';
 import 'package:qelem/infrastructure/auth/register_form_dto.dart';
 import 'package:qelem/infrastructure/auth/user_dto.dart';
+import 'package:qelem/infrastructure/common/qelem_http_exception.dart';
 import 'package:qelem/util/my_http_client.dart';
 
 class AuthApi {
@@ -28,7 +29,9 @@ class AuthApi {
     if (response.statusCode == 200) {
       return AuthResponseDto.fromJson(data);
     } else {
-      throw Exception(data['message'] ?? "Unkown error");
+      throw QHttpException(
+          json.decode(response.body)['message'] ?? "Unknown error",
+          response.statusCode);
     }
   }
 
@@ -41,7 +44,9 @@ class AuthApi {
     if (response.statusCode == 202) {
       return UserDto.fromJson(data);
     } else {
-      throw Exception(data['message'] ?? "Unkown error");
+      throw QHttpException(
+          json.decode(response.body)['message'] ?? "Unknown error",
+          response.statusCode);
     }
   }
 
@@ -54,7 +59,9 @@ class AuthApi {
     if (response.statusCode == 200) {
       return;
     } else {
-      throw Exception('Failed to change password!');
+      throw QHttpException(
+          json.decode(response.body)['message'] ?? "Unknown error",
+          response.statusCode);
     }
   }
 }

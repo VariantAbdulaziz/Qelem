@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:qelem/infrastructure/common/qelem_http_exception.dart';
 import 'package:qelem/infrastructure/profile/profile_dto.dart';
 import 'package:qelem/util/my_http_client.dart';
 
@@ -22,7 +23,10 @@ class ProfileApi {
       var responseBody = await response.stream.bytesToString();
       return ProfileDto.fromJson(json.decode(responseBody));
     } else {
-      throw Exception('Failed to update profile!');
+      throw QHttpException(
+          json.decode(await response.stream.bytesToString())['message'] ??
+              "Unknown error",
+          response.statusCode);
     }
   }
 
@@ -32,7 +36,9 @@ class ProfileApi {
     if (response.statusCode == 200) {
       return ProfileDto.fromJson(json.decode(response.body));
     } else {
-      throw Exception('Failed to load profile!');
+      throw QHttpException(
+          json.decode(response.body)['message'] ?? "Unknown error",
+          response.statusCode);
     }
   }
 }
