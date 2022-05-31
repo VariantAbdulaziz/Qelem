@@ -7,7 +7,7 @@ import 'package:qelem/data/remote/models/answer_model.dart';
 class AnswerApi {
   static const String _answersRootUrl = "${Constants.BASE_URL}answers/";
 
-  Future<Answer> getQuestion(int answerId) async {
+  static Future<Answer> getQuestion(int answerId) async {
     var url = Uri.parse(_answersRootUrl + "$answerId");
 
     final response = await http.get(url);
@@ -20,9 +20,25 @@ class AnswerApi {
     }
   }
 
-  Future<Answer> createAnswer(Answer answer) async {
+  static Future<Answer> createAnswer({
+    required content,
+    required questionId,
+    required author,
+    required upVotes,
+    required downVotes,
+    required userVote,
+    required createdAt,
+  }) async {
+    var body = jsonEncode({
+      'content': content,
+      'questionId': questionId,
+      'author': author,
+      'upVotes': upVotes,
+      'downVote': downVotes,
+      'userVote': userVote,
+      'createdAt': createdAt,
+    });
     final url = Uri.parse(_answersRootUrl);
-    var body = answer.toJson();
 
     final response = await http.post(
       url,
@@ -38,7 +54,7 @@ class AnswerApi {
     }
   }
 
-  Future<Answer> updateAnswer(Answer answer) async {
+  static Future<Answer> updateAnswer(Answer answer) async {
     final url = Uri.parse(_answersRootUrl);
     final body = answer.toJson();
 
@@ -56,7 +72,7 @@ class AnswerApi {
     }
   }
 
-  Future<void> deleteAnswer(int answerId) async {
+  static Future<void> deleteAnswer(int answerId) async {
     final url = Uri.parse(_answersRootUrl + "$answerId");
 
     final response = await http.delete(
