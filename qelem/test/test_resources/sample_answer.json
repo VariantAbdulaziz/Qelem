@@ -1,54 +1,18 @@
 {
-    "question": {
-        "id": 2,
-        "topic": "the second question",
-        "content": "The second question",
-        "user": {
-            "id": 2,
-            "username": "second",
-            "password": "$2a$10$grK6.kpThDYdBSdFFJQZ9.kjwmg5YpB2E7ME0Rn6CUN8foxMSmxv2",
-            "firstName": "second",
-            "lastName": "second",
-            "role": "MEMBER",
-            "profilePicture": "/user-photos/2/abebe.jpg"
-        },
-        "status": "UNANSWERED",
-        "tags": {
-            "id": 2,
-            "tag": "#Biology"
-        },
-        "answer": [
-            {
-                "id": 2,
-                "content": "The second answer",
-                "user": {
-                    "id": 2,
-                    "username": "second",
-                    "password": "$2a$10$grK6.kpThDYdBSdFFJQZ9.kjwmg5YpB2E7ME0Rn6CUN8foxMSmxv2",
-                    "firstName": "second",
-                    "lastName": "second",
-                    "role": "MEMBER",
-                    "profilePicture": "/user-photos/2/abebe.jpg"
-                },
-                "reportedAnswer": null
-            }
-        ]
+    "id": 83,
+    "content": "Blah blah blash",
+    "questionId": 8,
+    "author": {
+      "id": 4,
+      "userName": "brukted",
+      "firstName": "bruk",
+      "lastName": "tedla",
+      "role": "MEMBER",
+      "profilePicture": "/user-photos/1/abebe.jpeg"
     },
-    "content": "The second answer",
-    "user": {
-        "id": 2,
-        "username": "second",
-        "password": "$2a$10$grK6.kpThDYdBSdFFJQZ9.kjwmg5YpB2E7ME0Rn6CUN8foxMSmxv2",
-        "firstName": "second",
-        "lastName": "second",
-        "role": "MEMBER",
-        "profilePicture": "/user-photos/2/abebe.jpg"
-    },
-    "vote": [],
-    "reportedAnswerModel": null,
-    "_links": {
-        "self": {
-            "href": "http://localhost:8080/api/v1/answers/2"
-        }
-    }
-}
+    "upVotes": 0,
+    "downVotes": 0,
+    "userVote": 0,
+    "createdAt": "2022-05-30T13:34:28.707505Z",
+    "updatedAt": "2022-05-30T13:34:28.707505Z"
+  }

@@ -1,18 +1,7 @@
 import 'package:qelem/data/remote/models/user_model.dart';
-<<<<<<< HEAD
-import 'package:qelem/data/remote/models/question_model.dart';
-import 'package:qelem/data/remote/models/vote_model.dart';
-
-String answerModelToJson(AnswerModel answerModel) =>
-    json.encode(answerModel.toString());
-
-class AnswerModel {
-  QuestionModel questionModel;
-=======
 
 class Answer {
   int id;
->>>>>>> 674e8f7987fe2b149cbf441990d69e97271ddfa2
   String content;
   int questionId;
   User author;
