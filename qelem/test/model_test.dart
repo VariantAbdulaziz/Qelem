@@ -1,18 +1,17 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:math';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:qelem/data/remote/models/answer_model.dart';
-import 'package:qelem/data/remote/models/question_model.dart';
-import 'package:qelem/data/remote/models/user_model.dart';
+import 'package:qelem/infrastructure/answer/answer_dto.dart';
+import 'package:qelem/infrastructure/auth/user_dto.dart';
+import 'package:qelem/infrastructure/question/question_dto.dart';
 
 void main() {
   test("test user", () {
     final file =
         File('test/test_resources/sample_user.json').readAsStringSync();
 
-    final user = User.fromJson(json.decode(file));
+    final user = UserDto.fromJson(json.decode(file));
 
     expect(user.id, 3);
     expect(user.userName, "brukted");
@@ -26,7 +25,7 @@ void main() {
     final file =
         File('test/test_resources/sample_question.json').readAsStringSync();
 
-    final question = Question.fromJson(json.decode(file));
+    final question = QuestionDto.fromJson(json.decode(file));
 
     expect(question.author.userName, "brukted");
     expect(question.content, "this is the question's content");
@@ -42,7 +41,7 @@ void main() {
   test("test answer model", () {
     final file =
         File('test/test_resources/sample_answer.json').readAsStringSync();
-    final answer = Answer.fromJson(json.decode(file));
+    final answer = AnswerDto.fromJson(json.decode(file));
 
     expect(answer.id, 83);
     expect(answer.content, "Blah blah blash");
