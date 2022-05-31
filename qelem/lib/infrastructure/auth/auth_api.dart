@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:qelem/infrastructure/auth/auth_response_dto.dart';
+import 'package:qelem/infrastructure/auth/change_password_form_dto.dart';
 import 'package:qelem/infrastructure/auth/register_form_dto.dart';
 import 'package:qelem/infrastructure/auth/user_dto.dart';
 import 'package:qelem/util/my_http_client.dart';
@@ -41,6 +42,19 @@ class AuthApi {
       return UserDto.fromJson(data);
     } else {
       throw Exception(data['message'] ?? "Unkown error");
+    }
+  }
+
+  // change password
+  Future<void> changePassword(
+      ChangePasswordFormDto changePasswordFormDto) async {
+    var response = await _httpClient.post("profile/change-password",
+        body: changePasswordFormDto.toJson());
+
+    if (response.statusCode == 200) {
+      return;
+    } else {
+      throw Exception('Failed to change password!');
     }
   }
 }
