@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:qelem/data/remote/models/answer_model.dart';
@@ -13,9 +14,10 @@ void main() {
 
     final user = User.fromJson(json.decode(file));
 
-    expect(user.userName, "test_1");
-    expect(user.firstName, "test_1");
-    expect(user.lastName, "test_1");
+    expect(user.id, 3);
+    expect(user.userName, "brukted");
+    expect(user.firstName, "bruk");
+    expect(user.lastName, "tedla");
     expect(user.role, "MEMBER");
     expect(user.profilePicture, "/user-photos/1/abebe.jpeg");
   });

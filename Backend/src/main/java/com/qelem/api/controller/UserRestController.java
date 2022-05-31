@@ -2,24 +2,12 @@ package com.qelem.api.controller;
 
 import java.util.List;
 
-<<<<<<< HEAD
-import com.qelem.api.Repo.UserRepository;
-import com.qelem.api.model.ChangePasswordModel;
-import com.qelem.api.model.RegistrationForm;
-=======
->>>>>>> 674e8f7987fe2b149cbf441990d69e97271ddfa2
 import com.qelem.api.model.UserModel;
 import com.qelem.api.repository.UserRepository;
 import com.qelem.api.restdto.UserDto;
 import com.qelem.api.util.UnauthorizedAccess;
 import com.qelem.api.util.UserNotFoundException;
 
-<<<<<<< HEAD
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
-=======
->>>>>>> 674e8f7987fe2b149cbf441990d69e97271ddfa2
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
