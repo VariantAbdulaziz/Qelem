@@ -10,7 +10,7 @@ import 'package:qelem/data/remote/models/user_model.dart';
 void main() {
   test("test user", () {
     final file =
-        File('test/test_resources/random_user.json').readAsStringSync();
+        File('test/test_resources/sample_user.json').readAsStringSync();
 
     final user = User.fromJson(json.decode(file));
 
