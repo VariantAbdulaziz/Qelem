@@ -49,6 +49,18 @@ class MyHttpClient {
     return _httpClient.put((baseUrl + url).uri, headers: headers, body: body);
   }
 
+  Future<http.Response> patch(String url,
+      {Map<String, String> headers = const {},
+      Object? body,
+      String contentType = "application/json"}) async {
+    if (_authToken != null) {
+      headers['Authorization'] = 'Bearer $_authToken';
+    }
+    headers.putIfAbsent('Content-Type', () => contentType);
+
+    return _httpClient.patch((baseUrl + url).uri, headers: headers, body: body);
+  }
+
   Future<http.Response> delete(String url,
       {Map<String, String> headers = const {},
       Object? body,
