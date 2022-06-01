@@ -3,6 +3,9 @@ import 'package:qelem/infrastructure/answer/answer_dto.dart';
 import 'package:qelem/infrastructure/answer/answer_form_dto.dart';
 
 class AnswerRepository {
+  final AnswerApi answerApi;
+  AnswerRepository(this.answerApi);
+
   Future<AnswerDto> createAnswer({
     required content,
     required questionId,
@@ -10,7 +13,7 @@ class AnswerRepository {
     AnswerFormDto answerFormDto =
         AnswerFormDto(questionId: questionId, content: content);
     try {
-      AnswerDto answer = await AnswerApi.createAnswer(answerFormDto);
+      AnswerDto answer = await answerApi.createAnswer(answerFormDto);
       return answer;
     } catch (exception) {
       rethrow;
@@ -19,7 +22,7 @@ class AnswerRepository {
 
   Future<void> deleteAnswer(int answerId) async {
     try {
-      await AnswerApi.deleteAnswer(answerId);
+      await answerApi.deleteAnswer(answerId);
     } catch (exception) {
       rethrow;
     }
@@ -29,7 +32,7 @@ class AnswerRepository {
       AnswerFormDto answerFormDto, int answerId, String content) async {
     try {
       AnswerDto updatedAnswer =
-          await AnswerApi.updateAnswer(answerFormDto, answerId, content);
+          await answerApi.updateAnswer(answerFormDto, answerId, content);
       return updatedAnswer;
     } catch (exception) {
       rethrow;
@@ -38,7 +41,7 @@ class AnswerRepository {
 
   Future<void> upvoteAnswer(int answerId) async {
     try {
-      await AnswerApi.upvoteAnswer(answerId);
+      await answerApi.upvoteAnswer(answerId);
     } catch (exception) {
       rethrow;
     }
@@ -46,7 +49,7 @@ class AnswerRepository {
 
   Future<void> unvoteAnswer(int answerId) async {
     try {
-      await AnswerApi.unvoteAnswer(answerId);
+      await answerApi.unvoteAnswer(answerId);
     } catch (exception) {
       rethrow;
     }
