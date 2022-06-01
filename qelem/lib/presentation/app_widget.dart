@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:qelem/presentation/pages/splash/splash_screen.dart';
 
 import '../common/constants.dart';
 import '../common/qelem_theme.dart';
@@ -19,6 +20,10 @@ class App extends StatelessWidget {
     routes: [
       GoRoute(
         path: '/',
+        builder: (context, state) => const SplashScreen(),
+      ),
+      GoRoute(
+        path: '/main',
         builder: (context, state) => const MainScreen(),
       ),
       GoRoute(
