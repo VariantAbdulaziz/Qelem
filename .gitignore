@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+qelem/ios/Podfile
+qelem/ios/Flutter/Debug.xcconfig
+qelem/ios/Flutter/Release.xcconfig
