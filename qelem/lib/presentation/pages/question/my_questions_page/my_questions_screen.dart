@@ -6,6 +6,7 @@ import '../widgets/question_card.dart';
 
 Widget myQuestionsScreen() {
   return ListView.builder(
+    controller: ScrollController(),
     itemCount: 20,
     itemBuilder: (context, position) {
       return QuestionCard(Question(
@@ -17,7 +18,7 @@ Widget myQuestionsScreen() {
           userName: 'emre_varol',
           firstName: "Emre",
           lastName: "Varol",
-          profilePicture: "",
+          profilePicture: "assets/abebe.jpeg",
         ),
       ));
     },
