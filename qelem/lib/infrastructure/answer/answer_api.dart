@@ -37,8 +37,8 @@ class AnswerApi {
   }
 
   Future<AnswerDto> createAnswer(AnswerFormDto answerFormDto) async {
-    var response =
-        await _httpClient.post('answers', body: answerFormDto.toJson());
+    var response = await _httpClient.post('answers',
+        body: json.encode(answerFormDto.toJson()));
 
     if (response.statusCode == 201) {
       return AnswerDto.fromJson(json.decode(response.body));
