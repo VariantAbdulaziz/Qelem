@@ -47,12 +47,12 @@ class AnswerRepository {
     }
   }
 
-  Future<Either<AnswerDto>> updateAnswer(
+  Future<Either<Answer>> updateAnswer(
       AnswerFormDto answerFormDto, int answerId, String content) async {
     try {
       AnswerDto updatedAnswer =
           await answerApi.updateAnswer(answerFormDto, answerId, content);
-      return Either(val: updatedAnswer);
+      return Either(val: updatedAnswer.toAnswer());
     } on QHttpException catch (exception) {
       return Either(error: Error(exception.message));
     }
