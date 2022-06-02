@@ -109,6 +109,9 @@ class _SigninScreenState extends State<SigninScreen> {
                                 if (value!.isEmpty) {
                                   return 'Please enter your username';
                                 }
+                                if (value.length < 8) {
+                                  return 'Username must be at least 8 characters';
+                                }
                                 return null;
                               },
                               decoration: const InputDecoration(
@@ -124,6 +127,9 @@ class _SigninScreenState extends State<SigninScreen> {
                               validator: (value) {
                                 if (value!.isEmpty) {
                                   return 'Please enter your password';
+                                }
+                                if (value.length < 8) {
+                                  return 'Password must be at least 8 characters';
                                 }
                                 return null;
                               },
