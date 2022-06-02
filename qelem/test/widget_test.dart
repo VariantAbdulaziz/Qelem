@@ -10,15 +10,4 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:qelem/presentation/app_widget.dart';
 
-void main() {
-  testWidgets('Home widget test', (WidgetTester tester) async {
-    HttpOverrides.runZoned(
-      () => tester.pumpWidget(App()),
-      createHttpClient: (url) {
-        return MockHttpClient();
-      },
-    );
-    await tester.pumpWidget();
-    expect(find.text('My Questions'), findsOneWidget);
-  });
-}
+void main() {}
