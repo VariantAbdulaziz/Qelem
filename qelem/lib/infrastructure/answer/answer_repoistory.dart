@@ -1,14 +1,16 @@
+import 'dart:io';
+
 import 'package:qelem/domain/answer/answer.dart';
-import 'package:qelem/domain/question/question.dart';
 import 'package:qelem/infrastructure/answer/answer_api.dart';
 import 'package:qelem/infrastructure/answer/answer_dto.dart';
 import 'package:qelem/infrastructure/answer/answer_form_dto.dart';
 import 'package:qelem/infrastructure/answer/answer_model_mapper.dart';
 import 'package:qelem/infrastructure/common/qelem_http_exception.dart';
 import 'package:qelem/infrastructure/common/vote.dart';
-import 'package:qelem/infrastructure/question/question_dto.dart';
 import 'package:qelem/util/either.dart';
 import 'package:qelem/util/error.dart';
+
+import 'dart:developer' as developer;
 
 class AnswerRepository {
   final AnswerApi answerApi;
@@ -20,6 +22,12 @@ class AnswerRepository {
       return Either(val: answerDto.map((e) => e.toAnswer()).toList());
     } on QHttpException catch (exception) {
       return Either(error: Error(exception.message));
+    } on SocketException catch (_) {
+      return Either(error: Error("Check your internet connection"));
+    } on Exception catch (e) {
+      developer.log("Unexpected error while fetching answers in Answer Repo",
+          error: e);
+      return Either(error: Error("Unknown error"));
     }
   }
 
@@ -29,6 +37,13 @@ class AnswerRepository {
       return Either(val: answerDto.toAnswer());
     } on QHttpException catch (exception) {
       return Either(error: Error(exception.message));
+    } on SocketException catch (_) {
+      return Either(error: Error("Check your internet connection"));
+    } on Exception catch (e) {
+      developer.log(
+          "Unexpected error while fetching an answer with Id ${answerId} in Answer Repo",
+          error: e);
+      return Either(error: Error("Unknown error"));
     }
   }
 
@@ -39,6 +54,13 @@ class AnswerRepository {
       return Either(val: answer.toAnswer());
     } on QHttpException catch (exception) {
       return Either(error: Error(exception.message));
+    } on SocketException catch (_) {
+      return Either(error: Error("Check your internet connection"));
+    } on Exception catch (e) {
+      developer.log(
+          "Unexpected error while fetching creating an answer in Answer Repo",
+          error: e);
+      return Either(error: Error("Unknown error"));
     }
   }
 
@@ -47,6 +69,13 @@ class AnswerRepository {
       await answerApi.deleteAnswer(answerId);
     } on QHttpException catch (exception) {
       throw Either(error: Error(exception.message));
+    } on SocketException catch (_) {
+      throw Either(error: Error("Check your internet connection"));
+    } on Exception catch (e) {
+      developer.log(
+          "Unexpected error while fetching creating an answer in Answer Repo",
+          error: e);
+      throw Either(error: Error("Unknown error"));
     }
   }
 
@@ -58,6 +87,13 @@ class AnswerRepository {
       return Either(val: updatedAnswer.toAnswer());
     } on QHttpException catch (exception) {
       return Either(error: Error(exception.message));
+    } on SocketException catch (_) {
+      return Either(error: Error("Check your internet connection"));
+    } on Exception catch (e) {
+      developer.log(
+          "Unexpected error while updating an answer with Id ${answerId} in Answer Repo",
+          error: e);
+      return Either(error: Error("Unknown error"));
     }
   }
 
