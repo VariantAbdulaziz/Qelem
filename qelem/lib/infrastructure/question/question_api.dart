@@ -80,7 +80,7 @@ class QuestionApi {
     }
   }
 
-  Future<void> upvoteQuestion(int questionId) async {
+  Future<void> upVoteQuestion(int questionId) async {
     var response = await _httpClient.post('questions/$questionId/upvote');
 
     if (response.statusCode == 200) {
