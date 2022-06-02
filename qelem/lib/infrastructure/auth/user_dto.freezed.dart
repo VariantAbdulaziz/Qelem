@@ -21,6 +21,7 @@ UserDto _$UserDtoFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$UserDto {
   int get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'username')
   String get userName => throw _privateConstructorUsedError;
   String get firstName => throw _privateConstructorUsedError;
   String get lastName => throw _privateConstructorUsedError;
@@ -38,7 +39,7 @@ abstract class $UserDtoCopyWith<$Res> {
       _$UserDtoCopyWithImpl<$Res>;
   $Res call(
       {int id,
-      String userName,
+      @JsonKey(name: 'username') String userName,
       String firstName,
       String lastName,
       String role,
@@ -99,7 +100,7 @@ abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
   @override
   $Res call(
       {int id,
-      String userName,
+      @JsonKey(name: 'username') String userName,
       String firstName,
       String lastName,
       String role,
@@ -158,7 +159,7 @@ class __$$_UserDtoCopyWithImpl<$Res> extends _$UserDtoCopyWithImpl<$Res>
 class _$_UserDto with DiagnosticableTreeMixin implements _UserDto {
   const _$_UserDto(
       {required this.id,
-      required this.userName,
+      @JsonKey(name: 'username') required this.userName,
       required this.firstName,
       required this.lastName,
       required this.role,
@@ -170,6 +171,7 @@ class _$_UserDto with DiagnosticableTreeMixin implements _UserDto {
   @override
   final int id;
   @override
+  @JsonKey(name: 'username')
   final String userName;
   @override
   final String firstName;
@@ -237,7 +239,7 @@ class _$_UserDto with DiagnosticableTreeMixin implements _UserDto {
 abstract class _UserDto implements UserDto {
   const factory _UserDto(
       {required final int id,
-      required final String userName,
+      @JsonKey(name: 'username') required final String userName,
       required final String firstName,
       required final String lastName,
       required final String role,
@@ -248,6 +250,7 @@ abstract class _UserDto implements UserDto {
   @override
   int get id => throw _privateConstructorUsedError;
   @override
+  @JsonKey(name: 'username')
   String get userName => throw _privateConstructorUsedError;
   @override
   String get firstName => throw _privateConstructorUsedError;

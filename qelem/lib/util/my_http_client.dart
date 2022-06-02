@@ -12,66 +12,89 @@ class MyHttpClient {
 
   MyHttpClient();
 
-  set authToken(String value) {
+  set authToken(String? value) {
     _authToken = value;
   }
 
   Future<http.Response> get(String url,
       {Map<String, String> headers = const {}}) async {
-    if (_authToken != null) {
-      headers['Authorization'] = 'Bearer $_authToken';
-    }
+    Map<String, String> headersWithContentTypeAndAuth = {
+      ...headers,
+      if (_authToken != null) 'Authorization': 'Bearer $_authToken'
+    };
 
-    return _httpClient.get((baseUrl + url).uri, headers: headers);
+    return _httpClient.get(
+      (baseUrl + url).uri,
+      headers: headersWithContentTypeAndAuth,
+    );
   }
 
   Future<http.Response> post(String url,
-      {Map<String, String> headers = const {},
+      {Map<String, String> headers = const <String, String>{},
       Object? body,
       String contentType = "application/json"}) async {
-    if (_authToken != null) {
-      headers['Authorization'] = 'Bearer $_authToken';
-    }
-    headers.putIfAbsent('Content-Type', () => contentType);
+    Map<String, String> headersWithContentTypeAndAuth = {
+      ...headers,
+      'Content-Type': contentType,
+      if (_authToken != null) 'Authorization': 'Bearer $_authToken'
+    };
 
-    return _httpClient.post((baseUrl + url).uri, headers: headers, body: body);
+    return _httpClient.post(
+      (baseUrl + url).uri,
+      headers: headersWithContentTypeAndAuth,
+      body: body,
+    );
   }
 
   Future<http.Response> put(String url,
       {Map<String, String> headers = const {},
       Object? body,
       String contentType = "application/json"}) async {
-    if (_authToken != null) {
-      headers['Authorization'] = 'Bearer $_authToken';
-    }
-    headers.putIfAbsent('Content-Type', () => contentType);
+    Map<String, String> headersWithContentTypeAndAuth = {
+      ...headers,
+      'Content-Type': contentType,
+      if (_authToken != null) 'Authorization': 'Bearer $_authToken'
+    };
 
-    return _httpClient.put((baseUrl + url).uri, headers: headers, body: body);
+    return _httpClient.put(
+      (baseUrl + url).uri,
+      headers: headersWithContentTypeAndAuth,
+      body: body,
+    );
   }
 
   Future<http.Response> patch(String url,
       {Map<String, String> headers = const {},
       Object? body,
       String contentType = "application/json"}) async {
-    if (_authToken != null) {
-      headers['Authorization'] = 'Bearer $_authToken';
-    }
-    headers.putIfAbsent('Content-Type', () => contentType);
+    Map<String, String> headersWithContentTypeAndAuth = {
+      ...headers,
+      'Content-Type': contentType,
+      if (_authToken != null) 'Authorization': 'Bearer $_authToken'
+    };
 
-    return _httpClient.patch((baseUrl + url).uri, headers: headers, body: body);
+    return _httpClient.patch(
+      (baseUrl + url).uri,
+      headers: headersWithContentTypeAndAuth,
+      body: body,
+    );
   }
 
   Future<http.Response> delete(String url,
       {Map<String, String> headers = const {},
       Object? body,
       String contentType = "application/json"}) async {
-    if (_authToken != null) {
-      headers['Authorization'] = 'Bearer $_authToken';
-    }
-    headers.putIfAbsent('Content-Type', () => contentType);
+    Map<String, String> headersWithContentTypeAndAuth = {
+      ...headers,
+      'Content-Type': contentType,
+      if (_authToken != null) 'Authorization': 'Bearer $_authToken'
+    };
 
-    return _httpClient.delete((baseUrl + url).uri,
-        headers: headers, body: body);
+    return _httpClient.delete(
+      (baseUrl + url).uri,
+      headers: headersWithContentTypeAndAuth,
+      body: body,
+    );
   }
 
   Future<http.StreamedResponse> multiPartRequest(
@@ -81,15 +104,16 @@ class MyHttpClient {
     Map<String, dynamic> body = const {},
     Map<String, File> files = const {},
   }) async {
-    if (_authToken != null) {
-      headers['Authorization'] = 'Bearer $_authToken';
-    }
-    headers.putIfAbsent('Content-Type', () => "multipart/form-data");
+    Map<String, String> headersWithContentTypeAndAuth = {
+      ...headers,
+      'Content-Type': "multipart/form-data",
+      if (_authToken != null) 'Authorization': 'Bearer $_authToken'
+    };
 
     var request = http.MultipartRequest(method, Uri.parse(baseUrl + url));
 
     // Add headers
-    request.headers.addAll(headers);
+    request.headers.addAll(headersWithContentTypeAndAuth);
 
     // Add files to the request.
     if (files.isNotEmpty) {
