@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:http/http.dart' as http;
 import './string_extension.dart';
@@ -131,5 +132,10 @@ class MyHttpClient {
     }
 
     return await request.send();
+  }
+
+  @override
+  void close() {
+    // TODO: implement close
   }
 }

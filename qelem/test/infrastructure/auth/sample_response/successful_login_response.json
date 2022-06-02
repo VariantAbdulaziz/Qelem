@@ -1,0 +1,11 @@
+{
+    "jwt": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJicnVrdGVkIiwiZXhwIjoxNjUzOTUyOTcyLCJpYXQiOjE2NTM5MTY5NzJ9.7Q-jaYNN8P3mFQIqpPgw2GGlacPZ5VygWJIlbXA-MfM",
+    "user": {
+        "id": 3,
+        "username": "brukted",
+        "firstName": "bruk",
+        "lastName": "tedla",
+        "role": "MEMBER",
+        "profilePicture": "/user-photos/1/abebe.jpeg"
+    }
+}
