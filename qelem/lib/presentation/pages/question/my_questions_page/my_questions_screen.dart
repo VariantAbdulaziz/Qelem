@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qelem/common/Vote.dart';
 import 'package:qelem/domain/auth/user.dart';
 import 'package:qelem/domain/question/question.dart';
 
@@ -10,15 +11,18 @@ Widget myQuestionsScreen() {
     itemBuilder: (context, position) {
       return QuestionCard(Question(
         id: position,
-        heading: 'Question $position',
+        topic: 'Question $position',
         content: 'Content of question $position',
         author: User(
           id: 1,
           userName: 'emre_varol',
           firstName: "Emre",
           lastName: "Varol",
-          profilePicture: "",
+          profilePicture: "assets/images/default_profile_picture.jpeg",
         ),
+        upVotes: 0,
+        downVotes: 0,
+        userVote: Vote.none,
       ));
     },
   );
