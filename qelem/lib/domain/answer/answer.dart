@@ -1,11 +1,11 @@
-import 'package:qelem/infrastructure/auth/user_dto.dart';
+import 'package:qelem/domain/auth/user.dart';
 import 'package:qelem/infrastructure/common/vote.dart';
 
 class Answer {
   int id;
   String content;
   int questionId;
-  UserDto author;
+  User author;
   int upVotes;
   int downVotes;
   Vote userVote;
