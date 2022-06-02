@@ -8,7 +8,8 @@ import 'questions_list_state.dart';
 class QuestionsListBloc extends Bloc<QuestionsListEvent, QuestionsListState> {
   final QuestionRepository questionRepository;
 
-  QuestionsListBloc({required this.questionRepository}) : super() {
+  QuestionsListBloc({required this.questionRepository})
+      : super(const QuestionsListState.empty()) {
     () {
       emit(const QuestionsListState.empty());
     }();
