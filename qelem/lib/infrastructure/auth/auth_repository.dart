@@ -64,10 +64,6 @@ class AuthRepository {
     await authApi.changePassword(changePasswordFormDto);
   }
 
-  static Future<bool> loggedIn() async {
-    return await SharedPrefsService.getToken() != "";
-  }
-
   Future<String?> getAuthToken() {
     return SharedPrefsService.getToken();
   }
