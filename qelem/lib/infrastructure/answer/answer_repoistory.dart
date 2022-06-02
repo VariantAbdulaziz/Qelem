@@ -5,6 +5,7 @@ import 'package:qelem/infrastructure/answer/answer_dto.dart';
 import 'package:qelem/infrastructure/answer/answer_form_dto.dart';
 import 'package:qelem/infrastructure/answer/answer_model_mapper.dart';
 import 'package:qelem/infrastructure/common/qelem_http_exception.dart';
+import 'package:qelem/infrastructure/common/vote.dart';
 import 'package:qelem/infrastructure/question/question_dto.dart';
 import 'package:qelem/util/either.dart';
 import 'package:qelem/util/error.dart';
@@ -60,23 +61,97 @@ class AnswerRepository {
     }
   }
 
-  Future<Either<Answer>> upvoteAnswer(int answerId) async {
-    try {
-      await answerApi.upvoteAnswer(answerId);
-      AnswerDto answerDto = await answerApi.getAnswerById(answerId);
-      return Either(val: answerDto.toAnswer());
-    } on QHttpException catch (exception) {
-      return Either(error: Error(exception.message));
+  Future<Either<Answer>> upvoteAnswer(Answer answer) async {
+    int prevVote;
+    if (answer.userVote == Vote.upVote) {
+      prevVote = 1;
+    } else if (answer.userVote == Vote.downVote) {
+      prevVote = -1;
+    } else {
+      prevVote = 0;
+    }
+
+    if (answer.userVote == Vote.upVote) {
+      try {
+        await answerApi.upvoteAnswer(answer.id);
+        return Either(
+            val: Answer(
+                id: answer.id,
+                content: answer.content,
+                questionId: answer.questionId,
+                author: answer.author,
+                upVotes: answer.upVotes - prevVote,
+                downVotes: answer.downVotes,
+                userVote: Vote.none,
+                createdAt: answer.createdAt,
+                updatedAt: answer.updatedAt));
+      } on QHttpException catch (exception) {
+        return Either(error: Error(exception.message));
+      }
+    } else {
+      try {
+        await answerApi.unvoteAnswer(answer.id);
+        return Either(
+            val: Answer(
+                id: answer.id,
+                content: answer.content,
+                questionId: answer.questionId,
+                author: answer.author,
+                upVotes: answer.upVotes + 1,
+                downVotes: answer.downVotes + prevVote,
+                userVote: Vote.upVote,
+                createdAt: answer.createdAt,
+                updatedAt: answer.updatedAt));
+      } on QHttpException catch (exception) {
+        return Either(error: Error(exception.message));
+      }
     }
   }
 
-  Future<Either<Answer>> downvoteAnswer(int answerId) async {
-    try {
-      await answerApi.downvoteAnswer(answerId);
-      AnswerDto answerDto = await answerApi.getAnswerById(answerId);
-      return Either(val: answerDto.toAnswer());
-    } on QHttpException catch (exception) {
-      return Either(error: Error(exception.message));
+  Future<Either<Answer>> downvoteAnswer(Answer answer) async {
+    int prevVote;
+    if (answer.userVote == Vote.upVote) {
+      prevVote = 1;
+    } else if (answer.userVote == Vote.downVote) {
+      prevVote = -1;
+    } else {
+      prevVote = 0;
+    }
+
+    if (answer.userVote == Vote.upVote) {
+      try {
+        await answerApi.unvoteAnswer(answer.id);
+        return Either(
+            val: Answer(
+                id: answer.id,
+                content: answer.content,
+                questionId: answer.questionId,
+                author: answer.author,
+                upVotes: answer.upVotes,
+                downVotes: answer.downVotes + prevVote,
+                userVote: Vote.none,
+                createdAt: answer.createdAt,
+                updatedAt: answer.updatedAt));
+      } on QHttpException catch (exception) {
+        return Either(error: Error(exception.message));
+      }
+    } else {
+      try {
+        await answerApi.downvoteAnswer(answer.id);
+        return Either(
+            val: Answer(
+                id: answer.id,
+                content: answer.content,
+                questionId: answer.questionId,
+                author: answer.author,
+                upVotes: answer.upVotes - prevVote,
+                downVotes: answer.downVotes + 1,
+                userVote: Vote.downVote,
+                createdAt: answer.createdAt,
+                updatedAt: answer.updatedAt));
+      } on QHttpException catch (exception) {
+        return Either(error: Error(exception.message));
+      }
     }
   }
 }

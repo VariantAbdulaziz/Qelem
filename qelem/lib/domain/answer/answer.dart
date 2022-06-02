@@ -1,15 +1,16 @@
 import 'package:qelem/infrastructure/auth/user_dto.dart';
+import 'package:qelem/infrastructure/common/vote.dart';
 
 class Answer {
-  final int id;
-  final String content;
-  final int questionId;
-  final UserDto author;
-  final int upVotes;
-  final int downVotes;
-  final int userVote;
-  final String createdAt;
-  final String updatedAt;
+  int id;
+  String content;
+  int questionId;
+  UserDto author;
+  int upVotes;
+  int downVotes;
+  Vote userVote;
+  String createdAt;
+  String updatedAt;
 
   Answer(
       {required this.id,
