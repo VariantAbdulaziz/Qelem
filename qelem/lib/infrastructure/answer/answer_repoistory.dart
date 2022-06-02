@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:qelem/domain/answer/answer.dart';
+import 'package:qelem/domain/answer/answer_form.dart';
 import 'package:qelem/infrastructure/answer/answer_api.dart';
 import 'package:qelem/infrastructure/answer/answer_dto.dart';
 import 'package:qelem/infrastructure/answer/answer_form_dto.dart';
@@ -47,10 +48,9 @@ class AnswerRepository {
     }
   }
 
-  Future<Either<Answer>> createAnswer(
-      {required AnswerFormDto answerFormDto}) async {
+  Future<Either<Answer>> createAnswer({required AnswerForm answerForm}) async {
     try {
-      AnswerDto answer = await answerApi.createAnswer(answerFormDto);
+      AnswerDto answer = await answerApi.createAnswer(answerForm);
       return Either(val: answer.toAnswer());
     } on QHttpException catch (exception) {
       return Either(error: Error(exception.message));
@@ -80,10 +80,10 @@ class AnswerRepository {
   }
 
   Future<Either<Answer>> updateAnswer(
-      AnswerFormDto answerFormDto, int answerId, String content) async {
+      AnswerForm answerForm, int answerId, String content) async {
     try {
       AnswerDto updatedAnswer =
-          await answerApi.updateAnswer(answerFormDto, answerId, content);
+          await answerApi.updateAnswer(answerForm, answerId, content);
       return Either(val: updatedAnswer.toAnswer());
     } on QHttpException catch (exception) {
       return Either(error: Error(exception.message));
