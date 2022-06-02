@@ -7,6 +7,7 @@ import 'package:qelem/util/either.dart';
 import 'package:qelem/util/error.dart';
 import 'package:qelem/infrastructure/profile/profile_model_mapper.dart';
 import 'package:qelem/infrastructure/common/qelem_http_exception.dart';
+import 'dart:developer' as developer;
 
 class ProfileRepository {
   final ProfileApi profileApi;
@@ -21,6 +22,12 @@ class ProfileRepository {
       return Either(val: profileDto.toProfile());
     } on QHttpException catch (e) {
       return Either(error: Error(e.message));
+    } on SocketException catch (_) {
+      return Either(error: Error("Check your internet connection"));
+    } on Exception catch (e) {
+      developer.log("Unexpected error while updating profile in Profile Repo",
+          error: e);
+      return Either(error: Error("Unknown error"));
     }
   }
 
@@ -30,6 +37,12 @@ class ProfileRepository {
       return Either(val: profileDto.toProfile());
     } on QHttpException catch (e) {
       return Either(error: Error(e.message));
+    } on SocketException catch (_) {
+      return Either(error: Error("Check your internet connection"));
+    } on Exception catch (e) {
+      developer.log("Unexpected error while getting profile in Profile Repo",
+          error: e);
+      return Either(error: Error("Unknown error"));
     }
   }
 }
