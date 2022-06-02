@@ -9,7 +9,7 @@ Widget homeScreen() {
       itemBuilder: (context, position) {
         return QuestionCard(Question(
           id: position,
-          heading: 'Question $position',
+          topic: 'Question $position',
           content: 'Content of question $position',
           author: User(
             id: 1,
@@ -18,6 +18,9 @@ Widget homeScreen() {
             lastName: "Varol",
             profilePicture: "",
           ),
+          upVotes: 0,
+          downVotes: 0,
+          userVote: 0,
         ));
       });
 }
