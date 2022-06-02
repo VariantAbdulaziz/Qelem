@@ -1,16 +1,22 @@
-// TODO: Not finished yet.
+import 'package:qelem/common/Vote.dart';
 import 'package:qelem/domain/auth/user.dart';
 
 class Question {
-  final int id;
-  final String heading;
-  final String content;
-  final User author;
+  int id;
+  String topic;
+  String content;
+  User author;
+  int upVotes;
+  int downVotes;
+  Vote userVote;
 
   Question({
-    required this.author,
     required this.id,
-    required this.heading,
+    required this.topic,
     required this.content,
+    required this.author,
+    required this.upVotes,
+    required this.downVotes,
+    required this.userVote,
   });
 }
