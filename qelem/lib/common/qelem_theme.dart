@@ -6,11 +6,24 @@ import 'app_palette.dart';
 class QelemTheme {
   static ThemeData qelemTheme = ThemeData(
     textTheme: TextTheme(
-        headline6: GoogleFonts.comfortaa(),
-        subtitle2: GoogleFonts.comfortaa(color: Colors.black.withOpacity(0.6)),
-        bodyText2: GoogleFonts.comfortaa(color: Colors.black87)),
+      button: GoogleFonts.comfortaa(),
+      headline5: GoogleFonts.comfortaa(),
+      headline6: GoogleFonts.comfortaa(),
+      subtitle2: GoogleFonts.comfortaa(color: Colors.black.withOpacity(0.6)),
+      bodyText2: GoogleFonts.comfortaa(color: Colors.black87),
+      bodyText1: GoogleFonts.comfortaa(color: Colors.black87),
+    ),
+    primaryTextTheme: TextTheme(
+      button: GoogleFonts.comfortaa(),
+      headline5: GoogleFonts.comfortaa(),
+      headline6: GoogleFonts.comfortaa(),
+      subtitle2: GoogleFonts.comfortaa(),
+      bodyText2: GoogleFonts.comfortaa(),
+      bodyText1: GoogleFonts.comfortaa(),
+    ),
     primarySwatch: AppPalette.qelemPurple,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: AppPalette.qelemPurple,
       selectedLabelStyle: const TextStyle(color: Colors.white),
       unselectedLabelStyle: TextStyle(color: Colors.white.withOpacity(0.75)),
       selectedItemColor: Colors.white,

@@ -1,8 +1,8 @@
 {
     "id": 3,
-    "userName": "brukted",
+    "username": "brukted",
     "firstName": "bruk",
     "lastName": "tedla",
     "role": "MEMBER",
-    "profilePicture": "/user-photos/1/abebe.jpeg"
+    "profilePicture": "/files/abebe.jpeg"
 }
