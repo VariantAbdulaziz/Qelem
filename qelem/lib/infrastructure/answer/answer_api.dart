@@ -61,8 +61,7 @@ class AnswerApi {
     }
   }
 
-  Future<AnswerDto> updateAnswer(
-      AnswerFormDto answerFormDto, int answerId, String content) async {
+  Future<AnswerDto> updateAnswer(int answerId, String content) async {
     var response = await _httpClient
         .patch('answers/$answerId', body: {'content': content});
 

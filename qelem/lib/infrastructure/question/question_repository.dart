@@ -1,9 +1,13 @@
+import 'dart:developer' as developer;
+import 'dart:io';
+
+import 'package:qelem/domain/common/vote.dart';
+import 'package:qelem/domain/question/question_form.dart';
 import 'package:qelem/infrastructure/question/question_api.dart';
 import 'package:qelem/infrastructure/question/question_dto.dart';
-import 'package:qelem/infrastructure/question/question_form_dto.dart';
+import 'package:qelem/infrastructure/question/question_form_mapper.dart';
 import 'package:qelem/infrastructure/question/question_mapper.dart';
 
-import '../../common/Vote.dart';
 import '../../domain/question/question.dart';
 import '../../util/either.dart';
 import '../../util/error.dart';
@@ -14,148 +18,172 @@ class QuestionRepository {
 
   QuestionRepository(this.questionApi);
 
-  // get all questions
-  Future<Either<List<Question>>> getQuestion() async {
+  Future<Either<List<Question>>> getAllQuestions() async {
     try {
       List<QuestionDto> questionsDto = await questionApi.getAllQuestions();
       return Either(val: questionsDto.map((e) => e.toQuestion()).toList());
     } on QHttpException catch (e) {
       return Either(error: Error(e.message));
+    } on SocketException catch (_) {
+      return Either(error: Error("Check your internet connection"));
+    } on Exception catch (e) {
+      developer.log(
+          "Unexpected error while up voting while fetching all questions in Question Repo",
+          error: e);
+      return Either(error: Error("Unknown error"));
     }
   }
 
-  // get question by id
   Future<Either<Question>> getQuestionById(int id) async {
     try {
-      QuestionDto questionDto = await questionApi.getQuestionById(id);
+      final questionDto = await questionApi.getQuestionById(id);
       return Either(val: questionDto.toQuestion());
     } on QHttpException catch (e) {
       return Either(error: Error(e.message));
+    } on SocketException catch (_) {
+      return Either(error: Error("Check your internet connection"));
+    } on Exception catch (e) {
+      developer.log(
+          "Unexpected error while fetching a question with Id $id in Question Repo",
+          error: e);
+      return Either(error: Error("Unknown error"));
     }
   }
 
-  // create question
-  Future<Either<Question>> createQuestion(Question question) async {
+  Future<Either<Question>> createQuestion(QuestionForm questionForm) async {
     try {
-      QuestionDto questionDto = await questionApi.createQuestion(
-          QuestionFormDto(topic: question.topic, content: question.content));
+      final questionDto =
+          await questionApi.createQuestion(questionForm.toDto());
       return Either(val: questionDto.toQuestion());
     } on QHttpException catch (e) {
       return Either(error: Error(e.message));
+    } on SocketException catch (_) {
+      return Either(error: Error("Check your internet connection"));
+    } on Exception catch (e) {
+      developer.log(
+          "Unexpected error while fetching creating a question in Question Repo",
+          error: e);
+      return Either(error: Error("Unknown error"));
     }
   }
 
-  // delete question
   Future<Either<void>> deleteQuestion(int id) async {
     try {
       await questionApi.deleteQuestion(id);
-      return Either(val: null);
+      return Either();
     } on QHttpException catch (e) {
       return Either(error: Error(e.message));
+    } on SocketException catch (_) {
+      return Either(error: Error("Check your internet connection"));
+    } on Exception catch (e) {
+      developer.log(
+          "Unexpected error while deleting a question with Id $id in Question Repo",
+          error: e);
+      return Either(error: Error("Unknown error"));
     }
   }
 
-  // update question
-  Future<Either<Question>> updateQuestion(Question question) async {
+  Future<Either<Question>> updateQuestion(
+      QuestionForm questionForm, int questionId) async {
     try {
-      QuestionDto questionDto = await questionApi.updateQuestion(
-          QuestionFormDto(topic: question.topic, content: question.content),
-          question.id);
+      final questionDto =
+          await questionApi.updateQuestion(questionForm.toDto(), questionId);
       return Either(val: questionDto.toQuestion());
     } on QHttpException catch (e) {
       return Either(error: Error(e.message));
+    } on SocketException catch (_) {
+      return Either(error: Error("Check your internet connection"));
+    } on Exception catch (e) {
+      developer.log(
+          "Unexpected error while updating a question with Id $questionId in Question Repo",
+          error: e);
+      return Either(error: Error("Unknown error"));
     }
   }
 
-  // upVote question
   Future<Either<Question>> upvoteQuestion(Question question) async {
-    int prevVote;
     if (question.userVote == Vote.upVote) {
-      prevVote = 1;
-    } else if (question.userVote == Vote.downVote) {
-      prevVote = -1;
-    } else {
-      prevVote = 0;
+      // Should never happen, UI should prevent this
+      throw Exception('You already upvoted this question');
     }
 
-    if (question.userVote == Vote.upVote) {
-      try {
-        await questionApi.unvoteQuestion(question.id);
-
-        return Either(
-            val: Question(
-                id: question.id,
-                topic: question.topic,
-                content: question.content,
-                upVotes: question.upVotes - prevVote, // prevVote = 1
-                userVote: Vote.none,
-                downVotes: question.downVotes,
-                author: question.author));
-      } on QHttpException catch (e) {
-        return Either(error: Error(e.message));
-      }
-    } else {
-      try {
-        await questionApi.upVoteQuestion(question.id);
-
-        return Either(
-            val: Question(
-                id: question.id,
-                topic: question.topic,
-                content: question.content,
-                upVotes: question.upVotes + 1,
-                userVote: Vote.upVote,
-                downVotes: question.downVotes + prevVote, // prevVote = -1 or 0
-                author: question.author));
-      } on QHttpException catch (e) {
-        return Either(error: Error(e.message));
-      }
+    try {
+      await questionApi.upVoteQuestion(question.id);
+      return Either(
+          val: question.copyWith(
+        userVote: Vote.upVote,
+        upVotes: question.upVotes + 1,
+        downVotes: question.userVote == Vote.downVote
+            ? question.downVotes - 1
+            : question.downVotes,
+      ));
+    } on QHttpException catch (e) {
+      return Either(error: Error(e.message));
+    } on SocketException catch (_) {
+      return Either(error: Error("Check your internet connection"));
+    } on Exception catch (e) {
+      developer.log(
+          "Unexpected error while up voting a question with Id ${question.id} in Question Repo",
+          error: e);
+      return Either(error: Error("Unknown error"));
     }
   }
 
-  // downVote question
   Future<Either<Question>> downVoteQuestion(Question question) async {
-    int prevVote;
-    if (question.userVote == Vote.upVote) {
-      prevVote = 1;
-    } else if (question.userVote == Vote.downVote) {
-      prevVote = -1;
-    } else {
-      prevVote = 0;
+    if (question.userVote == Vote.downVote) {
+      // Should never happen, UI should prevent this
+      throw Exception('You already downvoted this question');
     }
 
-    if (question.userVote == Vote.downVote) {
-      try {
-        await questionApi.unvoteQuestion(question.id);
+    try {
+      await questionApi.downvoteQuestion(question.id);
+      return Either(
+          val: question.copyWith(
+        userVote: Vote.downVote,
+        upVotes: question.userVote == Vote.upVote
+            ? question.upVotes - 1
+            : question.upVotes,
+        downVotes: question.downVotes + 1,
+      ));
+    } on QHttpException catch (e) {
+      return Either(error: Error(e.message));
+    } on SocketException catch (_) {
+      return Either(error: Error("Check your internet connection"));
+    } on Exception catch (e) {
+      developer.log(
+          "Unexpected error while down voting a question with Id ${question.id} in Question Repo",
+          error: e);
+      return Either(error: Error("Unknown error"));
+    }
+  }
 
-        return Either(
-            val: Question(
-                id: question.id,
-                topic: question.topic,
-                content: question.content,
-                upVotes: question.upVotes,
-                userVote: Vote.none,
-                downVotes: question.downVotes + prevVote, // prevVote == -1 or 0
-                author: question.author));
-      } on QHttpException catch (e) {
-        return Either(error: Error(e.message));
-      }
-    } else {
-      try {
-        await questionApi.downvoteQuestion(question.id);
+  Future<Either<Question>> unvoteQuestion(Question question) async {
+    if (question.userVote == Vote.none) {
+      // Should never happen, UI should prevent this
+      throw Exception('You already unvoted this question');
+    }
 
-        return Either(
-            val: Question(
-                id: question.id,
-                topic: question.topic,
-                content: question.content,
-                upVotes: question.upVotes - prevVote, // prevVote == 1 or 0
-                userVote: Vote.downVote,
-                downVotes: question.downVotes + 1,
-                author: question.author));
-      } on QHttpException catch (e) {
-        return Either(error: Error(e.message));
-      }
+    try {
+      await questionApi.unvoteQuestion(question.id);
+      return Either(
+          val: question.copyWith(
+        userVote: Vote.none,
+        upVotes: question.userVote == Vote.upVote
+            ? question.upVotes - 1
+            : question.upVotes,
+        downVotes: question.userVote == Vote.downVote
+            ? question.downVotes - 1
+            : question.downVotes,
+      ));
+    } on QHttpException catch (e) {
+      return Either(error: Error(e.message));
+    } on SocketException catch (_) {
+      return Either(error: Error("Check your internet connection"));
+    } on Exception catch (e) {
+      developer.log(
+          "Unexpected error while unvoting a question with Id ${question.id} in Question Repo",
+          error: e);
+      return Either(error: Error("Unknown error"));
     }
   }
 }

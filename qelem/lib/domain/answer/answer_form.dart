@@ -8,7 +8,4 @@ class AnswerForm with _$AnswerForm {
     required int questionId,
     required String content,
   }) = _AnswerForm;
-
-  factory AnswerForm.fromJson(Map<String, dynamic> json) =>
-      _$AnswerFormFromJson(json);
 }

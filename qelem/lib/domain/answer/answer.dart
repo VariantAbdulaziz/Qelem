@@ -1,25 +1,20 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:qelem/domain/auth/user.dart';
-import 'package:qelem/infrastructure/common/vote.dart';
+import 'package:qelem/domain/common/vote.dart';
 
-class Answer {
-  int id;
-  String content;
-  int questionId;
-  User author;
-  int upVotes;
-  int downVotes;
-  Vote userVote;
-  String createdAt;
-  String updatedAt;
+part 'answer.freezed.dart';
 
-  Answer(
-      {required this.id,
-      required this.content,
-      required this.questionId,
-      required this.author,
-      required this.upVotes,
-      required this.downVotes,
-      required this.userVote,
-      required this.createdAt,
-      required this.updatedAt});
+@freezed
+class Answer with _$Answer {
+  const factory Answer({
+    required int id,
+    required String content,
+    required int questionId,
+    required User author,
+    required int upVotes,
+    required int downVotes,
+    required Vote userVote,
+    required DateTime createdAt,
+    required DateTime updatedAt,
+  }) = _Answer;
 }

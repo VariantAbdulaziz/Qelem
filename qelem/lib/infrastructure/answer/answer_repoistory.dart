@@ -1,17 +1,16 @@
+import 'dart:developer' as developer;
 import 'dart:io';
 
 import 'package:qelem/domain/answer/answer.dart';
 import 'package:qelem/domain/answer/answer_form.dart';
+import 'package:qelem/domain/common/vote.dart';
 import 'package:qelem/infrastructure/answer/answer_api.dart';
 import 'package:qelem/infrastructure/answer/answer_dto.dart';
-import 'package:qelem/infrastructure/answer/answer_form_dto.dart';
+import 'package:qelem/infrastructure/answer/answer_form_mapper.dart';
 import 'package:qelem/infrastructure/answer/answer_model_mapper.dart';
 import 'package:qelem/infrastructure/common/qelem_http_exception.dart';
-import 'package:qelem/infrastructure/common/vote.dart';
 import 'package:qelem/util/either.dart';
 import 'package:qelem/util/error.dart';
-
-import 'dart:developer' as developer;
 
 class AnswerRepository {
   final AnswerApi answerApi;
@@ -42,7 +41,7 @@ class AnswerRepository {
       return Either(error: Error("Check your internet connection"));
     } on Exception catch (e) {
       developer.log(
-          "Unexpected error while fetching an answer with Id ${answerId} in Answer Repo",
+          "Unexpected error while fetching an answer with Id $answerId in Answer Repo",
           error: e);
       return Either(error: Error("Unknown error"));
     }
@@ -50,7 +49,7 @@ class AnswerRepository {
 
   Future<Either<Answer>> createAnswer({required AnswerForm answerForm}) async {
     try {
-      AnswerDto answer = await answerApi.createAnswer(answerForm);
+      AnswerDto answer = await answerApi.createAnswer(answerForm.toDto());
       return Either(val: answer.toAnswer());
     } on QHttpException catch (exception) {
       return Either(error: Error(exception.message));
@@ -79,11 +78,9 @@ class AnswerRepository {
     }
   }
 
-  Future<Either<Answer>> updateAnswer(
-      AnswerForm answerForm, int answerId, String content) async {
+  Future<Either<Answer>> updateAnswer(int answerId, String content) async {
     try {
-      AnswerDto updatedAnswer =
-          await answerApi.updateAnswer(answerForm, answerId, content);
+      AnswerDto updatedAnswer = await answerApi.updateAnswer(answerId, content);
       return Either(val: updatedAnswer.toAnswer());
     } on QHttpException catch (exception) {
       return Either(error: Error(exception.message));
@@ -91,103 +88,95 @@ class AnswerRepository {
       return Either(error: Error("Check your internet connection"));
     } on Exception catch (e) {
       developer.log(
-          "Unexpected error while updating an answer with Id ${answerId} in Answer Repo",
+          "Unexpected error while updating an answer with Id $answerId in Answer Repo",
           error: e);
       return Either(error: Error("Unknown error"));
     }
   }
 
   Future<Either<Answer>> upvoteAnswer(Answer answer) async {
-    int prevVote;
     if (answer.userVote == Vote.upVote) {
-      prevVote = 1;
-    } else if (answer.userVote == Vote.downVote) {
-      prevVote = -1;
-    } else {
-      prevVote = 0;
+      // Should never happen, UI should handle this
+      throw Exception("Answer already upvoted");
     }
 
-    if (answer.userVote == Vote.upVote) {
-      try {
-        await answerApi.upvoteAnswer(answer.id);
-        return Either(
-            val: Answer(
-                id: answer.id,
-                content: answer.content,
-                questionId: answer.questionId,
-                author: answer.author,
-                upVotes: answer.upVotes - prevVote,
-                downVotes: answer.downVotes,
-                userVote: Vote.none,
-                createdAt: answer.createdAt,
-                updatedAt: answer.updatedAt));
-      } on QHttpException catch (exception) {
-        return Either(error: Error(exception.message));
-      }
-    } else {
-      try {
-        await answerApi.unvoteAnswer(answer.id);
-        return Either(
-            val: Answer(
-                id: answer.id,
-                content: answer.content,
-                questionId: answer.questionId,
-                author: answer.author,
-                upVotes: answer.upVotes + 1,
-                downVotes: answer.downVotes + prevVote,
-                userVote: Vote.upVote,
-                createdAt: answer.createdAt,
-                updatedAt: answer.updatedAt));
-      } on QHttpException catch (exception) {
-        return Either(error: Error(exception.message));
-      }
+    try {
+      await answerApi.unvoteAnswer(answer.id);
+      return Either(
+        val: answer.copyWith(
+            userVote: Vote.upVote,
+            upVotes: answer.upVotes + 1,
+            downVotes: answer.userVote == Vote.downVote
+                ? answer.downVotes - 1
+                : answer.downVotes),
+      );
+    } on QHttpException catch (exception) {
+      return Either(error: Error(exception.message));
+    } on SocketException catch (_) {
+      return Either(error: Error("Check your internet connection"));
+    } on Exception catch (e) {
+      developer.log(
+          "Unexpected error while up voting an answer with Id ${answer.id} in Answer Repo",
+          error: e);
+      return Either(error: Error("Unknown error"));
     }
   }
 
   Future<Either<Answer>> downvoteAnswer(Answer answer) async {
-    int prevVote;
-    if (answer.userVote == Vote.upVote) {
-      prevVote = 1;
-    } else if (answer.userVote == Vote.downVote) {
-      prevVote = -1;
-    } else {
-      prevVote = 0;
+    if (answer.userVote == Vote.downVote) {
+      // Should never happen, UI should handle this
+      throw Exception("Answer already downvoted");
     }
 
-    if (answer.userVote == Vote.upVote) {
-      try {
-        await answerApi.unvoteAnswer(answer.id);
-        return Either(
-            val: Answer(
-                id: answer.id,
-                content: answer.content,
-                questionId: answer.questionId,
-                author: answer.author,
-                upVotes: answer.upVotes,
-                downVotes: answer.downVotes + prevVote,
-                userVote: Vote.none,
-                createdAt: answer.createdAt,
-                updatedAt: answer.updatedAt));
-      } on QHttpException catch (exception) {
-        return Either(error: Error(exception.message));
-      }
-    } else {
-      try {
-        await answerApi.downvoteAnswer(answer.id);
-        return Either(
-            val: Answer(
-                id: answer.id,
-                content: answer.content,
-                questionId: answer.questionId,
-                author: answer.author,
-                upVotes: answer.upVotes - prevVote,
-                downVotes: answer.downVotes + 1,
-                userVote: Vote.downVote,
-                createdAt: answer.createdAt,
-                updatedAt: answer.updatedAt));
-      } on QHttpException catch (exception) {
-        return Either(error: Error(exception.message));
-      }
+    try {
+      await answerApi.unvoteAnswer(answer.id);
+      return Either(
+        val: answer.copyWith(
+            userVote: Vote.upVote,
+            upVotes: answer.userVote == Vote.upVote
+                ? answer.upVotes - 1
+                : answer.upVotes,
+            downVotes: answer.downVotes + 1),
+      );
+    } on QHttpException catch (exception) {
+      return Either(error: Error(exception.message));
+    } on SocketException catch (_) {
+      return Either(error: Error("Check your internet connection"));
+    } on Exception catch (e) {
+      developer.log(
+          "Unexpected error while up voting an answer with Id ${answer.id} in Answer Repo",
+          error: e);
+      return Either(error: Error("Unknown error"));
+    }
+  }
+
+  Future<Either<Answer>> unvoteAnswer(Answer answer) async {
+    if (answer.userVote == Vote.none) {
+      // Should never happen, UI should handle this
+      throw Exception("Answer is not voted");
+    }
+
+    try {
+      await answerApi.unvoteAnswer(answer.id);
+      return Either(
+        val: answer.copyWith(
+            userVote: Vote.none,
+            upVotes: answer.userVote == Vote.upVote
+                ? answer.upVotes - 1
+                : answer.upVotes,
+            downVotes: answer.userVote == Vote.downVote
+                ? answer.downVotes - 1
+                : answer.downVotes),
+      );
+    } on QHttpException catch (exception) {
+      return Either(error: Error(exception.message));
+    } on SocketException catch (_) {
+      return Either(error: Error("Check your internet connection"));
+    } on Exception catch (e) {
+      developer.log(
+          "Unexpected error while up voting an answer with Id ${answer.id} in Answer Repo",
+          error: e);
+      return Either(error: Error("Unknown error"));
     }
   }
 }
