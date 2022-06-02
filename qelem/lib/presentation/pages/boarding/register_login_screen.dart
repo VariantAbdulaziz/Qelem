@@ -6,81 +6,64 @@ class RegisterLoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pads = MediaQuery.of(context).size.height / 15;
-    final buttonHeight = MediaQuery.of(context).size.height / 15;
-    final imageHeight = MediaQuery.of(context).size.height / 2;
-    final mainWelcomeTextStyle = Theme.of(context).textTheme.headline5;
-    final additionalIntrosStyle = Theme.of(context).textTheme.bodyText2;
-    const signInButtonText = "SIGN IN";
-    const createAccButtonText = "CREATE AN ACCOUNT";
-    const imagePath = "assets/newbies_motivator.png";
-    const mainWelcomeText = "Hey! Welcome";
-    const additionalIntros =
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam egestas rhoncus lectus rhoncus, tempor. ";
-
     return Scaffold(
-      body: ListView(
-        children: [
-          SizedBox(height: pads),
-          Container(
-            padding: EdgeInsets.all(pads),
-            width: double.infinity,
-            height: imageHeight,
-            child: const Image(
-              image: AssetImage(imagePath),
-              fit: BoxFit.contain,
+      body: SingleChildScrollView(
+        child: ConstrainedBox(
+          constraints:
+              BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 40.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(
+                  width: double.infinity,
+                  height: 300.0,
+                  child: Image(
+                    image: AssetImage("assets/newbies_motivator.png"),
+                    fit: BoxFit.contain,
+                  ),
+                ),
+                const SizedBox(height: 70.0),
+                Text(
+                  "Hey! Welcome",
+                  style: Theme.of(context).textTheme.headline5,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 30.0),
+                Text(
+                  """Lorem ipsum dolor sit amet, consectetur"""
+                  """ adipiscing elit. Nam egestas rhoncus lectus rhoncus, tempor. """,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
+                const SizedBox(height: 30.0),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(double.infinity, 40),
+                  ),
+                  onPressed: () => context.push('/sign-in'),
+                  child: Text(
+                    "SIGN IN",
+                    style: Theme.of(context).primaryTextTheme.button,
+                  ),
+                ),
+                const SizedBox(height: 19.0),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(double.infinity, 40),
+                  ),
+                  onPressed: () => context.push('/register'),
+                  child: Text(
+                    "CREATE AN ACCOUNT",
+                    style: Theme.of(context).primaryTextTheme.button,
+                  ),
+                ),
+              ],
             ),
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                padding: EdgeInsets.only(left: pads, right: pads),
-                width: double.infinity,
-                height: buttonHeight + 2 * pads,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text(
-                      mainWelcomeText,
-                      style: mainWelcomeTextStyle,
-                      textAlign: TextAlign.center,
-                    ),
-                    Text(
-                      additionalIntros,
-                      textAlign: TextAlign.center,
-                      style: additionalIntrosStyle,
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: pads),
-                width: double.infinity,
-                height: buttonHeight + 2 * pads,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: Size(double.infinity, buttonHeight),
-                      ),
-                      onPressed: () => context.go('/sign-in'),
-                      child: const Text(signInButtonText),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: Size(double.infinity, buttonHeight),
-                      ),
-                      onPressed: () => context.go('/register'),
-                      child: const Text(createAccButtonText),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ],
+        ),
       ),
     );
   }

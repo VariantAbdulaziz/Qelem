@@ -15,7 +15,10 @@ class QuestionCard extends StatelessWidget {
             margin: const EdgeInsets.fromLTRB(0, 14, 16, 12),
             child: ListTile(
               leading: CircleAvatar(
-                backgroundImage: AssetImage(question.author.profilePicture),
+                backgroundImage: Image.network(
+                  question.author.profilePicture,
+                  fit: BoxFit.cover,
+                ).image,
                 radius: 40,
               ),
               title: Text(

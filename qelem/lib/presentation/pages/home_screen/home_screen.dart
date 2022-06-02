@@ -16,7 +16,7 @@ Widget homeScreen() {
             userName: 'emre_varol',
             firstName: "Emre",
             lastName: "Varol",
-            profilePicture: "",
+            profilePicture: "https://picsum.photos/200",
           ),
         ));
       });
