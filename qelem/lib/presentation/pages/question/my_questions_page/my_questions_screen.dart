@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qelem/common/Vote.dart';
 import 'package:qelem/domain/auth/user.dart';
 import 'package:qelem/domain/question/question.dart';
 
@@ -21,7 +22,7 @@ Widget myQuestionsScreen() {
         ),
         upVotes: 0,
         downVotes: 0,
-        userVote: 0,
+        userVote: Vote.none,
       ));
     },
   );

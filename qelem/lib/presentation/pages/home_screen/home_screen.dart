@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:qelem/domain/auth/user.dart';
 import 'package:qelem/domain/question/question.dart';
+import '../../../common/Vote.dart';
 import '../question/widgets/question_card.dart';
 
 Widget homeScreen() {
@@ -20,7 +21,7 @@ Widget homeScreen() {
           ),
           upVotes: 0,
           downVotes: 0,
-          userVote: 0,
+          userVote: Vote.none,
         ));
       });
 }

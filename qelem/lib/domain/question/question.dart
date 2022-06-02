@@ -1,3 +1,4 @@
+import 'package:qelem/common/Vote.dart';
 import 'package:qelem/domain/auth/user.dart';
 
 class Question {
@@ -7,7 +8,7 @@ class Question {
   User author;
   int upVotes;
   int downVotes;
-  int userVote;
+  Vote userVote;
 
   Question({
     required this.id,
