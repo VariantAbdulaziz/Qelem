@@ -11,6 +11,24 @@ class AnswerRepository {
   final AnswerApi answerApi;
   AnswerRepository(this.answerApi);
 
+  Future<Either<List<Answer>>> getAllAnswers() async {
+    try {
+      List<AnswerDto> answerDto = await answerApi.getAllAnswers();
+      return Either(val: answerDto.map((e) => e.toAnswer()).toList());
+    } on QHttpException catch (exception) {
+      return Either(error: Error(exception.message));
+    }
+  }
+
+  Future<Either<Answer>> getAnswerById(int answerId) async {
+    try {
+      AnswerDto answerDto = await answerApi.getAnswerById(answerId);
+      return Either(val: answerDto.toAnswer());
+    } on QHttpException catch (exception) {
+      return Either(error: Error(exception.message));
+    }
+  }
+
   Future<Either<Answer>> createAnswer(
       {required AnswerFormDto answerFormDto}) async {
     try {
@@ -40,19 +58,21 @@ class AnswerRepository {
     }
   }
 
-  Future<void> upvoteAnswer(int answerId) async {
+  Future<Either<void>> upvoteAnswer(int answerId) async {
     try {
       await answerApi.upvoteAnswer(answerId);
-    } catch (exception) {
-      rethrow;
+      return Either(val: null);
+    } on QHttpException catch (exception) {
+      return Either(error: Error(exception.message));
     }
   }
 
-  Future<void> unvoteAnswer(int answerId) async {
+  Future<Either<void>> downvoteAnswer(int answerId) async {
     try {
-      await answerApi.unvoteAnswer(answerId);
-    } catch (exception) {
-      rethrow;
+      await answerApi.downvoteAnswer(answerId);
+      return Either(val: null);
+    } on QHttpException catch (exception) {
+      return Either(error: Error(exception.message));
     }
   }
 }
