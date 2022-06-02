@@ -18,7 +18,7 @@ Widget myQuestionsScreen() {
           userName: 'emre_varol',
           firstName: "Emre",
           lastName: "Varol",
-          profilePicture: "assets/abebe.jpeg",
+          profilePicture: "assets/images/default_profile_picture.jpeg",
         ),
       ));
     },

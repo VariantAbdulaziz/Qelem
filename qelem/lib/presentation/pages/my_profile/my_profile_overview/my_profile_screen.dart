@@ -19,7 +19,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
           const Padding(
               padding: EdgeInsets.only(top: 15.0, left: 15.0, right: 25.0),
               child: CircleAvatar(
-                backgroundImage: AssetImage("assets/abebe.jpeg"),
+                backgroundImage: AssetImage("assets/images/default_profile_picture.jpeg"),
                 radius: 60,
               )),
           Column(
