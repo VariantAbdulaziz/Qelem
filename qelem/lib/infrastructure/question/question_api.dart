@@ -13,8 +13,8 @@ class QuestionApi {
   QuestionApi(this._httpClient);
 
   Future<QuestionDto> createQuestion(QuestionFormDto questionFormDto) async {
-    var response =
-        await _httpClient.post('questions', body: questionFormDto.toJson());
+    var response = await _httpClient.post('questions',
+        body: json.encode(questionFormDto.toJson()));
 
     if (response.statusCode == 201) {
       return QuestionDto.fromJson(json.decode(response.body));
@@ -55,7 +55,7 @@ class QuestionApi {
   Future<QuestionDto> updateQuestion(
       QuestionFormDto questionFormDto, int questionId) async {
     var response = await _httpClient.patch('questions/$questionId',
-        body: questionFormDto.toJson());
+        body: json.encode(questionFormDto.toJson()));
 
     if (response.statusCode == 200) {
       return QuestionDto.fromJson(json.decode(response.body));

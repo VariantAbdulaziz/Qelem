@@ -44,7 +44,7 @@ class AuthRepository {
   }
 
   static Future<bool> loggedIn() async {
-    String token = await SharedPrefsService.getToken();
+    String token = await SharedPrefsService.getToken() ?? "";
     return token != "";
   }
 }
