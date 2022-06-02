@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import lombok.Data;
+import lombok.ToString.Exclude;
 
 @Data
 public class RegistrationForm {
@@ -15,6 +16,7 @@ public class RegistrationForm {
     private String username;
     @NotNull(message="Password can't be null")
     @NotBlank(message="password can't be blank")
+    @Exclude // Don't log the password
     private String password;
     @NotNull(message="Last Name can't be null")
     @NotBlank(message="Last Name can't be blank")
