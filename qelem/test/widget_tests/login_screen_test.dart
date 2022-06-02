@@ -1,10 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
-import 'package:qelem/presentation/pages/signin/login_screen.dart';
+import 'package:qelem/presentation/pages/signin/signin_screen.dart';
 
 void main() {
   testWidgets('Login screen test', (WidgetTester tester) async {
-    await tester.pumpWidget(const MaterialApp(home: LoginScreen()));
+    await tester.pumpWidget(const MaterialApp(home: SigninScreen()));
     expect(find.text('Sign In'), findsOneWidget);
 
     expect(find.widgetWithText(TextButton, "SIGN UP"), findsOneWidget);
