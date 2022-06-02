@@ -5,7 +5,7 @@
   "content": "this is the question's content",
   "author": {
     "id": 3,
-    "userName": "brukted",
+    "username": "brukted",
     "firstName": "bruk",
     "lastName": "tedla",
     "role": "MEMBER",

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:qelem/application/auth/auth_bloc.dart';
+import 'package:qelem/application/auth/auth_event.dart';
 import 'package:qelem/common/app_palette.dart';
 import 'package:qelem/common/constants.dart';
 import 'package:qelem/presentation/pages/home_screen/home_screen.dart';
+import 'package:qelem/presentation/pages/main_screen/widgets/logout_dialog.dart';
 import 'package:qelem/presentation/pages/question/my_questions_page/my_questions_screen.dart';
-import 'package:qelem/presentation/pages/my_profile/my_profile_overview/widgets/profile_app_bar.dart';
-import 'package:qelem/presentation/pages/home_screen/widgets/home_app_bar.dart';
-import 'package:qelem/presentation/pages/question/my_questions_page/widgets/common_app_bar.dart';
 import 'package:go_router/go_router.dart';
+import 'package:qelem/presentation/routes/routes.dart';
 
 import '../my_profile/my_profile_overview/my_profile_screen.dart';
 
@@ -21,13 +23,11 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
-  String _title = Constants.home;
-  AppBar _appBar = homeAppBar(Constants.home);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _appBar,
+      appBar: _getAppBar(),
       body: IndexedStack(
         index: _selectedIndex,
         children: [homeScreen(), myQuestionsScreen(), const MyProfileScreen()],
@@ -66,27 +66,42 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   void _onTap(int index) {
-    _selectedIndex = index;
-    switch (index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  AppBar _getAppBar() {
+    switch (_selectedIndex) {
       case 0:
         {
-          _title = Constants.home;
-          _appBar = homeAppBar(_title);
+          return AppBar(
+            title: const Text("Home"),
+            actions: [
+              IconButton(onPressed: () => {}, icon: const Icon(Icons.search))
+            ],
+          );
         }
-        break;
       case 1:
         {
-          _title = Constants.myQuestions;
-          _appBar = commonAppBar(_title);
+          return AppBar(title: const Text("My Questions"));
         }
-        break;
       case 2:
         {
-          _title = Constants.profile;
-          _appBar = profileAppBar(_title);
+          return AppBar(
+            title: const Text("Profile"),
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) => const LogoutDialog());
+                  },
+                  icon: const Icon(Icons.logout))
+            ],
+          );
         }
-        break;
     }
-    setState(() {});
+    throw Exception("Invalid index");
   }
 }
