@@ -19,38 +19,38 @@ mixin _$AuthEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(User user, String token) signedIn,
-    required TResult Function() signedOut,
+    required TResult Function() signOut,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(User user, String token)? signedIn,
-    TResult Function()? signedOut,
+    TResult Function()? signOut,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(User user, String token)? signedIn,
-    TResult Function()? signedOut,
+    TResult Function()? signOut,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(AuthEventSignedIn value) signedIn,
-    required TResult Function(AuthEventSignedOut value) signedOut,
+    required TResult Function(AuthEventSignOut value) signOut,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(AuthEventSignedIn value)? signedIn,
-    TResult Function(AuthEventSignedOut value)? signedOut,
+    TResult Function(AuthEventSignOut value)? signOut,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthEventSignedIn value)? signedIn,
-    TResult Function(AuthEventSignedOut value)? signedOut,
+    TResult Function(AuthEventSignOut value)? signOut,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -147,7 +147,7 @@ class _$AuthEventSignedIn implements AuthEventSignedIn {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(User user, String token) signedIn,
-    required TResult Function() signedOut,
+    required TResult Function() signOut,
   }) {
     return signedIn(user, token);
   }
@@ -156,7 +156,7 @@ class _$AuthEventSignedIn implements AuthEventSignedIn {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(User user, String token)? signedIn,
-    TResult Function()? signedOut,
+    TResult Function()? signOut,
   }) {
     return signedIn?.call(user, token);
   }
@@ -165,7 +165,7 @@ class _$AuthEventSignedIn implements AuthEventSignedIn {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(User user, String token)? signedIn,
-    TResult Function()? signedOut,
+    TResult Function()? signOut,
     required TResult orElse(),
   }) {
     if (signedIn != null) {
@@ -178,7 +178,7 @@ class _$AuthEventSignedIn implements AuthEventSignedIn {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(AuthEventSignedIn value) signedIn,
-    required TResult Function(AuthEventSignedOut value) signedOut,
+    required TResult Function(AuthEventSignOut value) signOut,
   }) {
     return signedIn(this);
   }
@@ -187,7 +187,7 @@ class _$AuthEventSignedIn implements AuthEventSignedIn {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(AuthEventSignedIn value)? signedIn,
-    TResult Function(AuthEventSignedOut value)? signedOut,
+    TResult Function(AuthEventSignOut value)? signOut,
   }) {
     return signedIn?.call(this);
   }
@@ -196,7 +196,7 @@ class _$AuthEventSignedIn implements AuthEventSignedIn {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthEventSignedIn value)? signedIn,
-    TResult Function(AuthEventSignedOut value)? signedOut,
+    TResult Function(AuthEventSignOut value)? signOut,
     required TResult orElse(),
   }) {
     if (signedIn != null) {
@@ -218,38 +218,38 @@ abstract class AuthEventSignedIn implements AuthEvent {
 }
 
 /// @nodoc
-abstract class _$$AuthEventSignedOutCopyWith<$Res> {
-  factory _$$AuthEventSignedOutCopyWith(_$AuthEventSignedOut value,
-          $Res Function(_$AuthEventSignedOut) then) =
-      __$$AuthEventSignedOutCopyWithImpl<$Res>;
+abstract class _$$AuthEventSignOutCopyWith<$Res> {
+  factory _$$AuthEventSignOutCopyWith(
+          _$AuthEventSignOut value, $Res Function(_$AuthEventSignOut) then) =
+      __$$AuthEventSignOutCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$AuthEventSignedOutCopyWithImpl<$Res>
+class __$$AuthEventSignOutCopyWithImpl<$Res>
     extends _$AuthEventCopyWithImpl<$Res>
-    implements _$$AuthEventSignedOutCopyWith<$Res> {
-  __$$AuthEventSignedOutCopyWithImpl(
-      _$AuthEventSignedOut _value, $Res Function(_$AuthEventSignedOut) _then)
-      : super(_value, (v) => _then(v as _$AuthEventSignedOut));
+    implements _$$AuthEventSignOutCopyWith<$Res> {
+  __$$AuthEventSignOutCopyWithImpl(
+      _$AuthEventSignOut _value, $Res Function(_$AuthEventSignOut) _then)
+      : super(_value, (v) => _then(v as _$AuthEventSignOut));
 
   @override
-  _$AuthEventSignedOut get _value => super._value as _$AuthEventSignedOut;
+  _$AuthEventSignOut get _value => super._value as _$AuthEventSignOut;
 }
 
 /// @nodoc
 
-class _$AuthEventSignedOut implements AuthEventSignedOut {
-  const _$AuthEventSignedOut();
+class _$AuthEventSignOut implements AuthEventSignOut {
+  const _$AuthEventSignOut();
 
   @override
   String toString() {
-    return 'AuthEvent.signedOut()';
+    return 'AuthEvent.signOut()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$AuthEventSignedOut);
+        (other.runtimeType == runtimeType && other is _$AuthEventSignOut);
   }
 
   @override
@@ -259,29 +259,29 @@ class _$AuthEventSignedOut implements AuthEventSignedOut {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(User user, String token) signedIn,
-    required TResult Function() signedOut,
+    required TResult Function() signOut,
   }) {
-    return signedOut();
+    return signOut();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(User user, String token)? signedIn,
-    TResult Function()? signedOut,
+    TResult Function()? signOut,
   }) {
-    return signedOut?.call();
+    return signOut?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(User user, String token)? signedIn,
-    TResult Function()? signedOut,
+    TResult Function()? signOut,
     required TResult orElse(),
   }) {
-    if (signedOut != null) {
-      return signedOut();
+    if (signOut != null) {
+      return signOut();
     }
     return orElse();
   }
@@ -290,34 +290,34 @@ class _$AuthEventSignedOut implements AuthEventSignedOut {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(AuthEventSignedIn value) signedIn,
-    required TResult Function(AuthEventSignedOut value) signedOut,
+    required TResult Function(AuthEventSignOut value) signOut,
   }) {
-    return signedOut(this);
+    return signOut(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(AuthEventSignedIn value)? signedIn,
-    TResult Function(AuthEventSignedOut value)? signedOut,
+    TResult Function(AuthEventSignOut value)? signOut,
   }) {
-    return signedOut?.call(this);
+    return signOut?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthEventSignedIn value)? signedIn,
-    TResult Function(AuthEventSignedOut value)? signedOut,
+    TResult Function(AuthEventSignOut value)? signOut,
     required TResult orElse(),
   }) {
-    if (signedOut != null) {
-      return signedOut(this);
+    if (signOut != null) {
+      return signOut(this);
     }
     return orElse();
   }
 }
 
-abstract class AuthEventSignedOut implements AuthEvent {
-  const factory AuthEventSignedOut() = _$AuthEventSignedOut;
+abstract class AuthEventSignOut implements AuthEvent {
+  const factory AuthEventSignOut() = _$AuthEventSignOut;
 }

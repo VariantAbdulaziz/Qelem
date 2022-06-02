@@ -43,6 +43,14 @@ class App extends StatelessWidget {
             return Routes.signIn;
           }
         }
+
+        // User logged out
+        if (authBloc.state is AuthUnauthenticated &&
+            state.location != Routes.boarding &&
+            state.location != Routes.signIn &&
+            state.location != Routes.register) {
+          return Routes.signIn;
+        }
         return null;
       },
       routes: [

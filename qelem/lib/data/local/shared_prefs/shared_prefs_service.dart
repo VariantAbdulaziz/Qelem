@@ -11,6 +11,11 @@ class SharedPrefsService {
     return prefs.getString('token');
   }
 
+  static Future<void> removeToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('token');
+  }
+
   static isFirstRun() {
     return SharedPreferences.getInstance().then((prefs) {
       return prefs.getBool('firstRun') ?? true;

@@ -71,4 +71,8 @@ class AuthRepository {
   Future<String?> getAuthToken() {
     return SharedPrefsService.getToken();
   }
+
+  Future<void> logout() async {
+    SharedPrefsService.removeToken();
+  }
 }
