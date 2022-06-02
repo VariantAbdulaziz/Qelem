@@ -22,7 +22,7 @@ class QuestionCard extends StatelessWidget {
                 radius: 40,
               ),
               title: Text(
-                question.heading,
+                question.topic,
                 style: Theme.of(context).textTheme.headline6,
                 textAlign: TextAlign.left,
               ),
