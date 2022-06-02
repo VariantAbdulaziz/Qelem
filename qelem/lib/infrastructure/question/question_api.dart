@@ -13,11 +13,26 @@ class QuestionApi {
   QuestionApi(this._httpClient);
 
   Future<QuestionDto> createQuestion(QuestionFormDto questionFormDto) async {
-    var response =
-        await _httpClient.post('questions', body: questionFormDto.toJson());
+    var response = await _httpClient.post('questions',
+        body: json.encode(questionFormDto.toJson()));
 
     if (response.statusCode == 201) {
       return QuestionDto.fromJson(json.decode(response.body));
+    } else {
+      throw QHttpException(
+          json.decode(response.body)['message'] ?? "Unknown error",
+          response.statusCode);
+    }
+  }
+
+  // get all questions
+  Future<List<QuestionDto>> getAllQuestions() async {
+    var response = await _httpClient.get('questions');
+
+    if (response.statusCode == 200) {
+      return (json.decode(response.body) as List)
+          .map((e) => QuestionDto.fromJson(e))
+          .toList();
     } else {
       throw QHttpException(
           json.decode(response.body)['message'] ?? "Unknown error",
@@ -40,7 +55,7 @@ class QuestionApi {
   Future<QuestionDto> updateQuestion(
       QuestionFormDto questionFormDto, int questionId) async {
     var response = await _httpClient.patch('questions/$questionId',
-        body: questionFormDto.toJson());
+        body: json.encode(questionFormDto.toJson()));
 
     if (response.statusCode == 200) {
       return QuestionDto.fromJson(json.decode(response.body));
@@ -65,7 +80,7 @@ class QuestionApi {
     }
   }
 
-  Future<void> upvoteQuestion(int questionId) async {
+  Future<void> upVoteQuestion(int questionId) async {
     var response = await _httpClient.post('questions/$questionId/upvote');
 
     if (response.statusCode == 200) {
@@ -94,6 +109,18 @@ class QuestionApi {
 
     if (response.statusCode == 200) {
       return;
+    } else {
+      throw QHttpException(
+          json.decode(response.body)['message'] ?? "Unknown error",
+          response.statusCode);
+    }
+  }
+
+  Future<QuestionDto> getQuestionById(int questionId) async {
+    var response = await _httpClient.get('questions/$questionId');
+
+    if (response.statusCode == 200) {
+      return QuestionDto.fromJson(json.decode(response.body));
     } else {
       throw QHttpException(
           json.decode(response.body)['message'] ?? "Unknown error",

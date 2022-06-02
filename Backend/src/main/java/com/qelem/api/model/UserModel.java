@@ -10,11 +10,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.ibm.icu.lang.UCharacter;
+import com.ibm.icu.text.BreakIterator;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -72,5 +76,12 @@ public class UserModel {
 
     public boolean isAdmin() {
         return role.equals("ADMIN");
+    }
+
+    @PrePersist
+    @PreUpdate
+    public void ensureNamesTitleCase() {
+        firstName = UCharacter.toTitleCase(firstName, BreakIterator.getTitleInstance());
+        lastName = UCharacter.toTitleCase(lastName, BreakIterator.getTitleInstance());
     }
 }

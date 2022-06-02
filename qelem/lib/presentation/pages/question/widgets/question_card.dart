@@ -14,16 +14,15 @@ class QuestionCard extends StatelessWidget {
           Container(
             margin: const EdgeInsets.fromLTRB(0, 14, 16, 12),
             child: ListTile(
-              leading: const CircleAvatar(
-                // ignore: todo
-                //TODO Biruk removed the "question.author.profilePicture" since
-                //TODO it's causing a test to fail
-
-                backgroundImage: AssetImage("assets/abebe.jpeg"),
+              leading: CircleAvatar(
+                backgroundImage: Image.network(
+                  question.author.profilePicture,
+                  fit: BoxFit.cover,
+                ).image,
                 radius: 40,
               ),
               title: Text(
-                question.heading,
+                question.topic,
                 style: Theme.of(context).textTheme.headline6,
                 textAlign: TextAlign.left,
               ),

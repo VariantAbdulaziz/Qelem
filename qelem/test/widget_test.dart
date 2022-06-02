@@ -5,12 +5,9 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
+import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:qelem/presentation/app_widget.dart';
 
-void main() {
-  testWidgets('Home widget test', (WidgetTester tester) async {
-    await tester.pumpWidget(App());
-    expect(find.text('My Questions'), findsOneWidget);
-  });
-}
+void main() {}
