@@ -36,12 +36,12 @@ class AuthApi {
   }
 
   Future<UserDto> register({required RegisterFormDto registerForm}) async {
-    var response =
-        await _httpClient.post(_registerUrl, body: registerForm.toJson());
+    var response = await _httpClient.post(_registerUrl,
+        body: json.encode(registerForm.toJson()));
 
     final Map<String, dynamic> data = json.decode(response.body);
 
-    if (response.statusCode == 202) {
+    if (response.statusCode == 201) {
       return UserDto.fromJson(data);
     } else {
       throw QHttpException(
@@ -54,7 +54,7 @@ class AuthApi {
   Future<void> changePassword(
       ChangePasswordFormDto changePasswordFormDto) async {
     var response = await _httpClient.post("profile/change-password",
-        body: changePasswordFormDto.toJson());
+        body: json.encode(changePasswordFormDto.toJson()));
 
     if (response.statusCode == 200) {
       return;
