@@ -7,6 +7,8 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:qelem/infrastructure/auth/auth_api.dart';
 import 'package:qelem/infrastructure/auth/auth_response_dto.dart';
+import 'package:qelem/infrastructure/auth/register_form_dto.dart';
+import 'package:qelem/infrastructure/auth/user_dto.dart';
 import 'package:qelem/infrastructure/common/qelem_http_exception.dart';
 import 'package:qelem/util/my_http_client.dart';
 
@@ -94,6 +96,93 @@ void main() {
       } on QHttpException catch (e) {
         expect(e.statusCode, 400);
         expect(e.message, "Incorrect username or password");
+      }
+    });
+  });
+
+  group("register", () {
+    test("Register with correct input returns User", () async {
+      final response = File(
+              'test/infrastructure/auth/sample_response/successful_register_response.json')
+          .readAsStringSync();
+
+      var expectedResponse = UserDto.fromJson(json.decode(response));
+
+      when(httpClient.post("auth/register",
+          body: jsonEncode({
+            "username": "username",
+            "password": "password",
+            "firstName": "firstName",
+            "lastName": "lastName",
+          }))).thenAnswer((_) async => http.Response(response, 201));
+
+      final authApi = AuthApi(httpClient);
+
+      final result = await authApi.register(
+          registerForm: RegisterFormDto(
+              username: "username",
+              password: "password",
+              firstName: "firstName",
+              lastName: "lastName"));
+
+      expect(result, expectedResponse);
+    });
+
+    test("Register failure throws exception", () async {
+      final response = File(
+              'test/infrastructure/auth/sample_response/unsuccessful_register_response.json')
+          .readAsStringSync();
+
+      when(httpClient.post("auth/register",
+          body: json.encode(
+            {
+              'username': "username",
+              'password': "password",
+              'firstName': "firstName",
+              'lastName': "lastName",
+            },
+          ))).thenAnswer((_) async => http.Response(response, 409));
+
+      final authApi = AuthApi(httpClient);
+
+      expect(
+        authApi.register(
+            registerForm: RegisterFormDto(
+                username: "username",
+                password: "password",
+                firstName: "firstName",
+                lastName: "lastName")),
+        throwsA(isA<QHttpException>()),
+      );
+    });
+
+    test("Register failure throws exception with correct message", () async {
+      final response = File(
+              'test/infrastructure/auth/sample_response/unsuccessful_register_response.json')
+          .readAsStringSync();
+
+      when(httpClient.post("auth/register",
+          body: json.encode(
+            {
+              'username': "username",
+              'password': "password",
+              'firstName': "firstName",
+              'lastName': "lastName",
+            },
+          ))).thenAnswer((_) async => http.Response(response, 409));
+
+      final authApi = AuthApi(httpClient);
+
+      try {
+        await authApi.register(
+            registerForm: RegisterFormDto(
+                username: "username",
+                password: "password",
+                firstName: "firstName",
+                lastName: "lastName"));
+      } on QHttpException catch (e) {
+        expect(e.statusCode, 409);
+        expect(e.message, "User already exists");
       }
     });
   });
