@@ -1,9 +1,11 @@
 import 'package:qelem/domain/answer/answer.dart';
+import 'package:qelem/domain/question/question.dart';
 import 'package:qelem/infrastructure/answer/answer_api.dart';
 import 'package:qelem/infrastructure/answer/answer_dto.dart';
 import 'package:qelem/infrastructure/answer/answer_form_dto.dart';
 import 'package:qelem/infrastructure/answer/answer_model_mapper.dart';
 import 'package:qelem/infrastructure/common/qelem_http_exception.dart';
+import 'package:qelem/infrastructure/question/question_dto.dart';
 import 'package:qelem/util/either.dart';
 import 'package:qelem/util/error.dart';
 
@@ -58,19 +60,21 @@ class AnswerRepository {
     }
   }
 
-  Future<Either<void>> upvoteAnswer(int answerId) async {
+  Future<Either<Answer>> upvoteAnswer(int answerId) async {
     try {
       await answerApi.upvoteAnswer(answerId);
-      return Either(val: null);
+      AnswerDto answerDto = await answerApi.getAnswerById(answerId);
+      return Either(val: answerDto.toAnswer());
     } on QHttpException catch (exception) {
       return Either(error: Error(exception.message));
     }
   }
 
-  Future<Either<void>> downvoteAnswer(int answerId) async {
+  Future<Either<Answer>> downvoteAnswer(int answerId) async {
     try {
       await answerApi.downvoteAnswer(answerId);
-      return Either(val: null);
+      AnswerDto answerDto = await answerApi.getAnswerById(answerId);
+      return Either(val: answerDto.toAnswer());
     } on QHttpException catch (exception) {
       return Either(error: Error(exception.message));
     }
