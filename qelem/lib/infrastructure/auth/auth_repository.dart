@@ -18,8 +18,8 @@ import 'dart:developer' as developer;
 
 class AuthRepository {
   AuthApi authApi;
-
-  AuthRepository(this.authApi);
+  SharedPrefsService sharedPrefsService;
+  AuthRepository(this.authApi, this.sharedPrefsService);
 
   Future<Either<User>> register(
       {required RegistrationForm registerForm}) async {
@@ -42,7 +42,7 @@ class AuthRepository {
       AuthResponseDto response = await authApi.login(
           username: loginForm.userName.value,
           password: loginForm.password.value);
-      SharedPrefsService.addToken(response.jwt);
+      sharedPrefsService.addToken(response.jwt);
       return Either(
           val: LoginReponse(
         jwt: response.jwt,
@@ -65,10 +65,10 @@ class AuthRepository {
   }
 
   Future<String?> getAuthToken() {
-    return SharedPrefsService.getToken();
+    return sharedPrefsService.getToken();
   }
 
   Future<void> logout() async {
-    SharedPrefsService.removeToken();
+    sharedPrefsService.removeToken();
   }
 }
