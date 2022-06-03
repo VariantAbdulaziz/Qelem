@@ -10,9 +10,35 @@ class AnswerApi {
 
   AnswerApi(this._httpClient);
 
+  Future<List<AnswerDto>> getAllAnswers() async {
+    var response = await _httpClient.get('answers');
+
+    if (response.statusCode == 200) {
+      return (json.decode(response.body) as List)
+          .map((e) => AnswerDto.fromJson(e))
+          .toList();
+    } else {
+      throw QHttpException(
+          json.decode(response.body)['message'] ?? "Unknown error",
+          response.statusCode);
+    }
+  }
+
+  Future<AnswerDto> getAnswerById(int answerId) async {
+    var response = await _httpClient.get('answers/$answerId');
+
+    if (response.statusCode == 200) {
+      return AnswerDto.fromJson(json.decode(response.body));
+    } else {
+      throw QHttpException(
+          json.decode(response.body)['message'] ?? "Unknown error",
+          response.statusCode);
+    }
+  }
+
   Future<AnswerDto> createAnswer(AnswerFormDto answerFormDto) async {
-    var response =
-        await _httpClient.post('answers', body: answerFormDto.toJson());
+    var response = await _httpClient.post('answers',
+        body: json.encode(answerFormDto.toJson()));
 
     if (response.statusCode == 201) {
       return AnswerDto.fromJson(json.decode(response.body));
@@ -35,8 +61,7 @@ class AnswerApi {
     }
   }
 
-  Future<AnswerDto> updateAnswer(
-      AnswerFormDto answerFormDto, int answerId, String content) async {
+  Future<AnswerDto> updateAnswer(int answerId, String content) async {
     var response = await _httpClient
         .patch('answers/$answerId', body: {'content': content});
 
