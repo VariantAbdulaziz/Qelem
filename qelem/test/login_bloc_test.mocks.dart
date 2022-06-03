@@ -6,14 +6,13 @@ import 'dart:async' as _i6;
 
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:qelem/data/local/shared_prefs/shared_prefs_service.dart' as _i3;
+import 'package:qelem/domain/auth/change_password_form.dart' as _i11;
 import 'package:qelem/domain/auth/login_form.dart' as _i10;
 import 'package:qelem/domain/auth/login_response.dart' as _i9;
 import 'package:qelem/domain/auth/registration_form.dart' as _i8;
 import 'package:qelem/domain/auth/user.dart' as _i7;
 import 'package:qelem/infrastructure/auth/auth_api.dart' as _i2;
 import 'package:qelem/infrastructure/auth/auth_repository.dart' as _i5;
-import 'package:qelem/infrastructure/auth/change_password_form_dto.dart'
-    as _i11;
 import 'package:qelem/util/either.dart' as _i4;
 
 // ignore_for_file: type=lint
@@ -72,13 +71,14 @@ class MockAuthRepository extends _i1.Mock implements _i5.AuthRepository {
                   _FakeEither_2<_i9.LoginReponse>()))
           as _i6.Future<_i4.Either<_i9.LoginReponse>>);
   @override
-  _i6.Future<void> changePassword(
-          {_i11.ChangePasswordFormDto? changePasswordFormDto}) =>
+  _i6.Future<_i4.Either<void>> changePassword(
+          {_i11.ChangePasswordForm? changePasswordForm}) =>
       (super.noSuchMethod(
-          Invocation.method(#changePassword, [],
-              {#changePasswordFormDto: changePasswordFormDto}),
-          returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
+          Invocation.method(
+              #changePassword, [], {#changePasswordForm: changePasswordForm}),
+          returnValue:
+              Future<_i4.Either<void>>.value(_FakeEither_2<void>())) as _i6
+          .Future<_i4.Either<void>>);
   @override
   _i6.Future<String?> getAuthToken() =>
       (super.noSuchMethod(Invocation.method(#getAuthToken, []),
@@ -86,39 +86,6 @@ class MockAuthRepository extends _i1.Mock implements _i5.AuthRepository {
   @override
   _i6.Future<void> logout() =>
       (super.noSuchMethod(Invocation.method(#logout, []),
-          returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
-}
-
-/// A class which mocks [SharedPrefsService].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockSharedPrefsService extends _i1.Mock
-    implements _i3.SharedPrefsService {
-  MockSharedPrefsService() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  void addToken(String? token) =>
-      super.noSuchMethod(Invocation.method(#addToken, [token]),
-          returnValueForMissingStub: null);
-  @override
-  _i6.Future<String?> getToken() =>
-      (super.noSuchMethod(Invocation.method(#getToken, []),
-          returnValue: Future<String?>.value()) as _i6.Future<String?>);
-  @override
-  _i6.Future<void> removeToken() =>
-      (super.noSuchMethod(Invocation.method(#removeToken, []),
-          returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
-  @override
-  _i6.Future<bool> isFirstRun() =>
-      (super.noSuchMethod(Invocation.method(#isFirstRun, []),
-          returnValue: Future<bool>.value(false)) as _i6.Future<bool>);
-  @override
-  _i6.Future<void> setFirstRun(bool? isFirstRun) =>
-      (super.noSuchMethod(Invocation.method(#setFirstRun, [isFirstRun]),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
 }
