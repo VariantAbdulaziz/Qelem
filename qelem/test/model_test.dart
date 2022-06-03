@@ -17,7 +17,7 @@ void main() {
     expect(user.firstName, "bruk");
     expect(user.lastName, "tedla");
     expect(user.role, "MEMBER");
-    expect(user.profilePicture, "/files/abebe.jpeg");
+    expect(user.profilePictureRelativeUrl, "/files/abebe.jpeg");
   });
 
   test("test question model", () {
