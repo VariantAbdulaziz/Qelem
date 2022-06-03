@@ -2,6 +2,7 @@ package com.qelem.api.controller;
 
 import java.text.ParseException;
 
+import com.qelem.api.file.StorageService;
 import com.qelem.api.model.KelemUserDetail;
 import com.qelem.api.model.RegistrationForm;
 import com.qelem.api.model.UserModel;
@@ -14,6 +15,10 @@ import com.qelem.api.util.JwtUtil;
 import com.qelem.api.util.KelemBadCredentialsException;
 import com.qelem.api.util.UnauthorizedAccess;
 import com.qelem.api.util.UserAlreadyExists;
+import com.talanlabs.avatargenerator.Avatar;
+import com.talanlabs.avatargenerator.GitHubAvatar;
+import java.awt.Color;
+import com.talanlabs.avatargenerator.layers.backgrounds.ColorPaintBackgroundLayer;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,6 +50,7 @@ public class AuthenticationController {
     private final JwtUtil jwtUtil;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final StorageService storageService;
 
     private UserModel loggedInUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -104,6 +110,12 @@ public class AuthenticationController {
             log.error("User with username {} already exists", user.getUsername());
             throw new UserAlreadyExists();
         }
+
+        Avatar avatar = GitHubAvatar.newAvatarBuilder().layers(new ColorPaintBackgroundLayer(Color.WHITE)).padding(20)
+                .build();
+        String avatarFile = storageService.store(avatar.createAsPngBytes(123456L));
+
+        user.setProfilePicture(avatarFile);
 
         log.info("Saving user : {}", user);
         user = userRepository.save(user);
