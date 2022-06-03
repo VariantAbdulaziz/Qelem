@@ -1,4 +1,6 @@
-class Password {
+import 'package:equatable/equatable.dart';
+
+class Password extends Equatable{
   final String value;
 
   Password(this.value) {
@@ -9,4 +11,7 @@ class Password {
       throw Exception('Password must be at least 8 characters');
     }
   }
+
+  @override
+  List<Object?> get props => [value];
 }
