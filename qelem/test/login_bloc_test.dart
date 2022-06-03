@@ -1,73 +1,83 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:qelem/application/login/login_bloc.dart';
 import 'package:qelem/application/login/login_event.dart';
 import 'package:qelem/application/login/login_state.dart';
 import 'package:qelem/domain/auth/login_form.dart';
-import 'package:qelem/data/local/shared_prefs/shared_prefs_service.dart';
+import 'package:qelem/domain/auth/login_response.dart';
 import 'package:qelem/domain/auth/password.dart';
-import 'package:qelem/domain/auth/registration_form.dart';
 import 'package:qelem/domain/auth/user.dart';
 import 'package:qelem/domain/auth/username.dart';
-import 'package:qelem/infrastructure/auth/auth_api.dart';
 import 'package:qelem/infrastructure/auth/auth_repository.dart';
-import 'package:qelem/domain/auth/login_response.dart';
-import 'package:qelem/infrastructure/auth/auth_response_dto.dart';
-import 'package:qelem/infrastructure/auth/user_dto.dart';
-import 'package:qelem/infrastructure/auth/user_model_mapper.dart';
 import 'package:qelem/util/either.dart';
+import 'package:qelem/util/error.dart';
 
-class MockAuthRepository extends Mock implements AuthRepository {}
+import 'login_bloc_test.mocks.dart';
 
-class MockSharedPrefsService extends Mock implements SharedPrefsService {}
-
-class MockAuthApi extends Mock implements AuthApi {}
-
-class MockLoginForm extends Mock implements LoginForm {}
-
-class MockRegistrationForm extends Mock implements RegistrationForm {}
-
-class MockLoginResponse extends Mock implements LoginReponse {}
-
+@GenerateMocks([AuthRepository])
 void main() {
   setUp(() {});
+
   group("LoginBloc", () {
     test("should emit [LoginInitial, LoginLoading, LoginSuccess] when login is successful",
         () async {
-      //arrange
       final mockAuthRepository = MockAuthRepository();
+      final mockUser = User(
+        userName: "username",
+        lastName: "lastName",
+        firstName: "firstName",
+        id: 1,
+        profilePicture: "profilePicture",
+      );
+
+      final loginForm = LoginForm(
+        userName: UserName("username"),
+        password: Password("password"),
+      );
+
+      when(mockAuthRepository.login(loginForm: loginForm))
+          .thenAnswer((_) async => Either(val: LoginReponse(jwt: "jwt", user: mockUser)));
+
       final loginBloc = LoginBloc(mockAuthRepository);
 
-      AuthResponseDto response = const AuthResponseDto(
-          jwt: "jwt",
-          user: UserDto(
-            id: 1,
-            userName: "username",
-            lastName: "lastName",
-            firstName: "firstName",
-            profilePicture: 'profilePicture',
-            role: 'role',
-          ));
+      loginBloc.add(LoginEventLogin(loginForm));
 
-      Future<Either<LoginReponse>> resp() async => Either(
-              val: LoginReponse(
-            jwt: response.jwt,
-            user: response.user.toUser(),
-          ));
-
-      when(mockAuthRepository.login(
-              loginForm: LoginForm(userName: UserName("username"), password: Password("password"))))
-          .thenAnswer((_) async => resp());
-
-      loginBloc.add(LoginEventLogin(
-          LoginForm(userName: UserName("username"), password: Password("password"))));
-
-      //assert
       expectLater(
-          loginBloc,
+          loginBloc.stream,
           emitsInOrder([
-            await LoginStateLoading(),
-            await LoginStateSuccess(response.user.toUser(), response.jwt),
+            const LoginStateLoading(),
+            LoginStateSuccess(mockUser, "jwt"),
+          ]));
+    });
+
+    test("should emit [LoadingLoading, LoginStateFailure] when login fails", () async {
+      final mockAuthRepository = MockAuthRepository();
+      final mockUser = User(
+        userName: "username",
+        lastName: "lastName",
+        firstName: "firstName",
+        id: 1,
+        profilePicture: "profilePicture",
+      );
+
+      final loginForm = LoginForm(
+        userName: UserName("username"),
+        password: Password("password"),
+      );
+
+      when(mockAuthRepository.login(loginForm: loginForm))
+          .thenAnswer((_) async => Either(error: Error("error")));
+
+      final loginBloc = LoginBloc(mockAuthRepository);
+
+      loginBloc.add(LoginEventLogin(loginForm));
+
+      expectLater(
+          loginBloc.stream,
+          emitsInOrder([
+            const LoginStateLoading(),
+            LoginStateFailure(Error("error")),
           ]));
     });
   });
