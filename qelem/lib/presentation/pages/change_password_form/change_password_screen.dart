@@ -180,8 +180,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                               : () async {
                                   if (_formKey.currentState!.validate()) {
                                     var passwordForm = ChangePasswordForm(
-                                      //TODO get the username
-                                      userName: UserName("test"),
                                       currentPassword: Password(
                                           currentPasswordController.text),
                                       newPassword:

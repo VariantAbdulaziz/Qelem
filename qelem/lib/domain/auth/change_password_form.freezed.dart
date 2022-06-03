@@ -16,7 +16,6 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ChangePasswordForm {
-  UserName get userName => throw _privateConstructorUsedError;
   Password get currentPassword => throw _privateConstructorUsedError;
   Password get newPassword => throw _privateConstructorUsedError;
 
@@ -30,8 +29,7 @@ abstract class $ChangePasswordFormCopyWith<$Res> {
   factory $ChangePasswordFormCopyWith(
           ChangePasswordForm value, $Res Function(ChangePasswordForm) then) =
       _$ChangePasswordFormCopyWithImpl<$Res>;
-  $Res call(
-      {UserName userName, Password currentPassword, Password newPassword});
+  $Res call({Password currentPassword, Password newPassword});
 }
 
 /// @nodoc
@@ -45,15 +43,10 @@ class _$ChangePasswordFormCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? userName = freezed,
     Object? currentPassword = freezed,
     Object? newPassword = freezed,
   }) {
     return _then(_value.copyWith(
-      userName: userName == freezed
-          ? _value.userName
-          : userName // ignore: cast_nullable_to_non_nullable
-              as UserName,
       currentPassword: currentPassword == freezed
           ? _value.currentPassword
           : currentPassword // ignore: cast_nullable_to_non_nullable
@@ -73,8 +66,7 @@ abstract class _$$_ChangePasswordFormCopyWith<$Res>
           $Res Function(_$_ChangePasswordForm) then) =
       __$$_ChangePasswordFormCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {UserName userName, Password currentPassword, Password newPassword});
+  $Res call({Password currentPassword, Password newPassword});
 }
 
 /// @nodoc
@@ -90,15 +82,10 @@ class __$$_ChangePasswordFormCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? userName = freezed,
     Object? currentPassword = freezed,
     Object? newPassword = freezed,
   }) {
     return _then(_$_ChangePasswordForm(
-      userName: userName == freezed
-          ? _value.userName
-          : userName // ignore: cast_nullable_to_non_nullable
-              as UserName,
       currentPassword: currentPassword == freezed
           ? _value.currentPassword
           : currentPassword // ignore: cast_nullable_to_non_nullable
@@ -117,12 +104,8 @@ class _$_ChangePasswordForm
     with DiagnosticableTreeMixin
     implements _ChangePasswordForm {
   _$_ChangePasswordForm(
-      {required this.userName,
-      required this.currentPassword,
-      required this.newPassword});
+      {required this.currentPassword, required this.newPassword});
 
-  @override
-  final UserName userName;
   @override
   final Password currentPassword;
   @override
@@ -130,7 +113,7 @@ class _$_ChangePasswordForm
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ChangePasswordForm(userName: $userName, currentPassword: $currentPassword, newPassword: $newPassword)';
+    return 'ChangePasswordForm(currentPassword: $currentPassword, newPassword: $newPassword)';
   }
 
   @override
@@ -138,7 +121,6 @@ class _$_ChangePasswordForm
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'ChangePasswordForm'))
-      ..add(DiagnosticsProperty('userName', userName))
       ..add(DiagnosticsProperty('currentPassword', currentPassword))
       ..add(DiagnosticsProperty('newPassword', newPassword));
   }
@@ -148,7 +130,6 @@ class _$_ChangePasswordForm
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ChangePasswordForm &&
-            const DeepCollectionEquality().equals(other.userName, userName) &&
             const DeepCollectionEquality()
                 .equals(other.currentPassword, currentPassword) &&
             const DeepCollectionEquality()
@@ -158,7 +139,6 @@ class _$_ChangePasswordForm
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(userName),
       const DeepCollectionEquality().hash(currentPassword),
       const DeepCollectionEquality().hash(newPassword));
 
@@ -171,12 +151,9 @@ class _$_ChangePasswordForm
 
 abstract class _ChangePasswordForm implements ChangePasswordForm {
   factory _ChangePasswordForm(
-      {required final UserName userName,
-      required final Password currentPassword,
+      {required final Password currentPassword,
       required final Password newPassword}) = _$_ChangePasswordForm;
 
-  @override
-  UserName get userName => throw _privateConstructorUsedError;
   @override
   Password get currentPassword => throw _privateConstructorUsedError;
   @override
