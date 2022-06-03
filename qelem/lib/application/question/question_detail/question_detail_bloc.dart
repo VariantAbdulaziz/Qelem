@@ -10,15 +10,11 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
 
   QuestionBloc({required this.questionRepository})
       : super(const QuestionState.loading()) {
-    () {
-      emit(const QuestionState.loading());
-    }();
-
     on<QuestionLoadEvent>(
       ((event, emit) async {
+        emit(const QuestionState.loading());
         final question =
             await questionRepository.getQuestionById(event.questionId);
-        emit(const QuestionState.loading());
 
         if (question.hasError) {
           emit(QuestionState.error(question.error!));
@@ -30,14 +26,14 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
 
     on<QuestionDeleteEvent>(
       ((event, emit) async {
+        emit(const QuestionState.loading());
         final question =
             await questionRepository.deleteQuestion(event.questionId);
-        emit(const QuestionState.loading());
 
         if (question.hasError) {
           emit(QuestionState.error(question.error!));
         } else {
-          emit(QuestionState.rollBack());
+          emit(const QuestionState.rollBack());
         }
       }),
     );
@@ -49,7 +45,7 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
       if (question.hasError) {
         emit(QuestionState.error(question.error!));
       } else {
-        emit(QuestionState.downVoted(question.val!));
+        emit(QuestionState.loaded(question.val!));
       }
     });
 
@@ -59,7 +55,7 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
       if (question.hasError) {
         emit(QuestionState.error(question.error!));
       } else {
-        emit(QuestionState.upVoted(question.val!));
+        emit(QuestionState.loaded(question.val!));
       }
     });
   }
