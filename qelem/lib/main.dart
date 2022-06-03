@@ -3,9 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qelem/application/auth/auth_bloc.dart';
 import 'package:qelem/application/auth/auth_state.dart';
 import 'package:qelem/application/question/questions_list/questions_list_bloc.dart';
+import 'package:qelem/infrastructure/question/question_repository.dart';
+import 'package:qelem/data/local/shared_prefs/shared_prefs_service.dart';
 import 'package:qelem/infrastructure/auth/auth_api.dart';
 import 'package:qelem/infrastructure/auth/auth_repository.dart';
-import 'package:qelem/infrastructure/question/question_repository.dart';
+import 'package:qelem/infrastructure/profile/profile_api.dart';
+import 'package:qelem/infrastructure/profile/profile_repository.dart';
 import 'package:qelem/util/my_http_client.dart';
 
 import 'bloc_observer.dart';
@@ -18,14 +21,20 @@ void main() {
     () {
       runApp(
         // Dependecy injection tree
-        RepositoryProvider(
-          create: (context) => MyHttpClient(),
+        MultiRepositoryProvider(
+          providers:[
+            RepositoryProvider(create: (_) => MyHttpClient()),
+            RepositoryProvider(create: (_) => SharedPrefsService()),
+          ],
           child: MultiRepositoryProvider(
             // Data providers
             providers: [
               RepositoryProvider(
                   create: (context) =>
                       AuthApi(RepositoryProvider.of<MyHttpClient>(context))),
+              RepositoryProvider(
+                  create: ((context) => ProfileApi(
+                      RepositoryProvider.of<MyHttpClient>(context)))),
             ],
 
             child: MultiRepositoryProvider(
@@ -33,8 +42,11 @@ void main() {
               providers: [
                 RepositoryProvider(
                   create: (context) =>
-                      AuthRepository(RepositoryProvider.of<AuthApi>(context)),
+                      AuthRepository(RepositoryProvider.of<AuthApi>(context), RepositoryProvider.of<SharedPrefsService>(context)),
                 ),
+                RepositoryProvider(
+                    create: (context) => ProfileRepository(
+                        RepositoryProvider.of<ProfileApi>(context))),
               ],
 
               child: MultiBlocProvider(
@@ -43,7 +55,8 @@ void main() {
                   BlocProvider(
                     create: (context) => AuthBloc(
                         authRepository:
-                            RepositoryProvider.of<AuthRepository>(context)),
+                            RepositoryProvider.of<AuthRepository>(context),
+                        sharedPrefsService: RepositoryProvider.of<SharedPrefsService>(context)),
                   ),
                   BlocProvider(
                     create: (context) => QuestionsListBloc(

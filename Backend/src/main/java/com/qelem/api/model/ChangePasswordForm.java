@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class ChangePasswordForm {
     @NotBlank(message = "The old password can't be blank")
-    private String oldPassword;
+    private String currentPassword;
     @NotBlank(message = "The new password can't be blank")
     private String newPassword;
 }

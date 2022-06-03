@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:qelem/domain/profile/edit_profile_form.dart';
 import 'package:qelem/domain/profile/profile.dart';
 import 'package:qelem/infrastructure/profile/profile_api.dart';
 import 'package:qelem/infrastructure/profile/profile_dto.dart';
@@ -15,10 +16,10 @@ class ProfileRepository {
   ProfileRepository(this.profileApi);
 
   Future<Either<Profile>> updateProfile(
-      {required Profile profile, File? profilePicture}) async {
+      {required EditProfileForm profileForm}) async {
     try {
-      ProfileDto profileDto = await profileApi.updateProfile(
-          profileDto: profile.toProfileDto(), profilePicture: profilePicture);
+      ProfileDto profileDto =
+          await profileApi.updateProfile(profileForm: profileForm);
       return Either(val: profileDto.toProfile());
     } on QHttpException catch (e) {
       return Either(error: Error(e.message));

@@ -4,7 +4,7 @@ class Profile {
   final String firstName;
   final String lastName;
   final String role;
-  final String profilePicture;
+  final String profilePictureUrl;
 
   Profile({
     required this.id,
@@ -12,6 +12,6 @@ class Profile {
     required this.firstName,
     required this.lastName,
     required this.role,
-    required this.profilePicture,
+    required this.profilePictureUrl,
   });
 }
