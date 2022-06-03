@@ -1,7 +1,10 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qelem/application/auth/auth_bloc.dart';
 import 'package:qelem/application/auth/auth_state.dart';
+import 'package:qelem/application/question/question_detail/question_detail_bloc.dart';
 import 'package:qelem/application/question/questions_list/questions_list_bloc.dart';
 import 'package:qelem/infrastructure/auth/auth_api.dart';
 import 'package:qelem/infrastructure/auth/auth_repository.dart';
@@ -49,7 +52,12 @@ void main() {
                     create: (context) => QuestionsListBloc(
                         questionRepository:
                             RepositoryProvider.of<QuestionRepository>(context)),
-                  )
+                  ),
+                  BlocProvider(
+                    create: (context) => QuestionBloc(
+                        questionRepository:
+                            RepositoryProvider.of<QuestionRepository>(context)),
+                  ),
                 ],
                 child: BlocListener<AuthBloc, AuthState>(
                   listener: (context, state) {
