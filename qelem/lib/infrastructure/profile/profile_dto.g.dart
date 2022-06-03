@@ -13,7 +13,7 @@ _$_ProfileDto _$$_ProfileDtoFromJson(Map<String, dynamic> json) =>
       firstName: json['firstName'] as String,
       lastName: json['lastName'] as String,
       role: json['role'] as String,
-      profilePicture: json['profilePicture'] as String,
+      profilePictureRelativeUrl: json['profilePicture'] as String,
     );
 
 Map<String, dynamic> _$$_ProfileDtoToJson(_$_ProfileDto instance) =>
@@ -23,5 +23,5 @@ Map<String, dynamic> _$$_ProfileDtoToJson(_$_ProfileDto instance) =>
       'firstName': instance.firstName,
       'lastName': instance.lastName,
       'role': instance.role,
-      'profilePicture': instance.profilePicture,
+      'profilePicture': instance.profilePictureRelativeUrl,
     };

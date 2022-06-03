@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:qelem/domain/auth/change_password_form.dart';
 import 'package:qelem/domain/auth/login_form.dart';
 import 'package:qelem/domain/auth/login_response.dart';
 import 'package:qelem/domain/auth/registration_form.dart';
@@ -18,8 +19,8 @@ import 'dart:developer' as developer;
 
 class AuthRepository {
   AuthApi authApi;
-
-  AuthRepository(this.authApi);
+  SharedPrefsService sharedPrefsService;
+  AuthRepository(this.authApi, this.sharedPrefsService);
 
   Future<Either<User>> register(
       {required RegistrationForm registerForm}) async {
@@ -42,7 +43,7 @@ class AuthRepository {
       AuthResponseDto response = await authApi.login(
           username: loginForm.userName.value,
           password: loginForm.password.value);
-      SharedPrefsService.addToken(response.jwt);
+      sharedPrefsService.addToken(response.jwt);
       return Either(
           val: LoginReponse(
         jwt: response.jwt,
@@ -59,16 +60,27 @@ class AuthRepository {
     }
   }
 
-  Future<void> changePassword(
-      {required ChangePasswordFormDto changePasswordFormDto}) async {
-    await authApi.changePassword(changePasswordFormDto);
+  Future<Either<void>> changePassword(
+      {required ChangePasswordForm changePasswordForm}) async {
+    try {
+      await authApi.changePassword(changePasswordForm);
+      return Either(val: null);
+    } on QHttpException catch (e) {
+      return Either(error: Error(e.message));
+    } on SocketException catch (_) {
+      return Either(error: Error("Check your internet connection"));
+    } on Exception catch (e) {
+      developer.log("Unexpected error while logging in user in Auth Repo",
+          error: e);
+      return Either(error: Error("Unknown error"));
+    }
   }
 
   Future<String?> getAuthToken() {
-    return SharedPrefsService.getToken();
+    return sharedPrefsService.getToken();
   }
 
   Future<void> logout() async {
-    SharedPrefsService.removeToken();
+    sharedPrefsService.removeToken();
   }
 }

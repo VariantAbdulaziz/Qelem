@@ -108,4 +108,23 @@ public class FileSystemStorageService implements StorageService {
             throw new StorageException("Could not initialize storage", e);
         }
     }
+
+    @Override
+    public String store(byte[] bytes) {
+        try {
+            String filename = UUID.randomUUID().toString();
+            Path destinationFile = this.rootLocation.resolve(
+                    Paths.get(filename))
+                    .normalize().toAbsolutePath();
+            if (!destinationFile.getParent().equals(this.rootLocation.toAbsolutePath())) {
+                // This is a security check
+                throw new StorageException(
+                        "Cannot store file outside current directory.");
+            }
+            Files.write(destinationFile, bytes);
+            return filename;
+        } catch (IOException e) {
+            throw new StorageException("Failed to store file.", e);
+        }
+    }
 }
