@@ -12,8 +12,10 @@ _$_QuestionDto _$$_QuestionDtoFromJson(Map<String, dynamic> json) =>
       topic: json['topic'] as String,
       content: json['content'] as String,
       author: UserDto.fromJson(json['author'] as Map<String, dynamic>),
-      createdAt: json['createdAt'] as String,
-      updatedAt: json['updatedAt'] as String,
+      createdAt:
+          const TimestampConverter().fromJson(json['createdAt'] as String),
+      updatedAt:
+          const TimestampConverter().fromJson(json['updatedAt'] as String),
       upVotes: json['upVotes'] as int,
       downVotes: json['downVotes'] as int,
       userVote: json['userVote'] as int,
@@ -25,8 +27,8 @@ Map<String, dynamic> _$$_QuestionDtoToJson(_$_QuestionDto instance) =>
       'topic': instance.topic,
       'content': instance.content,
       'author': instance.author,
-      'createdAt': instance.createdAt,
-      'updatedAt': instance.updatedAt,
+      'createdAt': const TimestampConverter().toJson(instance.createdAt),
+      'updatedAt': const TimestampConverter().toJson(instance.updatedAt),
       'upVotes': instance.upVotes,
       'downVotes': instance.downVotes,
       'userVote': instance.userVote,

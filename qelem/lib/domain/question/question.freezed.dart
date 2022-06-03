@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'question_dto.dart';
+part of 'question.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,56 +14,46 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-QuestionDto _$QuestionDtoFromJson(Map<String, dynamic> json) {
-  return _QuestionDto.fromJson(json);
-}
-
 /// @nodoc
-mixin _$QuestionDto {
+mixin _$Question {
   int get id => throw _privateConstructorUsedError;
   String get topic => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
-  UserDto get author => throw _privateConstructorUsedError;
-  @TimestampConverter()
-  DateTime get createdAt => throw _privateConstructorUsedError;
-  @TimestampConverter()
-  DateTime get updatedAt => throw _privateConstructorUsedError;
+  User get author => throw _privateConstructorUsedError;
   int get upVotes => throw _privateConstructorUsedError;
   int get downVotes => throw _privateConstructorUsedError;
-  int get userVote => throw _privateConstructorUsedError;
+  Vote get userVote => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
+  DateTime get updatedAt => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $QuestionDtoCopyWith<QuestionDto> get copyWith =>
+  $QuestionCopyWith<Question> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $QuestionDtoCopyWith<$Res> {
-  factory $QuestionDtoCopyWith(
-          QuestionDto value, $Res Function(QuestionDto) then) =
-      _$QuestionDtoCopyWithImpl<$Res>;
+abstract class $QuestionCopyWith<$Res> {
+  factory $QuestionCopyWith(Question value, $Res Function(Question) then) =
+      _$QuestionCopyWithImpl<$Res>;
   $Res call(
       {int id,
       String topic,
       String content,
-      UserDto author,
-      @TimestampConverter() DateTime createdAt,
-      @TimestampConverter() DateTime updatedAt,
+      User author,
       int upVotes,
       int downVotes,
-      int userVote});
-
-  $UserDtoCopyWith<$Res> get author;
+      Vote userVote,
+      DateTime createdAt,
+      DateTime updatedAt});
 }
 
 /// @nodoc
-class _$QuestionDtoCopyWithImpl<$Res> implements $QuestionDtoCopyWith<$Res> {
-  _$QuestionDtoCopyWithImpl(this._value, this._then);
+class _$QuestionCopyWithImpl<$Res> implements $QuestionCopyWith<$Res> {
+  _$QuestionCopyWithImpl(this._value, this._then);
 
-  final QuestionDto _value;
+  final Question _value;
   // ignore: unused_field
-  final $Res Function(QuestionDto) _then;
+  final $Res Function(Question) _then;
 
   @override
   $Res call({
@@ -71,11 +61,11 @@ class _$QuestionDtoCopyWithImpl<$Res> implements $QuestionDtoCopyWith<$Res> {
     Object? topic = freezed,
     Object? content = freezed,
     Object? author = freezed,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
     Object? upVotes = freezed,
     Object? downVotes = freezed,
     Object? userVote = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -93,15 +83,7 @@ class _$QuestionDtoCopyWithImpl<$Res> implements $QuestionDtoCopyWith<$Res> {
       author: author == freezed
           ? _value.author
           : author // ignore: cast_nullable_to_non_nullable
-              as UserDto,
-      createdAt: createdAt == freezed
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updatedAt: updatedAt == freezed
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as User,
       upVotes: upVotes == freezed
           ? _value.upVotes
           : upVotes // ignore: cast_nullable_to_non_nullable
@@ -113,49 +95,46 @@ class _$QuestionDtoCopyWithImpl<$Res> implements $QuestionDtoCopyWith<$Res> {
       userVote: userVote == freezed
           ? _value.userVote
           : userVote // ignore: cast_nullable_to_non_nullable
-              as int,
+              as Vote,
+      createdAt: createdAt == freezed
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: updatedAt == freezed
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
-  }
-
-  @override
-  $UserDtoCopyWith<$Res> get author {
-    return $UserDtoCopyWith<$Res>(_value.author, (value) {
-      return _then(_value.copyWith(author: value));
-    });
   }
 }
 
 /// @nodoc
-abstract class _$$_QuestionDtoCopyWith<$Res>
-    implements $QuestionDtoCopyWith<$Res> {
-  factory _$$_QuestionDtoCopyWith(
-          _$_QuestionDto value, $Res Function(_$_QuestionDto) then) =
-      __$$_QuestionDtoCopyWithImpl<$Res>;
+abstract class _$$_QuestionCopyWith<$Res> implements $QuestionCopyWith<$Res> {
+  factory _$$_QuestionCopyWith(
+          _$_Question value, $Res Function(_$_Question) then) =
+      __$$_QuestionCopyWithImpl<$Res>;
   @override
   $Res call(
       {int id,
       String topic,
       String content,
-      UserDto author,
-      @TimestampConverter() DateTime createdAt,
-      @TimestampConverter() DateTime updatedAt,
+      User author,
       int upVotes,
       int downVotes,
-      int userVote});
-
-  @override
-  $UserDtoCopyWith<$Res> get author;
+      Vote userVote,
+      DateTime createdAt,
+      DateTime updatedAt});
 }
 
 /// @nodoc
-class __$$_QuestionDtoCopyWithImpl<$Res> extends _$QuestionDtoCopyWithImpl<$Res>
-    implements _$$_QuestionDtoCopyWith<$Res> {
-  __$$_QuestionDtoCopyWithImpl(
-      _$_QuestionDto _value, $Res Function(_$_QuestionDto) _then)
-      : super(_value, (v) => _then(v as _$_QuestionDto));
+class __$$_QuestionCopyWithImpl<$Res> extends _$QuestionCopyWithImpl<$Res>
+    implements _$$_QuestionCopyWith<$Res> {
+  __$$_QuestionCopyWithImpl(
+      _$_Question _value, $Res Function(_$_Question) _then)
+      : super(_value, (v) => _then(v as _$_Question));
 
   @override
-  _$_QuestionDto get _value => super._value as _$_QuestionDto;
+  _$_Question get _value => super._value as _$_Question;
 
   @override
   $Res call({
@@ -163,13 +142,13 @@ class __$$_QuestionDtoCopyWithImpl<$Res> extends _$QuestionDtoCopyWithImpl<$Res>
     Object? topic = freezed,
     Object? content = freezed,
     Object? author = freezed,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
     Object? upVotes = freezed,
     Object? downVotes = freezed,
     Object? userVote = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
   }) {
-    return _then(_$_QuestionDto(
+    return _then(_$_Question(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -185,15 +164,7 @@ class __$$_QuestionDtoCopyWithImpl<$Res> extends _$QuestionDtoCopyWithImpl<$Res>
       author: author == freezed
           ? _value.author
           : author // ignore: cast_nullable_to_non_nullable
-              as UserDto,
-      createdAt: createdAt == freezed
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updatedAt: updatedAt == freezed
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as User,
       upVotes: upVotes == freezed
           ? _value.upVotes
           : upVotes // ignore: cast_nullable_to_non_nullable
@@ -205,27 +176,32 @@ class __$$_QuestionDtoCopyWithImpl<$Res> extends _$QuestionDtoCopyWithImpl<$Res>
       userVote: userVote == freezed
           ? _value.userVote
           : userVote // ignore: cast_nullable_to_non_nullable
-              as int,
+              as Vote,
+      createdAt: createdAt == freezed
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: updatedAt == freezed
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$_QuestionDto with DiagnosticableTreeMixin implements _QuestionDto {
-  const _$_QuestionDto(
+
+class _$_Question implements _Question {
+  const _$_Question(
       {required this.id,
       required this.topic,
       required this.content,
       required this.author,
-      @TimestampConverter() required this.createdAt,
-      @TimestampConverter() required this.updatedAt,
       required this.upVotes,
       required this.downVotes,
-      required this.userVote});
-
-  factory _$_QuestionDto.fromJson(Map<String, dynamic> json) =>
-      _$$_QuestionDtoFromJson(json);
+      required this.userVote,
+      required this.createdAt,
+      required this.updatedAt});
 
   @override
   final int id;
@@ -234,58 +210,39 @@ class _$_QuestionDto with DiagnosticableTreeMixin implements _QuestionDto {
   @override
   final String content;
   @override
-  final UserDto author;
-  @override
-  @TimestampConverter()
-  final DateTime createdAt;
-  @override
-  @TimestampConverter()
-  final DateTime updatedAt;
+  final User author;
   @override
   final int upVotes;
   @override
   final int downVotes;
   @override
-  final int userVote;
+  final Vote userVote;
+  @override
+  final DateTime createdAt;
+  @override
+  final DateTime updatedAt;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'QuestionDto(id: $id, topic: $topic, content: $content, author: $author, createdAt: $createdAt, updatedAt: $updatedAt, upVotes: $upVotes, downVotes: $downVotes, userVote: $userVote)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'QuestionDto'))
-      ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('topic', topic))
-      ..add(DiagnosticsProperty('content', content))
-      ..add(DiagnosticsProperty('author', author))
-      ..add(DiagnosticsProperty('createdAt', createdAt))
-      ..add(DiagnosticsProperty('updatedAt', updatedAt))
-      ..add(DiagnosticsProperty('upVotes', upVotes))
-      ..add(DiagnosticsProperty('downVotes', downVotes))
-      ..add(DiagnosticsProperty('userVote', userVote));
+  String toString() {
+    return 'Question(id: $id, topic: $topic, content: $content, author: $author, upVotes: $upVotes, downVotes: $downVotes, userVote: $userVote, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_QuestionDto &&
+            other is _$_Question &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.topic, topic) &&
             const DeepCollectionEquality().equals(other.content, content) &&
             const DeepCollectionEquality().equals(other.author, author) &&
-            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
-            const DeepCollectionEquality().equals(other.updatedAt, updatedAt) &&
             const DeepCollectionEquality().equals(other.upVotes, upVotes) &&
             const DeepCollectionEquality().equals(other.downVotes, downVotes) &&
-            const DeepCollectionEquality().equals(other.userVote, userVote));
+            const DeepCollectionEquality().equals(other.userVote, userVote) &&
+            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
+            const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -293,37 +250,29 @@ class _$_QuestionDto with DiagnosticableTreeMixin implements _QuestionDto {
       const DeepCollectionEquality().hash(topic),
       const DeepCollectionEquality().hash(content),
       const DeepCollectionEquality().hash(author),
-      const DeepCollectionEquality().hash(createdAt),
-      const DeepCollectionEquality().hash(updatedAt),
       const DeepCollectionEquality().hash(upVotes),
       const DeepCollectionEquality().hash(downVotes),
-      const DeepCollectionEquality().hash(userVote));
+      const DeepCollectionEquality().hash(userVote),
+      const DeepCollectionEquality().hash(createdAt),
+      const DeepCollectionEquality().hash(updatedAt));
 
   @JsonKey(ignore: true)
   @override
-  _$$_QuestionDtoCopyWith<_$_QuestionDto> get copyWith =>
-      __$$_QuestionDtoCopyWithImpl<_$_QuestionDto>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_QuestionDtoToJson(this);
-  }
+  _$$_QuestionCopyWith<_$_Question> get copyWith =>
+      __$$_QuestionCopyWithImpl<_$_Question>(this, _$identity);
 }
 
-abstract class _QuestionDto implements QuestionDto {
-  const factory _QuestionDto(
+abstract class _Question implements Question {
+  const factory _Question(
       {required final int id,
       required final String topic,
       required final String content,
-      required final UserDto author,
-      @TimestampConverter() required final DateTime createdAt,
-      @TimestampConverter() required final DateTime updatedAt,
+      required final User author,
       required final int upVotes,
       required final int downVotes,
-      required final int userVote}) = _$_QuestionDto;
-
-  factory _QuestionDto.fromJson(Map<String, dynamic> json) =
-      _$_QuestionDto.fromJson;
+      required final Vote userVote,
+      required final DateTime createdAt,
+      required final DateTime updatedAt}) = _$_Question;
 
   @override
   int get id => throw _privateConstructorUsedError;
@@ -332,21 +281,19 @@ abstract class _QuestionDto implements QuestionDto {
   @override
   String get content => throw _privateConstructorUsedError;
   @override
-  UserDto get author => throw _privateConstructorUsedError;
-  @override
-  @TimestampConverter()
-  DateTime get createdAt => throw _privateConstructorUsedError;
-  @override
-  @TimestampConverter()
-  DateTime get updatedAt => throw _privateConstructorUsedError;
+  User get author => throw _privateConstructorUsedError;
   @override
   int get upVotes => throw _privateConstructorUsedError;
   @override
   int get downVotes => throw _privateConstructorUsedError;
   @override
-  int get userVote => throw _privateConstructorUsedError;
+  Vote get userVote => throw _privateConstructorUsedError;
+  @override
+  DateTime get createdAt => throw _privateConstructorUsedError;
+  @override
+  DateTime get updatedAt => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$$_QuestionDtoCopyWith<_$_QuestionDto> get copyWith =>
+  _$$_QuestionCopyWith<_$_Question> get copyWith =>
       throw _privateConstructorUsedError;
 }
