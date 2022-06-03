@@ -12,22 +12,19 @@ class ChangePasswordBloc
     isAuth = AuthRepository.loggedIn() as bool;
   }
 
-  //TODO handle if not logged in
   ChangePasswordBloc(this._authRepository)
       : super(const ChangePasswordState.initial()) {
-    if (AuthRepository.loggedIn() as bool) {
-      on<ChangePasswordEvent>(((event, emit) async {
-        emit(const ChangePasswordState.loading());
+    on<ChangePasswordEvent>(((event, emit) async {
+      emit(const ChangePasswordState.loading());
 
-        var result = await _authRepository.changePassword(
-            changePasswordForm: event.passwordForm);
+      var result = await _authRepository.changePassword(
+          changePasswordForm: event.passwordForm);
 
-        if (result.hasError) {
-          emit(ChangePasswordStateFailure(result.error!));
-        } else {
-          emit(const ChangePasswordStateSuccess());
-        }
-      }));
-    }
+      if (result.hasError) {
+        emit(ChangePasswordStateFailure(result.error!));
+      } else {
+        emit(const ChangePasswordStateSuccess());
+      }
+    }));
   }
 }
