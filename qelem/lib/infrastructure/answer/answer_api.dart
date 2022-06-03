@@ -10,6 +10,20 @@ class AnswerApi {
 
   AnswerApi(this._httpClient);
 
+  Future<List<AnswerDto>> getAnswerByQuestionId(int questionId) async {
+    final response = await _httpClient.get("questions/$questionId/answers");
+
+    if (response.statusCode == 200) {
+      return (json.decode(response.body) as List)
+          .map((e) => AnswerDto.fromJson(e))
+          .toList();
+    } else {
+      throw QHttpException(
+          json.decode(response.body)["message"] ?? "Unknown error",
+          response.statusCode);
+    }
+  }
+
   Future<List<AnswerDto>> getAllAnswers() async {
     var response = await _httpClient.get('answers');
 

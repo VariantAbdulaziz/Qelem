@@ -179,4 +179,21 @@ class AnswerRepository {
       return Either(error: Error("Unknown error"));
     }
   }
+
+  Future<Either<List<Answer>>> getAnswersByQuestionId(int questionId) async {
+    try {
+      List<AnswerDto> answers =
+          await answerApi.getAnswerByQuestionId(questionId);
+      return Either(val: answers.map((answer) => answer.toAnswer()).toList());
+    } on QHttpException catch (exception) {
+      return Either(error: Error(exception.message));
+    } on SocketException catch (_) {
+      return Either(error: Error("Check your internet connection"));
+    } on Exception catch (e) {
+      developer.log(
+          "Unexpected error while fetching answers by question Id $questionId in Answer Repo",
+          error: e);
+      return Either(error: Error("Unknown error"));
+    }
+  }
 }
