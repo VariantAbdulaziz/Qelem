@@ -387,6 +387,8 @@ abstract class _$$QuestionUpVoteEventCopyWith<$Res> {
           $Res Function(_$QuestionUpVoteEvent) then) =
       __$$QuestionUpVoteEventCopyWithImpl<$Res>;
   $Res call({Question question});
+
+  $QuestionCopyWith<$Res> get question;
 }
 
 /// @nodoc
@@ -410,6 +412,13 @@ class __$$QuestionUpVoteEventCopyWithImpl<$Res>
           : question // ignore: cast_nullable_to_non_nullable
               as Question,
     ));
+  }
+
+  @override
+  $QuestionCopyWith<$Res> get question {
+    return $QuestionCopyWith<$Res>(_value.question, (value) {
+      return _then(_value.copyWith(question: value));
+    });
   }
 }
 
@@ -535,6 +544,8 @@ abstract class _$$QuestionDownVoteEventCopyWith<$Res> {
           $Res Function(_$QuestionDownVoteEvent) then) =
       __$$QuestionDownVoteEventCopyWithImpl<$Res>;
   $Res call({Question question});
+
+  $QuestionCopyWith<$Res> get question;
 }
 
 /// @nodoc
@@ -558,6 +569,13 @@ class __$$QuestionDownVoteEventCopyWithImpl<$Res>
           : question // ignore: cast_nullable_to_non_nullable
               as Question,
     ));
+  }
+
+  @override
+  $QuestionCopyWith<$Res> get question {
+    return $QuestionCopyWith<$Res>(_value.question, (value) {
+      return _then(_value.copyWith(question: value));
+    });
   }
 }
 
