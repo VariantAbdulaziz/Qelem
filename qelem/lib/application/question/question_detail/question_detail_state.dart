@@ -10,6 +10,4 @@ abstract class QuestionState with _$QuestionState {
   const factory QuestionState.rollBack() = _QuestionRollBack;
   const factory QuestionState.error(Error error) = _QuestionError;
   const factory QuestionState.loaded(Question question) = _QuestionFetched;
-  const factory QuestionState.upVoted(Question question) = _QuestionUpVoted;
-  const factory QuestionState.downVoted(Question question) = _QuestionDownVoted;
 }

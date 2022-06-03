@@ -22,8 +22,6 @@ mixin _$QuestionState {
     required TResult Function() rollBack,
     required TResult Function(Error error) error,
     required TResult Function(Question question) loaded,
-    required TResult Function(Question question) upVoted,
-    required TResult Function(Question question) downVoted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -32,8 +30,6 @@ mixin _$QuestionState {
     TResult Function()? rollBack,
     TResult Function(Error error)? error,
     TResult Function(Question question)? loaded,
-    TResult Function(Question question)? upVoted,
-    TResult Function(Question question)? downVoted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -42,8 +38,6 @@ mixin _$QuestionState {
     TResult Function()? rollBack,
     TResult Function(Error error)? error,
     TResult Function(Question question)? loaded,
-    TResult Function(Question question)? upVoted,
-    TResult Function(Question question)? downVoted,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -53,8 +47,6 @@ mixin _$QuestionState {
     required TResult Function(_QuestionRollBack value) rollBack,
     required TResult Function(_QuestionError value) error,
     required TResult Function(_QuestionFetched value) loaded,
-    required TResult Function(_QuestionUpVoted value) upVoted,
-    required TResult Function(_QuestionDownVoted value) downVoted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,8 +55,6 @@ mixin _$QuestionState {
     TResult Function(_QuestionRollBack value)? rollBack,
     TResult Function(_QuestionError value)? error,
     TResult Function(_QuestionFetched value)? loaded,
-    TResult Function(_QuestionUpVoted value)? upVoted,
-    TResult Function(_QuestionDownVoted value)? downVoted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -73,8 +63,6 @@ mixin _$QuestionState {
     TResult Function(_QuestionRollBack value)? rollBack,
     TResult Function(_QuestionError value)? error,
     TResult Function(_QuestionFetched value)? loaded,
-    TResult Function(_QuestionUpVoted value)? upVoted,
-    TResult Function(_QuestionDownVoted value)? downVoted,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -142,8 +130,6 @@ class _$_QuestionLoading implements _QuestionLoading {
     required TResult Function() rollBack,
     required TResult Function(Error error) error,
     required TResult Function(Question question) loaded,
-    required TResult Function(Question question) upVoted,
-    required TResult Function(Question question) downVoted,
   }) {
     return loading();
   }
@@ -155,8 +141,6 @@ class _$_QuestionLoading implements _QuestionLoading {
     TResult Function()? rollBack,
     TResult Function(Error error)? error,
     TResult Function(Question question)? loaded,
-    TResult Function(Question question)? upVoted,
-    TResult Function(Question question)? downVoted,
   }) {
     return loading?.call();
   }
@@ -168,8 +152,6 @@ class _$_QuestionLoading implements _QuestionLoading {
     TResult Function()? rollBack,
     TResult Function(Error error)? error,
     TResult Function(Question question)? loaded,
-    TResult Function(Question question)? upVoted,
-    TResult Function(Question question)? downVoted,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -185,8 +167,6 @@ class _$_QuestionLoading implements _QuestionLoading {
     required TResult Function(_QuestionRollBack value) rollBack,
     required TResult Function(_QuestionError value) error,
     required TResult Function(_QuestionFetched value) loaded,
-    required TResult Function(_QuestionUpVoted value) upVoted,
-    required TResult Function(_QuestionDownVoted value) downVoted,
   }) {
     return loading(this);
   }
@@ -198,8 +178,6 @@ class _$_QuestionLoading implements _QuestionLoading {
     TResult Function(_QuestionRollBack value)? rollBack,
     TResult Function(_QuestionError value)? error,
     TResult Function(_QuestionFetched value)? loaded,
-    TResult Function(_QuestionUpVoted value)? upVoted,
-    TResult Function(_QuestionDownVoted value)? downVoted,
   }) {
     return loading?.call(this);
   }
@@ -211,8 +189,6 @@ class _$_QuestionLoading implements _QuestionLoading {
     TResult Function(_QuestionRollBack value)? rollBack,
     TResult Function(_QuestionError value)? error,
     TResult Function(_QuestionFetched value)? loaded,
-    TResult Function(_QuestionUpVoted value)? upVoted,
-    TResult Function(_QuestionDownVoted value)? downVoted,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -271,8 +247,6 @@ class _$_QuestionRollBack implements _QuestionRollBack {
     required TResult Function() rollBack,
     required TResult Function(Error error) error,
     required TResult Function(Question question) loaded,
-    required TResult Function(Question question) upVoted,
-    required TResult Function(Question question) downVoted,
   }) {
     return rollBack();
   }
@@ -284,8 +258,6 @@ class _$_QuestionRollBack implements _QuestionRollBack {
     TResult Function()? rollBack,
     TResult Function(Error error)? error,
     TResult Function(Question question)? loaded,
-    TResult Function(Question question)? upVoted,
-    TResult Function(Question question)? downVoted,
   }) {
     return rollBack?.call();
   }
@@ -297,8 +269,6 @@ class _$_QuestionRollBack implements _QuestionRollBack {
     TResult Function()? rollBack,
     TResult Function(Error error)? error,
     TResult Function(Question question)? loaded,
-    TResult Function(Question question)? upVoted,
-    TResult Function(Question question)? downVoted,
     required TResult orElse(),
   }) {
     if (rollBack != null) {
@@ -314,8 +284,6 @@ class _$_QuestionRollBack implements _QuestionRollBack {
     required TResult Function(_QuestionRollBack value) rollBack,
     required TResult Function(_QuestionError value) error,
     required TResult Function(_QuestionFetched value) loaded,
-    required TResult Function(_QuestionUpVoted value) upVoted,
-    required TResult Function(_QuestionDownVoted value) downVoted,
   }) {
     return rollBack(this);
   }
@@ -327,8 +295,6 @@ class _$_QuestionRollBack implements _QuestionRollBack {
     TResult Function(_QuestionRollBack value)? rollBack,
     TResult Function(_QuestionError value)? error,
     TResult Function(_QuestionFetched value)? loaded,
-    TResult Function(_QuestionUpVoted value)? upVoted,
-    TResult Function(_QuestionDownVoted value)? downVoted,
   }) {
     return rollBack?.call(this);
   }
@@ -340,8 +306,6 @@ class _$_QuestionRollBack implements _QuestionRollBack {
     TResult Function(_QuestionRollBack value)? rollBack,
     TResult Function(_QuestionError value)? error,
     TResult Function(_QuestionFetched value)? loaded,
-    TResult Function(_QuestionUpVoted value)? upVoted,
-    TResult Function(_QuestionDownVoted value)? downVoted,
     required TResult orElse(),
   }) {
     if (rollBack != null) {
@@ -424,8 +388,6 @@ class _$_QuestionError implements _QuestionError {
     required TResult Function() rollBack,
     required TResult Function(Error error) error,
     required TResult Function(Question question) loaded,
-    required TResult Function(Question question) upVoted,
-    required TResult Function(Question question) downVoted,
   }) {
     return error(this.error);
   }
@@ -437,8 +399,6 @@ class _$_QuestionError implements _QuestionError {
     TResult Function()? rollBack,
     TResult Function(Error error)? error,
     TResult Function(Question question)? loaded,
-    TResult Function(Question question)? upVoted,
-    TResult Function(Question question)? downVoted,
   }) {
     return error?.call(this.error);
   }
@@ -450,8 +410,6 @@ class _$_QuestionError implements _QuestionError {
     TResult Function()? rollBack,
     TResult Function(Error error)? error,
     TResult Function(Question question)? loaded,
-    TResult Function(Question question)? upVoted,
-    TResult Function(Question question)? downVoted,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -467,8 +425,6 @@ class _$_QuestionError implements _QuestionError {
     required TResult Function(_QuestionRollBack value) rollBack,
     required TResult Function(_QuestionError value) error,
     required TResult Function(_QuestionFetched value) loaded,
-    required TResult Function(_QuestionUpVoted value) upVoted,
-    required TResult Function(_QuestionDownVoted value) downVoted,
   }) {
     return error(this);
   }
@@ -480,8 +436,6 @@ class _$_QuestionError implements _QuestionError {
     TResult Function(_QuestionRollBack value)? rollBack,
     TResult Function(_QuestionError value)? error,
     TResult Function(_QuestionFetched value)? loaded,
-    TResult Function(_QuestionUpVoted value)? upVoted,
-    TResult Function(_QuestionDownVoted value)? downVoted,
   }) {
     return error?.call(this);
   }
@@ -493,8 +447,6 @@ class _$_QuestionError implements _QuestionError {
     TResult Function(_QuestionRollBack value)? rollBack,
     TResult Function(_QuestionError value)? error,
     TResult Function(_QuestionFetched value)? loaded,
-    TResult Function(_QuestionUpVoted value)? upVoted,
-    TResult Function(_QuestionDownVoted value)? downVoted,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -591,8 +543,6 @@ class _$_QuestionFetched implements _QuestionFetched {
     required TResult Function() rollBack,
     required TResult Function(Error error) error,
     required TResult Function(Question question) loaded,
-    required TResult Function(Question question) upVoted,
-    required TResult Function(Question question) downVoted,
   }) {
     return loaded(question);
   }
@@ -604,8 +554,6 @@ class _$_QuestionFetched implements _QuestionFetched {
     TResult Function()? rollBack,
     TResult Function(Error error)? error,
     TResult Function(Question question)? loaded,
-    TResult Function(Question question)? upVoted,
-    TResult Function(Question question)? downVoted,
   }) {
     return loaded?.call(question);
   }
@@ -617,8 +565,6 @@ class _$_QuestionFetched implements _QuestionFetched {
     TResult Function()? rollBack,
     TResult Function(Error error)? error,
     TResult Function(Question question)? loaded,
-    TResult Function(Question question)? upVoted,
-    TResult Function(Question question)? downVoted,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -634,8 +580,6 @@ class _$_QuestionFetched implements _QuestionFetched {
     required TResult Function(_QuestionRollBack value) rollBack,
     required TResult Function(_QuestionError value) error,
     required TResult Function(_QuestionFetched value) loaded,
-    required TResult Function(_QuestionUpVoted value) upVoted,
-    required TResult Function(_QuestionDownVoted value) downVoted,
   }) {
     return loaded(this);
   }
@@ -647,8 +591,6 @@ class _$_QuestionFetched implements _QuestionFetched {
     TResult Function(_QuestionRollBack value)? rollBack,
     TResult Function(_QuestionError value)? error,
     TResult Function(_QuestionFetched value)? loaded,
-    TResult Function(_QuestionUpVoted value)? upVoted,
-    TResult Function(_QuestionDownVoted value)? downVoted,
   }) {
     return loaded?.call(this);
   }
@@ -660,8 +602,6 @@ class _$_QuestionFetched implements _QuestionFetched {
     TResult Function(_QuestionRollBack value)? rollBack,
     TResult Function(_QuestionError value)? error,
     TResult Function(_QuestionFetched value)? loaded,
-    TResult Function(_QuestionUpVoted value)? upVoted,
-    TResult Function(_QuestionDownVoted value)? downVoted,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -677,341 +617,5 @@ abstract class _QuestionFetched implements QuestionState {
   Question get question => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$_QuestionFetchedCopyWith<_$_QuestionFetched> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_QuestionUpVotedCopyWith<$Res> {
-  factory _$$_QuestionUpVotedCopyWith(
-          _$_QuestionUpVoted value, $Res Function(_$_QuestionUpVoted) then) =
-      __$$_QuestionUpVotedCopyWithImpl<$Res>;
-  $Res call({Question question});
-
-  $QuestionCopyWith<$Res> get question;
-}
-
-/// @nodoc
-class __$$_QuestionUpVotedCopyWithImpl<$Res>
-    extends _$QuestionStateCopyWithImpl<$Res>
-    implements _$$_QuestionUpVotedCopyWith<$Res> {
-  __$$_QuestionUpVotedCopyWithImpl(
-      _$_QuestionUpVoted _value, $Res Function(_$_QuestionUpVoted) _then)
-      : super(_value, (v) => _then(v as _$_QuestionUpVoted));
-
-  @override
-  _$_QuestionUpVoted get _value => super._value as _$_QuestionUpVoted;
-
-  @override
-  $Res call({
-    Object? question = freezed,
-  }) {
-    return _then(_$_QuestionUpVoted(
-      question == freezed
-          ? _value.question
-          : question // ignore: cast_nullable_to_non_nullable
-              as Question,
-    ));
-  }
-
-  @override
-  $QuestionCopyWith<$Res> get question {
-    return $QuestionCopyWith<$Res>(_value.question, (value) {
-      return _then(_value.copyWith(question: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$_QuestionUpVoted implements _QuestionUpVoted {
-  const _$_QuestionUpVoted(this.question);
-
-  @override
-  final Question question;
-
-  @override
-  String toString() {
-    return 'QuestionState.upVoted(question: $question)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_QuestionUpVoted &&
-            const DeepCollectionEquality().equals(other.question, question));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(question));
-
-  @JsonKey(ignore: true)
-  @override
-  _$$_QuestionUpVotedCopyWith<_$_QuestionUpVoted> get copyWith =>
-      __$$_QuestionUpVotedCopyWithImpl<_$_QuestionUpVoted>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function() rollBack,
-    required TResult Function(Error error) error,
-    required TResult Function(Question question) loaded,
-    required TResult Function(Question question) upVoted,
-    required TResult Function(Question question) downVoted,
-  }) {
-    return upVoted(question);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function()? rollBack,
-    TResult Function(Error error)? error,
-    TResult Function(Question question)? loaded,
-    TResult Function(Question question)? upVoted,
-    TResult Function(Question question)? downVoted,
-  }) {
-    return upVoted?.call(question);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function()? rollBack,
-    TResult Function(Error error)? error,
-    TResult Function(Question question)? loaded,
-    TResult Function(Question question)? upVoted,
-    TResult Function(Question question)? downVoted,
-    required TResult orElse(),
-  }) {
-    if (upVoted != null) {
-      return upVoted(question);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_QuestionLoading value) loading,
-    required TResult Function(_QuestionRollBack value) rollBack,
-    required TResult Function(_QuestionError value) error,
-    required TResult Function(_QuestionFetched value) loaded,
-    required TResult Function(_QuestionUpVoted value) upVoted,
-    required TResult Function(_QuestionDownVoted value) downVoted,
-  }) {
-    return upVoted(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_QuestionLoading value)? loading,
-    TResult Function(_QuestionRollBack value)? rollBack,
-    TResult Function(_QuestionError value)? error,
-    TResult Function(_QuestionFetched value)? loaded,
-    TResult Function(_QuestionUpVoted value)? upVoted,
-    TResult Function(_QuestionDownVoted value)? downVoted,
-  }) {
-    return upVoted?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_QuestionLoading value)? loading,
-    TResult Function(_QuestionRollBack value)? rollBack,
-    TResult Function(_QuestionError value)? error,
-    TResult Function(_QuestionFetched value)? loaded,
-    TResult Function(_QuestionUpVoted value)? upVoted,
-    TResult Function(_QuestionDownVoted value)? downVoted,
-    required TResult orElse(),
-  }) {
-    if (upVoted != null) {
-      return upVoted(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _QuestionUpVoted implements QuestionState {
-  const factory _QuestionUpVoted(final Question question) = _$_QuestionUpVoted;
-
-  Question get question => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  _$$_QuestionUpVotedCopyWith<_$_QuestionUpVoted> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_QuestionDownVotedCopyWith<$Res> {
-  factory _$$_QuestionDownVotedCopyWith(_$_QuestionDownVoted value,
-          $Res Function(_$_QuestionDownVoted) then) =
-      __$$_QuestionDownVotedCopyWithImpl<$Res>;
-  $Res call({Question question});
-
-  $QuestionCopyWith<$Res> get question;
-}
-
-/// @nodoc
-class __$$_QuestionDownVotedCopyWithImpl<$Res>
-    extends _$QuestionStateCopyWithImpl<$Res>
-    implements _$$_QuestionDownVotedCopyWith<$Res> {
-  __$$_QuestionDownVotedCopyWithImpl(
-      _$_QuestionDownVoted _value, $Res Function(_$_QuestionDownVoted) _then)
-      : super(_value, (v) => _then(v as _$_QuestionDownVoted));
-
-  @override
-  _$_QuestionDownVoted get _value => super._value as _$_QuestionDownVoted;
-
-  @override
-  $Res call({
-    Object? question = freezed,
-  }) {
-    return _then(_$_QuestionDownVoted(
-      question == freezed
-          ? _value.question
-          : question // ignore: cast_nullable_to_non_nullable
-              as Question,
-    ));
-  }
-
-  @override
-  $QuestionCopyWith<$Res> get question {
-    return $QuestionCopyWith<$Res>(_value.question, (value) {
-      return _then(_value.copyWith(question: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$_QuestionDownVoted implements _QuestionDownVoted {
-  const _$_QuestionDownVoted(this.question);
-
-  @override
-  final Question question;
-
-  @override
-  String toString() {
-    return 'QuestionState.downVoted(question: $question)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_QuestionDownVoted &&
-            const DeepCollectionEquality().equals(other.question, question));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(question));
-
-  @JsonKey(ignore: true)
-  @override
-  _$$_QuestionDownVotedCopyWith<_$_QuestionDownVoted> get copyWith =>
-      __$$_QuestionDownVotedCopyWithImpl<_$_QuestionDownVoted>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function() rollBack,
-    required TResult Function(Error error) error,
-    required TResult Function(Question question) loaded,
-    required TResult Function(Question question) upVoted,
-    required TResult Function(Question question) downVoted,
-  }) {
-    return downVoted(question);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function()? rollBack,
-    TResult Function(Error error)? error,
-    TResult Function(Question question)? loaded,
-    TResult Function(Question question)? upVoted,
-    TResult Function(Question question)? downVoted,
-  }) {
-    return downVoted?.call(question);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function()? rollBack,
-    TResult Function(Error error)? error,
-    TResult Function(Question question)? loaded,
-    TResult Function(Question question)? upVoted,
-    TResult Function(Question question)? downVoted,
-    required TResult orElse(),
-  }) {
-    if (downVoted != null) {
-      return downVoted(question);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_QuestionLoading value) loading,
-    required TResult Function(_QuestionRollBack value) rollBack,
-    required TResult Function(_QuestionError value) error,
-    required TResult Function(_QuestionFetched value) loaded,
-    required TResult Function(_QuestionUpVoted value) upVoted,
-    required TResult Function(_QuestionDownVoted value) downVoted,
-  }) {
-    return downVoted(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_QuestionLoading value)? loading,
-    TResult Function(_QuestionRollBack value)? rollBack,
-    TResult Function(_QuestionError value)? error,
-    TResult Function(_QuestionFetched value)? loaded,
-    TResult Function(_QuestionUpVoted value)? upVoted,
-    TResult Function(_QuestionDownVoted value)? downVoted,
-  }) {
-    return downVoted?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_QuestionLoading value)? loading,
-    TResult Function(_QuestionRollBack value)? rollBack,
-    TResult Function(_QuestionError value)? error,
-    TResult Function(_QuestionFetched value)? loaded,
-    TResult Function(_QuestionUpVoted value)? upVoted,
-    TResult Function(_QuestionDownVoted value)? downVoted,
-    required TResult orElse(),
-  }) {
-    if (downVoted != null) {
-      return downVoted(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _QuestionDownVoted implements QuestionState {
-  const factory _QuestionDownVoted(final Question question) =
-      _$_QuestionDownVoted;
-
-  Question get question => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  _$$_QuestionDownVotedCopyWith<_$_QuestionDownVoted> get copyWith =>
       throw _privateConstructorUsedError;
 }
