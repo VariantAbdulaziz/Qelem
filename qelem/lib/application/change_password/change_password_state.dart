@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:qelem/util/error.dart';
 
 part 'change_password_state.freezed.dart';
 

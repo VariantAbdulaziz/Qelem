@@ -16,22 +16,20 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ChangePasswordEvent {
-  ChangePasswordFormDto get passwordFormDto =>
-      throw _privateConstructorUsedError;
+  ChangePasswordForm get passwordForm => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ChangePasswordFormDto passwordFormDto)
-        changePassword,
+    required TResult Function(ChangePasswordForm passwordForm) changePassword,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(ChangePasswordFormDto passwordFormDto)? changePassword,
+    TResult Function(ChangePasswordForm passwordForm)? changePassword,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ChangePasswordFormDto passwordFormDto)? changePassword,
+    TResult Function(ChangePasswordForm passwordForm)? changePassword,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -63,9 +61,9 @@ abstract class $ChangePasswordEventCopyWith<$Res> {
   factory $ChangePasswordEventCopyWith(
           ChangePasswordEvent value, $Res Function(ChangePasswordEvent) then) =
       _$ChangePasswordEventCopyWithImpl<$Res>;
-  $Res call({ChangePasswordFormDto passwordFormDto});
+  $Res call({ChangePasswordForm passwordForm});
 
-  $ChangePasswordFormDtoCopyWith<$Res> get passwordFormDto;
+  $ChangePasswordFormCopyWith<$Res> get passwordForm;
 }
 
 /// @nodoc
@@ -79,21 +77,20 @@ class _$ChangePasswordEventCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? passwordFormDto = freezed,
+    Object? passwordForm = freezed,
   }) {
     return _then(_value.copyWith(
-      passwordFormDto: passwordFormDto == freezed
-          ? _value.passwordFormDto
-          : passwordFormDto // ignore: cast_nullable_to_non_nullable
-              as ChangePasswordFormDto,
+      passwordForm: passwordForm == freezed
+          ? _value.passwordForm
+          : passwordForm // ignore: cast_nullable_to_non_nullable
+              as ChangePasswordForm,
     ));
   }
 
   @override
-  $ChangePasswordFormDtoCopyWith<$Res> get passwordFormDto {
-    return $ChangePasswordFormDtoCopyWith<$Res>(_value.passwordFormDto,
-        (value) {
-      return _then(_value.copyWith(passwordFormDto: value));
+  $ChangePasswordFormCopyWith<$Res> get passwordForm {
+    return $ChangePasswordFormCopyWith<$Res>(_value.passwordForm, (value) {
+      return _then(_value.copyWith(passwordForm: value));
     });
   }
 }
@@ -106,10 +103,10 @@ abstract class _$$ChangePasswordEventChangePasswordCopyWith<$Res>
           $Res Function(_$ChangePasswordEventChangePassword) then) =
       __$$ChangePasswordEventChangePasswordCopyWithImpl<$Res>;
   @override
-  $Res call({ChangePasswordFormDto passwordFormDto});
+  $Res call({ChangePasswordForm passwordForm});
 
   @override
-  $ChangePasswordFormDtoCopyWith<$Res> get passwordFormDto;
+  $ChangePasswordFormCopyWith<$Res> get passwordForm;
 }
 
 /// @nodoc
@@ -127,13 +124,13 @@ class __$$ChangePasswordEventChangePasswordCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? passwordFormDto = freezed,
+    Object? passwordForm = freezed,
   }) {
     return _then(_$ChangePasswordEventChangePassword(
-      passwordFormDto == freezed
-          ? _value.passwordFormDto
-          : passwordFormDto // ignore: cast_nullable_to_non_nullable
-              as ChangePasswordFormDto,
+      passwordForm == freezed
+          ? _value.passwordForm
+          : passwordForm // ignore: cast_nullable_to_non_nullable
+              as ChangePasswordForm,
     ));
   }
 }
@@ -142,14 +139,14 @@ class __$$ChangePasswordEventChangePasswordCopyWithImpl<$Res>
 
 class _$ChangePasswordEventChangePassword
     extends ChangePasswordEventChangePassword {
-  const _$ChangePasswordEventChangePassword(this.passwordFormDto) : super._();
+  const _$ChangePasswordEventChangePassword(this.passwordForm) : super._();
 
   @override
-  final ChangePasswordFormDto passwordFormDto;
+  final ChangePasswordForm passwordForm;
 
   @override
   String toString() {
-    return 'ChangePasswordEvent.changePassword(passwordFormDto: $passwordFormDto)';
+    return 'ChangePasswordEvent.changePassword(passwordForm: $passwordForm)';
   }
 
   @override
@@ -158,12 +155,12 @@ class _$ChangePasswordEventChangePassword
         (other.runtimeType == runtimeType &&
             other is _$ChangePasswordEventChangePassword &&
             const DeepCollectionEquality()
-                .equals(other.passwordFormDto, passwordFormDto));
+                .equals(other.passwordForm, passwordForm));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(passwordFormDto));
+      runtimeType, const DeepCollectionEquality().hash(passwordForm));
 
   @JsonKey(ignore: true)
   @override
@@ -175,28 +172,27 @@ class _$ChangePasswordEventChangePassword
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ChangePasswordFormDto passwordFormDto)
-        changePassword,
+    required TResult Function(ChangePasswordForm passwordForm) changePassword,
   }) {
-    return changePassword(passwordFormDto);
+    return changePassword(passwordForm);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(ChangePasswordFormDto passwordFormDto)? changePassword,
+    TResult Function(ChangePasswordForm passwordForm)? changePassword,
   }) {
-    return changePassword?.call(passwordFormDto);
+    return changePassword?.call(passwordForm);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ChangePasswordFormDto passwordFormDto)? changePassword,
+    TResult Function(ChangePasswordForm passwordForm)? changePassword,
     required TResult orElse(),
   }) {
     if (changePassword != null) {
-      return changePassword(passwordFormDto);
+      return changePassword(passwordForm);
     }
     return orElse();
   }
@@ -233,13 +229,12 @@ class _$ChangePasswordEventChangePassword
 
 abstract class ChangePasswordEventChangePassword extends ChangePasswordEvent {
   const factory ChangePasswordEventChangePassword(
-          final ChangePasswordFormDto passwordFormDto) =
+          final ChangePasswordForm passwordForm) =
       _$ChangePasswordEventChangePassword;
   const ChangePasswordEventChangePassword._() : super._();
 
   @override
-  ChangePasswordFormDto get passwordFormDto =>
-      throw _privateConstructorUsedError;
+  ChangePasswordForm get passwordForm => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$ChangePasswordEventChangePasswordCopyWith<
