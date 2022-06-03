@@ -29,7 +29,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   alignment: const Alignment(1.1, 1.1),
                   children: [
                     const CircleAvatar(
-                      backgroundImage: AssetImage("assets/images/default_profile_picture.jpeg"),
+                      backgroundImage: AssetImage("assets/abebe.jpeg"),
                       radius: 80,
                     ),
                     Container(
