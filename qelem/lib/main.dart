@@ -11,6 +11,7 @@ import 'package:qelem/infrastructure/auth/auth_repository.dart';
 import 'package:qelem/infrastructure/question/question_repository.dart';
 import 'package:qelem/util/my_http_client.dart';
 
+import 'application/question/question_construction/question_construction_bloc.dart';
 import 'bloc_observer.dart';
 import 'presentation/app_widget.dart';
 
@@ -45,18 +46,27 @@ void main() {
                 providers: [
                   BlocProvider(
                     create: (context) => AuthBloc(
-                        authRepository:
-                            RepositoryProvider.of<AuthRepository>(context)),
+                      authRepository:
+                          RepositoryProvider.of<AuthRepository>(context),
+                    ),
                   ),
                   BlocProvider(
                     create: (context) => QuestionsListBloc(
-                        questionRepository:
-                            RepositoryProvider.of<QuestionRepository>(context)),
+                      questionRepository:
+                          RepositoryProvider.of<QuestionRepository>(context),
+                    ),
                   ),
                   BlocProvider(
                     create: (context) => QuestionBloc(
-                        questionRepository:
-                            RepositoryProvider.of<QuestionRepository>(context)),
+                      questionRepository:
+                          RepositoryProvider.of<QuestionRepository>(context),
+                    ),
+                  ),
+                  BlocProvider(
+                    create: (context) => QuestionContructionBloc(
+                      questionRepository:
+                          RepositoryProvider.of<QuestionRepository>(context),
+                    ),
                   ),
                 ],
                 child: BlocListener<AuthBloc, AuthState>(

@@ -496,6 +496,8 @@ abstract class _$$_UpdatedCopyWith<$Res> {
           _$_Updated value, $Res Function(_$_Updated) then) =
       __$$_UpdatedCopyWithImpl<$Res>;
   $Res call({Question question});
+
+  $QuestionCopyWith<$Res> get question;
 }
 
 /// @nodoc
@@ -518,6 +520,13 @@ class __$$_UpdatedCopyWithImpl<$Res>
           : question // ignore: cast_nullable_to_non_nullable
               as Question,
     ));
+  }
+
+  @override
+  $QuestionCopyWith<$Res> get question {
+    return $QuestionCopyWith<$Res>(_value.question, (value) {
+      return _then(_value.copyWith(question: value));
+    });
   }
 }
 

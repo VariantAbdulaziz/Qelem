@@ -5,11 +5,11 @@ import '../../../infrastructure/question/question_repository.dart';
 import 'question_construction_event.dart';
 import 'question_construction_state.dart';
 
-class QuestionBloc
+class QuestionContructionBloc
     extends Bloc<QuestionConstructionEvent, QuestionConstructionState> {
   final QuestionRepository questionRepository;
 
-  QuestionBloc({required this.questionRepository})
+  QuestionContructionBloc({required this.questionRepository})
       : super(const QuestionConstructionState.empty()) {
     on<QuestionConstructionEmptyEvent>(
       ((event, emit) {
