@@ -6,9 +6,8 @@ part 'questions_list_state.freezed.dart';
 
 @freezed
 abstract class QuestionsListState with _$QuestionsListState {
-  const factory QuestionsListState.success(List<Question> question) =
-      _QuestionsListSuccess;
-  const factory QuestionsListState.error(Error error) = _QuestionsListError;
-  const factory QuestionsListState.loading() = _QuestionsListLoading;
-  const factory QuestionsListState.empty() = _QuestionsListEmpty;
+  const factory QuestionsListState.success(List<Question> question) = _Success;
+  const factory QuestionsListState.error(Error error) = _Error;
+  const factory QuestionsListState.loading() = _Loading;
+  const factory QuestionsListState.empty() = _Empty;
 }

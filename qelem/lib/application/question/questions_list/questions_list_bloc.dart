@@ -9,15 +9,11 @@ class QuestionsListBloc extends Bloc<QuestionsListEvent, QuestionsListState> {
   final QuestionRepository questionRepository;
 
   QuestionsListBloc({required this.questionRepository})
-      : super(const QuestionsListState.empty()) {
-    () {
-      emit(const QuestionsListState.empty());
-    }();
-
+      : super(const QuestionsListState.loading()) {
     on<QuestionsListRequestEvent>(
       ((event, emit) async {
-        final questions = await questionRepository.getQuestion();
         emit(const QuestionsListState.loading());
+        final questions = await questionRepository.getQuestion();
 
         if (questions.hasError) {
           emit(QuestionsListState.error(questions.error!));
