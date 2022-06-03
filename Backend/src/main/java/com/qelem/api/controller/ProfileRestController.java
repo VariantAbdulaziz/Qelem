@@ -60,7 +60,7 @@ public class ProfileRestController {
         UserModel user = userRepository.getById(loggedInUser().getId());
         log.info("Changing password for user {}, password form {}", user.getUsername(), changePasswordForm);
 
-        if (!passwordEncoder.matches(changePasswordForm.getOldPassword(), user.getPassword())) {
+        if (!passwordEncoder.matches(changePasswordForm.getCurrentPassword(), user.getPassword())) {
             throw new PasswordException("Password doesn't match!");
         }
         user.setPassword(passwordEncoder.encode(changePasswordForm.getNewPassword()));
