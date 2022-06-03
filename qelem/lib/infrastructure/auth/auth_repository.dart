@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:qelem/domain/auth/change_password_form.dart';
 import 'package:qelem/domain/auth/login_form.dart';
 import 'package:qelem/domain/auth/login_response.dart';
 import 'package:qelem/domain/auth/registration_form.dart';
@@ -59,9 +60,20 @@ class AuthRepository {
     }
   }
 
-  Future<void> changePassword(
-      {required ChangePasswordFormDto changePasswordFormDto}) async {
-    await authApi.changePassword(changePasswordFormDto);
+  Future<Either<void>> changePassword(
+      {required ChangePasswordForm changePasswordForm}) async {
+    try {
+      await authApi.changePassword(changePasswordForm);
+      return Either(val: null);
+    } on QHttpException catch (e) {
+      return Either(error: Error(e.message));
+    } on SocketException catch (_) {
+      return Either(error: Error("Check your internet connection"));
+    } on Exception catch (e) {
+      developer.log("Unexpected error while logging in user in Auth Repo",
+          error: e);
+      return Either(error: Error("Unknown error"));
+    }
   }
 
   static Future<bool> loggedIn() async {
