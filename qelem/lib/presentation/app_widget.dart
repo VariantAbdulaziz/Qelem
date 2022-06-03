@@ -64,14 +64,6 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<QuestionsListBloc>(
-        create: (context) => QuestionsListBloc(questionRepository: fakeRepo()),
-        child: MaterialApp.router(
-          title: Constants.home,
-          theme: QelemTheme.qelemTheme,
-          debugShowCheckedModeBanner: false,
-          routeInformationParser: _router.routeInformationParser,
-          routerDelegate: _router.routerDelegate,
-        ));
+    return Container();
   }
 }

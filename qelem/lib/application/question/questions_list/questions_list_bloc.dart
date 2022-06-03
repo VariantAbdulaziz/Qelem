@@ -10,12 +10,13 @@ import 'questions_list_event.dart';
 import 'questions_list_state.dart';
 
 class QuestionsListBloc extends Bloc<QuestionsListEvent, QuestionsListState> {
-  // final QuestionRepository questionRepository;
-  final fakeRepo questionRepository;
+  final QuestionRepository questionRepository;
+  // final fakeRepo questionRepository;
+
   QuestionsListBloc({required this.questionRepository})
       : super(const QuestionsListState.initial()) {
     () async {
-      final questions = await questionRepository.getQuestion(0);
+      final questions = await questionRepository.getQuestion();
 
       if (questions.hasError) {
         emit(QuestionsListState.error(questions.error!));
@@ -30,8 +31,7 @@ class QuestionsListBloc extends Bloc<QuestionsListEvent, QuestionsListState> {
 
     on<QuestionsListRequestEvent>(
       ((event, emit) async {
-        final questions =
-            await questionRepository.getQuestion(event.offset as int);
+        final questions = await questionRepository.getQuestion();
 
         if (questions.hasError) {
           emit(QuestionsListState.error(questions.error!));
