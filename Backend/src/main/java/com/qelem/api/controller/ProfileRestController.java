@@ -79,6 +79,7 @@ public class ProfileRestController {
             @RequestParam(value = "lastName", required = false) String lastName,
             @RequestPart(value = "profilePicture", required = false) MultipartFile file) {
         UserModel user = loggedInUser();
+        log.info("Updating profile for user {}, firstName {}, lastName {}, file {}", user.getUsername(), firstName, lastName, file);
 
         if (firstName != null) {
             user.setFirstName(firstName);

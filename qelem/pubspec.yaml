@@ -40,6 +40,7 @@ dependencies:
   go_router: ^3.1.1
   freezed_annotation: ^2.0.3
   flutter_bloc: ^8.0.1
+  bloc: ^8.0.3
   get_it: ^7.2.0
   meta: ^1.7.0
   injectable: ^1.5.3
@@ -50,10 +51,13 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^1.0.0
-  build_runner:
+  build_runner: ^2.1.11
   freezed: ^2.0.3+1
   injectable_generator: ^1.5.3
   json_serializable: ^6.2.0
+  mockito: ^5.2.0
+  equatable: ^2.0.3
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
