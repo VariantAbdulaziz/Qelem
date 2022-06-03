@@ -16,7 +16,7 @@ class PostQuestionScreen extends StatefulWidget {
 
 class _PostQuestionScreenState extends State<PostQuestionScreen> {
   bool _isNetworkInProgress = false;
-  final _formKey = GlobalKey<FormState>();
+  final _postQuestionFormKey = GlobalKey<FormState>();
 
   TextEditingController topicController = TextEditingController();
   TextEditingController contentController = TextEditingController();
@@ -106,7 +106,7 @@ class _PostQuestionScreenState extends State<PostQuestionScreen> {
                     onPressed: _isNetworkInProgress
                         ? null
                         : () {
-                            if (_formKey.currentState!.validate()) {
+                            if (_postQuestionFormKey.currentState!.validate()) {
                               var form = QuestionForm(
                                   topic: topicController.text,
                                   content: contentController.text);
