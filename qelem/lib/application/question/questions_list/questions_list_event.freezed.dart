@@ -16,19 +16,21 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$QuestionsListEvent {
+  List<Question> get questions => throw _privateConstructorUsedError;
+  double get offset => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() request,
+    required TResult Function(List<Question> questions, double offset) request,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? request,
+    TResult Function(List<Question> questions, double offset)? request,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? request,
+    TResult Function(List<Question> questions, double offset)? request,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -48,6 +50,10 @@ mixin _$QuestionsListEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $QuestionsListEventCopyWith<QuestionsListEvent> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -55,6 +61,7 @@ abstract class $QuestionsListEventCopyWith<$Res> {
   factory $QuestionsListEventCopyWith(
           QuestionsListEvent value, $Res Function(QuestionsListEvent) then) =
       _$QuestionsListEventCopyWithImpl<$Res>;
+  $Res call({List<Question> questions, double offset});
 }
 
 /// @nodoc
@@ -65,14 +72,34 @@ class _$QuestionsListEventCopyWithImpl<$Res>
   final QuestionsListEvent _value;
   // ignore: unused_field
   final $Res Function(QuestionsListEvent) _then;
+
+  @override
+  $Res call({
+    Object? questions = freezed,
+    Object? offset = freezed,
+  }) {
+    return _then(_value.copyWith(
+      questions: questions == freezed
+          ? _value.questions
+          : questions // ignore: cast_nullable_to_non_nullable
+              as List<Question>,
+      offset: offset == freezed
+          ? _value.offset
+          : offset // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
+  }
 }
 
 /// @nodoc
-abstract class _$$QuestionsListRequestEventCopyWith<$Res> {
+abstract class _$$QuestionsListRequestEventCopyWith<$Res>
+    implements $QuestionsListEventCopyWith<$Res> {
   factory _$$QuestionsListRequestEventCopyWith(
           _$QuestionsListRequestEvent value,
           $Res Function(_$QuestionsListRequestEvent) then) =
       __$$QuestionsListRequestEventCopyWithImpl<$Res>;
+  @override
+  $Res call({List<Question> questions, double offset});
 }
 
 /// @nodoc
@@ -86,52 +113,92 @@ class __$$QuestionsListRequestEventCopyWithImpl<$Res>
   @override
   _$QuestionsListRequestEvent get _value =>
       super._value as _$QuestionsListRequestEvent;
+
+  @override
+  $Res call({
+    Object? questions = freezed,
+    Object? offset = freezed,
+  }) {
+    return _then(_$QuestionsListRequestEvent(
+      questions == freezed
+          ? _value._questions
+          : questions // ignore: cast_nullable_to_non_nullable
+              as List<Question>,
+      offset == freezed
+          ? _value.offset
+          : offset // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$QuestionsListRequestEvent implements QuestionsListRequestEvent {
-  const _$QuestionsListRequestEvent();
+  const _$QuestionsListRequestEvent(final List<Question> questions, this.offset)
+      : _questions = questions;
+
+  final List<Question> _questions;
+  @override
+  List<Question> get questions {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_questions);
+  }
+
+  @override
+  final double offset;
 
   @override
   String toString() {
-    return 'QuestionsListEvent.request()';
+    return 'QuestionsListEvent.request(questions: $questions, offset: $offset)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$QuestionsListRequestEvent);
+            other is _$QuestionsListRequestEvent &&
+            const DeepCollectionEquality()
+                .equals(other._questions, _questions) &&
+            const DeepCollectionEquality().equals(other.offset, offset));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_questions),
+      const DeepCollectionEquality().hash(offset));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$QuestionsListRequestEventCopyWith<_$QuestionsListRequestEvent>
+      get copyWith => __$$QuestionsListRequestEventCopyWithImpl<
+          _$QuestionsListRequestEvent>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() request,
+    required TResult Function(List<Question> questions, double offset) request,
   }) {
-    return request();
+    return request(questions, offset);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? request,
+    TResult Function(List<Question> questions, double offset)? request,
   }) {
-    return request?.call();
+    return request?.call(questions, offset);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? request,
+    TResult Function(List<Question> questions, double offset)? request,
     required TResult orElse(),
   }) {
     if (request != null) {
-      return request();
+      return request(questions, offset);
     }
     return orElse();
   }
@@ -166,5 +233,16 @@ class _$QuestionsListRequestEvent implements QuestionsListRequestEvent {
 }
 
 abstract class QuestionsListRequestEvent implements QuestionsListEvent {
-  const factory QuestionsListRequestEvent() = _$QuestionsListRequestEvent;
+  const factory QuestionsListRequestEvent(
+          final List<Question> questions, final double offset) =
+      _$QuestionsListRequestEvent;
+
+  @override
+  List<Question> get questions => throw _privateConstructorUsedError;
+  @override
+  double get offset => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$$QuestionsListRequestEventCopyWith<_$QuestionsListRequestEvent>
+      get copyWith => throw _privateConstructorUsedError;
 }
