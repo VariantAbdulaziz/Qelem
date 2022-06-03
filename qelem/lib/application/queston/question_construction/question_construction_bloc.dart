@@ -11,10 +11,6 @@ class QuestionBloc
 
   QuestionBloc({required this.questionRepository})
       : super(const QuestionConstructionState.empty()) {
-    () {
-      emit(const QuestionConstructionState.empty());
-    }();
-
     on<QuestionConstructionEmptyEvent>(
       ((event, emit) {
         emit(const QuestionConstructionState.empty());
@@ -23,9 +19,9 @@ class QuestionBloc
 
     on<QuestionConstructionUpdateEvent>(
       ((event, emit) async {
+        emit(const QuestionConstructionState.loading());
         final question =
             await questionRepository.getQuestionById(event.questionId);
-        emit(const QuestionConstructionState.loading());
 
         if (question.hasError) {
           emit(QuestionConstructionState.error(question.error!));
