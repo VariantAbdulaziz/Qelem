@@ -4,6 +4,8 @@ import 'package:qelem/application/auth/auth_bloc.dart';
 import 'package:qelem/application/auth/auth_state.dart';
 import 'package:qelem/infrastructure/auth/auth_api.dart';
 import 'package:qelem/infrastructure/auth/auth_repository.dart';
+import 'package:qelem/infrastructure/profile/profile_api.dart';
+import 'package:qelem/infrastructure/profile/profile_repository.dart';
 import 'package:qelem/util/my_http_client.dart';
 
 import 'bloc_observer.dart';
@@ -24,6 +26,9 @@ void main() {
               RepositoryProvider(
                   create: (context) =>
                       AuthApi(RepositoryProvider.of<MyHttpClient>(context))),
+              RepositoryProvider(
+                  create: ((context) => ProfileApi(
+                      RepositoryProvider.of<MyHttpClient>(context)))),
             ],
 
             child: MultiRepositoryProvider(
@@ -33,6 +38,9 @@ void main() {
                   create: (context) =>
                       AuthRepository(RepositoryProvider.of<AuthApi>(context)),
                 ),
+                RepositoryProvider(
+                    create: (context) => ProfileRepository(
+                        RepositoryProvider.of<ProfileApi>(context))),
               ],
 
               child: MultiBlocProvider(

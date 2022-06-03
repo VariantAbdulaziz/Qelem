@@ -25,7 +25,8 @@ mixin _$ProfileDto {
   String get firstName => throw _privateConstructorUsedError;
   String get lastName => throw _privateConstructorUsedError;
   String get role => throw _privateConstructorUsedError;
-  String get profilePicture => throw _privateConstructorUsedError;
+  @JsonKey(name: 'profilePicture')
+  String get profilePictureRelativeUrl => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,7 +45,7 @@ abstract class $ProfileDtoCopyWith<$Res> {
       String firstName,
       String lastName,
       String role,
-      String profilePicture});
+      @JsonKey(name: 'profilePicture') String profilePictureRelativeUrl});
 }
 
 /// @nodoc
@@ -62,7 +63,7 @@ class _$ProfileDtoCopyWithImpl<$Res> implements $ProfileDtoCopyWith<$Res> {
     Object? firstName = freezed,
     Object? lastName = freezed,
     Object? role = freezed,
-    Object? profilePicture = freezed,
+    Object? profilePictureRelativeUrl = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -85,9 +86,9 @@ class _$ProfileDtoCopyWithImpl<$Res> implements $ProfileDtoCopyWith<$Res> {
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as String,
-      profilePicture: profilePicture == freezed
-          ? _value.profilePicture
-          : profilePicture // ignore: cast_nullable_to_non_nullable
+      profilePictureRelativeUrl: profilePictureRelativeUrl == freezed
+          ? _value.profilePictureRelativeUrl
+          : profilePictureRelativeUrl // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -106,7 +107,7 @@ abstract class _$$_ProfileDtoCopyWith<$Res>
       String firstName,
       String lastName,
       String role,
-      String profilePicture});
+      @JsonKey(name: 'profilePicture') String profilePictureRelativeUrl});
 }
 
 /// @nodoc
@@ -126,7 +127,7 @@ class __$$_ProfileDtoCopyWithImpl<$Res> extends _$ProfileDtoCopyWithImpl<$Res>
     Object? firstName = freezed,
     Object? lastName = freezed,
     Object? role = freezed,
-    Object? profilePicture = freezed,
+    Object? profilePictureRelativeUrl = freezed,
   }) {
     return _then(_$_ProfileDto(
       id: id == freezed
@@ -149,9 +150,9 @@ class __$$_ProfileDtoCopyWithImpl<$Res> extends _$ProfileDtoCopyWithImpl<$Res>
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as String,
-      profilePicture: profilePicture == freezed
-          ? _value.profilePicture
-          : profilePicture // ignore: cast_nullable_to_non_nullable
+      profilePictureRelativeUrl: profilePictureRelativeUrl == freezed
+          ? _value.profilePictureRelativeUrl
+          : profilePictureRelativeUrl // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -166,7 +167,8 @@ class _$_ProfileDto with DiagnosticableTreeMixin implements _ProfileDto {
       required this.firstName,
       required this.lastName,
       required this.role,
-      required this.profilePicture});
+      @JsonKey(name: 'profilePicture')
+          required this.profilePictureRelativeUrl});
 
   factory _$_ProfileDto.fromJson(Map<String, dynamic> json) =>
       _$$_ProfileDtoFromJson(json);
@@ -182,11 +184,12 @@ class _$_ProfileDto with DiagnosticableTreeMixin implements _ProfileDto {
   @override
   final String role;
   @override
-  final String profilePicture;
+  @JsonKey(name: 'profilePicture')
+  final String profilePictureRelativeUrl;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ProfileDto(id: $id, username: $username, firstName: $firstName, lastName: $lastName, role: $role, profilePicture: $profilePicture)';
+    return 'ProfileDto(id: $id, username: $username, firstName: $firstName, lastName: $lastName, role: $role, profilePictureRelativeUrl: $profilePictureRelativeUrl)';
   }
 
   @override
@@ -199,7 +202,8 @@ class _$_ProfileDto with DiagnosticableTreeMixin implements _ProfileDto {
       ..add(DiagnosticsProperty('firstName', firstName))
       ..add(DiagnosticsProperty('lastName', lastName))
       ..add(DiagnosticsProperty('role', role))
-      ..add(DiagnosticsProperty('profilePicture', profilePicture));
+      ..add(DiagnosticsProperty(
+          'profilePictureRelativeUrl', profilePictureRelativeUrl));
   }
 
   @override
@@ -212,8 +216,8 @@ class _$_ProfileDto with DiagnosticableTreeMixin implements _ProfileDto {
             const DeepCollectionEquality().equals(other.firstName, firstName) &&
             const DeepCollectionEquality().equals(other.lastName, lastName) &&
             const DeepCollectionEquality().equals(other.role, role) &&
-            const DeepCollectionEquality()
-                .equals(other.profilePicture, profilePicture));
+            const DeepCollectionEquality().equals(
+                other.profilePictureRelativeUrl, profilePictureRelativeUrl));
   }
 
   @JsonKey(ignore: true)
@@ -225,7 +229,7 @@ class _$_ProfileDto with DiagnosticableTreeMixin implements _ProfileDto {
       const DeepCollectionEquality().hash(firstName),
       const DeepCollectionEquality().hash(lastName),
       const DeepCollectionEquality().hash(role),
-      const DeepCollectionEquality().hash(profilePicture));
+      const DeepCollectionEquality().hash(profilePictureRelativeUrl));
 
   @JsonKey(ignore: true)
   @override
@@ -245,7 +249,8 @@ abstract class _ProfileDto implements ProfileDto {
       required final String firstName,
       required final String lastName,
       required final String role,
-      required final String profilePicture}) = _$_ProfileDto;
+      @JsonKey(name: 'profilePicture')
+          required final String profilePictureRelativeUrl}) = _$_ProfileDto;
 
   factory _ProfileDto.fromJson(Map<String, dynamic> json) =
       _$_ProfileDto.fromJson;
@@ -261,7 +266,8 @@ abstract class _ProfileDto implements ProfileDto {
   @override
   String get role => throw _privateConstructorUsedError;
   @override
-  String get profilePicture => throw _privateConstructorUsedError;
+  @JsonKey(name: 'profilePicture')
+  String get profilePictureRelativeUrl => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_ProfileDtoCopyWith<_$_ProfileDto> get copyWith =>
