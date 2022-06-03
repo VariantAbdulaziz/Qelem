@@ -28,7 +28,7 @@ class _PostQuestionScreenState extends State<PostQuestionScreen> {
           questionRepository: RepositoryProvider.of(context)),
       child: BlocConsumer<QuestionContructionBloc, QuestionConstructionState>(
         listener: (context, state) {
-          if (state is QuestionStateLoading) {
+          if (state is QuestionPostStateLoading) {
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Posting Question...')),
@@ -42,12 +42,12 @@ class _PostQuestionScreenState extends State<PostQuestionScreen> {
             });
           }
 
-          if (state is QuestionStateSuccess) {
+          if (state is QuestionPostStateSuccess) {
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
             context.go(Routes.home);
           }
 
-          if (state is QuestionStateError) {
+          if (state is QuestionPostStateError) {
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
 
             ScaffoldMessenger.of(context).showSnackBar(

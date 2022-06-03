@@ -7,8 +7,8 @@ part 'question_construction_state.freezed.dart';
 
 @freezed
 abstract class QuestionConstructionState with _$QuestionConstructionState {
-  const factory QuestionConstructionState.empty() = QuestionConstructionEmpty;
-  const factory QuestionConstructionState.error(Error error) = QuestionStateError;
-  const factory QuestionConstructionState.loading() = QuestionStateLoading;
-  const factory QuestionConstructionState.success(Question question) = QuestionStateSuccess;
+  const factory QuestionConstructionState.empty() = QuestionPostStateEmpty;
+  const factory QuestionConstructionState.error(Error error) = QuestionPostStateError;
+  const factory QuestionConstructionState.loading() = QuestionPostStateLoading;
+  const factory QuestionConstructionState.success(Question question) = QuestionPostStateSuccess;
 }

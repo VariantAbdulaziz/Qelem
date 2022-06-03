@@ -10,16 +10,16 @@ class QuestionContructionBloc
   final QuestionRepository questionRepository;
 
   QuestionContructionBloc({required this.questionRepository})
-      : super(const QuestionConstructionState.empty()) {
+      : super(const QuestionPostStateEmpty()) {
 
     on<QuestionEventPost>(
       ((event, emit) async {
-        emit(const QuestionStateLoading());
+        emit(const QuestionPostStateLoading());
         var result = await questionRepository.createQuestion(event.form);
         if (result.hasError) {
-          emit(QuestionStateError(result.error!));
+          emit(QuestionPostStateError(result.error!));
         } else {
-          emit(QuestionStateSuccess(result.val!));
+          emit(QuestionPostStateSuccess(result.val!));
         }
       }),
     );
