@@ -58,7 +58,7 @@ class AuthApi {
       'newPassword': changePasswordForm.newPassword.value,
     });
     var response =
-        await _httpClient.post("profile/change-password", body: body);
+        await _httpClient.patch("profile/change-password", body: body);
 
     if (response.statusCode == 200) {
       return;
