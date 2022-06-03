@@ -14,8 +14,10 @@ _$_AnswerDto _$$_AnswerDtoFromJson(Map<String, dynamic> json) => _$_AnswerDto(
       upVotes: json['upVotes'] as int,
       downVotes: json['downVotes'] as int,
       userVote: json['userVote'] as int,
-      createdAt: json['createdAt'] as String,
-      updatedAt: json['updatedAt'] as String,
+      createdAt:
+          const TimestampConverter().fromJson(json['createdAt'] as String),
+      updatedAt:
+          const TimestampConverter().fromJson(json['updatedAt'] as String),
     );
 
 Map<String, dynamic> _$$_AnswerDtoToJson(_$_AnswerDto instance) =>
@@ -27,6 +29,6 @@ Map<String, dynamic> _$$_AnswerDtoToJson(_$_AnswerDto instance) =>
       'upVotes': instance.upVotes,
       'downVotes': instance.downVotes,
       'userVote': instance.userVote,
-      'createdAt': instance.createdAt,
-      'updatedAt': instance.updatedAt,
+      'createdAt': const TimestampConverter().toJson(instance.createdAt),
+      'updatedAt': const TimestampConverter().toJson(instance.updatedAt),
     };

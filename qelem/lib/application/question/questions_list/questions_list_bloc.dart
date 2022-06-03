@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../common/Vote.dart';
 import '../../../domain/auth/user.dart';
+import '../../../domain/common/vote.dart';
 import '../../../domain/question/question.dart';
 import '../../../infrastructure/question/question_repository.dart';
 
@@ -16,7 +16,7 @@ class QuestionsListBloc extends Bloc<QuestionsListEvent, QuestionsListState> {
   QuestionsListBloc({required this.questionRepository})
       : super(const QuestionsListState.initial()) {
     () async {
-      final questions = await questionRepository.getQuestion();
+      final questions = await questionRepository.getAllQuestions();
 
       if (questions.hasError) {
         emit(QuestionsListState.error(questions.error!));
@@ -31,7 +31,7 @@ class QuestionsListBloc extends Bloc<QuestionsListEvent, QuestionsListState> {
 
     on<QuestionsListRequestEvent>(
       ((event, emit) async {
-        final questions = await questionRepository.getQuestion();
+        final questions = await questionRepository.getAllQuestions();
 
         if (questions.hasError) {
           emit(QuestionsListState.error(questions.error!));
@@ -52,6 +52,8 @@ class fakeRepo {
         id: index,
         topic: 'topic $index',
         content: 'content $index',
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
         author: User(
           id: index,
           firstName: 'name $index',

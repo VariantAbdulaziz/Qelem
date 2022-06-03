@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'answer_dto.dart';
+part of 'answer.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,55 +14,45 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-AnswerDto _$AnswerDtoFromJson(Map<String, dynamic> json) {
-  return _AnswerDto.fromJson(json);
-}
-
 /// @nodoc
-mixin _$AnswerDto {
+mixin _$Answer {
   int get id => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
   int get questionId => throw _privateConstructorUsedError;
-  UserDto get author => throw _privateConstructorUsedError;
+  User get author => throw _privateConstructorUsedError;
   int get upVotes => throw _privateConstructorUsedError;
   int get downVotes => throw _privateConstructorUsedError;
-  int get userVote => throw _privateConstructorUsedError;
-  @TimestampConverter()
+  Vote get userVote => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
-  @TimestampConverter()
   DateTime get updatedAt => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $AnswerDtoCopyWith<AnswerDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  $AnswerCopyWith<Answer> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $AnswerDtoCopyWith<$Res> {
-  factory $AnswerDtoCopyWith(AnswerDto value, $Res Function(AnswerDto) then) =
-      _$AnswerDtoCopyWithImpl<$Res>;
+abstract class $AnswerCopyWith<$Res> {
+  factory $AnswerCopyWith(Answer value, $Res Function(Answer) then) =
+      _$AnswerCopyWithImpl<$Res>;
   $Res call(
       {int id,
       String content,
       int questionId,
-      UserDto author,
+      User author,
       int upVotes,
       int downVotes,
-      int userVote,
-      @TimestampConverter() DateTime createdAt,
-      @TimestampConverter() DateTime updatedAt});
-
-  $UserDtoCopyWith<$Res> get author;
+      Vote userVote,
+      DateTime createdAt,
+      DateTime updatedAt});
 }
 
 /// @nodoc
-class _$AnswerDtoCopyWithImpl<$Res> implements $AnswerDtoCopyWith<$Res> {
-  _$AnswerDtoCopyWithImpl(this._value, this._then);
+class _$AnswerCopyWithImpl<$Res> implements $AnswerCopyWith<$Res> {
+  _$AnswerCopyWithImpl(this._value, this._then);
 
-  final AnswerDto _value;
+  final Answer _value;
   // ignore: unused_field
-  final $Res Function(AnswerDto) _then;
+  final $Res Function(Answer) _then;
 
   @override
   $Res call({
@@ -92,7 +82,7 @@ class _$AnswerDtoCopyWithImpl<$Res> implements $AnswerDtoCopyWith<$Res> {
       author: author == freezed
           ? _value.author
           : author // ignore: cast_nullable_to_non_nullable
-              as UserDto,
+              as User,
       upVotes: upVotes == freezed
           ? _value.upVotes
           : upVotes // ignore: cast_nullable_to_non_nullable
@@ -104,7 +94,7 @@ class _$AnswerDtoCopyWithImpl<$Res> implements $AnswerDtoCopyWith<$Res> {
       userVote: userVote == freezed
           ? _value.userVote
           : userVote // ignore: cast_nullable_to_non_nullable
-              as int,
+              as Vote,
       createdAt: createdAt == freezed
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -115,45 +105,33 @@ class _$AnswerDtoCopyWithImpl<$Res> implements $AnswerDtoCopyWith<$Res> {
               as DateTime,
     ));
   }
-
-  @override
-  $UserDtoCopyWith<$Res> get author {
-    return $UserDtoCopyWith<$Res>(_value.author, (value) {
-      return _then(_value.copyWith(author: value));
-    });
-  }
 }
 
 /// @nodoc
-abstract class _$$_AnswerDtoCopyWith<$Res> implements $AnswerDtoCopyWith<$Res> {
-  factory _$$_AnswerDtoCopyWith(
-          _$_AnswerDto value, $Res Function(_$_AnswerDto) then) =
-      __$$_AnswerDtoCopyWithImpl<$Res>;
+abstract class _$$_AnswerCopyWith<$Res> implements $AnswerCopyWith<$Res> {
+  factory _$$_AnswerCopyWith(_$_Answer value, $Res Function(_$_Answer) then) =
+      __$$_AnswerCopyWithImpl<$Res>;
   @override
   $Res call(
       {int id,
       String content,
       int questionId,
-      UserDto author,
+      User author,
       int upVotes,
       int downVotes,
-      int userVote,
-      @TimestampConverter() DateTime createdAt,
-      @TimestampConverter() DateTime updatedAt});
-
-  @override
-  $UserDtoCopyWith<$Res> get author;
+      Vote userVote,
+      DateTime createdAt,
+      DateTime updatedAt});
 }
 
 /// @nodoc
-class __$$_AnswerDtoCopyWithImpl<$Res> extends _$AnswerDtoCopyWithImpl<$Res>
-    implements _$$_AnswerDtoCopyWith<$Res> {
-  __$$_AnswerDtoCopyWithImpl(
-      _$_AnswerDto _value, $Res Function(_$_AnswerDto) _then)
-      : super(_value, (v) => _then(v as _$_AnswerDto));
+class __$$_AnswerCopyWithImpl<$Res> extends _$AnswerCopyWithImpl<$Res>
+    implements _$$_AnswerCopyWith<$Res> {
+  __$$_AnswerCopyWithImpl(_$_Answer _value, $Res Function(_$_Answer) _then)
+      : super(_value, (v) => _then(v as _$_Answer));
 
   @override
-  _$_AnswerDto get _value => super._value as _$_AnswerDto;
+  _$_Answer get _value => super._value as _$_Answer;
 
   @override
   $Res call({
@@ -167,7 +145,7 @@ class __$$_AnswerDtoCopyWithImpl<$Res> extends _$AnswerDtoCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(_$_AnswerDto(
+    return _then(_$_Answer(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -183,7 +161,7 @@ class __$$_AnswerDtoCopyWithImpl<$Res> extends _$AnswerDtoCopyWithImpl<$Res>
       author: author == freezed
           ? _value.author
           : author // ignore: cast_nullable_to_non_nullable
-              as UserDto,
+              as User,
       upVotes: upVotes == freezed
           ? _value.upVotes
           : upVotes // ignore: cast_nullable_to_non_nullable
@@ -195,7 +173,7 @@ class __$$_AnswerDtoCopyWithImpl<$Res> extends _$AnswerDtoCopyWithImpl<$Res>
       userVote: userVote == freezed
           ? _value.userVote
           : userVote // ignore: cast_nullable_to_non_nullable
-              as int,
+              as Vote,
       createdAt: createdAt == freezed
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -209,9 +187,9 @@ class __$$_AnswerDtoCopyWithImpl<$Res> extends _$AnswerDtoCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$_AnswerDto with DiagnosticableTreeMixin implements _AnswerDto {
-  const _$_AnswerDto(
+
+class _$_Answer implements _Answer {
+  const _$_Answer(
       {required this.id,
       required this.content,
       required this.questionId,
@@ -219,11 +197,8 @@ class _$_AnswerDto with DiagnosticableTreeMixin implements _AnswerDto {
       required this.upVotes,
       required this.downVotes,
       required this.userVote,
-      @TimestampConverter() required this.createdAt,
-      @TimestampConverter() required this.updatedAt});
-
-  factory _$_AnswerDto.fromJson(Map<String, dynamic> json) =>
-      _$$_AnswerDtoFromJson(json);
+      required this.createdAt,
+      required this.updatedAt});
 
   @override
   final int id;
@@ -232,46 +207,28 @@ class _$_AnswerDto with DiagnosticableTreeMixin implements _AnswerDto {
   @override
   final int questionId;
   @override
-  final UserDto author;
+  final User author;
   @override
   final int upVotes;
   @override
   final int downVotes;
   @override
-  final int userVote;
+  final Vote userVote;
   @override
-  @TimestampConverter()
   final DateTime createdAt;
   @override
-  @TimestampConverter()
   final DateTime updatedAt;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'AnswerDto(id: $id, content: $content, questionId: $questionId, author: $author, upVotes: $upVotes, downVotes: $downVotes, userVote: $userVote, createdAt: $createdAt, updatedAt: $updatedAt)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'AnswerDto'))
-      ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('content', content))
-      ..add(DiagnosticsProperty('questionId', questionId))
-      ..add(DiagnosticsProperty('author', author))
-      ..add(DiagnosticsProperty('upVotes', upVotes))
-      ..add(DiagnosticsProperty('downVotes', downVotes))
-      ..add(DiagnosticsProperty('userVote', userVote))
-      ..add(DiagnosticsProperty('createdAt', createdAt))
-      ..add(DiagnosticsProperty('updatedAt', updatedAt));
+  String toString() {
+    return 'Answer(id: $id, content: $content, questionId: $questionId, author: $author, upVotes: $upVotes, downVotes: $downVotes, userVote: $userVote, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AnswerDto &&
+            other is _$_Answer &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.content, content) &&
             const DeepCollectionEquality()
@@ -284,7 +241,6 @@ class _$_AnswerDto with DiagnosticableTreeMixin implements _AnswerDto {
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -300,29 +256,21 @@ class _$_AnswerDto with DiagnosticableTreeMixin implements _AnswerDto {
 
   @JsonKey(ignore: true)
   @override
-  _$$_AnswerDtoCopyWith<_$_AnswerDto> get copyWith =>
-      __$$_AnswerDtoCopyWithImpl<_$_AnswerDto>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_AnswerDtoToJson(this);
-  }
+  _$$_AnswerCopyWith<_$_Answer> get copyWith =>
+      __$$_AnswerCopyWithImpl<_$_Answer>(this, _$identity);
 }
 
-abstract class _AnswerDto implements AnswerDto {
-  const factory _AnswerDto(
+abstract class _Answer implements Answer {
+  const factory _Answer(
       {required final int id,
       required final String content,
       required final int questionId,
-      required final UserDto author,
+      required final User author,
       required final int upVotes,
       required final int downVotes,
-      required final int userVote,
-      @TimestampConverter() required final DateTime createdAt,
-      @TimestampConverter() required final DateTime updatedAt}) = _$_AnswerDto;
-
-  factory _AnswerDto.fromJson(Map<String, dynamic> json) =
-      _$_AnswerDto.fromJson;
+      required final Vote userVote,
+      required final DateTime createdAt,
+      required final DateTime updatedAt}) = _$_Answer;
 
   @override
   int get id => throw _privateConstructorUsedError;
@@ -331,21 +279,19 @@ abstract class _AnswerDto implements AnswerDto {
   @override
   int get questionId => throw _privateConstructorUsedError;
   @override
-  UserDto get author => throw _privateConstructorUsedError;
+  User get author => throw _privateConstructorUsedError;
   @override
   int get upVotes => throw _privateConstructorUsedError;
   @override
   int get downVotes => throw _privateConstructorUsedError;
   @override
-  int get userVote => throw _privateConstructorUsedError;
+  Vote get userVote => throw _privateConstructorUsedError;
   @override
-  @TimestampConverter()
   DateTime get createdAt => throw _privateConstructorUsedError;
   @override
-  @TimestampConverter()
   DateTime get updatedAt => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$$_AnswerDtoCopyWith<_$_AnswerDto> get copyWith =>
+  _$$_AnswerCopyWith<_$_Answer> get copyWith =>
       throw _privateConstructorUsedError;
 }

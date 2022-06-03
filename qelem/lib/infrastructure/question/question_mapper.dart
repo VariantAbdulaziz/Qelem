@@ -1,11 +1,9 @@
+import 'package:qelem/domain/common/vote.dart';
+import 'package:qelem/domain/question/question.dart';
 import 'package:qelem/infrastructure/auth/user_model_mapper.dart';
 import 'package:qelem/infrastructure/question/question_dto.dart';
 
-import '../../common/Vote.dart';
-import '../../domain/question/question.dart';
-
 extension QuestionMapper on QuestionDto {
-
   Question toQuestion() {
     Vote vote;
     if (userVote == 1) {
@@ -23,6 +21,8 @@ extension QuestionMapper on QuestionDto {
       upVotes: upVotes,
       downVotes: downVotes,
       userVote: vote,
+      createdAt: createdAt,
+      updatedAt: updatedAt,
     );
   }
 }

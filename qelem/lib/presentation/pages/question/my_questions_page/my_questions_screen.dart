@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:qelem/domain/auth/user.dart';
+import 'package:qelem/domain/common/vote.dart';
 import 'package:qelem/domain/question/question.dart';
 
 import '../../../../application/question/questions_list/questions_list_bloc.dart';
@@ -40,6 +42,8 @@ class _MyQuestionsScreenState extends State<MyQuestionsScreen> {
                     id: position,
                     topic: questions[position].topic,
                     content: questions[position].content,
+                    createdAt: questions[position].createdAt,
+                    updatedAt: questions[position].updatedAt,
                     author: questions[position].author,
                     upVotes: questions[position].upVotes,
                     downVotes: questions[position].downVotes,
