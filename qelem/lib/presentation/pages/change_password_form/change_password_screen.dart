@@ -5,14 +5,9 @@ import 'package:qelem/application/change_password/change_password_bloc.dart';
 import 'package:qelem/application/change_password/change_password_event.dart';
 import 'package:qelem/application/change_password/change_password_state.dart';
 import 'package:qelem/common/constants.dart';
-import 'package:qelem/data/local/shared_prefs/shared_prefs_service.dart';
 import 'package:qelem/domain/auth/change_password_form.dart';
 import 'package:qelem/domain/auth/password.dart';
-import 'package:qelem/domain/auth/username.dart';
-import 'package:qelem/infrastructure/auth/auth_api.dart';
-import 'package:qelem/infrastructure/auth/auth_repository.dart';
 import 'package:qelem/presentation/routes/routes.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
   const ChangePasswordScreen({Key? key}) : super(key: key);
@@ -59,7 +54,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 backgroundColor: Colors.green,
               ),
             );
-            context.go(Routes.signIn);
           }
           if (state is ChangePasswordStateFailure) {
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
