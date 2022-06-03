@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:qelem/domain/auth/change_password_form.dart';
 import 'package:qelem/infrastructure/auth/auth_response_dto.dart';
 import 'package:qelem/infrastructure/auth/change_password_form_dto.dart';
 import 'package:qelem/infrastructure/auth/register_form_dto.dart';
@@ -51,10 +52,13 @@ class AuthApi {
   }
 
   // change password
-  Future<void> changePassword(
-      ChangePasswordFormDto changePasswordFormDto) async {
-    var response = await _httpClient.post("profile/change-password",
-        body: json.encode(changePasswordFormDto.toJson()));
+  Future<void> changePassword(ChangePasswordForm changePasswordForm) async {
+    var body = jsonEncode({
+      'currentPassword': changePasswordForm.currentPassword.value,
+      'newPassword': changePasswordForm.newPassword.value,
+    });
+    var response =
+        await _httpClient.post("profile/change-password", body: body);
 
     if (response.statusCode == 200) {
       return;
