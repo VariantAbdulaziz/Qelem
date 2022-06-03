@@ -36,16 +36,8 @@ void main() {
         () async {
       //arrange
       final mockAuthRepository = MockAuthRepository();
-      final mockSharedPrefsService = MockSharedPrefsService();
-      final mockAuthApi = MockAuthApi();
-      final mockLoginForm = MockLoginForm();
-      final mockLoginResponse = MockLoginResponse();
       final loginBloc = LoginBloc(mockAuthRepository);
-      // final mockLoginForm = LoginForm(
-      //   userName: "username",
-      //   password: "password",
-      // );
-      // mockLoginForm = LoginForm(userName: UserName("userName"), password: Password("password"));
+
       AuthResponseDto response = const AuthResponseDto(
           jwt: "jwt",
           user: UserDto(
@@ -56,17 +48,20 @@ void main() {
             profilePicture: 'profilePicture',
             role: 'role',
           ));
+
       Future<Either<LoginReponse>> resp() async => Either(
               val: LoginReponse(
             jwt: response.jwt,
             user: response.user.toUser(),
           ));
+
       when(mockAuthRepository.login(
               loginForm: LoginForm(userName: UserName("username"), password: Password("password"))))
           .thenAnswer((_) async => resp());
 
       loginBloc.add(LoginEventLogin(
           LoginForm(userName: UserName("username"), password: Password("password"))));
+
       //assert
       expectLater(
           loginBloc,
