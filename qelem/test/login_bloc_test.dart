@@ -17,12 +17,16 @@ import 'login_bloc_test.mocks.dart';
 
 @GenerateMocks([AuthRepository])
 void main() {
-  setUp(() {});
+  late MockAuthRepository mockAuthRepository;
+
+  setUp(() {
+    mockAuthRepository = MockAuthRepository();
+  });
 
   group("LoginBloc", () {
     test("should emit [LoginInitial, LoginLoading, LoginSuccess] when login is successful",
         () async {
-      final mockAuthRepository = MockAuthRepository();
+
       final mockUser = User(
         userName: "username",
         lastName: "lastName",
@@ -52,14 +56,6 @@ void main() {
     });
 
     test("should emit [LoadingLoading, LoginStateFailure] when login fails", () async {
-      final mockAuthRepository = MockAuthRepository();
-      final mockUser = User(
-        userName: "username",
-        lastName: "lastName",
-        firstName: "firstName",
-        id: 1,
-        profilePicture: "profilePicture",
-      );
 
       final loginForm = LoginForm(
         userName: UserName("username"),
