@@ -6,11 +6,6 @@ import 'package:qelem/infrastructure/auth/auth_repository.dart';
 class ChangePasswordBloc
     extends Bloc<ChangePasswordEvent, ChangePasswordState> {
   final AuthRepository _authRepository;
-  bool isAuth = false;
-
-  _checkAuth() async {
-    isAuth = AuthRepository.loggedIn() as bool;
-  }
 
   ChangePasswordBloc(this._authRepository)
       : super(const ChangePasswordState.initial()) {
