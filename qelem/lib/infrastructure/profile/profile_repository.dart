@@ -46,4 +46,19 @@ class ProfileRepository {
       return Either(error: Error("Unknown error"));
     }
   }
+
+  Future<Either<void>> deleteAccount() async {
+    try {
+      await profileApi.deleteAccount();
+      return Either();
+    } on QHttpException catch (e) {
+      return Either(error: Error(e.message));
+    } on SocketException catch (_) {
+      return Either(error: Error("Check your internet connection"));
+    } on Exception catch (e) {
+      developer.log("Unexpected error while deleting account in Profile Repo",
+          error: e);
+      return Either(error: Error("Unknown error"));
+    }
+  }
 }

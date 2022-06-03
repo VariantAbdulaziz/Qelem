@@ -9,7 +9,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository authRepository;
   final SharedPrefsService sharedPrefsService;
 
-  AuthBloc({required this.authRepository, required this.sharedPrefsService}) : super(const AuthUnInitialized()) {
+  AuthBloc({required this.authRepository, required this.sharedPrefsService})
+      : super(const AuthUnInitialized()) {
     () async {
       var authToken = await authRepository.getAuthToken();
       bool firstRun = await sharedPrefsService.isFirstRun();

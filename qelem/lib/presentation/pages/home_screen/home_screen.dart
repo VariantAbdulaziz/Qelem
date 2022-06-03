@@ -18,7 +18,8 @@ Widget homeScreen() {
               userName: 'emre_varol',
               firstName: "Emre",
               lastName: "Varol",
-              profilePicture: "assets/images/default_profile_picture.jpeg",
+              profilePicture:
+                  "http://10.0.2.2:8080/files/8a4b18f7-e593-4eb3-8179-40b3b1fb5ada",
             ),
             upVotes: 0,
             downVotes: 0,
