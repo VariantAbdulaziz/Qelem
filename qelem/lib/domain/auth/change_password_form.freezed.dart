@@ -14,17 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-ChangePasswordForm _$ChangePasswordFormFromJson(Map<String, dynamic> json) {
-  return _ChangePasswordForm.fromJson(json);
-}
-
 /// @nodoc
 mixin _$ChangePasswordForm {
-  String get username => throw _privateConstructorUsedError;
-  String get oldPassword => throw _privateConstructorUsedError;
-  String get newPassword => throw _privateConstructorUsedError;
+  UserName get userName => throw _privateConstructorUsedError;
+  Password get currentPassword => throw _privateConstructorUsedError;
+  Password get newPassword => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $ChangePasswordFormCopyWith<ChangePasswordForm> get copyWith =>
       throw _privateConstructorUsedError;
@@ -35,7 +30,8 @@ abstract class $ChangePasswordFormCopyWith<$Res> {
   factory $ChangePasswordFormCopyWith(
           ChangePasswordForm value, $Res Function(ChangePasswordForm) then) =
       _$ChangePasswordFormCopyWithImpl<$Res>;
-  $Res call({String username, String oldPassword, String newPassword});
+  $Res call(
+      {UserName userName, Password currentPassword, Password newPassword});
 }
 
 /// @nodoc
@@ -49,23 +45,23 @@ class _$ChangePasswordFormCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? username = freezed,
-    Object? oldPassword = freezed,
+    Object? userName = freezed,
+    Object? currentPassword = freezed,
     Object? newPassword = freezed,
   }) {
     return _then(_value.copyWith(
-      username: username == freezed
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
-              as String,
-      oldPassword: oldPassword == freezed
-          ? _value.oldPassword
-          : oldPassword // ignore: cast_nullable_to_non_nullable
-              as String,
+      userName: userName == freezed
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as UserName,
+      currentPassword: currentPassword == freezed
+          ? _value.currentPassword
+          : currentPassword // ignore: cast_nullable_to_non_nullable
+              as Password,
       newPassword: newPassword == freezed
           ? _value.newPassword
           : newPassword // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Password,
     ));
   }
 }
@@ -77,7 +73,8 @@ abstract class _$$_ChangePasswordFormCopyWith<$Res>
           $Res Function(_$_ChangePasswordForm) then) =
       __$$_ChangePasswordFormCopyWithImpl<$Res>;
   @override
-  $Res call({String username, String oldPassword, String newPassword});
+  $Res call(
+      {UserName userName, Password currentPassword, Password newPassword});
 }
 
 /// @nodoc
@@ -93,50 +90,47 @@ class __$$_ChangePasswordFormCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? username = freezed,
-    Object? oldPassword = freezed,
+    Object? userName = freezed,
+    Object? currentPassword = freezed,
     Object? newPassword = freezed,
   }) {
     return _then(_$_ChangePasswordForm(
-      username: username == freezed
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
-              as String,
-      oldPassword: oldPassword == freezed
-          ? _value.oldPassword
-          : oldPassword // ignore: cast_nullable_to_non_nullable
-              as String,
+      userName: userName == freezed
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as UserName,
+      currentPassword: currentPassword == freezed
+          ? _value.currentPassword
+          : currentPassword // ignore: cast_nullable_to_non_nullable
+              as Password,
       newPassword: newPassword == freezed
           ? _value.newPassword
           : newPassword // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Password,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$_ChangePasswordForm
     with DiagnosticableTreeMixin
     implements _ChangePasswordForm {
   _$_ChangePasswordForm(
-      {required this.username,
-      required this.oldPassword,
+      {required this.userName,
+      required this.currentPassword,
       required this.newPassword});
 
-  factory _$_ChangePasswordForm.fromJson(Map<String, dynamic> json) =>
-      _$$_ChangePasswordFormFromJson(json);
-
   @override
-  final String username;
+  final UserName userName;
   @override
-  final String oldPassword;
+  final Password currentPassword;
   @override
-  final String newPassword;
+  final Password newPassword;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ChangePasswordForm(username: $username, oldPassword: $oldPassword, newPassword: $newPassword)';
+    return 'ChangePasswordForm(userName: $userName, currentPassword: $currentPassword, newPassword: $newPassword)';
   }
 
   @override
@@ -144,8 +138,8 @@ class _$_ChangePasswordForm
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'ChangePasswordForm'))
-      ..add(DiagnosticsProperty('username', username))
-      ..add(DiagnosticsProperty('oldPassword', oldPassword))
+      ..add(DiagnosticsProperty('userName', userName))
+      ..add(DiagnosticsProperty('currentPassword', currentPassword))
       ..add(DiagnosticsProperty('newPassword', newPassword));
   }
 
@@ -154,19 +148,18 @@ class _$_ChangePasswordForm
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ChangePasswordForm &&
-            const DeepCollectionEquality().equals(other.username, username) &&
+            const DeepCollectionEquality().equals(other.userName, userName) &&
             const DeepCollectionEquality()
-                .equals(other.oldPassword, oldPassword) &&
+                .equals(other.currentPassword, currentPassword) &&
             const DeepCollectionEquality()
                 .equals(other.newPassword, newPassword));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(username),
-      const DeepCollectionEquality().hash(oldPassword),
+      const DeepCollectionEquality().hash(userName),
+      const DeepCollectionEquality().hash(currentPassword),
       const DeepCollectionEquality().hash(newPassword));
 
   @JsonKey(ignore: true)
@@ -174,28 +167,20 @@ class _$_ChangePasswordForm
   _$$_ChangePasswordFormCopyWith<_$_ChangePasswordForm> get copyWith =>
       __$$_ChangePasswordFormCopyWithImpl<_$_ChangePasswordForm>(
           this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_ChangePasswordFormToJson(this);
-  }
 }
 
 abstract class _ChangePasswordForm implements ChangePasswordForm {
   factory _ChangePasswordForm(
-      {required final String username,
-      required final String oldPassword,
-      required final String newPassword}) = _$_ChangePasswordForm;
-
-  factory _ChangePasswordForm.fromJson(Map<String, dynamic> json) =
-      _$_ChangePasswordForm.fromJson;
+      {required final UserName userName,
+      required final Password currentPassword,
+      required final Password newPassword}) = _$_ChangePasswordForm;
 
   @override
-  String get username => throw _privateConstructorUsedError;
+  UserName get userName => throw _privateConstructorUsedError;
   @override
-  String get oldPassword => throw _privateConstructorUsedError;
+  Password get currentPassword => throw _privateConstructorUsedError;
   @override
-  String get newPassword => throw _privateConstructorUsedError;
+  Password get newPassword => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_ChangePasswordFormCopyWith<_$_ChangePasswordForm> get copyWith =>
