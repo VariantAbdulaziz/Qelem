@@ -16,43 +16,42 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$QuestionConstructionEvent {
+  QuestionForm get form => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() empty,
-    required TResult Function(int questionId) update,
+    required TResult Function(QuestionForm form) postQuestion,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? empty,
-    TResult Function(int questionId)? update,
+    TResult Function(QuestionForm form)? postQuestion,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? empty,
-    TResult Function(int questionId)? update,
+    TResult Function(QuestionForm form)? postQuestion,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(QuestionConstructionEmptyEvent value) empty,
-    required TResult Function(QuestionConstructionUpdateEvent value) update,
+    required TResult Function(QuestionEventPost value) postQuestion,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(QuestionConstructionEmptyEvent value)? empty,
-    TResult Function(QuestionConstructionUpdateEvent value)? update,
+    TResult Function(QuestionEventPost value)? postQuestion,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(QuestionConstructionEmptyEvent value)? empty,
-    TResult Function(QuestionConstructionUpdateEvent value)? update,
+    TResult Function(QuestionEventPost value)? postQuestion,
     required TResult orElse(),
   }) =>
+      throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $QuestionConstructionEventCopyWith<QuestionConstructionEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -61,6 +60,9 @@ abstract class $QuestionConstructionEventCopyWith<$Res> {
   factory $QuestionConstructionEventCopyWith(QuestionConstructionEvent value,
           $Res Function(QuestionConstructionEvent) then) =
       _$QuestionConstructionEventCopyWithImpl<$Res>;
+  $Res call({QuestionForm form});
+
+  $QuestionFormCopyWith<$Res> get form;
 }
 
 /// @nodoc
@@ -71,215 +73,118 @@ class _$QuestionConstructionEventCopyWithImpl<$Res>
   final QuestionConstructionEvent _value;
   // ignore: unused_field
   final $Res Function(QuestionConstructionEvent) _then;
-}
-
-/// @nodoc
-abstract class _$$QuestionConstructionEmptyEventCopyWith<$Res> {
-  factory _$$QuestionConstructionEmptyEventCopyWith(
-          _$QuestionConstructionEmptyEvent value,
-          $Res Function(_$QuestionConstructionEmptyEvent) then) =
-      __$$QuestionConstructionEmptyEventCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$QuestionConstructionEmptyEventCopyWithImpl<$Res>
-    extends _$QuestionConstructionEventCopyWithImpl<$Res>
-    implements _$$QuestionConstructionEmptyEventCopyWith<$Res> {
-  __$$QuestionConstructionEmptyEventCopyWithImpl(
-      _$QuestionConstructionEmptyEvent _value,
-      $Res Function(_$QuestionConstructionEmptyEvent) _then)
-      : super(_value, (v) => _then(v as _$QuestionConstructionEmptyEvent));
-
-  @override
-  _$QuestionConstructionEmptyEvent get _value =>
-      super._value as _$QuestionConstructionEmptyEvent;
-}
-
-/// @nodoc
-
-class _$QuestionConstructionEmptyEvent
-    implements QuestionConstructionEmptyEvent {
-  const _$QuestionConstructionEmptyEvent();
-
-  @override
-  String toString() {
-    return 'QuestionConstructionEvent.empty()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$QuestionConstructionEmptyEvent);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() empty,
-    required TResult Function(int questionId) update,
-  }) {
-    return empty();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? empty,
-    TResult Function(int questionId)? update,
-  }) {
-    return empty?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? empty,
-    TResult Function(int questionId)? update,
-    required TResult orElse(),
-  }) {
-    if (empty != null) {
-      return empty();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(QuestionConstructionEmptyEvent value) empty,
-    required TResult Function(QuestionConstructionUpdateEvent value) update,
-  }) {
-    return empty(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(QuestionConstructionEmptyEvent value)? empty,
-    TResult Function(QuestionConstructionUpdateEvent value)? update,
-  }) {
-    return empty?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(QuestionConstructionEmptyEvent value)? empty,
-    TResult Function(QuestionConstructionUpdateEvent value)? update,
-    required TResult orElse(),
-  }) {
-    if (empty != null) {
-      return empty(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class QuestionConstructionEmptyEvent
-    implements QuestionConstructionEvent {
-  const factory QuestionConstructionEmptyEvent() =
-      _$QuestionConstructionEmptyEvent;
-}
-
-/// @nodoc
-abstract class _$$QuestionConstructionUpdateEventCopyWith<$Res> {
-  factory _$$QuestionConstructionUpdateEventCopyWith(
-          _$QuestionConstructionUpdateEvent value,
-          $Res Function(_$QuestionConstructionUpdateEvent) then) =
-      __$$QuestionConstructionUpdateEventCopyWithImpl<$Res>;
-  $Res call({int questionId});
-}
-
-/// @nodoc
-class __$$QuestionConstructionUpdateEventCopyWithImpl<$Res>
-    extends _$QuestionConstructionEventCopyWithImpl<$Res>
-    implements _$$QuestionConstructionUpdateEventCopyWith<$Res> {
-  __$$QuestionConstructionUpdateEventCopyWithImpl(
-      _$QuestionConstructionUpdateEvent _value,
-      $Res Function(_$QuestionConstructionUpdateEvent) _then)
-      : super(_value, (v) => _then(v as _$QuestionConstructionUpdateEvent));
-
-  @override
-  _$QuestionConstructionUpdateEvent get _value =>
-      super._value as _$QuestionConstructionUpdateEvent;
 
   @override
   $Res call({
-    Object? questionId = freezed,
+    Object? form = freezed,
   }) {
-    return _then(_$QuestionConstructionUpdateEvent(
-      questionId == freezed
-          ? _value.questionId
-          : questionId // ignore: cast_nullable_to_non_nullable
-              as int,
+    return _then(_value.copyWith(
+      form: form == freezed
+          ? _value.form
+          : form // ignore: cast_nullable_to_non_nullable
+              as QuestionForm,
+    ));
+  }
+
+  @override
+  $QuestionFormCopyWith<$Res> get form {
+    return $QuestionFormCopyWith<$Res>(_value.form, (value) {
+      return _then(_value.copyWith(form: value));
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$QuestionEventPostCopyWith<$Res>
+    implements $QuestionConstructionEventCopyWith<$Res> {
+  factory _$$QuestionEventPostCopyWith(
+          _$QuestionEventPost value, $Res Function(_$QuestionEventPost) then) =
+      __$$QuestionEventPostCopyWithImpl<$Res>;
+  @override
+  $Res call({QuestionForm form});
+
+  @override
+  $QuestionFormCopyWith<$Res> get form;
+}
+
+/// @nodoc
+class __$$QuestionEventPostCopyWithImpl<$Res>
+    extends _$QuestionConstructionEventCopyWithImpl<$Res>
+    implements _$$QuestionEventPostCopyWith<$Res> {
+  __$$QuestionEventPostCopyWithImpl(
+      _$QuestionEventPost _value, $Res Function(_$QuestionEventPost) _then)
+      : super(_value, (v) => _then(v as _$QuestionEventPost));
+
+  @override
+  _$QuestionEventPost get _value => super._value as _$QuestionEventPost;
+
+  @override
+  $Res call({
+    Object? form = freezed,
+  }) {
+    return _then(_$QuestionEventPost(
+      form == freezed
+          ? _value.form
+          : form // ignore: cast_nullable_to_non_nullable
+              as QuestionForm,
     ));
   }
 }
 
 /// @nodoc
 
-class _$QuestionConstructionUpdateEvent
-    implements QuestionConstructionUpdateEvent {
-  const _$QuestionConstructionUpdateEvent(this.questionId);
+class _$QuestionEventPost extends QuestionEventPost {
+  const _$QuestionEventPost(this.form) : super._();
 
   @override
-  final int questionId;
+  final QuestionForm form;
 
   @override
   String toString() {
-    return 'QuestionConstructionEvent.update(questionId: $questionId)';
+    return 'QuestionConstructionEvent.postQuestion(form: $form)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$QuestionConstructionUpdateEvent &&
-            const DeepCollectionEquality()
-                .equals(other.questionId, questionId));
+            other is _$QuestionEventPost &&
+            const DeepCollectionEquality().equals(other.form, form));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(questionId));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(form));
 
   @JsonKey(ignore: true)
   @override
-  _$$QuestionConstructionUpdateEventCopyWith<_$QuestionConstructionUpdateEvent>
-      get copyWith => __$$QuestionConstructionUpdateEventCopyWithImpl<
-          _$QuestionConstructionUpdateEvent>(this, _$identity);
+  _$$QuestionEventPostCopyWith<_$QuestionEventPost> get copyWith =>
+      __$$QuestionEventPostCopyWithImpl<_$QuestionEventPost>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() empty,
-    required TResult Function(int questionId) update,
+    required TResult Function(QuestionForm form) postQuestion,
   }) {
-    return update(questionId);
+    return postQuestion(form);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? empty,
-    TResult Function(int questionId)? update,
+    TResult Function(QuestionForm form)? postQuestion,
   }) {
-    return update?.call(questionId);
+    return postQuestion?.call(form);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? empty,
-    TResult Function(int questionId)? update,
+    TResult Function(QuestionForm form)? postQuestion,
     required TResult orElse(),
   }) {
-    if (update != null) {
-      return update(questionId);
+    if (postQuestion != null) {
+      return postQuestion(form);
     }
     return orElse();
   }
@@ -287,42 +192,41 @@ class _$QuestionConstructionUpdateEvent
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(QuestionConstructionEmptyEvent value) empty,
-    required TResult Function(QuestionConstructionUpdateEvent value) update,
+    required TResult Function(QuestionEventPost value) postQuestion,
   }) {
-    return update(this);
+    return postQuestion(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(QuestionConstructionEmptyEvent value)? empty,
-    TResult Function(QuestionConstructionUpdateEvent value)? update,
+    TResult Function(QuestionEventPost value)? postQuestion,
   }) {
-    return update?.call(this);
+    return postQuestion?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(QuestionConstructionEmptyEvent value)? empty,
-    TResult Function(QuestionConstructionUpdateEvent value)? update,
+    TResult Function(QuestionEventPost value)? postQuestion,
     required TResult orElse(),
   }) {
-    if (update != null) {
-      return update(this);
+    if (postQuestion != null) {
+      return postQuestion(this);
     }
     return orElse();
   }
 }
 
-abstract class QuestionConstructionUpdateEvent
-    implements QuestionConstructionEvent {
-  const factory QuestionConstructionUpdateEvent(final int questionId) =
-      _$QuestionConstructionUpdateEvent;
+abstract class QuestionEventPost extends QuestionConstructionEvent {
+  const factory QuestionEventPost(final QuestionForm form) =
+      _$QuestionEventPost;
+  const QuestionEventPost._() : super._();
 
-  int get questionId => throw _privateConstructorUsedError;
+  @override
+  QuestionForm get form => throw _privateConstructorUsedError;
+  @override
   @JsonKey(ignore: true)
-  _$$QuestionConstructionUpdateEventCopyWith<_$QuestionConstructionUpdateEvent>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$QuestionEventPostCopyWith<_$QuestionEventPost> get copyWith =>
+      throw _privateConstructorUsedError;
 }

@@ -21,7 +21,7 @@ mixin _$QuestionConstructionState {
     required TResult Function() empty,
     required TResult Function(Error error) error,
     required TResult Function() loading,
-    required TResult Function(Question question) update,
+    required TResult Function(Question question) success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,7 +29,7 @@ mixin _$QuestionConstructionState {
     TResult Function()? empty,
     TResult Function(Error error)? error,
     TResult Function()? loading,
-    TResult Function(Question question)? update,
+    TResult Function(Question question)? success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,32 +37,32 @@ mixin _$QuestionConstructionState {
     TResult Function()? empty,
     TResult Function(Error error)? error,
     TResult Function()? loading,
-    TResult Function(Question question)? update,
+    TResult Function(Question question)? success,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_QuestionConstructionEmpty value) empty,
-    required TResult Function(_Error value) error,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Updated value) update,
+    required TResult Function(QuestionConstructionEmpty value) empty,
+    required TResult Function(QuestionStateError value) error,
+    required TResult Function(QuestionStateLoading value) loading,
+    required TResult Function(QuestionStateSuccess value) success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_QuestionConstructionEmpty value)? empty,
-    TResult Function(_Error value)? error,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Updated value)? update,
+    TResult Function(QuestionConstructionEmpty value)? empty,
+    TResult Function(QuestionStateError value)? error,
+    TResult Function(QuestionStateLoading value)? loading,
+    TResult Function(QuestionStateSuccess value)? success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_QuestionConstructionEmpty value)? empty,
-    TResult Function(_Error value)? error,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Updated value)? update,
+    TResult Function(QuestionConstructionEmpty value)? empty,
+    TResult Function(QuestionStateError value)? error,
+    TResult Function(QuestionStateLoading value)? loading,
+    TResult Function(QuestionStateSuccess value)? success,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -86,33 +86,32 @@ class _$QuestionConstructionStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$$_QuestionConstructionEmptyCopyWith<$Res> {
-  factory _$$_QuestionConstructionEmptyCopyWith(
-          _$_QuestionConstructionEmpty value,
-          $Res Function(_$_QuestionConstructionEmpty) then) =
-      __$$_QuestionConstructionEmptyCopyWithImpl<$Res>;
+abstract class _$$QuestionConstructionEmptyCopyWith<$Res> {
+  factory _$$QuestionConstructionEmptyCopyWith(
+          _$QuestionConstructionEmpty value,
+          $Res Function(_$QuestionConstructionEmpty) then) =
+      __$$QuestionConstructionEmptyCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_QuestionConstructionEmptyCopyWithImpl<$Res>
+class __$$QuestionConstructionEmptyCopyWithImpl<$Res>
     extends _$QuestionConstructionStateCopyWithImpl<$Res>
-    implements _$$_QuestionConstructionEmptyCopyWith<$Res> {
-  __$$_QuestionConstructionEmptyCopyWithImpl(
-      _$_QuestionConstructionEmpty _value,
-      $Res Function(_$_QuestionConstructionEmpty) _then)
-      : super(_value, (v) => _then(v as _$_QuestionConstructionEmpty));
+    implements _$$QuestionConstructionEmptyCopyWith<$Res> {
+  __$$QuestionConstructionEmptyCopyWithImpl(_$QuestionConstructionEmpty _value,
+      $Res Function(_$QuestionConstructionEmpty) _then)
+      : super(_value, (v) => _then(v as _$QuestionConstructionEmpty));
 
   @override
-  _$_QuestionConstructionEmpty get _value =>
-      super._value as _$_QuestionConstructionEmpty;
+  _$QuestionConstructionEmpty get _value =>
+      super._value as _$QuestionConstructionEmpty;
 }
 
 /// @nodoc
 
-class _$_QuestionConstructionEmpty
+class _$QuestionConstructionEmpty
     with DiagnosticableTreeMixin
-    implements _QuestionConstructionEmpty {
-  const _$_QuestionConstructionEmpty();
+    implements QuestionConstructionEmpty {
+  const _$QuestionConstructionEmpty();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -130,7 +129,7 @@ class _$_QuestionConstructionEmpty
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_QuestionConstructionEmpty);
+            other is _$QuestionConstructionEmpty);
   }
 
   @override
@@ -142,7 +141,7 @@ class _$_QuestionConstructionEmpty
     required TResult Function() empty,
     required TResult Function(Error error) error,
     required TResult Function() loading,
-    required TResult Function(Question question) update,
+    required TResult Function(Question question) success,
   }) {
     return empty();
   }
@@ -153,7 +152,7 @@ class _$_QuestionConstructionEmpty
     TResult Function()? empty,
     TResult Function(Error error)? error,
     TResult Function()? loading,
-    TResult Function(Question question)? update,
+    TResult Function(Question question)? success,
   }) {
     return empty?.call();
   }
@@ -164,7 +163,7 @@ class _$_QuestionConstructionEmpty
     TResult Function()? empty,
     TResult Function(Error error)? error,
     TResult Function()? loading,
-    TResult Function(Question question)? update,
+    TResult Function(Question question)? success,
     required TResult orElse(),
   }) {
     if (empty != null) {
@@ -176,10 +175,10 @@ class _$_QuestionConstructionEmpty
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_QuestionConstructionEmpty value) empty,
-    required TResult Function(_Error value) error,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Updated value) update,
+    required TResult Function(QuestionConstructionEmpty value) empty,
+    required TResult Function(QuestionStateError value) error,
+    required TResult Function(QuestionStateLoading value) loading,
+    required TResult Function(QuestionStateSuccess value) success,
   }) {
     return empty(this);
   }
@@ -187,10 +186,10 @@ class _$_QuestionConstructionEmpty
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_QuestionConstructionEmpty value)? empty,
-    TResult Function(_Error value)? error,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Updated value)? update,
+    TResult Function(QuestionConstructionEmpty value)? empty,
+    TResult Function(QuestionStateError value)? error,
+    TResult Function(QuestionStateLoading value)? loading,
+    TResult Function(QuestionStateSuccess value)? success,
   }) {
     return empty?.call(this);
   }
@@ -198,10 +197,10 @@ class _$_QuestionConstructionEmpty
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_QuestionConstructionEmpty value)? empty,
-    TResult Function(_Error value)? error,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Updated value)? update,
+    TResult Function(QuestionConstructionEmpty value)? empty,
+    TResult Function(QuestionStateError value)? error,
+    TResult Function(QuestionStateLoading value)? loading,
+    TResult Function(QuestionStateSuccess value)? success,
     required TResult orElse(),
   }) {
     if (empty != null) {
@@ -211,32 +210,34 @@ class _$_QuestionConstructionEmpty
   }
 }
 
-abstract class _QuestionConstructionEmpty implements QuestionConstructionState {
-  const factory _QuestionConstructionEmpty() = _$_QuestionConstructionEmpty;
+abstract class QuestionConstructionEmpty implements QuestionConstructionState {
+  const factory QuestionConstructionEmpty() = _$QuestionConstructionEmpty;
 }
 
 /// @nodoc
-abstract class _$$_ErrorCopyWith<$Res> {
-  factory _$$_ErrorCopyWith(_$_Error value, $Res Function(_$_Error) then) =
-      __$$_ErrorCopyWithImpl<$Res>;
+abstract class _$$QuestionStateErrorCopyWith<$Res> {
+  factory _$$QuestionStateErrorCopyWith(_$QuestionStateError value,
+          $Res Function(_$QuestionStateError) then) =
+      __$$QuestionStateErrorCopyWithImpl<$Res>;
   $Res call({Error error});
 }
 
 /// @nodoc
-class __$$_ErrorCopyWithImpl<$Res>
+class __$$QuestionStateErrorCopyWithImpl<$Res>
     extends _$QuestionConstructionStateCopyWithImpl<$Res>
-    implements _$$_ErrorCopyWith<$Res> {
-  __$$_ErrorCopyWithImpl(_$_Error _value, $Res Function(_$_Error) _then)
-      : super(_value, (v) => _then(v as _$_Error));
+    implements _$$QuestionStateErrorCopyWith<$Res> {
+  __$$QuestionStateErrorCopyWithImpl(
+      _$QuestionStateError _value, $Res Function(_$QuestionStateError) _then)
+      : super(_value, (v) => _then(v as _$QuestionStateError));
 
   @override
-  _$_Error get _value => super._value as _$_Error;
+  _$QuestionStateError get _value => super._value as _$QuestionStateError;
 
   @override
   $Res call({
     Object? error = freezed,
   }) {
-    return _then(_$_Error(
+    return _then(_$QuestionStateError(
       error == freezed
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -247,8 +248,10 @@ class __$$_ErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Error with DiagnosticableTreeMixin implements _Error {
-  const _$_Error(this.error);
+class _$QuestionStateError
+    with DiagnosticableTreeMixin
+    implements QuestionStateError {
+  const _$QuestionStateError(this.error);
 
   @override
   final Error error;
@@ -270,7 +273,7 @@ class _$_Error with DiagnosticableTreeMixin implements _Error {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Error &&
+            other is _$QuestionStateError &&
             const DeepCollectionEquality().equals(other.error, error));
   }
 
@@ -280,8 +283,9 @@ class _$_Error with DiagnosticableTreeMixin implements _Error {
 
   @JsonKey(ignore: true)
   @override
-  _$$_ErrorCopyWith<_$_Error> get copyWith =>
-      __$$_ErrorCopyWithImpl<_$_Error>(this, _$identity);
+  _$$QuestionStateErrorCopyWith<_$QuestionStateError> get copyWith =>
+      __$$QuestionStateErrorCopyWithImpl<_$QuestionStateError>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -289,7 +293,7 @@ class _$_Error with DiagnosticableTreeMixin implements _Error {
     required TResult Function() empty,
     required TResult Function(Error error) error,
     required TResult Function() loading,
-    required TResult Function(Question question) update,
+    required TResult Function(Question question) success,
   }) {
     return error(this.error);
   }
@@ -300,7 +304,7 @@ class _$_Error with DiagnosticableTreeMixin implements _Error {
     TResult Function()? empty,
     TResult Function(Error error)? error,
     TResult Function()? loading,
-    TResult Function(Question question)? update,
+    TResult Function(Question question)? success,
   }) {
     return error?.call(this.error);
   }
@@ -311,7 +315,7 @@ class _$_Error with DiagnosticableTreeMixin implements _Error {
     TResult Function()? empty,
     TResult Function(Error error)? error,
     TResult Function()? loading,
-    TResult Function(Question question)? update,
+    TResult Function(Question question)? success,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -323,10 +327,10 @@ class _$_Error with DiagnosticableTreeMixin implements _Error {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_QuestionConstructionEmpty value) empty,
-    required TResult Function(_Error value) error,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Updated value) update,
+    required TResult Function(QuestionConstructionEmpty value) empty,
+    required TResult Function(QuestionStateError value) error,
+    required TResult Function(QuestionStateLoading value) loading,
+    required TResult Function(QuestionStateSuccess value) success,
   }) {
     return error(this);
   }
@@ -334,10 +338,10 @@ class _$_Error with DiagnosticableTreeMixin implements _Error {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_QuestionConstructionEmpty value)? empty,
-    TResult Function(_Error value)? error,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Updated value)? update,
+    TResult Function(QuestionConstructionEmpty value)? empty,
+    TResult Function(QuestionStateError value)? error,
+    TResult Function(QuestionStateLoading value)? loading,
+    TResult Function(QuestionStateSuccess value)? success,
   }) {
     return error?.call(this);
   }
@@ -345,10 +349,10 @@ class _$_Error with DiagnosticableTreeMixin implements _Error {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_QuestionConstructionEmpty value)? empty,
-    TResult Function(_Error value)? error,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Updated value)? update,
+    TResult Function(QuestionConstructionEmpty value)? empty,
+    TResult Function(QuestionStateError value)? error,
+    TResult Function(QuestionStateLoading value)? loading,
+    TResult Function(QuestionStateSuccess value)? success,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -358,37 +362,40 @@ class _$_Error with DiagnosticableTreeMixin implements _Error {
   }
 }
 
-abstract class _Error implements QuestionConstructionState {
-  const factory _Error(final Error error) = _$_Error;
+abstract class QuestionStateError implements QuestionConstructionState {
+  const factory QuestionStateError(final Error error) = _$QuestionStateError;
 
   Error get error => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$$_ErrorCopyWith<_$_Error> get copyWith =>
+  _$$QuestionStateErrorCopyWith<_$QuestionStateError> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_LoadingCopyWith<$Res> {
-  factory _$$_LoadingCopyWith(
-          _$_Loading value, $Res Function(_$_Loading) then) =
-      __$$_LoadingCopyWithImpl<$Res>;
+abstract class _$$QuestionStateLoadingCopyWith<$Res> {
+  factory _$$QuestionStateLoadingCopyWith(_$QuestionStateLoading value,
+          $Res Function(_$QuestionStateLoading) then) =
+      __$$QuestionStateLoadingCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_LoadingCopyWithImpl<$Res>
+class __$$QuestionStateLoadingCopyWithImpl<$Res>
     extends _$QuestionConstructionStateCopyWithImpl<$Res>
-    implements _$$_LoadingCopyWith<$Res> {
-  __$$_LoadingCopyWithImpl(_$_Loading _value, $Res Function(_$_Loading) _then)
-      : super(_value, (v) => _then(v as _$_Loading));
+    implements _$$QuestionStateLoadingCopyWith<$Res> {
+  __$$QuestionStateLoadingCopyWithImpl(_$QuestionStateLoading _value,
+      $Res Function(_$QuestionStateLoading) _then)
+      : super(_value, (v) => _then(v as _$QuestionStateLoading));
 
   @override
-  _$_Loading get _value => super._value as _$_Loading;
+  _$QuestionStateLoading get _value => super._value as _$QuestionStateLoading;
 }
 
 /// @nodoc
 
-class _$_Loading with DiagnosticableTreeMixin implements _Loading {
-  const _$_Loading();
+class _$QuestionStateLoading
+    with DiagnosticableTreeMixin
+    implements QuestionStateLoading {
+  const _$QuestionStateLoading();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -405,7 +412,7 @@ class _$_Loading with DiagnosticableTreeMixin implements _Loading {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Loading);
+        (other.runtimeType == runtimeType && other is _$QuestionStateLoading);
   }
 
   @override
@@ -417,7 +424,7 @@ class _$_Loading with DiagnosticableTreeMixin implements _Loading {
     required TResult Function() empty,
     required TResult Function(Error error) error,
     required TResult Function() loading,
-    required TResult Function(Question question) update,
+    required TResult Function(Question question) success,
   }) {
     return loading();
   }
@@ -428,7 +435,7 @@ class _$_Loading with DiagnosticableTreeMixin implements _Loading {
     TResult Function()? empty,
     TResult Function(Error error)? error,
     TResult Function()? loading,
-    TResult Function(Question question)? update,
+    TResult Function(Question question)? success,
   }) {
     return loading?.call();
   }
@@ -439,7 +446,7 @@ class _$_Loading with DiagnosticableTreeMixin implements _Loading {
     TResult Function()? empty,
     TResult Function(Error error)? error,
     TResult Function()? loading,
-    TResult Function(Question question)? update,
+    TResult Function(Question question)? success,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -451,10 +458,10 @@ class _$_Loading with DiagnosticableTreeMixin implements _Loading {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_QuestionConstructionEmpty value) empty,
-    required TResult Function(_Error value) error,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Updated value) update,
+    required TResult Function(QuestionConstructionEmpty value) empty,
+    required TResult Function(QuestionStateError value) error,
+    required TResult Function(QuestionStateLoading value) loading,
+    required TResult Function(QuestionStateSuccess value) success,
   }) {
     return loading(this);
   }
@@ -462,10 +469,10 @@ class _$_Loading with DiagnosticableTreeMixin implements _Loading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_QuestionConstructionEmpty value)? empty,
-    TResult Function(_Error value)? error,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Updated value)? update,
+    TResult Function(QuestionConstructionEmpty value)? empty,
+    TResult Function(QuestionStateError value)? error,
+    TResult Function(QuestionStateLoading value)? loading,
+    TResult Function(QuestionStateSuccess value)? success,
   }) {
     return loading?.call(this);
   }
@@ -473,10 +480,10 @@ class _$_Loading with DiagnosticableTreeMixin implements _Loading {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_QuestionConstructionEmpty value)? empty,
-    TResult Function(_Error value)? error,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Updated value)? update,
+    TResult Function(QuestionConstructionEmpty value)? empty,
+    TResult Function(QuestionStateError value)? error,
+    TResult Function(QuestionStateLoading value)? loading,
+    TResult Function(QuestionStateSuccess value)? success,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -486,35 +493,36 @@ class _$_Loading with DiagnosticableTreeMixin implements _Loading {
   }
 }
 
-abstract class _Loading implements QuestionConstructionState {
-  const factory _Loading() = _$_Loading;
+abstract class QuestionStateLoading implements QuestionConstructionState {
+  const factory QuestionStateLoading() = _$QuestionStateLoading;
 }
 
 /// @nodoc
-abstract class _$$_UpdatedCopyWith<$Res> {
-  factory _$$_UpdatedCopyWith(
-          _$_Updated value, $Res Function(_$_Updated) then) =
-      __$$_UpdatedCopyWithImpl<$Res>;
+abstract class _$$QuestionStateSuccessCopyWith<$Res> {
+  factory _$$QuestionStateSuccessCopyWith(_$QuestionStateSuccess value,
+          $Res Function(_$QuestionStateSuccess) then) =
+      __$$QuestionStateSuccessCopyWithImpl<$Res>;
   $Res call({Question question});
 
   $QuestionCopyWith<$Res> get question;
 }
 
 /// @nodoc
-class __$$_UpdatedCopyWithImpl<$Res>
+class __$$QuestionStateSuccessCopyWithImpl<$Res>
     extends _$QuestionConstructionStateCopyWithImpl<$Res>
-    implements _$$_UpdatedCopyWith<$Res> {
-  __$$_UpdatedCopyWithImpl(_$_Updated _value, $Res Function(_$_Updated) _then)
-      : super(_value, (v) => _then(v as _$_Updated));
+    implements _$$QuestionStateSuccessCopyWith<$Res> {
+  __$$QuestionStateSuccessCopyWithImpl(_$QuestionStateSuccess _value,
+      $Res Function(_$QuestionStateSuccess) _then)
+      : super(_value, (v) => _then(v as _$QuestionStateSuccess));
 
   @override
-  _$_Updated get _value => super._value as _$_Updated;
+  _$QuestionStateSuccess get _value => super._value as _$QuestionStateSuccess;
 
   @override
   $Res call({
     Object? question = freezed,
   }) {
-    return _then(_$_Updated(
+    return _then(_$QuestionStateSuccess(
       question == freezed
           ? _value.question
           : question // ignore: cast_nullable_to_non_nullable
@@ -532,22 +540,24 @@ class __$$_UpdatedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Updated with DiagnosticableTreeMixin implements _Updated {
-  const _$_Updated(this.question);
+class _$QuestionStateSuccess
+    with DiagnosticableTreeMixin
+    implements QuestionStateSuccess {
+  const _$QuestionStateSuccess(this.question);
 
   @override
   final Question question;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'QuestionConstructionState.update(question: $question)';
+    return 'QuestionConstructionState.success(question: $question)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'QuestionConstructionState.update'))
+      ..add(DiagnosticsProperty('type', 'QuestionConstructionState.success'))
       ..add(DiagnosticsProperty('question', question));
   }
 
@@ -555,7 +565,7 @@ class _$_Updated with DiagnosticableTreeMixin implements _Updated {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Updated &&
+            other is _$QuestionStateSuccess &&
             const DeepCollectionEquality().equals(other.question, question));
   }
 
@@ -565,8 +575,9 @@ class _$_Updated with DiagnosticableTreeMixin implements _Updated {
 
   @JsonKey(ignore: true)
   @override
-  _$$_UpdatedCopyWith<_$_Updated> get copyWith =>
-      __$$_UpdatedCopyWithImpl<_$_Updated>(this, _$identity);
+  _$$QuestionStateSuccessCopyWith<_$QuestionStateSuccess> get copyWith =>
+      __$$QuestionStateSuccessCopyWithImpl<_$QuestionStateSuccess>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -574,9 +585,9 @@ class _$_Updated with DiagnosticableTreeMixin implements _Updated {
     required TResult Function() empty,
     required TResult Function(Error error) error,
     required TResult Function() loading,
-    required TResult Function(Question question) update,
+    required TResult Function(Question question) success,
   }) {
-    return update(question);
+    return success(question);
   }
 
   @override
@@ -585,9 +596,9 @@ class _$_Updated with DiagnosticableTreeMixin implements _Updated {
     TResult Function()? empty,
     TResult Function(Error error)? error,
     TResult Function()? loading,
-    TResult Function(Question question)? update,
+    TResult Function(Question question)? success,
   }) {
-    return update?.call(question);
+    return success?.call(question);
   }
 
   @override
@@ -596,11 +607,11 @@ class _$_Updated with DiagnosticableTreeMixin implements _Updated {
     TResult Function()? empty,
     TResult Function(Error error)? error,
     TResult Function()? loading,
-    TResult Function(Question question)? update,
+    TResult Function(Question question)? success,
     required TResult orElse(),
   }) {
-    if (update != null) {
-      return update(question);
+    if (success != null) {
+      return success(question);
     }
     return orElse();
   }
@@ -608,46 +619,47 @@ class _$_Updated with DiagnosticableTreeMixin implements _Updated {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_QuestionConstructionEmpty value) empty,
-    required TResult Function(_Error value) error,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Updated value) update,
+    required TResult Function(QuestionConstructionEmpty value) empty,
+    required TResult Function(QuestionStateError value) error,
+    required TResult Function(QuestionStateLoading value) loading,
+    required TResult Function(QuestionStateSuccess value) success,
   }) {
-    return update(this);
+    return success(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_QuestionConstructionEmpty value)? empty,
-    TResult Function(_Error value)? error,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Updated value)? update,
+    TResult Function(QuestionConstructionEmpty value)? empty,
+    TResult Function(QuestionStateError value)? error,
+    TResult Function(QuestionStateLoading value)? loading,
+    TResult Function(QuestionStateSuccess value)? success,
   }) {
-    return update?.call(this);
+    return success?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_QuestionConstructionEmpty value)? empty,
-    TResult Function(_Error value)? error,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Updated value)? update,
+    TResult Function(QuestionConstructionEmpty value)? empty,
+    TResult Function(QuestionStateError value)? error,
+    TResult Function(QuestionStateLoading value)? loading,
+    TResult Function(QuestionStateSuccess value)? success,
     required TResult orElse(),
   }) {
-    if (update != null) {
-      return update(this);
+    if (success != null) {
+      return success(this);
     }
     return orElse();
   }
 }
 
-abstract class _Updated implements QuestionConstructionState {
-  const factory _Updated(final Question question) = _$_Updated;
+abstract class QuestionStateSuccess implements QuestionConstructionState {
+  const factory QuestionStateSuccess(final Question question) =
+      _$QuestionStateSuccess;
 
   Question get question => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$$_UpdatedCopyWith<_$_Updated> get copyWith =>
+  _$$QuestionStateSuccessCopyWith<_$QuestionStateSuccess> get copyWith =>
       throw _privateConstructorUsedError;
 }
