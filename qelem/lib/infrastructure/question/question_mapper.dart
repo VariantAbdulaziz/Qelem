@@ -3,6 +3,8 @@ import 'package:qelem/domain/question/question.dart';
 import 'package:qelem/infrastructure/auth/user_model_mapper.dart';
 import 'package:qelem/infrastructure/question/question_dto.dart';
 
+import '../../data/local/entity/question/question_entity.dart';
+
 extension QuestionMapper on QuestionDto {
   Question toQuestion() {
     Vote vote;
@@ -25,4 +27,17 @@ extension QuestionMapper on QuestionDto {
       updatedAt: updatedAt,
     );
   }
+
+  QuestionEntity toQuestionEntity() {
+    return QuestionEntity(
+      id: id,
+      topic: topic,
+      content: content,
+      authorId: author.id,
+      upVotes: upVotes,
+      downVotes: downVotes,
+      userVote: userVote,
+    );
+  }
 }
+

@@ -1,3 +1,4 @@
+import 'package:qelem/data/local/entity/answer/answer_entity.dart';
 import 'package:qelem/domain/answer/answer.dart';
 import 'package:qelem/domain/common/vote.dart';
 import 'package:qelem/infrastructure/answer/answer_dto.dart';
@@ -21,6 +22,18 @@ extension AnswerMapper on AnswerDto {
       userVote: userVote,
       createdAt: createdAt,
       updatedAt: updatedAt,
+    );
+  }
+
+  AnswerEntity toAnswerEntity() {
+    return AnswerEntity(
+      id: id,
+      content: content,
+      questionId: questionId,
+      authorId: author.id,
+      upVotes: upVotes,
+      downVotes: downVotes,
+      userVote: userVote,
     );
   }
 }
