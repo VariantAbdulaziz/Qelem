@@ -2,7 +2,7 @@
 // in qelem/test/login_bloc_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i6;
+import 'dart:async' as _i7;
 
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:qelem/data/local/shared_prefs/shared_prefs_service.dart' as _i3;
@@ -10,7 +10,7 @@ import 'package:qelem/domain/auth/change_password_form.dart' as _i11;
 import 'package:qelem/domain/auth/login_form.dart' as _i10;
 import 'package:qelem/domain/auth/login_response.dart' as _i9;
 import 'package:qelem/domain/auth/registration_form.dart' as _i8;
-import 'package:qelem/domain/auth/user.dart' as _i7;
+import 'package:qelem/domain/auth/user.dart' as _i6;
 import 'package:qelem/infrastructure/auth/auth_api.dart' as _i2;
 import 'package:qelem/infrastructure/auth/auth_repository.dart' as _i5;
 import 'package:qelem/util/either.dart' as _i4;
@@ -56,36 +56,40 @@ class MockAuthRepository extends _i1.Mock implements _i5.AuthRepository {
       .noSuchMethod(Invocation.setter(#sharedPrefsService, _sharedPrefsService),
           returnValueForMissingStub: null);
   @override
-  _i6.Future<_i4.Either<_i7.User>> register(
+  set authenticatedUser(_i6.User? _authenticatedUser) => super.noSuchMethod(
+      Invocation.setter(#authenticatedUser, _authenticatedUser),
+      returnValueForMissingStub: null);
+  @override
+  _i7.Future<_i4.Either<_i6.User>> register(
           {_i8.RegistrationForm? registerForm}) =>
       (super.noSuchMethod(
               Invocation.method(#register, [], {#registerForm: registerForm}),
               returnValue:
-                  Future<_i4.Either<_i7.User>>.value(_FakeEither_2<_i7.User>()))
-          as _i6.Future<_i4.Either<_i7.User>>);
+                  Future<_i4.Either<_i6.User>>.value(_FakeEither_2<_i6.User>()))
+          as _i7.Future<_i4.Either<_i6.User>>);
   @override
-  _i6.Future<_i4.Either<_i9.LoginReponse>> login({_i10.LoginForm? loginForm}) =>
+  _i7.Future<_i4.Either<_i9.LoginReponse>> login({_i10.LoginForm? loginForm}) =>
       (super.noSuchMethod(
               Invocation.method(#login, [], {#loginForm: loginForm}),
               returnValue: Future<_i4.Either<_i9.LoginReponse>>.value(
                   _FakeEither_2<_i9.LoginReponse>()))
-          as _i6.Future<_i4.Either<_i9.LoginReponse>>);
+          as _i7.Future<_i4.Either<_i9.LoginReponse>>);
   @override
-  _i6.Future<_i4.Either<void>> changePassword(
+  _i7.Future<_i4.Either<void>> changePassword(
           {_i11.ChangePasswordForm? changePasswordForm}) =>
       (super.noSuchMethod(
           Invocation.method(
               #changePassword, [], {#changePasswordForm: changePasswordForm}),
           returnValue:
-              Future<_i4.Either<void>>.value(_FakeEither_2<void>())) as _i6
+              Future<_i4.Either<void>>.value(_FakeEither_2<void>())) as _i7
           .Future<_i4.Either<void>>);
   @override
-  _i6.Future<String?> getAuthToken() =>
+  _i7.Future<String?> getAuthToken() =>
       (super.noSuchMethod(Invocation.method(#getAuthToken, []),
-          returnValue: Future<String?>.value()) as _i6.Future<String?>);
+          returnValue: Future<String?>.value()) as _i7.Future<String?>);
   @override
-  _i6.Future<void> logout() =>
+  _i7.Future<void> logout() =>
       (super.noSuchMethod(Invocation.method(#logout, []),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i7.Future<void>);
 }

@@ -4,13 +4,13 @@ import 'package:qelem/application/auth/auth_bloc.dart';
 import 'package:qelem/application/auth/auth_state.dart';
 import 'package:qelem/presentation/pages/boarding/register_login_screen.dart';
 import 'package:qelem/presentation/pages/my_profile/my_profile_edit/edit_profile_page.dart';
+import 'package:qelem/presentation/pages/question/question_detail/question_detail_page.dart';
 import 'package:qelem/presentation/routes/routes.dart';
 
 import '../common/constants.dart';
 import '../common/qelem_theme.dart';
 import 'pages/change_password_form/change_password_screen.dart';
 import 'pages/main_screen/main_screen.dart';
-import 'pages/question/question_detail/question_detail_screen.dart';
 import 'pages/question/question_edit_form/edit_question_screen.dart';
 import 'pages/question/question_post_form/post_question_screen.dart';
 import 'pages/register/registration_screen.dart';
@@ -89,10 +89,10 @@ class App extends StatelessWidget {
           },
         ),
         GoRoute(
-          path: '${Routes.questionDetail}/:qid',
+          path: '${Routes.questionDetail}/:id',
           builder: (context, state) {
-            final qid = int.parse(state.params['qid']!);
-            return QuestionDetailScreen(qid: qid);
+            final qid = int.parse(state.params['id']!);
+            return QuestionDetailPage(questionId: qid);
           },
         ),
       ],

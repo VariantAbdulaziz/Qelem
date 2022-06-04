@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+import 'package:qelem/domain/common/vote.dart';
 import 'package:qelem/infrastructure/answer/answer_dto.dart';
 import 'package:qelem/infrastructure/answer/answer_form_dto.dart';
 import 'package:qelem/infrastructure/common/qelem_http_exception.dart';
+import 'package:qelem/infrastructure/common/vote_mapper.dart';
 import 'package:qelem/util/my_http_client.dart';
 
 class AnswerApi {
@@ -76,8 +78,8 @@ class AnswerApi {
   }
 
   Future<AnswerDto> updateAnswer(int answerId, String content) async {
-    var response = await _httpClient
-        .patch('answers/$answerId', body: {'content': content});
+    var response = await _httpClient.put('answers/$answerId',
+        body: json.encode({'content': content}));
 
     if (response.statusCode == 200) {
       return AnswerDto.fromJson(json.decode(response.body));
@@ -88,35 +90,12 @@ class AnswerApi {
     }
   }
 
-  Future<void> upvoteAnswer(int answerId) async {
-    var response = await _httpClient.post('answers/$answerId/upvote');
+  Future<AnswerDto> voteAnswer(int answerId, Vote vote) async {
+    var response = await _httpClient.put('answers/$answerId/vote',
+        body: json.encode(vote.toVoteDto().toJson()));
 
-    if (response.statusCode == 200) {
-      return;
-    } else {
-      throw QHttpException(
-          json.decode(response.body)['message'] ?? "Unknown error",
-          response.statusCode);
-    }
-  }
-
-  Future<void> downvoteAnswer(int answerId) async {
-    var response = await _httpClient.post('answers/$answerId/downvote');
-
-    if (response.statusCode == 200) {
-      return;
-    } else {
-      throw QHttpException(
-          json.decode(response.body)['message'] ?? "Unknown error",
-          response.statusCode);
-    }
-  }
-
-  Future<void> unvoteAnswer(int answerId) async {
-    var response = await _httpClient.delete('answers/$answerId/unvote');
-
-    if (response.statusCode == 200) {
-      return;
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return AnswerDto.fromJson(json.decode(response.body));
     } else {
       throw QHttpException(
           json.decode(response.body)['message'] ?? "Unknown error",
