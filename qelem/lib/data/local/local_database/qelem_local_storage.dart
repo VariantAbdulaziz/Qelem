@@ -27,7 +27,17 @@ class DatabaseHelper {
 
   Future _onCreate(Database db, int version) async {
     await db.execute('''
-      CREATE TABLE question
+      CREATE TABLE user (
+        id INTEGER PRIMARY KEY,
+        user_name TEXT NOT NULL,
+        first_name TEXT NOT NULL,
+        last_name TEXT NOT NULL,
+        profile_picture TEXT NOT NULL)
+      ''');
+
+
+    await db.execute('''
+      CREATE TABLE question (
         id INTEGER PRIMARY KEY,
         topic TEXT NOT NULL,
         content TEXT NOT NULL,
@@ -36,20 +46,13 @@ class DatabaseHelper {
         user_vote INTEGER NOT NULL,
         created_at TEXT NOT NULL,
         updated_at TEXT NOT NULL,
-        FOREIGN KEY (author_id INTEGER NOT NULL)
+        author_id INTEGER NOT NULL,
+        FOREIGN KEY (author_id)
+        REFERENCES user(id))
       ''');
 
     await db.execute('''
-      CREATE TABLE user
-        id INTEGER PRIMARY KEY,
-        user_name TEXT NOT NULL,
-        first_name TEXT NOT NULL,
-        last_name TEXT NOT NULL,
-        profile_picture TEXT NOT NULL
-      ''');
-
-    await db.execute('''
-      CREATE TABLE answer
+      CREATE TABLE answer (
         id INTEGER PRIMARY KEY,
         content TEXT NOT NULL,
         up_votes INTEGER NOT NULL,
@@ -57,8 +60,12 @@ class DatabaseHelper {
         user_vote INTEGER NOT NULL,
         created_at TEXT NOT NULL,
         updated_at TEXT NOT NULL,
-        FOREIGN KEY (question_id INTEGER NOT NULL)
-        FOREIGN KEY (author_id INTEGER NOT NULL)
+        question_id INTEGER NOT NULL, 
+        author_id INTEGER NOT NULL,
+        FOREIGN KEY (question_id)
+        REFERENCES question(id),
+        FOREIGN KEY (author_id)
+        REFERENCES user(id) )
       ''');
   }
 
@@ -140,7 +147,7 @@ class DatabaseHelper {
   Future<void> addQuestions(List<QuestionDto> questionDtoList) async {
     final Database db = await database;
     await db.transaction((txn) async {
-      final batch = db.batch();
+      final batch = txn.batch();
 
       for (var e in questionDtoList) {
         final List<Map<String, dynamic>> questionsList =
