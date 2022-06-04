@@ -135,8 +135,19 @@ class AnswerRepository {
 
   Future<Either<List<Answer>>> getAnswersByQuestionId(int questionId) async {
     try {
-      List<AnswerDto> answers = await answerApi.getAnswerByQuestionId(questionId);
-      return Either(val: answers.map((answer) => answer.toAnswer()).toList());
+      List<Answer> finalResult = [];
+      List<AnswerEntity> answers = await databaseHelper.getAnswers(questionId);
+      if (answers.isEmpty) {
+        List<AnswerDto> answer = await answerApi.getAnswerByQuestionId(questionId);
+        await databaseHelper.addAnswers(answer);
+      }
+      answers = await databaseHelper.getAnswers(questionId);
+      for (var e in answers) {
+        var user = await databaseHelper.getUser(e.authorId);
+        e.toAnswer(user!.toUser());
+        finalResult.add(e.toAnswer(user.toUser()));
+      }
+      return Either(val: finalResult);
     } on QHttpException catch (exception) {
       return Either(error: Error(exception.message));
     } on SocketException catch (_) {
