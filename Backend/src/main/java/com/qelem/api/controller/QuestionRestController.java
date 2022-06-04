@@ -101,11 +101,18 @@ public class QuestionRestController {
     @GetMapping()
     public List<QuestionDto> allQuestions(@RequestParam(name = "page", defaultValue = "0") int page,
             @RequestParam(name = "size", defaultValue = "10") int size,
-            @RequestParam(name = "sort", defaultValue = "id") String sort) {
+            @RequestParam(name = "sort", defaultValue = "id") String sort,
+            @RequestParam(name = "authorId", required = false) Long authorId) {
         PageRequest pageable = PageRequest.of(page, size,
                 Sort.by("id").descending());
 
-        List<QuestionModel> questions = questionRepository.findAll(pageable).toList();
+        List<QuestionModel> questions;
+
+        if (authorId != null) {
+            questions = questionRepository.findByAuthorId(authorId, pageable).toList();
+        } else {
+            questions = questionRepository.findAll(pageable).toList();
+        }
 
         return questions.stream().map(this::questionDtoFromQuestionModel)
                 .collect(java.util.stream.Collectors.toList());
@@ -190,9 +197,9 @@ public class QuestionRestController {
         log.info("Question with id {} deleted", id);
     }
 
-
     @PutMapping(path = "/{id}/vote", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<QuestionDto> voteQuestion(@PathVariable("id") Long id, @RequestBody @Valid QuestionVote questionVote) {
+    public ResponseEntity<QuestionDto> voteQuestion(@PathVariable("id") Long id,
+            @RequestBody @Valid QuestionVote questionVote) {
         UserModel user = loggedInUser();
 
         // finding the question from the question database based on the id
@@ -201,7 +208,7 @@ public class QuestionRestController {
 
         // find the vote by the user and question
         Optional<QuestionVote> vote = questionVoteRepository.findByQuestionAndAuthor(question, user);
-        
+
         int responseStatus = vote.isPresent() ? HttpStatus.OK.value() : HttpStatus.CREATED.value();
 
         // if the user has already voted, update the vote
