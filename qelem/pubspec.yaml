@@ -46,6 +46,8 @@ dependencies:
   injectable: ^1.5.3
   json_annotation: ^4.5.0
   shared_preferences: "2.0.15"
+  sqflite: ^2.0.2+1
+  path_provider: ^2.0.10
 
 dev_dependencies:
   flutter_test:
