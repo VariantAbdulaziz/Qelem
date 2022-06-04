@@ -82,7 +82,6 @@ class DatabaseHelper {
   Future<QuestionEntity?> getQuestion(int id) async {
     debugPrint('getQuestion: \n\n\n\n\n\n\n');
     final Database db = await database;
-    // db.insert("question", values)
     final List<Map<String, dynamic>> questionsList =
         await db.query("question", where: "id = ?", whereArgs: [id]);
     QuestionEntity? questionEntity =
