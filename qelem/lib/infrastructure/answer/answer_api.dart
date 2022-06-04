@@ -86,7 +86,7 @@ class AnswerApi {
     }
   }
 
-  Future<void> downvoteAnswer(int answerId) async {
+  Future<void> downVoteAnswer(int answerId) async {
     var response = await _httpClient.post('answers/$answerId/downvote');
 
     if (response.statusCode == 200) {
@@ -98,7 +98,7 @@ class AnswerApi {
     }
   }
 
-  Future<void> unvoteAnswer(int answerId) async {
+  Future<void> unVoteAnswer(int answerId) async {
     var response = await _httpClient.delete('answers/$answerId/unvote');
 
     if (response.statusCode == 200) {
