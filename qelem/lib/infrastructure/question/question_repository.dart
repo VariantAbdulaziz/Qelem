@@ -63,7 +63,6 @@ class QuestionRepository {
       }
       var user = await databaseHelper.getUser(result!.authorId);
       finalResult = result.toQuestion(user!.toUser());
-
       return Either(val: finalResult);
     } on QHttpException catch (e) {
       return Either(error: Error(e.message));
@@ -135,6 +134,7 @@ class QuestionRepository {
     try {
       QuestionDto updatedQuestion =
           await questionApi.voteQuestion(questionId, vote);
+      await databaseHelper.updateQuestion(updatedQuestion.toQuestionEntity());
       return Either(val: updatedQuestion.toQuestion());
     } on QHttpException catch (exception) {
       return Either(error: Error(exception.message));
