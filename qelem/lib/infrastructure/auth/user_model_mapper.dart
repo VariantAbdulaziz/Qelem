@@ -2,7 +2,7 @@ import 'package:qelem/common/constants.dart';
 import 'package:qelem/domain/auth/user.dart';
 import 'package:qelem/infrastructure/auth/user_dto.dart';
 
-import '../../data/local/entity/user/user_entity.dart';
+import '../user/local/user_entity.dart';
 
 extension UserMapper on UserDto {
   User toUser() {
