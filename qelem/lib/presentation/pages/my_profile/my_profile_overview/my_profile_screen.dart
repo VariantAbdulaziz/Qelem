@@ -87,7 +87,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
         color: Colors.black45,
       ),
       InkWell(
-          onTap: () => context.push('/edit-profile'),
+          onTap: () => context.go('/edit-profile'),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Row(

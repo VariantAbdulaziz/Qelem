@@ -70,6 +70,10 @@ class App extends StatelessWidget {
           builder: (context, state) => const EditProfilePage(),
         ),
         GoRoute(
+          path: Routes.myProfile,
+          builder: (context, state) => const MainScreen(index: 2,),
+        ),
+        GoRoute(
           path: Routes.register,
           builder: (context, state) => const RegistrationScreen(),
         ),
