@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:qelem/domain/answer/answer.dart';
 import 'package:qelem/domain/answer/answer_form.dart';
+import 'package:qelem/domain/answer/answer_repository_interface.dart';
 import 'package:qelem/domain/common/vote.dart';
 import 'package:qelem/infrastructure/answer/answer_api.dart';
 import 'package:qelem/infrastructure/answer/answer_dto.dart';
@@ -12,10 +13,11 @@ import 'package:qelem/infrastructure/common/qelem_http_exception.dart';
 import 'package:qelem/util/either.dart';
 import 'package:qelem/util/error.dart';
 
-class AnswerRepository {
+class AnswerRepository implements AnswerRepositoryInterface {
   final AnswerApi answerApi;
   AnswerRepository(this.answerApi);
 
+  @override
   Future<Either<List<Answer>>> getAllAnswers() async {
     try {
       List<AnswerDto> answerDto = await answerApi.getAllAnswers();
@@ -31,6 +33,7 @@ class AnswerRepository {
     }
   }
 
+  @override
   Future<Either<Answer>> getAnswerById(int answerId) async {
     try {
       AnswerDto answerDto = await answerApi.getAnswerById(answerId);
@@ -47,6 +50,7 @@ class AnswerRepository {
     }
   }
 
+  @override
   Future<Either<Answer>> createAnswer({required AnswerForm answerForm}) async {
     try {
       AnswerDto answer = await answerApi.createAnswer(answerForm.toDto());
@@ -63,6 +67,7 @@ class AnswerRepository {
     }
   }
 
+  @override
   Future<Either<void>> deleteAnswer(int answerId) async {
     try {
       await answerApi.deleteAnswer(answerId);
@@ -79,6 +84,7 @@ class AnswerRepository {
     }
   }
 
+  @override
   Future<Either<Answer>> updateAnswer(Answer answer) async {
     try {
       AnswerDto updatedAnswer =
@@ -96,6 +102,7 @@ class AnswerRepository {
     }
   }
 
+  @override
   Future<Either<Answer>> voteAnswer(int answerId, Vote vote) async {
     try {
       AnswerDto updatedAnswer = await answerApi.voteAnswer(answerId, vote);
@@ -112,6 +119,7 @@ class AnswerRepository {
     }
   }
 
+  @override
   Future<Either<List<Answer>>> getAnswersByQuestionId(int questionId) async {
     try {
       List<AnswerDto> answers =
