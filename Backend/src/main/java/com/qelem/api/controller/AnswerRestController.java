@@ -5,6 +5,23 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.qelem.api.model.AnswerModel;
 import com.qelem.api.model.AnswerVote;
 import com.qelem.api.model.QuestionModel;
@@ -15,25 +32,8 @@ import com.qelem.api.repository.QuestionRepository;
 import com.qelem.api.repository.UserRepository;
 import com.qelem.api.restdto.AnswerDto;
 import com.qelem.api.restdto.AnswerForm;
-import com.qelem.api.util.NoVoteFoundException;
 import com.qelem.api.util.ResourceNotFoundException;
 import com.qelem.api.util.UnauthorizedAccess;
-
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -117,10 +117,40 @@ public class AnswerRestController {
         return answerDtoFromAnswerModel(answer);
     }
 
-    @PatchMapping(path = "/{id}", consumes = "application/json", produces = "application/json")
+    @PutMapping(path = "/{id}/vote", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<AnswerDto> voteAnswer(@PathVariable("id") Long id, @RequestBody @Valid AnswerVote answerVote) {
+        UserModel user = loggedInUser();
+
+        // finding the answer from the answer database based on the id
+        AnswerModel answer = answerRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Answer with id " + id + " not found"));
+
+        // find the vote by the user and answer
+        Optional<AnswerVote> vote = answerVoteRepository.findByAnswerAndAuthor(answer, user);
+        
+        int responseStatus = vote.isPresent() ? HttpStatus.OK.value() : HttpStatus.CREATED.value();
+
+        // if the user has already voted, update the vote
+        if (vote.isPresent()) {
+            vote.get().setVote(answerVote.getVote());
+        } else {
+            // if the user has not voted, create a new vote
+            AnswerVote newVote = new AnswerVote();
+            newVote.setAnswer(answer);
+            newVote.setAuthor(user);
+            newVote.setVote(answerVote.getVote());
+            answerVoteRepository.save(newVote);
+        }
+
+        // saving the answer to the answer database
+        answer = answerRepository.save(answer);
+        return ResponseEntity.status(responseStatus).body(answerDtoFromAnswerModel(answer));
+    }
+
+    @PutMapping(path = "/{id}", consumes = "application/json", produces = "application/json")
     public AnswerDto editAnswer(
             @PathVariable("id") Long id,
-            @RequestBody @Valid AnswerForm answerForm) {
+            @RequestBody @Valid AnswerDto answerDto) {
         UserModel user = loggedInUser();
 
         // find the answer by id or throw 404
@@ -133,7 +163,7 @@ public class AnswerRestController {
             throw new UnauthorizedAccess("You are not authorized to update this answer");
         }
 
-        answer.setContent(answerForm.getContent());
+        answer.setContent(answerDto.getContent());
 
         answer = answerRepository.save(answer);
         return answerDtoFromAnswerModel(answer);
@@ -154,88 +184,5 @@ public class AnswerRestController {
         }
 
         answerRepository.delete(answer);
-    }
-
-    // Voting
-
-    @PostMapping("/{id}/upvote")
-    public void upVoteAnswer(@PathVariable("id") Long id) {
-        UserModel user = loggedInUser();
-        log.info("Upvote answer request with id {}", id);
-
-        // find the answer by id or throw 404
-        AnswerModel answer = answerRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Answer with id " + id + " not found"));
-
-        // find the vote by the user and answer
-        Optional<AnswerVote> vote = answerVoteRepository.findByAnswerAndAuthor(answer, user);
-
-        // if the user has already voted, update the vote
-        if (vote.isPresent() && vote.get().getVote() != 1) {
-            AnswerVote answerVote = vote.get();
-            answerVote.setVote(1);
-            answerVoteRepository.save(answerVote);
-            log.info("Answer with id {} upvoted", id);
-        } else {
-            // if the user has not voted, create a new vote
-            AnswerVote answerVote = new AnswerVote();
-            answerVote.setAnswer(answer);
-            answerVote.setAuthor(user);
-            answerVote.setVote(1);
-            answerVoteRepository.save(answerVote);
-            log.info("Answer with id {} upvoted", id);
-        }
-    }
-
-    @PostMapping("/{id}/downvote")
-    public void downVoteAnswer(@PathVariable("id") Long id) {
-        UserModel user = loggedInUser();
-        log.info("Downvote answer request with id {}", id);
-
-        // find the answer by id or throw 404
-        AnswerModel answer = answerRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Answer with id " + id + " not found"));
-
-        // find the vote by the user and answer
-        Optional<AnswerVote> vote = answerVoteRepository.findByAnswerAndAuthor(answer, user);
-
-        // if the user has already voted, update the vote
-        if (vote.isPresent() && vote.get().getVote() != -1) {
-            AnswerVote answerVote = vote.get();
-            answerVote.setVote(-1);
-            answerVoteRepository.save(answerVote);
-            log.info("Answer with id {} downvoted", id);
-        } else {
-            // if the user has not voted, create a new vote
-            AnswerVote answerVote = new AnswerVote();
-            answerVote.setAnswer(answer);
-            answerVote.setAuthor(user);
-            answerVote.setVote(-1);
-            answerVoteRepository.save(answerVote);
-            log.info("Answer with id {} downvoted", id);
-        }
-    }
-
-    @PostMapping("/{id}/unvote")
-    public void unVoteAnswer(@PathVariable("id") Long id) {
-        UserModel user = loggedInUser();
-        log.info("Unvote answer with id {} request", id);
-
-        // find the answer by id or throw 404
-        AnswerModel answer = answerRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Answer with id " + id + " not found"));
-
-        // find the vote by the user and answer
-        AnswerVote vote = answerVoteRepository.findByAnswerAndAuthor(answer, user).orElseThrow(
-                () -> new NoVoteFoundException("User has not votted this answer"));
-
-        Boolean isUpvote = vote.getVote() == 1;
-        answerVoteRepository.delete(vote);
-
-        if (isUpvote) {
-            log.info("Answer with id {} un upvoted", id);
-        } else {
-            log.info("Answer with id {} un downvoted", id);
-        }
     }
 }

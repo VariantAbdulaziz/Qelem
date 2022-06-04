@@ -42,4 +42,14 @@ class ProfileApi {
           response.statusCode);
     }
   }
+
+  Future<void> deleteAccount() async {
+    var response = await _httpClient.delete("profile");
+
+    if (response.statusCode != 204) {
+      throw QHttpException(
+          json.decode(response.body)['message'] ?? "Unknown error",
+          response.statusCode);
+    }
+  }
 }
