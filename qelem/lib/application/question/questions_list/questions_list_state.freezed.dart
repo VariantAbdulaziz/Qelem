@@ -21,8 +21,7 @@ mixin _$QuestionsListState {
     required TResult Function() initial,
     required TResult Function(Error error) error,
     required TResult Function() loading,
-    required TResult Function() empty,
-    required TResult Function(List<Question> questions, double offset) success,
+    required TResult Function(List<Question> questions) success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,8 +29,7 @@ mixin _$QuestionsListState {
     TResult Function()? initial,
     TResult Function(Error error)? error,
     TResult Function()? loading,
-    TResult Function()? empty,
-    TResult Function(List<Question> questions, double offset)? success,
+    TResult Function(List<Question> questions)? success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -39,36 +37,32 @@ mixin _$QuestionsListState {
     TResult Function()? initial,
     TResult Function(Error error)? error,
     TResult Function()? loading,
-    TResult Function()? empty,
-    TResult Function(List<Question> questions, double offset)? success,
+    TResult Function(List<Question> questions)? success,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Error value) error,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Empty value) empty,
-    required TResult Function(_Success value) success,
+    required TResult Function(QuestionsListStateInitial value) initial,
+    required TResult Function(QuestionsListStateError value) error,
+    required TResult Function(QuestionsListStateLoading value) loading,
+    required TResult Function(QuestionsListStateSuccess value) success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Error value)? error,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Empty value)? empty,
-    TResult Function(_Success value)? success,
+    TResult Function(QuestionsListStateInitial value)? initial,
+    TResult Function(QuestionsListStateError value)? error,
+    TResult Function(QuestionsListStateLoading value)? loading,
+    TResult Function(QuestionsListStateSuccess value)? success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Error value)? error,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Empty value)? empty,
-    TResult Function(_Success value)? success,
+    TResult Function(QuestionsListStateInitial value)? initial,
+    TResult Function(QuestionsListStateError value)? error,
+    TResult Function(QuestionsListStateLoading value)? loading,
+    TResult Function(QuestionsListStateSuccess value)? success,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -92,27 +86,30 @@ class _$QuestionsListStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$$_InitialCopyWith<$Res> {
-  factory _$$_InitialCopyWith(
-          _$_Initial value, $Res Function(_$_Initial) then) =
-      __$$_InitialCopyWithImpl<$Res>;
+abstract class _$$QuestionsListStateInitialCopyWith<$Res> {
+  factory _$$QuestionsListStateInitialCopyWith(
+          _$QuestionsListStateInitial value,
+          $Res Function(_$QuestionsListStateInitial) then) =
+      __$$QuestionsListStateInitialCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitialCopyWithImpl<$Res>
+class __$$QuestionsListStateInitialCopyWithImpl<$Res>
     extends _$QuestionsListStateCopyWithImpl<$Res>
-    implements _$$_InitialCopyWith<$Res> {
-  __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
-      : super(_value, (v) => _then(v as _$_Initial));
+    implements _$$QuestionsListStateInitialCopyWith<$Res> {
+  __$$QuestionsListStateInitialCopyWithImpl(_$QuestionsListStateInitial _value,
+      $Res Function(_$QuestionsListStateInitial) _then)
+      : super(_value, (v) => _then(v as _$QuestionsListStateInitial));
 
   @override
-  _$_Initial get _value => super._value as _$_Initial;
+  _$QuestionsListStateInitial get _value =>
+      super._value as _$QuestionsListStateInitial;
 }
 
 /// @nodoc
 
-class _$_Initial implements _Initial {
-  const _$_Initial();
+class _$QuestionsListStateInitial implements QuestionsListStateInitial {
+  const _$QuestionsListStateInitial();
 
   @override
   String toString() {
@@ -122,7 +119,8 @@ class _$_Initial implements _Initial {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initial);
+        (other.runtimeType == runtimeType &&
+            other is _$QuestionsListStateInitial);
   }
 
   @override
@@ -134,8 +132,7 @@ class _$_Initial implements _Initial {
     required TResult Function() initial,
     required TResult Function(Error error) error,
     required TResult Function() loading,
-    required TResult Function() empty,
-    required TResult Function(List<Question> questions, double offset) success,
+    required TResult Function(List<Question> questions) success,
   }) {
     return initial();
   }
@@ -146,8 +143,7 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function(Error error)? error,
     TResult Function()? loading,
-    TResult Function()? empty,
-    TResult Function(List<Question> questions, double offset)? success,
+    TResult Function(List<Question> questions)? success,
   }) {
     return initial?.call();
   }
@@ -158,8 +154,7 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function(Error error)? error,
     TResult Function()? loading,
-    TResult Function()? empty,
-    TResult Function(List<Question> questions, double offset)? success,
+    TResult Function(List<Question> questions)? success,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -171,11 +166,10 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Error value) error,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Empty value) empty,
-    required TResult Function(_Success value) success,
+    required TResult Function(QuestionsListStateInitial value) initial,
+    required TResult Function(QuestionsListStateError value) error,
+    required TResult Function(QuestionsListStateLoading value) loading,
+    required TResult Function(QuestionsListStateSuccess value) success,
   }) {
     return initial(this);
   }
@@ -183,11 +177,10 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Error value)? error,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Empty value)? empty,
-    TResult Function(_Success value)? success,
+    TResult Function(QuestionsListStateInitial value)? initial,
+    TResult Function(QuestionsListStateError value)? error,
+    TResult Function(QuestionsListStateLoading value)? loading,
+    TResult Function(QuestionsListStateSuccess value)? success,
   }) {
     return initial?.call(this);
   }
@@ -195,11 +188,10 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Error value)? error,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Empty value)? empty,
-    TResult Function(_Success value)? success,
+    TResult Function(QuestionsListStateInitial value)? initial,
+    TResult Function(QuestionsListStateError value)? error,
+    TResult Function(QuestionsListStateLoading value)? loading,
+    TResult Function(QuestionsListStateSuccess value)? success,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -209,32 +201,35 @@ class _$_Initial implements _Initial {
   }
 }
 
-abstract class _Initial implements QuestionsListState {
-  const factory _Initial() = _$_Initial;
+abstract class QuestionsListStateInitial implements QuestionsListState {
+  const factory QuestionsListStateInitial() = _$QuestionsListStateInitial;
 }
 
 /// @nodoc
-abstract class _$$_ErrorCopyWith<$Res> {
-  factory _$$_ErrorCopyWith(_$_Error value, $Res Function(_$_Error) then) =
-      __$$_ErrorCopyWithImpl<$Res>;
+abstract class _$$QuestionsListStateErrorCopyWith<$Res> {
+  factory _$$QuestionsListStateErrorCopyWith(_$QuestionsListStateError value,
+          $Res Function(_$QuestionsListStateError) then) =
+      __$$QuestionsListStateErrorCopyWithImpl<$Res>;
   $Res call({Error error});
 }
 
 /// @nodoc
-class __$$_ErrorCopyWithImpl<$Res>
+class __$$QuestionsListStateErrorCopyWithImpl<$Res>
     extends _$QuestionsListStateCopyWithImpl<$Res>
-    implements _$$_ErrorCopyWith<$Res> {
-  __$$_ErrorCopyWithImpl(_$_Error _value, $Res Function(_$_Error) _then)
-      : super(_value, (v) => _then(v as _$_Error));
+    implements _$$QuestionsListStateErrorCopyWith<$Res> {
+  __$$QuestionsListStateErrorCopyWithImpl(_$QuestionsListStateError _value,
+      $Res Function(_$QuestionsListStateError) _then)
+      : super(_value, (v) => _then(v as _$QuestionsListStateError));
 
   @override
-  _$_Error get _value => super._value as _$_Error;
+  _$QuestionsListStateError get _value =>
+      super._value as _$QuestionsListStateError;
 
   @override
   $Res call({
     Object? error = freezed,
   }) {
-    return _then(_$_Error(
+    return _then(_$QuestionsListStateError(
       error == freezed
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -245,8 +240,8 @@ class __$$_ErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Error implements _Error {
-  const _$_Error(this.error);
+class _$QuestionsListStateError implements QuestionsListStateError {
+  const _$QuestionsListStateError(this.error);
 
   @override
   final Error error;
@@ -260,7 +255,7 @@ class _$_Error implements _Error {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Error &&
+            other is _$QuestionsListStateError &&
             const DeepCollectionEquality().equals(other.error, error));
   }
 
@@ -270,8 +265,9 @@ class _$_Error implements _Error {
 
   @JsonKey(ignore: true)
   @override
-  _$$_ErrorCopyWith<_$_Error> get copyWith =>
-      __$$_ErrorCopyWithImpl<_$_Error>(this, _$identity);
+  _$$QuestionsListStateErrorCopyWith<_$QuestionsListStateError> get copyWith =>
+      __$$QuestionsListStateErrorCopyWithImpl<_$QuestionsListStateError>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -279,8 +275,7 @@ class _$_Error implements _Error {
     required TResult Function() initial,
     required TResult Function(Error error) error,
     required TResult Function() loading,
-    required TResult Function() empty,
-    required TResult Function(List<Question> questions, double offset) success,
+    required TResult Function(List<Question> questions) success,
   }) {
     return error(this.error);
   }
@@ -291,8 +286,7 @@ class _$_Error implements _Error {
     TResult Function()? initial,
     TResult Function(Error error)? error,
     TResult Function()? loading,
-    TResult Function()? empty,
-    TResult Function(List<Question> questions, double offset)? success,
+    TResult Function(List<Question> questions)? success,
   }) {
     return error?.call(this.error);
   }
@@ -303,8 +297,7 @@ class _$_Error implements _Error {
     TResult Function()? initial,
     TResult Function(Error error)? error,
     TResult Function()? loading,
-    TResult Function()? empty,
-    TResult Function(List<Question> questions, double offset)? success,
+    TResult Function(List<Question> questions)? success,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -316,11 +309,10 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Error value) error,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Empty value) empty,
-    required TResult Function(_Success value) success,
+    required TResult Function(QuestionsListStateInitial value) initial,
+    required TResult Function(QuestionsListStateError value) error,
+    required TResult Function(QuestionsListStateLoading value) loading,
+    required TResult Function(QuestionsListStateSuccess value) success,
   }) {
     return error(this);
   }
@@ -328,11 +320,10 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Error value)? error,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Empty value)? empty,
-    TResult Function(_Success value)? success,
+    TResult Function(QuestionsListStateInitial value)? initial,
+    TResult Function(QuestionsListStateError value)? error,
+    TResult Function(QuestionsListStateLoading value)? loading,
+    TResult Function(QuestionsListStateSuccess value)? success,
   }) {
     return error?.call(this);
   }
@@ -340,11 +331,10 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Error value)? error,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Empty value)? empty,
-    TResult Function(_Success value)? success,
+    TResult Function(QuestionsListStateInitial value)? initial,
+    TResult Function(QuestionsListStateError value)? error,
+    TResult Function(QuestionsListStateLoading value)? loading,
+    TResult Function(QuestionsListStateSuccess value)? success,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -354,37 +344,41 @@ class _$_Error implements _Error {
   }
 }
 
-abstract class _Error implements QuestionsListState {
-  const factory _Error(final Error error) = _$_Error;
+abstract class QuestionsListStateError implements QuestionsListState {
+  const factory QuestionsListStateError(final Error error) =
+      _$QuestionsListStateError;
 
   Error get error => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$$_ErrorCopyWith<_$_Error> get copyWith =>
+  _$$QuestionsListStateErrorCopyWith<_$QuestionsListStateError> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_LoadingCopyWith<$Res> {
-  factory _$$_LoadingCopyWith(
-          _$_Loading value, $Res Function(_$_Loading) then) =
-      __$$_LoadingCopyWithImpl<$Res>;
+abstract class _$$QuestionsListStateLoadingCopyWith<$Res> {
+  factory _$$QuestionsListStateLoadingCopyWith(
+          _$QuestionsListStateLoading value,
+          $Res Function(_$QuestionsListStateLoading) then) =
+      __$$QuestionsListStateLoadingCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_LoadingCopyWithImpl<$Res>
+class __$$QuestionsListStateLoadingCopyWithImpl<$Res>
     extends _$QuestionsListStateCopyWithImpl<$Res>
-    implements _$$_LoadingCopyWith<$Res> {
-  __$$_LoadingCopyWithImpl(_$_Loading _value, $Res Function(_$_Loading) _then)
-      : super(_value, (v) => _then(v as _$_Loading));
+    implements _$$QuestionsListStateLoadingCopyWith<$Res> {
+  __$$QuestionsListStateLoadingCopyWithImpl(_$QuestionsListStateLoading _value,
+      $Res Function(_$QuestionsListStateLoading) _then)
+      : super(_value, (v) => _then(v as _$QuestionsListStateLoading));
 
   @override
-  _$_Loading get _value => super._value as _$_Loading;
+  _$QuestionsListStateLoading get _value =>
+      super._value as _$QuestionsListStateLoading;
 }
 
 /// @nodoc
 
-class _$_Loading implements _Loading {
-  const _$_Loading();
+class _$QuestionsListStateLoading implements QuestionsListStateLoading {
+  const _$QuestionsListStateLoading();
 
   @override
   String toString() {
@@ -394,7 +388,8 @@ class _$_Loading implements _Loading {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Loading);
+        (other.runtimeType == runtimeType &&
+            other is _$QuestionsListStateLoading);
   }
 
   @override
@@ -406,8 +401,7 @@ class _$_Loading implements _Loading {
     required TResult Function() initial,
     required TResult Function(Error error) error,
     required TResult Function() loading,
-    required TResult Function() empty,
-    required TResult Function(List<Question> questions, double offset) success,
+    required TResult Function(List<Question> questions) success,
   }) {
     return loading();
   }
@@ -418,8 +412,7 @@ class _$_Loading implements _Loading {
     TResult Function()? initial,
     TResult Function(Error error)? error,
     TResult Function()? loading,
-    TResult Function()? empty,
-    TResult Function(List<Question> questions, double offset)? success,
+    TResult Function(List<Question> questions)? success,
   }) {
     return loading?.call();
   }
@@ -430,8 +423,7 @@ class _$_Loading implements _Loading {
     TResult Function()? initial,
     TResult Function(Error error)? error,
     TResult Function()? loading,
-    TResult Function()? empty,
-    TResult Function(List<Question> questions, double offset)? success,
+    TResult Function(List<Question> questions)? success,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -443,11 +435,10 @@ class _$_Loading implements _Loading {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Error value) error,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Empty value) empty,
-    required TResult Function(_Success value) success,
+    required TResult Function(QuestionsListStateInitial value) initial,
+    required TResult Function(QuestionsListStateError value) error,
+    required TResult Function(QuestionsListStateLoading value) loading,
+    required TResult Function(QuestionsListStateSuccess value) success,
   }) {
     return loading(this);
   }
@@ -455,11 +446,10 @@ class _$_Loading implements _Loading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Error value)? error,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Empty value)? empty,
-    TResult Function(_Success value)? success,
+    TResult Function(QuestionsListStateInitial value)? initial,
+    TResult Function(QuestionsListStateError value)? error,
+    TResult Function(QuestionsListStateLoading value)? loading,
+    TResult Function(QuestionsListStateSuccess value)? success,
   }) {
     return loading?.call(this);
   }
@@ -467,11 +457,10 @@ class _$_Loading implements _Loading {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Error value)? error,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Empty value)? empty,
-    TResult Function(_Success value)? success,
+    TResult Function(QuestionsListStateInitial value)? initial,
+    TResult Function(QuestionsListStateError value)? error,
+    TResult Function(QuestionsListStateLoading value)? loading,
+    TResult Function(QuestionsListStateSuccess value)? success,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -481,171 +470,48 @@ class _$_Loading implements _Loading {
   }
 }
 
-abstract class _Loading implements QuestionsListState {
-  const factory _Loading() = _$_Loading;
+abstract class QuestionsListStateLoading implements QuestionsListState {
+  const factory QuestionsListStateLoading() = _$QuestionsListStateLoading;
 }
 
 /// @nodoc
-abstract class _$$_EmptyCopyWith<$Res> {
-  factory _$$_EmptyCopyWith(_$_Empty value, $Res Function(_$_Empty) then) =
-      __$$_EmptyCopyWithImpl<$Res>;
+abstract class _$$QuestionsListStateSuccessCopyWith<$Res> {
+  factory _$$QuestionsListStateSuccessCopyWith(
+          _$QuestionsListStateSuccess value,
+          $Res Function(_$QuestionsListStateSuccess) then) =
+      __$$QuestionsListStateSuccessCopyWithImpl<$Res>;
+  $Res call({List<Question> questions});
 }
 
 /// @nodoc
-class __$$_EmptyCopyWithImpl<$Res>
+class __$$QuestionsListStateSuccessCopyWithImpl<$Res>
     extends _$QuestionsListStateCopyWithImpl<$Res>
-    implements _$$_EmptyCopyWith<$Res> {
-  __$$_EmptyCopyWithImpl(_$_Empty _value, $Res Function(_$_Empty) _then)
-      : super(_value, (v) => _then(v as _$_Empty));
+    implements _$$QuestionsListStateSuccessCopyWith<$Res> {
+  __$$QuestionsListStateSuccessCopyWithImpl(_$QuestionsListStateSuccess _value,
+      $Res Function(_$QuestionsListStateSuccess) _then)
+      : super(_value, (v) => _then(v as _$QuestionsListStateSuccess));
 
   @override
-  _$_Empty get _value => super._value as _$_Empty;
-}
-
-/// @nodoc
-
-class _$_Empty implements _Empty {
-  const _$_Empty();
-
-  @override
-  String toString() {
-    return 'QuestionsListState.empty()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Empty);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(Error error) error,
-    required TResult Function() loading,
-    required TResult Function() empty,
-    required TResult Function(List<Question> questions, double offset) success,
-  }) {
-    return empty();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(Error error)? error,
-    TResult Function()? loading,
-    TResult Function()? empty,
-    TResult Function(List<Question> questions, double offset)? success,
-  }) {
-    return empty?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(Error error)? error,
-    TResult Function()? loading,
-    TResult Function()? empty,
-    TResult Function(List<Question> questions, double offset)? success,
-    required TResult orElse(),
-  }) {
-    if (empty != null) {
-      return empty();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Error value) error,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Empty value) empty,
-    required TResult Function(_Success value) success,
-  }) {
-    return empty(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Error value)? error,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Empty value)? empty,
-    TResult Function(_Success value)? success,
-  }) {
-    return empty?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Error value)? error,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Empty value)? empty,
-    TResult Function(_Success value)? success,
-    required TResult orElse(),
-  }) {
-    if (empty != null) {
-      return empty(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Empty implements QuestionsListState {
-  const factory _Empty() = _$_Empty;
-}
-
-/// @nodoc
-abstract class _$$_SuccessCopyWith<$Res> {
-  factory _$$_SuccessCopyWith(
-          _$_Success value, $Res Function(_$_Success) then) =
-      __$$_SuccessCopyWithImpl<$Res>;
-  $Res call({List<Question> questions, double offset});
-}
-
-/// @nodoc
-class __$$_SuccessCopyWithImpl<$Res>
-    extends _$QuestionsListStateCopyWithImpl<$Res>
-    implements _$$_SuccessCopyWith<$Res> {
-  __$$_SuccessCopyWithImpl(_$_Success _value, $Res Function(_$_Success) _then)
-      : super(_value, (v) => _then(v as _$_Success));
-
-  @override
-  _$_Success get _value => super._value as _$_Success;
+  _$QuestionsListStateSuccess get _value =>
+      super._value as _$QuestionsListStateSuccess;
 
   @override
   $Res call({
     Object? questions = freezed,
-    Object? offset = freezed,
   }) {
-    return _then(_$_Success(
+    return _then(_$QuestionsListStateSuccess(
       questions == freezed
           ? _value._questions
           : questions // ignore: cast_nullable_to_non_nullable
               as List<Question>,
-      offset == freezed
-          ? _value.offset
-          : offset // ignore: cast_nullable_to_non_nullable
-              as double,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_Success implements _Success {
-  const _$_Success(final List<Question> questions, this.offset)
+class _$QuestionsListStateSuccess implements QuestionsListStateSuccess {
+  const _$QuestionsListStateSuccess(final List<Question> questions)
       : _questions = questions;
 
   final List<Question> _questions;
@@ -656,33 +522,28 @@ class _$_Success implements _Success {
   }
 
   @override
-  final double offset;
-
-  @override
   String toString() {
-    return 'QuestionsListState.success(questions: $questions, offset: $offset)';
+    return 'QuestionsListState.success(questions: $questions)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Success &&
+            other is _$QuestionsListStateSuccess &&
             const DeepCollectionEquality()
-                .equals(other._questions, _questions) &&
-            const DeepCollectionEquality().equals(other.offset, offset));
+                .equals(other._questions, _questions));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_questions),
-      const DeepCollectionEquality().hash(offset));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_questions));
 
   @JsonKey(ignore: true)
   @override
-  _$$_SuccessCopyWith<_$_Success> get copyWith =>
-      __$$_SuccessCopyWithImpl<_$_Success>(this, _$identity);
+  _$$QuestionsListStateSuccessCopyWith<_$QuestionsListStateSuccess>
+      get copyWith => __$$QuestionsListStateSuccessCopyWithImpl<
+          _$QuestionsListStateSuccess>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -690,10 +551,9 @@ class _$_Success implements _Success {
     required TResult Function() initial,
     required TResult Function(Error error) error,
     required TResult Function() loading,
-    required TResult Function() empty,
-    required TResult Function(List<Question> questions, double offset) success,
+    required TResult Function(List<Question> questions) success,
   }) {
-    return success(questions, offset);
+    return success(questions);
   }
 
   @override
@@ -702,10 +562,9 @@ class _$_Success implements _Success {
     TResult Function()? initial,
     TResult Function(Error error)? error,
     TResult Function()? loading,
-    TResult Function()? empty,
-    TResult Function(List<Question> questions, double offset)? success,
+    TResult Function(List<Question> questions)? success,
   }) {
-    return success?.call(questions, offset);
+    return success?.call(questions);
   }
 
   @override
@@ -714,12 +573,11 @@ class _$_Success implements _Success {
     TResult Function()? initial,
     TResult Function(Error error)? error,
     TResult Function()? loading,
-    TResult Function()? empty,
-    TResult Function(List<Question> questions, double offset)? success,
+    TResult Function(List<Question> questions)? success,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(questions, offset);
+      return success(questions);
     }
     return orElse();
   }
@@ -727,11 +585,10 @@ class _$_Success implements _Success {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Error value) error,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Empty value) empty,
-    required TResult Function(_Success value) success,
+    required TResult Function(QuestionsListStateInitial value) initial,
+    required TResult Function(QuestionsListStateError value) error,
+    required TResult Function(QuestionsListStateLoading value) loading,
+    required TResult Function(QuestionsListStateSuccess value) success,
   }) {
     return success(this);
   }
@@ -739,11 +596,10 @@ class _$_Success implements _Success {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Error value)? error,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Empty value)? empty,
-    TResult Function(_Success value)? success,
+    TResult Function(QuestionsListStateInitial value)? initial,
+    TResult Function(QuestionsListStateError value)? error,
+    TResult Function(QuestionsListStateLoading value)? loading,
+    TResult Function(QuestionsListStateSuccess value)? success,
   }) {
     return success?.call(this);
   }
@@ -751,11 +607,10 @@ class _$_Success implements _Success {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Error value)? error,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Empty value)? empty,
-    TResult Function(_Success value)? success,
+    TResult Function(QuestionsListStateInitial value)? initial,
+    TResult Function(QuestionsListStateError value)? error,
+    TResult Function(QuestionsListStateLoading value)? loading,
+    TResult Function(QuestionsListStateSuccess value)? success,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -765,13 +620,12 @@ class _$_Success implements _Success {
   }
 }
 
-abstract class _Success implements QuestionsListState {
-  const factory _Success(final List<Question> questions, final double offset) =
-      _$_Success;
+abstract class QuestionsListStateSuccess implements QuestionsListState {
+  const factory QuestionsListStateSuccess(final List<Question> questions) =
+      _$QuestionsListStateSuccess;
 
   List<Question> get questions => throw _privateConstructorUsedError;
-  double get offset => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$$_SuccessCopyWith<_$_Success> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$QuestionsListStateSuccessCopyWith<_$QuestionsListStateSuccess>
+      get copyWith => throw _privateConstructorUsedError;
 }
