@@ -25,7 +25,11 @@ class _MainScreenState extends State<MainScreen> {
       appBar: _getAppBar(),
       body: IndexedStack(
         index: _selectedIndex,
-        children: [homeScreen(), MyQuestionsScreen(), const MyProfilePage()],
+        children: [
+          homeScreen(),
+          const MyQuestionsScreen(),
+          const MyProfilePage()
+        ],
       ),
       bottomNavigationBar: bottomNav(),
       floatingActionButton: FloatingActionButton.extended(

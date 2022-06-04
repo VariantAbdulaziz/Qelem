@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:qelem/domain/common/vote.dart';
 import 'package:qelem/infrastructure/answer/answer_dto.dart';
+import 'package:qelem/infrastructure/common/vote_mapper.dart';
 import 'package:qelem/infrastructure/question/question_dto.dart';
 import 'package:qelem/infrastructure/question/question_form_dto.dart';
 import 'package:qelem/util/my_http_client.dart';
@@ -80,35 +82,12 @@ class QuestionApi {
     }
   }
 
-  Future<void> upVoteQuestion(int questionId) async {
-    var response = await _httpClient.post('questions/$questionId/upvote');
+  Future<QuestionDto> voteQuestion(int questionId, Vote vote) async {
+    var response = await _httpClient.put('questions/$questionId/vote',
+        body: json.encode(vote.toVoteDto().toJson()));
 
-    if (response.statusCode == 200) {
-      return;
-    } else {
-      throw QHttpException(
-          json.decode(response.body)['message'] ?? "Unknown error",
-          response.statusCode);
-    }
-  }
-
-  Future<void> downvoteQuestion(int questionId) async {
-    var response = await _httpClient.post('questions/$questionId/downvote');
-
-    if (response.statusCode == 200) {
-      return;
-    } else {
-      throw QHttpException(
-          json.decode(response.body)['message'] ?? "Unknown error",
-          response.statusCode);
-    }
-  }
-
-  Future<void> unvoteQuestion(int questionId) async {
-    var response = await _httpClient.delete('questions/$questionId/unvote');
-
-    if (response.statusCode == 200) {
-      return;
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return QuestionDto.fromJson(json.decode(response.body));
     } else {
       throw QHttpException(
           json.decode(response.body)['message'] ?? "Unknown error",

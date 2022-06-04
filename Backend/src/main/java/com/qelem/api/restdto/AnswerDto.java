@@ -2,13 +2,18 @@ package com.qelem.api.restdto;
 
 import java.time.Instant;
 
+import javax.validation.constraints.NotBlank;
+
 import com.qelem.api.model.AnswerModel;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class AnswerDto {
     private Long id;
+    @NotBlank
     private String content;
     private Long questionId;
     private UserDto author;

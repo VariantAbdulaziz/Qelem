@@ -1,16 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:qelem/domain/auth/user.dart';
-import 'package:qelem/domain/common/vote.dart';
-import 'package:qelem/domain/question/question.dart';
-
-import '../../../../application/question/questions_list/questions_list_bloc.dart';
-import '../../../../application/question/questions_list/questions_list_event.dart';
-import '../widgets/question_card.dart';
 
 class MyQuestionsScreen extends StatefulWidget {
-  // final User user;
-
   const MyQuestionsScreen({Key? key}) : super(key: key);
 
   @override
