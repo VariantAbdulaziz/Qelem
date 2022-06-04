@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:qelem/infrastructure/answer/answer_model_mapper.dart';
 import 'package:qelem/infrastructure/auth/user_model_mapper.dart';
@@ -22,17 +23,17 @@ class DatabaseHelper {
 
   Future<Database> _initDatabase() async {
     String path = join(await getDatabasesPath(), 'grocery_database.db');
-    return await openDatabase(path, version: 1, onCreate: _onCreate);
+    return await openDatabase(path, version: 3, onCreate: _onCreate);
   }
 
   Future _onCreate(Database db, int version) async {
     await db.execute('''
       CREATE TABLE user (
         id INTEGER PRIMARY KEY,
-        user_name TEXT NOT NULL,
-        first_name TEXT NOT NULL,
-        last_name TEXT NOT NULL,
-        profile_picture TEXT NOT NULL)
+        userName TEXT NOT NULL,
+        firstName TEXT NOT NULL,
+        lastName TEXT NOT NULL,
+        profilePicture TEXT NOT NULL)
       ''');
 
 
@@ -41,13 +42,13 @@ class DatabaseHelper {
         id INTEGER PRIMARY KEY,
         topic TEXT NOT NULL,
         content TEXT NOT NULL,
-        up_votes INTEGER NOT NULL,
-        down_votes INTEGER NOT NULL,
-        user_vote INTEGER NOT NULL,
-        created_at TEXT NOT NULL,
-        updated_at TEXT NOT NULL,
-        author_id INTEGER NOT NULL,
-        FOREIGN KEY (author_id)
+        upVotes INTEGER NOT NULL,
+        downVotes INTEGER NOT NULL,
+        userVote INTEGER NOT NULL,
+        createdAt TEXT NOT NULL,
+        updatedAt TEXT NOT NULL,
+        authorId INTEGER NOT NULL,
+        FOREIGN KEY (authorId)
         REFERENCES user(id))
       ''');
 
@@ -55,16 +56,16 @@ class DatabaseHelper {
       CREATE TABLE answer (
         id INTEGER PRIMARY KEY,
         content TEXT NOT NULL,
-        up_votes INTEGER NOT NULL,
-        down_votes INTEGER NOT NULL,
-        user_vote INTEGER NOT NULL,
-        created_at TEXT NOT NULL,
-        updated_at TEXT NOT NULL,
-        question_id INTEGER NOT NULL, 
-        author_id INTEGER NOT NULL,
-        FOREIGN KEY (question_id)
+        upVotes INTEGER NOT NULL,
+        downVotes INTEGER NOT NULL,
+        userVote INTEGER NOT NULL,
+        createdAt TEXT NOT NULL,
+        updatedAt TEXT NOT NULL,
+        questionId INTEGER NOT NULL, 
+        authorId INTEGER NOT NULL,
+        FOREIGN KEY (questionId)
         REFERENCES question(id),
-        FOREIGN KEY (author_id)
+        FOREIGN KEY (authorId)
         REFERENCES user(id) )
       ''');
   }
@@ -79,7 +80,9 @@ class DatabaseHelper {
 
   // get a single question
   Future<QuestionEntity?> getQuestion(int id) async {
+    debugPrint('getQuestion: \n\n\n\n\n\n\n');
     final Database db = await database;
+    // db.insert("question", values)
     final List<Map<String, dynamic>> questionsList =
         await db.query("question", where: "id = ?", whereArgs: [id]);
     QuestionEntity? questionEntity =
@@ -91,7 +94,7 @@ class DatabaseHelper {
   Future<List<AnswerEntity>> getAnswers(int questionId) async {
     final Database db = await database;
     final List<Map<String, dynamic>> answersList =
-        await db.query("answer", where: "question_id = ?", whereArgs: [questionId]);
+        await db.query("answer", where: "questionId = ?", whereArgs: [questionId]);
     List<AnswerEntity> answerEntityList =
         answersList.isEmpty ? [] : answersList.map((e) => AnswerEntity.fromJson(e)).toList();
     return answerEntityList;
@@ -150,22 +153,10 @@ class DatabaseHelper {
       final batch = txn.batch();
 
       for (var e in questionDtoList) {
-        final List<Map<String, dynamic>> questionsList =
-            await txn.query("question", where: "id = ?", whereArgs: [e.id]);
-        final List<Map<String, dynamic>> usersList =
-            await txn.query("user", where: "id = ?", whereArgs: [e.author.id]);
 
-        if (questionsList.isEmpty) {
-          batch.insert("question", e.toQuestionEntity().toJson());
-        } else {
-          batch.update("question", e.toQuestionEntity().toJson());
-        }
+          batch.insert("question", e.toQuestionEntity().toJson(), conflictAlgorithm: ConflictAlgorithm.replace);
+          batch.insert("user", e.author.toUserEntity().toJson(), conflictAlgorithm: ConflictAlgorithm.replace);
 
-        if (usersList.isEmpty) {
-          batch.insert("user", e.author.toUserEntity().toJson());
-        } else {
-          batch.update("user", e.author.toUserEntity().toJson());
-        }
       }
       await batch.commit(noResult: true);
     });
@@ -175,27 +166,13 @@ class DatabaseHelper {
   Future<void> addAnswers(List<AnswerDto> answerDtoList) async {
     final Database db = await database;
     await db.transaction((txn) async {
-      final batch = db.batch();
+      final batch = txn.batch();
 
       for (var e in answerDtoList) {
-        final List<Map<String, dynamic>> answerList =
-            await db.query("answer", where: "id = ?", whereArgs: [e.questionId]);
-        final List<Map<String, dynamic>> usersList =
-            await db.query("user", where: "id = ?", whereArgs: [e.author.id]);
 
-        if (answerList.isEmpty) {
-          batch.insert("answer", e.toAnswerEntity().toJson());
-        } else {
-          batch.update("answer", e.toAnswerEntity().toJson(),
-              where: "id = ?", whereArgs: [e.questionId]);
-        }
+          batch.insert("answer", e.toAnswerEntity().toJson(), conflictAlgorithm: ConflictAlgorithm.replace);
+          batch.insert("user", e.author.toUserEntity().toJson(), conflictAlgorithm: ConflictAlgorithm.replace);
 
-        if (usersList.isEmpty) {
-          batch.insert("user", e.author.toUserEntity().toJson());
-        } else {
-          batch.update("user", e.author.toUserEntity().toJson(),
-              where: "id = ?", whereArgs: [e.author.id]);
-        }
       }
       await batch.commit(noResult: true);
     });
@@ -204,18 +181,18 @@ class DatabaseHelper {
   // update a question
   Future<void> updateQuestion(QuestionEntity questionEntity) async {
     final Database db = await database;
-    db.update("question", questionEntity.toJson(), where: "id = ?", whereArgs: [questionEntity.id]);
+    await db.insert("question", questionEntity.toJson(), conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
   // update an answer
   Future<void> updateAnswer(AnswerEntity answer) async {
     final Database db = await database;
-    db.update("answer", answer.toJson(), where: "id = ?", whereArgs: [answer.id]);
+    await db.insert("answer", answer.toJson(), conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
   // update a user
   Future<void> updateUser(UserDto userDto) async {
     final Database db = await database;
-    db.update("user", userDto.toUserEntity().toJson(), where: "id = ?", whereArgs: [userDto.id]);
+    await db.insert("user", userDto.toUserEntity().toJson(), conflictAlgorithm: ConflictAlgorithm.replace);
   }
 }
