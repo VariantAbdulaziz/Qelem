@@ -19,9 +19,9 @@ class QuestionsListBloc extends Bloc<QuestionsListEvent, QuestionsListState> {
 
       if (questions.hasError) {
         emit(QuestionsListStateError(questions.error!));
+      } else {
+        emit(QuestionsListStateSuccess(questions.val!));
       }
-
-      emit(QuestionsListStateSuccess(questions.val!));
     });
 
     on<QuestionsListEventLoadAll>((event, emit) async {
@@ -34,9 +34,9 @@ class QuestionsListBloc extends Bloc<QuestionsListEvent, QuestionsListState> {
 
       if (questions.hasError) {
         emit(QuestionsListStateError(questions.error!));
+      } else {
+        emit(QuestionsListStateSuccess(questions.val!));
       }
-
-      emit(QuestionsListStateSuccess(questions.val!));
     });
   }
 }
