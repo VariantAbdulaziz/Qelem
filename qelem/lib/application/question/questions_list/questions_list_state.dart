@@ -5,11 +5,10 @@ import '../../../util/error.dart';
 part 'questions_list_state.freezed.dart';
 
 @freezed
-abstract class QuestionsListState with _$QuestionsListState {
-  const factory QuestionsListState.initial() = _Initial;
-  const factory QuestionsListState.error(Error error) = _Error;
-  const factory QuestionsListState.loading() = _Loading;
-  const factory QuestionsListState.empty() = _Empty;
-  const factory QuestionsListState.success(
-      List<Question> questions, double offset) = _Success;
+class QuestionsListState with _$QuestionsListState {
+  const factory QuestionsListState.initial() = QuestionsListStateInitial;
+  const factory QuestionsListState.error(Error error) = QuestionsListStateError;
+  const factory QuestionsListState.loading() = QuestionsListStateLoading;
+  const factory QuestionsListState.success(List<Question> questions) =
+      QuestionsListStateSuccess;
 }

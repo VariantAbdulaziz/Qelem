@@ -10,25 +10,32 @@ class QuestionContructionBloc
   final QuestionRepository questionRepository;
 
   QuestionContructionBloc({required this.questionRepository})
-      : super(const QuestionConstructionState.empty()) {
-    on<QuestionConstructionEmptyEvent>(
-      ((event, emit) {
-        emit(const QuestionConstructionState.empty());
-      }),
-    );
+      : super(const QuestionPostStateEmpty()) {
 
-    on<QuestionConstructionUpdateEvent>(
+    on<QuestionEventPost>(
       ((event, emit) async {
-        emit(const QuestionConstructionState.loading());
-        final question =
-            await questionRepository.getQuestionById(event.questionId);
-
-        if (question.hasError) {
-          emit(QuestionConstructionState.error(question.error!));
+        emit(const QuestionPostStateLoading());
+        var result = await questionRepository.createQuestion(event.form);
+        if (result.hasError) {
+          emit(QuestionPostStateError(result.error!));
         } else {
-          emit(QuestionConstructionState.update(question.val!));
+          emit(QuestionPostStateSuccess(result.val!));
         }
       }),
     );
+
+    // on<QuestionConstructionUpdateEvent>(
+    //   ((event, emit) async {
+    //     emit(const QuestionConstructionState.loading());
+    //     final question =
+    //         await _questionRepository.getQuestionById(event.questionId);
+
+    //     if (question.hasError) {
+    //       emit(QuestionConstructionState.error(question.error!));
+    //     } else {
+    //       emit(QuestionConstructionState.update(question.val!));
+    //     }
+    //   }),
+    // );
   }
 }
