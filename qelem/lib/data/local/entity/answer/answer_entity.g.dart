@@ -15,6 +15,10 @@ _$_AnswerEntity _$$_AnswerEntityFromJson(Map<String, dynamic> json) =>
       upVotes: json['upVotes'] as int,
       downVotes: json['downVotes'] as int,
       userVote: json['userVote'] as int,
+      createdAt:
+          const TimestampConverter().fromJson(json['createdAt'] as String),
+      updatedAt:
+          const TimestampConverter().fromJson(json['updatedAt'] as String),
     );
 
 Map<String, dynamic> _$$_AnswerEntityToJson(_$_AnswerEntity instance) =>
@@ -26,4 +30,6 @@ Map<String, dynamic> _$$_AnswerEntityToJson(_$_AnswerEntity instance) =>
       'upVotes': instance.upVotes,
       'downVotes': instance.downVotes,
       'userVote': instance.userVote,
+      'createdAt': const TimestampConverter().toJson(instance.createdAt),
+      'updatedAt': const TimestampConverter().toJson(instance.updatedAt),
     };
