@@ -8,9 +8,12 @@ import 'package:qelem/util/either.dart';
 class SearchQuestionBloc
     extends Bloc<SearchQuestionEvent, SearchQuestionState> {
   final QuestionRepository questionRepository;
+
   String keyWord;
   SearchQuestionBloc(this.questionRepository, this.keyWord)
       : super(const SearchQuestionState.initial()) {
+    print("here you have to look\n\n\n\n\n\n\n\n");
+    print(questionRepository.getQuestionById(1));
     on<SearchQuestionEventSearch>(((event, emit) async {
       emit(const SearchQuestionStateLoading());
       Either<List<Question>> result =
