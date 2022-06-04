@@ -3,29 +3,53 @@ import 'dart:io';
 
 import 'package:qelem/domain/answer/answer.dart';
 import 'package:qelem/domain/answer/answer_form.dart';
+import 'package:qelem/domain/answer/answer_mapper.dart';
 import 'package:qelem/domain/common/vote.dart';
 import 'package:qelem/infrastructure/answer/answer_api.dart';
 import 'package:qelem/infrastructure/answer/answer_dto.dart';
 import 'package:qelem/infrastructure/answer/answer_form_mapper.dart';
 import 'package:qelem/infrastructure/answer/answer_model_mapper.dart';
+import 'package:qelem/infrastructure/answer/local/answer/answer_entity.dart';
+import 'package:qelem/infrastructure/answer/local/answer/answer_entity_mapper.dart';
 import 'package:qelem/infrastructure/common/qelem_http_exception.dart';
+import 'package:qelem/infrastructure/question/question_api.dart';
+import 'package:qelem/infrastructure/user/local/user_entity_mapper.dart';
 import 'package:qelem/util/either.dart';
 import 'package:qelem/util/error.dart';
 
+import '../../data/local/local_database/qelem_local_storage.dart';
+
 class AnswerRepository {
   final AnswerApi answerApi;
-  AnswerRepository(this.answerApi);
+  final QuestionApi questionApi;
+  final DatabaseHelper databaseHelper = DatabaseHelper.instance;
 
-  Future<Either<List<Answer>>> getAllAnswers() async {
+  AnswerRepository(this.answerApi, this.questionApi);
+
+  Future<Either<List<Answer>>> getAnswerForQuestion(int questionId) async {
     try {
-      List<AnswerDto> answerDto = await answerApi.getAllAnswers();
-      return Either(val: answerDto.map((e) => e.toAnswer()).toList());
-    } on QHttpException catch (exception) {
-      return Either(error: Error(exception.message));
+      List<Answer> finalResult = [];
+
+      var result = await databaseHelper.getAnswers(questionId);
+      if (result.isEmpty) {
+        List<AnswerDto> answersDto = await questionApi.getQuestionAnswers(questionId);
+        await databaseHelper.addAnswers(answersDto);
+        result = await databaseHelper.getAnswers(questionId);
+      }
+
+      result.map((answerEntity) async {
+        var user = await databaseHelper.getUser(answerEntity.authorId);
+        finalResult.add(answerEntity.toAnswer(user!.toUser()));
+      }).toList();
+
+      return Either(val: finalResult);
+    } on QHttpException catch (e) {
+      return Either(error: Error(e.message));
     } on SocketException catch (_) {
       return Either(error: Error("Check your internet connection"));
     } on Exception catch (e) {
-      developer.log("Unexpected error while fetching answers in Answer Repo",
+      developer.log(
+          "Unexpected error while up voting while fetching all questions in Question Repo",
           error: e);
       return Either(error: Error("Unknown error"));
     }
@@ -33,15 +57,18 @@ class AnswerRepository {
 
   Future<Either<Answer>> getAnswerById(int answerId) async {
     try {
-      AnswerDto answerDto = await answerApi.getAnswerById(answerId);
-      return Either(val: answerDto.toAnswer());
+
+      AnswerEntity finalResult;
+      finalResult = await databaseHelper.getAnswer(answerId);
+      final user = await databaseHelper.getUser(finalResult.authorId);
+      return Either(val: finalResult.toAnswer(user!.toUser()));
+
     } on QHttpException catch (exception) {
       return Either(error: Error(exception.message));
     } on SocketException catch (_) {
       return Either(error: Error("Check your internet connection"));
     } on Exception catch (e) {
-      developer.log(
-          "Unexpected error while fetching an answer with Id $answerId in Answer Repo",
+      developer.log("Unexpected error while fetching an answer with Id $answerId in Answer Repo",
           error: e);
       return Either(error: Error("Unknown error"));
     }
@@ -50,21 +77,21 @@ class AnswerRepository {
   Future<Either<Answer>> createAnswer({required AnswerForm answerForm}) async {
     try {
       AnswerDto answer = await answerApi.createAnswer(answerForm.toDto());
+      databaseHelper.addAnswers([answer]);
       return Either(val: answer.toAnswer());
     } on QHttpException catch (exception) {
       return Either(error: Error(exception.message));
     } on SocketException catch (_) {
       return Either(error: Error("Check your internet connection"));
     } on Exception catch (e) {
-      developer.log(
-          "Unexpected error while fetching creating an answer in Answer Repo",
-          error: e);
+      developer.log("Unexpected error while fetching creating an answer in Answer Repo", error: e);
       return Either(error: Error("Unknown error"));
     }
   }
 
   Future<Either<void>> deleteAnswer(int answerId) async {
     try {
+      await databaseHelper.removeAnswer(answerId);
       await answerApi.deleteAnswer(answerId);
       return Either();
     } on QHttpException catch (exception) {
@@ -106,7 +133,7 @@ class AnswerRepository {
       return Either(error: Error("Check your internet connection"));
     } on Exception catch (e) {
       developer.log(
-          "Unexpected error while voting an answer with Id $answerId in Answer Repo",
+          "Unexpected error while up voting an answer with Id ${answer.id} in Answer Repo",
           error: e);
       return Either(error: Error("Unknown error"));
     }
