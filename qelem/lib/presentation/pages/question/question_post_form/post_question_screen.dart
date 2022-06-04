@@ -5,7 +5,7 @@ import 'package:qelem/application/question/question_construction/question_constr
 import 'package:qelem/application/question/question_construction/question_construction_state.dart';
 import 'package:qelem/domain/question/question_form.dart';
 import 'package:go_router/go_router.dart';
-import 'package:qelem/presentation/routes/routes.dart';
+import 'package:qelem/infrastructure/question/question_repository.dart';
 
 class PostQuestionScreen extends StatefulWidget {
   const PostQuestionScreen({Key? key}) : super(key: key);
@@ -25,7 +25,8 @@ class _PostQuestionScreenState extends State<PostQuestionScreen> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => QuestionContructionBloc(
-          questionRepository: RepositoryProvider.of(context)),
+          questionRepository:
+              RepositoryProvider.of<QuestionRepository>(context)),
       child: BlocConsumer<QuestionContructionBloc, QuestionConstructionState>(
         listener: (context, state) {
           if (state is QuestionPostStateLoading) {
@@ -44,7 +45,13 @@ class _PostQuestionScreenState extends State<PostQuestionScreen> {
 
           if (state is QuestionPostStateSuccess) {
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
-            context.go(Routes.home);
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Question Posted Successfully'),
+                backgroundColor: Colors.green,
+              ),
+            );
+            context.pop();
           }
 
           if (state is QuestionPostStateError) {
@@ -66,60 +73,66 @@ class _PostQuestionScreenState extends State<PostQuestionScreen> {
             body: Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  TextFormField(
-                    controller: topicController,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Topic can not be empty';
-                      }
-                      return null;
-                    },
-                    initialValue: '',
-                    decoration: const InputDecoration(
-                      labelText: 'Topic',
-                      border: OutlineInputBorder(),
+              child: Form(
+                key: _postQuestionFormKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    TextFormField(
+                      controller: topicController,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Topic can not be empty';
+                        }
+                        if (value.length > 30) {
+                          return 'Try to keep the topic short';
+                        }
+                        return null;
+                      },
+                      decoration: const InputDecoration(
+                        labelText: 'Topic',
+                        border: OutlineInputBorder(),
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 16.0),
-                  TextFormField(
-                    controller: contentController,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Question can not be empty';
-                      }
-                      return null;
-                    },
-                    initialValue: '',
-                    decoration: const InputDecoration(
-                      labelText: 'Content',
-                      border: OutlineInputBorder(),
-                      alignLabelWithHint: true,
+                    const SizedBox(height: 16.0),
+                    TextFormField(
+                      controller: contentController,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Question can not be empty';
+                        }
+                        return null;
+                      },
+                      decoration: const InputDecoration(
+                        labelText: 'Content',
+                        border: OutlineInputBorder(),
+                        alignLabelWithHint: true,
+                      ),
+                      maxLines: 10,
+                      textAlignVertical: TextAlignVertical.top,
                     ),
-                    maxLines: 10,
-                    textAlignVertical: TextAlignVertical.top,
-                  ),
-                  const SizedBox(height: 25.0),
-                  ElevatedButton(
-                    onPressed: _isNetworkInProgress
-                        ? null
-                        : () {
-                            if (_postQuestionFormKey.currentState!.validate()) {
-                              var form = QuestionForm(
-                                  topic: topicController.text,
-                                  content: contentController.text);
+                    const SizedBox(height: 25.0),
+                    ElevatedButton(
+                      onPressed: _isNetworkInProgress
+                          ? null
+                          : () {
+                              if (_postQuestionFormKey.currentState!
+                                  .validate()) {
+                                var form = QuestionForm(
+                                    topic: topicController.text,
+                                    content: contentController.text);
 
-                              BlocProvider.of<QuestionContructionBloc>(context)
-                                  .add(
-                                QuestionEventPost(form),
-                              );
-                            }
-                          },
-                    child: const Text('POST'),
-                  ),
-                ],
+                                BlocProvider.of<QuestionContructionBloc>(
+                                        context)
+                                    .add(
+                                  QuestionEventPost(form),
+                                );
+                              }
+                            },
+                      child: const Text('POST'),
+                    ),
+                  ],
+                ),
               ),
             ),
           );

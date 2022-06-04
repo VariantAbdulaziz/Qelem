@@ -20,43 +20,44 @@ class MyQuestionsScreen extends StatefulWidget {
 class _MyQuestionsScreenState extends State<MyQuestionsScreen> {
   @override
   Widget build(BuildContext context) {
-    final state = context.watch<QuestionsListBloc>().state;
+    return Container();
+    // final state = context.watch<QuestionsListBloc>().state;
 
-    return state.when(
-      initial: () => const Center(child: CircularProgressIndicator()),
-      error: (error) => const Center(child: Text('Error')),
-      loading: () => const Center(child: CircularProgressIndicator()),
-      success: (questions, offset) => NotificationListener<ScrollNotification>(
-        child: ListView.builder(
-          itemCount: questions.length + 1,
-          itemBuilder: (context, position) {
-            if (position >= questions.length) {
-              BlocProvider.of<QuestionsListBloc>(context).add(
-                QuestionsListRequestEvent(
-                    questions, questions.length as double),
-              );
-            }
-            return position >= questions.length
-                ? BottomLoader()
-                : QuestionCard(Question(
-                    id: position,
-                    topic: questions[position].topic,
-                    content: questions[position].content,
-                    createdAt: questions[position].createdAt,
-                    updatedAt: questions[position].updatedAt,
-                    author: questions[position].author,
-                    upVotes: questions[position].upVotes,
-                    downVotes: questions[position].downVotes,
-                    userVote: questions[position].userVote,
-                  ));
-          },
-          controller: ScrollController(initialScrollOffset: offset),
-        ),
-      ),
-      empty: () => Container(
-        color: Colors.black,
-      ),
-    );
+    // return state.when(
+    //   initial: () => const Center(child: CircularProgressIndicator()),
+    //   error: (error) => const Center(child: Text('Error')),
+    //   loading: () => const Center(child: CircularProgressIndicator()),
+    //   success: (questions, offset) => NotificationListener<ScrollNotification>(
+    //     child: ListView.builder(
+    //       itemCount: questions.length + 1,
+    //       itemBuilder: (context, position) {
+    //         if (position >= questions.length) {
+    //           BlocProvider.of<QuestionsListBloc>(context).add(
+    //             QuestionsListRequestEvent(
+    //                 questions, questions.length as double),
+    //           );
+    //         }
+    //         return position >= questions.length
+    //             ? BottomLoader()
+    //             : QuestionCard(Question(
+    //                 id: position,
+    //                 topic: questions[position].topic,
+    //                 content: questions[position].content,
+    //                 createdAt: questions[position].createdAt,
+    //                 updatedAt: questions[position].updatedAt,
+    //                 author: questions[position].author,
+    //                 upVotes: questions[position].upVotes,
+    //                 downVotes: questions[position].downVotes,
+    //                 userVote: questions[position].userVote,
+    //               ));
+    //       },
+    //       controller: ScrollController(initialScrollOffset: offset),
+    //     ),
+    //   ),
+    //   empty: () => Container(
+    //     color: Colors.black,
+    //   ),
+    // );
   }
 }
 
