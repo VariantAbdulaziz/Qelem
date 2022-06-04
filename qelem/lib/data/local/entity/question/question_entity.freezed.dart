@@ -23,7 +23,7 @@ mixin _$QuestionEntity {
   int get id => throw _privateConstructorUsedError;
   String get topic => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
-  int get author => throw _privateConstructorUsedError;
+  int get authorId => throw _privateConstructorUsedError;
   int get upVotes => throw _privateConstructorUsedError;
   int get downVotes => throw _privateConstructorUsedError;
   int get userVote => throw _privateConstructorUsedError;
@@ -43,7 +43,7 @@ abstract class $QuestionEntityCopyWith<$Res> {
       {int id,
       String topic,
       String content,
-      int author,
+      int authorId,
       int upVotes,
       int downVotes,
       int userVote});
@@ -63,7 +63,7 @@ class _$QuestionEntityCopyWithImpl<$Res>
     Object? id = freezed,
     Object? topic = freezed,
     Object? content = freezed,
-    Object? author = freezed,
+    Object? authorId = freezed,
     Object? upVotes = freezed,
     Object? downVotes = freezed,
     Object? userVote = freezed,
@@ -81,9 +81,9 @@ class _$QuestionEntityCopyWithImpl<$Res>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      author: author == freezed
-          ? _value.author
-          : author // ignore: cast_nullable_to_non_nullable
+      authorId: authorId == freezed
+          ? _value.authorId
+          : authorId // ignore: cast_nullable_to_non_nullable
               as int,
       upVotes: upVotes == freezed
           ? _value.upVotes
@@ -112,7 +112,7 @@ abstract class _$$_QuestionEntityCopyWith<$Res>
       {int id,
       String topic,
       String content,
-      int author,
+      int authorId,
       int upVotes,
       int downVotes,
       int userVote});
@@ -134,7 +134,7 @@ class __$$_QuestionEntityCopyWithImpl<$Res>
     Object? id = freezed,
     Object? topic = freezed,
     Object? content = freezed,
-    Object? author = freezed,
+    Object? authorId = freezed,
     Object? upVotes = freezed,
     Object? downVotes = freezed,
     Object? userVote = freezed,
@@ -152,9 +152,9 @@ class __$$_QuestionEntityCopyWithImpl<$Res>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      author: author == freezed
-          ? _value.author
-          : author // ignore: cast_nullable_to_non_nullable
+      authorId: authorId == freezed
+          ? _value.authorId
+          : authorId // ignore: cast_nullable_to_non_nullable
               as int,
       upVotes: upVotes == freezed
           ? _value.upVotes
@@ -179,7 +179,7 @@ class _$_QuestionEntity implements _QuestionEntity {
       {required this.id,
       required this.topic,
       required this.content,
-      required this.author,
+      required this.authorId,
       required this.upVotes,
       required this.downVotes,
       required this.userVote});
@@ -194,7 +194,7 @@ class _$_QuestionEntity implements _QuestionEntity {
   @override
   final String content;
   @override
-  final int author;
+  final int authorId;
   @override
   final int upVotes;
   @override
@@ -204,7 +204,7 @@ class _$_QuestionEntity implements _QuestionEntity {
 
   @override
   String toString() {
-    return 'QuestionEntity(id: $id, topic: $topic, content: $content, author: $author, upVotes: $upVotes, downVotes: $downVotes, userVote: $userVote)';
+    return 'QuestionEntity(id: $id, topic: $topic, content: $content, authorId: $authorId, upVotes: $upVotes, downVotes: $downVotes, userVote: $userVote)';
   }
 
   @override
@@ -215,7 +215,7 @@ class _$_QuestionEntity implements _QuestionEntity {
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.topic, topic) &&
             const DeepCollectionEquality().equals(other.content, content) &&
-            const DeepCollectionEquality().equals(other.author, author) &&
+            const DeepCollectionEquality().equals(other.authorId, authorId) &&
             const DeepCollectionEquality().equals(other.upVotes, upVotes) &&
             const DeepCollectionEquality().equals(other.downVotes, downVotes) &&
             const DeepCollectionEquality().equals(other.userVote, userVote));
@@ -228,7 +228,7 @@ class _$_QuestionEntity implements _QuestionEntity {
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(topic),
       const DeepCollectionEquality().hash(content),
-      const DeepCollectionEquality().hash(author),
+      const DeepCollectionEquality().hash(authorId),
       const DeepCollectionEquality().hash(upVotes),
       const DeepCollectionEquality().hash(downVotes),
       const DeepCollectionEquality().hash(userVote));
@@ -249,7 +249,7 @@ abstract class _QuestionEntity implements QuestionEntity {
       {required final int id,
       required final String topic,
       required final String content,
-      required final int author,
+      required final int authorId,
       required final int upVotes,
       required final int downVotes,
       required final int userVote}) = _$_QuestionEntity;
@@ -264,7 +264,7 @@ abstract class _QuestionEntity implements QuestionEntity {
   @override
   String get content => throw _privateConstructorUsedError;
   @override
-  int get author => throw _privateConstructorUsedError;
+  int get authorId => throw _privateConstructorUsedError;
   @override
   int get upVotes => throw _privateConstructorUsedError;
   @override

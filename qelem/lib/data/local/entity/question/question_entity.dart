@@ -10,7 +10,7 @@ class QuestionEntity with _$QuestionEntity {
     required int id,
     required String topic,
     required String content,
-    required int author,
+    required int authorId,
     required int upVotes,
     required int downVotes,
     required int userVote,
@@ -18,5 +18,4 @@ class QuestionEntity with _$QuestionEntity {
 
   factory QuestionEntity.fromJson(Map<String, dynamic> json) =>
       _$QuestionEntityFromJson(json);
-
 }
