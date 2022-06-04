@@ -20,6 +20,8 @@ import 'dart:developer' as developer;
 class AuthRepository {
   AuthApi authApi;
   SharedPrefsService sharedPrefsService;
+  User? authenticatedUser;
+
   AuthRepository(this.authApi, this.sharedPrefsService);
 
   Future<Either<User>> register(

@@ -15,100 +15,101 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$QuestionEvent {
+mixin _$QuestionDetailEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int questionId) load,
+    required TResult Function(int questionId) reload,
     required TResult Function(int questionId) delete,
-    required TResult Function(Question question) upVote,
-    required TResult Function(Question question) downVote,
+    required TResult Function(Question question, Vote vote) vote,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(int questionId)? load,
+    TResult Function(int questionId)? reload,
     TResult Function(int questionId)? delete,
-    TResult Function(Question question)? upVote,
-    TResult Function(Question question)? downVote,
+    TResult Function(Question question, Vote vote)? vote,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int questionId)? load,
+    TResult Function(int questionId)? reload,
     TResult Function(int questionId)? delete,
-    TResult Function(Question question)? upVote,
-    TResult Function(Question question)? downVote,
+    TResult Function(Question question, Vote vote)? vote,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(QuestionLoadEvent value) load,
-    required TResult Function(QuestionDeleteEvent value) delete,
-    required TResult Function(QuestionUpVoteEvent value) upVote,
-    required TResult Function(QuestionDownVoteEvent value) downVote,
+    required TResult Function(QuestionDetailLoadEvent value) load,
+    required TResult Function(QuestionDetailReloadEvent value) reload,
+    required TResult Function(QuestionDetailDeleteEvent value) delete,
+    required TResult Function(VoteQuestionEvent value) vote,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(QuestionLoadEvent value)? load,
-    TResult Function(QuestionDeleteEvent value)? delete,
-    TResult Function(QuestionUpVoteEvent value)? upVote,
-    TResult Function(QuestionDownVoteEvent value)? downVote,
+    TResult Function(QuestionDetailLoadEvent value)? load,
+    TResult Function(QuestionDetailReloadEvent value)? reload,
+    TResult Function(QuestionDetailDeleteEvent value)? delete,
+    TResult Function(VoteQuestionEvent value)? vote,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(QuestionLoadEvent value)? load,
-    TResult Function(QuestionDeleteEvent value)? delete,
-    TResult Function(QuestionUpVoteEvent value)? upVote,
-    TResult Function(QuestionDownVoteEvent value)? downVote,
+    TResult Function(QuestionDetailLoadEvent value)? load,
+    TResult Function(QuestionDetailReloadEvent value)? reload,
+    TResult Function(QuestionDetailDeleteEvent value)? delete,
+    TResult Function(VoteQuestionEvent value)? vote,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $QuestionEventCopyWith<$Res> {
-  factory $QuestionEventCopyWith(
-          QuestionEvent value, $Res Function(QuestionEvent) then) =
-      _$QuestionEventCopyWithImpl<$Res>;
+abstract class $QuestionDetailEventCopyWith<$Res> {
+  factory $QuestionDetailEventCopyWith(
+          QuestionDetailEvent value, $Res Function(QuestionDetailEvent) then) =
+      _$QuestionDetailEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$QuestionEventCopyWithImpl<$Res>
-    implements $QuestionEventCopyWith<$Res> {
-  _$QuestionEventCopyWithImpl(this._value, this._then);
+class _$QuestionDetailEventCopyWithImpl<$Res>
+    implements $QuestionDetailEventCopyWith<$Res> {
+  _$QuestionDetailEventCopyWithImpl(this._value, this._then);
 
-  final QuestionEvent _value;
+  final QuestionDetailEvent _value;
   // ignore: unused_field
-  final $Res Function(QuestionEvent) _then;
+  final $Res Function(QuestionDetailEvent) _then;
 }
 
 /// @nodoc
-abstract class _$$QuestionLoadEventCopyWith<$Res> {
-  factory _$$QuestionLoadEventCopyWith(
-          _$QuestionLoadEvent value, $Res Function(_$QuestionLoadEvent) then) =
-      __$$QuestionLoadEventCopyWithImpl<$Res>;
+abstract class _$$QuestionDetailLoadEventCopyWith<$Res> {
+  factory _$$QuestionDetailLoadEventCopyWith(_$QuestionDetailLoadEvent value,
+          $Res Function(_$QuestionDetailLoadEvent) then) =
+      __$$QuestionDetailLoadEventCopyWithImpl<$Res>;
   $Res call({int questionId});
 }
 
 /// @nodoc
-class __$$QuestionLoadEventCopyWithImpl<$Res>
-    extends _$QuestionEventCopyWithImpl<$Res>
-    implements _$$QuestionLoadEventCopyWith<$Res> {
-  __$$QuestionLoadEventCopyWithImpl(
-      _$QuestionLoadEvent _value, $Res Function(_$QuestionLoadEvent) _then)
-      : super(_value, (v) => _then(v as _$QuestionLoadEvent));
+class __$$QuestionDetailLoadEventCopyWithImpl<$Res>
+    extends _$QuestionDetailEventCopyWithImpl<$Res>
+    implements _$$QuestionDetailLoadEventCopyWith<$Res> {
+  __$$QuestionDetailLoadEventCopyWithImpl(_$QuestionDetailLoadEvent _value,
+      $Res Function(_$QuestionDetailLoadEvent) _then)
+      : super(_value, (v) => _then(v as _$QuestionDetailLoadEvent));
 
   @override
-  _$QuestionLoadEvent get _value => super._value as _$QuestionLoadEvent;
+  _$QuestionDetailLoadEvent get _value =>
+      super._value as _$QuestionDetailLoadEvent;
 
   @override
   $Res call({
     Object? questionId = freezed,
   }) {
-    return _then(_$QuestionLoadEvent(
+    return _then(_$QuestionDetailLoadEvent(
       questionId == freezed
           ? _value.questionId
           : questionId // ignore: cast_nullable_to_non_nullable
@@ -119,22 +120,22 @@ class __$$QuestionLoadEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$QuestionLoadEvent implements QuestionLoadEvent {
-  const _$QuestionLoadEvent(this.questionId);
+class _$QuestionDetailLoadEvent implements QuestionDetailLoadEvent {
+  const _$QuestionDetailLoadEvent(this.questionId);
 
   @override
   final int questionId;
 
   @override
   String toString() {
-    return 'QuestionEvent.load(questionId: $questionId)';
+    return 'QuestionDetailEvent.load(questionId: $questionId)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$QuestionLoadEvent &&
+            other is _$QuestionDetailLoadEvent &&
             const DeepCollectionEquality()
                 .equals(other.questionId, questionId));
   }
@@ -145,16 +146,17 @@ class _$QuestionLoadEvent implements QuestionLoadEvent {
 
   @JsonKey(ignore: true)
   @override
-  _$$QuestionLoadEventCopyWith<_$QuestionLoadEvent> get copyWith =>
-      __$$QuestionLoadEventCopyWithImpl<_$QuestionLoadEvent>(this, _$identity);
+  _$$QuestionDetailLoadEventCopyWith<_$QuestionDetailLoadEvent> get copyWith =>
+      __$$QuestionDetailLoadEventCopyWithImpl<_$QuestionDetailLoadEvent>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int questionId) load,
+    required TResult Function(int questionId) reload,
     required TResult Function(int questionId) delete,
-    required TResult Function(Question question) upVote,
-    required TResult Function(Question question) downVote,
+    required TResult Function(Question question, Vote vote) vote,
   }) {
     return load(questionId);
   }
@@ -163,9 +165,9 @@ class _$QuestionLoadEvent implements QuestionLoadEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(int questionId)? load,
+    TResult Function(int questionId)? reload,
     TResult Function(int questionId)? delete,
-    TResult Function(Question question)? upVote,
-    TResult Function(Question question)? downVote,
+    TResult Function(Question question, Vote vote)? vote,
   }) {
     return load?.call(questionId);
   }
@@ -174,9 +176,9 @@ class _$QuestionLoadEvent implements QuestionLoadEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int questionId)? load,
+    TResult Function(int questionId)? reload,
     TResult Function(int questionId)? delete,
-    TResult Function(Question question)? upVote,
-    TResult Function(Question question)? downVote,
+    TResult Function(Question question, Vote vote)? vote,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -188,10 +190,10 @@ class _$QuestionLoadEvent implements QuestionLoadEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(QuestionLoadEvent value) load,
-    required TResult Function(QuestionDeleteEvent value) delete,
-    required TResult Function(QuestionUpVoteEvent value) upVote,
-    required TResult Function(QuestionDownVoteEvent value) downVote,
+    required TResult Function(QuestionDetailLoadEvent value) load,
+    required TResult Function(QuestionDetailReloadEvent value) reload,
+    required TResult Function(QuestionDetailDeleteEvent value) delete,
+    required TResult Function(VoteQuestionEvent value) vote,
   }) {
     return load(this);
   }
@@ -199,10 +201,10 @@ class _$QuestionLoadEvent implements QuestionLoadEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(QuestionLoadEvent value)? load,
-    TResult Function(QuestionDeleteEvent value)? delete,
-    TResult Function(QuestionUpVoteEvent value)? upVote,
-    TResult Function(QuestionDownVoteEvent value)? downVote,
+    TResult Function(QuestionDetailLoadEvent value)? load,
+    TResult Function(QuestionDetailReloadEvent value)? reload,
+    TResult Function(QuestionDetailDeleteEvent value)? delete,
+    TResult Function(VoteQuestionEvent value)? vote,
   }) {
     return load?.call(this);
   }
@@ -210,10 +212,10 @@ class _$QuestionLoadEvent implements QuestionLoadEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(QuestionLoadEvent value)? load,
-    TResult Function(QuestionDeleteEvent value)? delete,
-    TResult Function(QuestionUpVoteEvent value)? upVote,
-    TResult Function(QuestionDownVoteEvent value)? downVote,
+    TResult Function(QuestionDetailLoadEvent value)? load,
+    TResult Function(QuestionDetailReloadEvent value)? reload,
+    TResult Function(QuestionDetailDeleteEvent value)? delete,
+    TResult Function(VoteQuestionEvent value)? vote,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -223,39 +225,42 @@ class _$QuestionLoadEvent implements QuestionLoadEvent {
   }
 }
 
-abstract class QuestionLoadEvent implements QuestionEvent {
-  const factory QuestionLoadEvent(final int questionId) = _$QuestionLoadEvent;
+abstract class QuestionDetailLoadEvent implements QuestionDetailEvent {
+  const factory QuestionDetailLoadEvent(final int questionId) =
+      _$QuestionDetailLoadEvent;
 
   int get questionId => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$$QuestionLoadEventCopyWith<_$QuestionLoadEvent> get copyWith =>
+  _$$QuestionDetailLoadEventCopyWith<_$QuestionDetailLoadEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$QuestionDeleteEventCopyWith<$Res> {
-  factory _$$QuestionDeleteEventCopyWith(_$QuestionDeleteEvent value,
-          $Res Function(_$QuestionDeleteEvent) then) =
-      __$$QuestionDeleteEventCopyWithImpl<$Res>;
+abstract class _$$QuestionDetailReloadEventCopyWith<$Res> {
+  factory _$$QuestionDetailReloadEventCopyWith(
+          _$QuestionDetailReloadEvent value,
+          $Res Function(_$QuestionDetailReloadEvent) then) =
+      __$$QuestionDetailReloadEventCopyWithImpl<$Res>;
   $Res call({int questionId});
 }
 
 /// @nodoc
-class __$$QuestionDeleteEventCopyWithImpl<$Res>
-    extends _$QuestionEventCopyWithImpl<$Res>
-    implements _$$QuestionDeleteEventCopyWith<$Res> {
-  __$$QuestionDeleteEventCopyWithImpl(
-      _$QuestionDeleteEvent _value, $Res Function(_$QuestionDeleteEvent) _then)
-      : super(_value, (v) => _then(v as _$QuestionDeleteEvent));
+class __$$QuestionDetailReloadEventCopyWithImpl<$Res>
+    extends _$QuestionDetailEventCopyWithImpl<$Res>
+    implements _$$QuestionDetailReloadEventCopyWith<$Res> {
+  __$$QuestionDetailReloadEventCopyWithImpl(_$QuestionDetailReloadEvent _value,
+      $Res Function(_$QuestionDetailReloadEvent) _then)
+      : super(_value, (v) => _then(v as _$QuestionDetailReloadEvent));
 
   @override
-  _$QuestionDeleteEvent get _value => super._value as _$QuestionDeleteEvent;
+  _$QuestionDetailReloadEvent get _value =>
+      super._value as _$QuestionDetailReloadEvent;
 
   @override
   $Res call({
     Object? questionId = freezed,
   }) {
-    return _then(_$QuestionDeleteEvent(
+    return _then(_$QuestionDetailReloadEvent(
       questionId == freezed
           ? _value.questionId
           : questionId // ignore: cast_nullable_to_non_nullable
@@ -266,22 +271,22 @@ class __$$QuestionDeleteEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$QuestionDeleteEvent implements QuestionDeleteEvent {
-  const _$QuestionDeleteEvent(this.questionId);
+class _$QuestionDetailReloadEvent implements QuestionDetailReloadEvent {
+  const _$QuestionDetailReloadEvent(this.questionId);
 
   @override
   final int questionId;
 
   @override
   String toString() {
-    return 'QuestionEvent.delete(questionId: $questionId)';
+    return 'QuestionDetailEvent.reload(questionId: $questionId)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$QuestionDeleteEvent &&
+            other is _$QuestionDetailReloadEvent &&
             const DeepCollectionEquality()
                 .equals(other.questionId, questionId));
   }
@@ -292,17 +297,168 @@ class _$QuestionDeleteEvent implements QuestionDeleteEvent {
 
   @JsonKey(ignore: true)
   @override
-  _$$QuestionDeleteEventCopyWith<_$QuestionDeleteEvent> get copyWith =>
-      __$$QuestionDeleteEventCopyWithImpl<_$QuestionDeleteEvent>(
-          this, _$identity);
+  _$$QuestionDetailReloadEventCopyWith<_$QuestionDetailReloadEvent>
+      get copyWith => __$$QuestionDetailReloadEventCopyWithImpl<
+          _$QuestionDetailReloadEvent>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int questionId) load,
+    required TResult Function(int questionId) reload,
     required TResult Function(int questionId) delete,
-    required TResult Function(Question question) upVote,
-    required TResult Function(Question question) downVote,
+    required TResult Function(Question question, Vote vote) vote,
+  }) {
+    return reload(questionId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(int questionId)? load,
+    TResult Function(int questionId)? reload,
+    TResult Function(int questionId)? delete,
+    TResult Function(Question question, Vote vote)? vote,
+  }) {
+    return reload?.call(questionId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int questionId)? load,
+    TResult Function(int questionId)? reload,
+    TResult Function(int questionId)? delete,
+    TResult Function(Question question, Vote vote)? vote,
+    required TResult orElse(),
+  }) {
+    if (reload != null) {
+      return reload(questionId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(QuestionDetailLoadEvent value) load,
+    required TResult Function(QuestionDetailReloadEvent value) reload,
+    required TResult Function(QuestionDetailDeleteEvent value) delete,
+    required TResult Function(VoteQuestionEvent value) vote,
+  }) {
+    return reload(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(QuestionDetailLoadEvent value)? load,
+    TResult Function(QuestionDetailReloadEvent value)? reload,
+    TResult Function(QuestionDetailDeleteEvent value)? delete,
+    TResult Function(VoteQuestionEvent value)? vote,
+  }) {
+    return reload?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(QuestionDetailLoadEvent value)? load,
+    TResult Function(QuestionDetailReloadEvent value)? reload,
+    TResult Function(QuestionDetailDeleteEvent value)? delete,
+    TResult Function(VoteQuestionEvent value)? vote,
+    required TResult orElse(),
+  }) {
+    if (reload != null) {
+      return reload(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class QuestionDetailReloadEvent implements QuestionDetailEvent {
+  const factory QuestionDetailReloadEvent(final int questionId) =
+      _$QuestionDetailReloadEvent;
+
+  int get questionId => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$$QuestionDetailReloadEventCopyWith<_$QuestionDetailReloadEvent>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$QuestionDetailDeleteEventCopyWith<$Res> {
+  factory _$$QuestionDetailDeleteEventCopyWith(
+          _$QuestionDetailDeleteEvent value,
+          $Res Function(_$QuestionDetailDeleteEvent) then) =
+      __$$QuestionDetailDeleteEventCopyWithImpl<$Res>;
+  $Res call({int questionId});
+}
+
+/// @nodoc
+class __$$QuestionDetailDeleteEventCopyWithImpl<$Res>
+    extends _$QuestionDetailEventCopyWithImpl<$Res>
+    implements _$$QuestionDetailDeleteEventCopyWith<$Res> {
+  __$$QuestionDetailDeleteEventCopyWithImpl(_$QuestionDetailDeleteEvent _value,
+      $Res Function(_$QuestionDetailDeleteEvent) _then)
+      : super(_value, (v) => _then(v as _$QuestionDetailDeleteEvent));
+
+  @override
+  _$QuestionDetailDeleteEvent get _value =>
+      super._value as _$QuestionDetailDeleteEvent;
+
+  @override
+  $Res call({
+    Object? questionId = freezed,
+  }) {
+    return _then(_$QuestionDetailDeleteEvent(
+      questionId == freezed
+          ? _value.questionId
+          : questionId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$QuestionDetailDeleteEvent implements QuestionDetailDeleteEvent {
+  const _$QuestionDetailDeleteEvent(this.questionId);
+
+  @override
+  final int questionId;
+
+  @override
+  String toString() {
+    return 'QuestionDetailEvent.delete(questionId: $questionId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$QuestionDetailDeleteEvent &&
+            const DeepCollectionEquality()
+                .equals(other.questionId, questionId));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(questionId));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$QuestionDetailDeleteEventCopyWith<_$QuestionDetailDeleteEvent>
+      get copyWith => __$$QuestionDetailDeleteEventCopyWithImpl<
+          _$QuestionDetailDeleteEvent>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int questionId) load,
+    required TResult Function(int questionId) reload,
+    required TResult Function(int questionId) delete,
+    required TResult Function(Question question, Vote vote) vote,
   }) {
     return delete(questionId);
   }
@@ -311,9 +467,9 @@ class _$QuestionDeleteEvent implements QuestionDeleteEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(int questionId)? load,
+    TResult Function(int questionId)? reload,
     TResult Function(int questionId)? delete,
-    TResult Function(Question question)? upVote,
-    TResult Function(Question question)? downVote,
+    TResult Function(Question question, Vote vote)? vote,
   }) {
     return delete?.call(questionId);
   }
@@ -322,9 +478,9 @@ class _$QuestionDeleteEvent implements QuestionDeleteEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int questionId)? load,
+    TResult Function(int questionId)? reload,
     TResult Function(int questionId)? delete,
-    TResult Function(Question question)? upVote,
-    TResult Function(Question question)? downVote,
+    TResult Function(Question question, Vote vote)? vote,
     required TResult orElse(),
   }) {
     if (delete != null) {
@@ -336,10 +492,10 @@ class _$QuestionDeleteEvent implements QuestionDeleteEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(QuestionLoadEvent value) load,
-    required TResult Function(QuestionDeleteEvent value) delete,
-    required TResult Function(QuestionUpVoteEvent value) upVote,
-    required TResult Function(QuestionDownVoteEvent value) downVote,
+    required TResult Function(QuestionDetailLoadEvent value) load,
+    required TResult Function(QuestionDetailReloadEvent value) reload,
+    required TResult Function(QuestionDetailDeleteEvent value) delete,
+    required TResult Function(VoteQuestionEvent value) vote,
   }) {
     return delete(this);
   }
@@ -347,10 +503,10 @@ class _$QuestionDeleteEvent implements QuestionDeleteEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(QuestionLoadEvent value)? load,
-    TResult Function(QuestionDeleteEvent value)? delete,
-    TResult Function(QuestionUpVoteEvent value)? upVote,
-    TResult Function(QuestionDownVoteEvent value)? downVote,
+    TResult Function(QuestionDetailLoadEvent value)? load,
+    TResult Function(QuestionDetailReloadEvent value)? reload,
+    TResult Function(QuestionDetailDeleteEvent value)? delete,
+    TResult Function(VoteQuestionEvent value)? vote,
   }) {
     return delete?.call(this);
   }
@@ -358,10 +514,10 @@ class _$QuestionDeleteEvent implements QuestionDeleteEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(QuestionLoadEvent value)? load,
-    TResult Function(QuestionDeleteEvent value)? delete,
-    TResult Function(QuestionUpVoteEvent value)? upVote,
-    TResult Function(QuestionDownVoteEvent value)? downVote,
+    TResult Function(QuestionDetailLoadEvent value)? load,
+    TResult Function(QuestionDetailReloadEvent value)? reload,
+    TResult Function(QuestionDetailDeleteEvent value)? delete,
+    TResult Function(VoteQuestionEvent value)? vote,
     required TResult orElse(),
   }) {
     if (delete != null) {
@@ -371,46 +527,51 @@ class _$QuestionDeleteEvent implements QuestionDeleteEvent {
   }
 }
 
-abstract class QuestionDeleteEvent implements QuestionEvent {
-  const factory QuestionDeleteEvent(final int questionId) =
-      _$QuestionDeleteEvent;
+abstract class QuestionDetailDeleteEvent implements QuestionDetailEvent {
+  const factory QuestionDetailDeleteEvent(final int questionId) =
+      _$QuestionDetailDeleteEvent;
 
   int get questionId => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$$QuestionDeleteEventCopyWith<_$QuestionDeleteEvent> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$QuestionDetailDeleteEventCopyWith<_$QuestionDetailDeleteEvent>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$QuestionUpVoteEventCopyWith<$Res> {
-  factory _$$QuestionUpVoteEventCopyWith(_$QuestionUpVoteEvent value,
-          $Res Function(_$QuestionUpVoteEvent) then) =
-      __$$QuestionUpVoteEventCopyWithImpl<$Res>;
-  $Res call({Question question});
+abstract class _$$VoteQuestionEventCopyWith<$Res> {
+  factory _$$VoteQuestionEventCopyWith(
+          _$VoteQuestionEvent value, $Res Function(_$VoteQuestionEvent) then) =
+      __$$VoteQuestionEventCopyWithImpl<$Res>;
+  $Res call({Question question, Vote vote});
 
   $QuestionCopyWith<$Res> get question;
 }
 
 /// @nodoc
-class __$$QuestionUpVoteEventCopyWithImpl<$Res>
-    extends _$QuestionEventCopyWithImpl<$Res>
-    implements _$$QuestionUpVoteEventCopyWith<$Res> {
-  __$$QuestionUpVoteEventCopyWithImpl(
-      _$QuestionUpVoteEvent _value, $Res Function(_$QuestionUpVoteEvent) _then)
-      : super(_value, (v) => _then(v as _$QuestionUpVoteEvent));
+class __$$VoteQuestionEventCopyWithImpl<$Res>
+    extends _$QuestionDetailEventCopyWithImpl<$Res>
+    implements _$$VoteQuestionEventCopyWith<$Res> {
+  __$$VoteQuestionEventCopyWithImpl(
+      _$VoteQuestionEvent _value, $Res Function(_$VoteQuestionEvent) _then)
+      : super(_value, (v) => _then(v as _$VoteQuestionEvent));
 
   @override
-  _$QuestionUpVoteEvent get _value => super._value as _$QuestionUpVoteEvent;
+  _$VoteQuestionEvent get _value => super._value as _$VoteQuestionEvent;
 
   @override
   $Res call({
     Object? question = freezed,
+    Object? vote = freezed,
   }) {
-    return _then(_$QuestionUpVoteEvent(
+    return _then(_$VoteQuestionEvent(
       question == freezed
           ? _value.question
           : question // ignore: cast_nullable_to_non_nullable
               as Question,
+      vote == freezed
+          ? _value.vote
+          : vote // ignore: cast_nullable_to_non_nullable
+              as Vote,
     ));
   }
 
@@ -424,68 +585,72 @@ class __$$QuestionUpVoteEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$QuestionUpVoteEvent implements QuestionUpVoteEvent {
-  const _$QuestionUpVoteEvent(this.question);
+class _$VoteQuestionEvent implements VoteQuestionEvent {
+  const _$VoteQuestionEvent(this.question, this.vote);
 
   @override
   final Question question;
+  @override
+  final Vote vote;
 
   @override
   String toString() {
-    return 'QuestionEvent.upVote(question: $question)';
+    return 'QuestionDetailEvent.vote(question: $question, vote: $vote)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$QuestionUpVoteEvent &&
-            const DeepCollectionEquality().equals(other.question, question));
+            other is _$VoteQuestionEvent &&
+            const DeepCollectionEquality().equals(other.question, question) &&
+            const DeepCollectionEquality().equals(other.vote, vote));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(question));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(question),
+      const DeepCollectionEquality().hash(vote));
 
   @JsonKey(ignore: true)
   @override
-  _$$QuestionUpVoteEventCopyWith<_$QuestionUpVoteEvent> get copyWith =>
-      __$$QuestionUpVoteEventCopyWithImpl<_$QuestionUpVoteEvent>(
-          this, _$identity);
+  _$$VoteQuestionEventCopyWith<_$VoteQuestionEvent> get copyWith =>
+      __$$VoteQuestionEventCopyWithImpl<_$VoteQuestionEvent>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int questionId) load,
+    required TResult Function(int questionId) reload,
     required TResult Function(int questionId) delete,
-    required TResult Function(Question question) upVote,
-    required TResult Function(Question question) downVote,
+    required TResult Function(Question question, Vote vote) vote,
   }) {
-    return upVote(question);
+    return vote(question, this.vote);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(int questionId)? load,
+    TResult Function(int questionId)? reload,
     TResult Function(int questionId)? delete,
-    TResult Function(Question question)? upVote,
-    TResult Function(Question question)? downVote,
+    TResult Function(Question question, Vote vote)? vote,
   }) {
-    return upVote?.call(question);
+    return vote?.call(question, this.vote);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int questionId)? load,
+    TResult Function(int questionId)? reload,
     TResult Function(int questionId)? delete,
-    TResult Function(Question question)? upVote,
-    TResult Function(Question question)? downVote,
+    TResult Function(Question question, Vote vote)? vote,
     required TResult orElse(),
   }) {
-    if (upVote != null) {
-      return upVote(question);
+    if (vote != null) {
+      return vote(question, this.vote);
     }
     return orElse();
   }
@@ -493,204 +658,48 @@ class _$QuestionUpVoteEvent implements QuestionUpVoteEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(QuestionLoadEvent value) load,
-    required TResult Function(QuestionDeleteEvent value) delete,
-    required TResult Function(QuestionUpVoteEvent value) upVote,
-    required TResult Function(QuestionDownVoteEvent value) downVote,
+    required TResult Function(QuestionDetailLoadEvent value) load,
+    required TResult Function(QuestionDetailReloadEvent value) reload,
+    required TResult Function(QuestionDetailDeleteEvent value) delete,
+    required TResult Function(VoteQuestionEvent value) vote,
   }) {
-    return upVote(this);
+    return vote(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(QuestionLoadEvent value)? load,
-    TResult Function(QuestionDeleteEvent value)? delete,
-    TResult Function(QuestionUpVoteEvent value)? upVote,
-    TResult Function(QuestionDownVoteEvent value)? downVote,
+    TResult Function(QuestionDetailLoadEvent value)? load,
+    TResult Function(QuestionDetailReloadEvent value)? reload,
+    TResult Function(QuestionDetailDeleteEvent value)? delete,
+    TResult Function(VoteQuestionEvent value)? vote,
   }) {
-    return upVote?.call(this);
+    return vote?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(QuestionLoadEvent value)? load,
-    TResult Function(QuestionDeleteEvent value)? delete,
-    TResult Function(QuestionUpVoteEvent value)? upVote,
-    TResult Function(QuestionDownVoteEvent value)? downVote,
+    TResult Function(QuestionDetailLoadEvent value)? load,
+    TResult Function(QuestionDetailReloadEvent value)? reload,
+    TResult Function(QuestionDetailDeleteEvent value)? delete,
+    TResult Function(VoteQuestionEvent value)? vote,
     required TResult orElse(),
   }) {
-    if (upVote != null) {
-      return upVote(this);
+    if (vote != null) {
+      return vote(this);
     }
     return orElse();
   }
 }
 
-abstract class QuestionUpVoteEvent implements QuestionEvent {
-  const factory QuestionUpVoteEvent(final Question question) =
-      _$QuestionUpVoteEvent;
+abstract class VoteQuestionEvent implements QuestionDetailEvent {
+  const factory VoteQuestionEvent(final Question question, final Vote vote) =
+      _$VoteQuestionEvent;
 
   Question get question => throw _privateConstructorUsedError;
+  Vote get vote => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$$QuestionUpVoteEventCopyWith<_$QuestionUpVoteEvent> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$QuestionDownVoteEventCopyWith<$Res> {
-  factory _$$QuestionDownVoteEventCopyWith(_$QuestionDownVoteEvent value,
-          $Res Function(_$QuestionDownVoteEvent) then) =
-      __$$QuestionDownVoteEventCopyWithImpl<$Res>;
-  $Res call({Question question});
-
-  $QuestionCopyWith<$Res> get question;
-}
-
-/// @nodoc
-class __$$QuestionDownVoteEventCopyWithImpl<$Res>
-    extends _$QuestionEventCopyWithImpl<$Res>
-    implements _$$QuestionDownVoteEventCopyWith<$Res> {
-  __$$QuestionDownVoteEventCopyWithImpl(_$QuestionDownVoteEvent _value,
-      $Res Function(_$QuestionDownVoteEvent) _then)
-      : super(_value, (v) => _then(v as _$QuestionDownVoteEvent));
-
-  @override
-  _$QuestionDownVoteEvent get _value => super._value as _$QuestionDownVoteEvent;
-
-  @override
-  $Res call({
-    Object? question = freezed,
-  }) {
-    return _then(_$QuestionDownVoteEvent(
-      question == freezed
-          ? _value.question
-          : question // ignore: cast_nullable_to_non_nullable
-              as Question,
-    ));
-  }
-
-  @override
-  $QuestionCopyWith<$Res> get question {
-    return $QuestionCopyWith<$Res>(_value.question, (value) {
-      return _then(_value.copyWith(question: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$QuestionDownVoteEvent implements QuestionDownVoteEvent {
-  const _$QuestionDownVoteEvent(this.question);
-
-  @override
-  final Question question;
-
-  @override
-  String toString() {
-    return 'QuestionEvent.downVote(question: $question)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$QuestionDownVoteEvent &&
-            const DeepCollectionEquality().equals(other.question, question));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(question));
-
-  @JsonKey(ignore: true)
-  @override
-  _$$QuestionDownVoteEventCopyWith<_$QuestionDownVoteEvent> get copyWith =>
-      __$$QuestionDownVoteEventCopyWithImpl<_$QuestionDownVoteEvent>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int questionId) load,
-    required TResult Function(int questionId) delete,
-    required TResult Function(Question question) upVote,
-    required TResult Function(Question question) downVote,
-  }) {
-    return downVote(question);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int questionId)? load,
-    TResult Function(int questionId)? delete,
-    TResult Function(Question question)? upVote,
-    TResult Function(Question question)? downVote,
-  }) {
-    return downVote?.call(question);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int questionId)? load,
-    TResult Function(int questionId)? delete,
-    TResult Function(Question question)? upVote,
-    TResult Function(Question question)? downVote,
-    required TResult orElse(),
-  }) {
-    if (downVote != null) {
-      return downVote(question);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(QuestionLoadEvent value) load,
-    required TResult Function(QuestionDeleteEvent value) delete,
-    required TResult Function(QuestionUpVoteEvent value) upVote,
-    required TResult Function(QuestionDownVoteEvent value) downVote,
-  }) {
-    return downVote(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(QuestionLoadEvent value)? load,
-    TResult Function(QuestionDeleteEvent value)? delete,
-    TResult Function(QuestionUpVoteEvent value)? upVote,
-    TResult Function(QuestionDownVoteEvent value)? downVote,
-  }) {
-    return downVote?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(QuestionLoadEvent value)? load,
-    TResult Function(QuestionDeleteEvent value)? delete,
-    TResult Function(QuestionUpVoteEvent value)? upVote,
-    TResult Function(QuestionDownVoteEvent value)? downVote,
-    required TResult orElse(),
-  }) {
-    if (downVote != null) {
-      return downVote(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class QuestionDownVoteEvent implements QuestionEvent {
-  const factory QuestionDownVoteEvent(final Question question) =
-      _$QuestionDownVoteEvent;
-
-  Question get question => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  _$$QuestionDownVoteEventCopyWith<_$QuestionDownVoteEvent> get copyWith =>
+  _$$VoteQuestionEventCopyWith<_$VoteQuestionEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }

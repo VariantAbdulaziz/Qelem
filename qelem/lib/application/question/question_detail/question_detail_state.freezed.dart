@@ -15,109 +15,121 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$QuestionState {
+mixin _$QuestionDetailState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() rollBack,
+    required TResult Function(Question question) loadedQuestion,
     required TResult Function(Error error) error,
-    required TResult Function(Question question) loaded,
+    required TResult Function() deleteSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? rollBack,
+    TResult Function(Question question)? loadedQuestion,
     TResult Function(Error error)? error,
-    TResult Function(Question question)? loaded,
+    TResult Function()? deleteSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? rollBack,
+    TResult Function(Question question)? loadedQuestion,
     TResult Function(Error error)? error,
-    TResult Function(Question question)? loaded,
+    TResult Function()? deleteSuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_QuestionLoading value) loading,
-    required TResult Function(_QuestionRollBack value) rollBack,
-    required TResult Function(_QuestionError value) error,
-    required TResult Function(_QuestionFetched value) loaded,
+    required TResult Function(QuestionDetailStateInitial value) initial,
+    required TResult Function(QuestionDetailStateLoading value) loading,
+    required TResult Function(QuestionDetailStateLoadedQuestion value)
+        loadedQuestion,
+    required TResult Function(QuestionDetailStateError value) error,
+    required TResult Function(QuestionDetailStateDeleteSuccess value)
+        deleteSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_QuestionLoading value)? loading,
-    TResult Function(_QuestionRollBack value)? rollBack,
-    TResult Function(_QuestionError value)? error,
-    TResult Function(_QuestionFetched value)? loaded,
+    TResult Function(QuestionDetailStateInitial value)? initial,
+    TResult Function(QuestionDetailStateLoading value)? loading,
+    TResult Function(QuestionDetailStateLoadedQuestion value)? loadedQuestion,
+    TResult Function(QuestionDetailStateError value)? error,
+    TResult Function(QuestionDetailStateDeleteSuccess value)? deleteSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_QuestionLoading value)? loading,
-    TResult Function(_QuestionRollBack value)? rollBack,
-    TResult Function(_QuestionError value)? error,
-    TResult Function(_QuestionFetched value)? loaded,
+    TResult Function(QuestionDetailStateInitial value)? initial,
+    TResult Function(QuestionDetailStateLoading value)? loading,
+    TResult Function(QuestionDetailStateLoadedQuestion value)? loadedQuestion,
+    TResult Function(QuestionDetailStateError value)? error,
+    TResult Function(QuestionDetailStateDeleteSuccess value)? deleteSuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $QuestionStateCopyWith<$Res> {
-  factory $QuestionStateCopyWith(
-          QuestionState value, $Res Function(QuestionState) then) =
-      _$QuestionStateCopyWithImpl<$Res>;
+abstract class $QuestionDetailStateCopyWith<$Res> {
+  factory $QuestionDetailStateCopyWith(
+          QuestionDetailState value, $Res Function(QuestionDetailState) then) =
+      _$QuestionDetailStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$QuestionStateCopyWithImpl<$Res>
-    implements $QuestionStateCopyWith<$Res> {
-  _$QuestionStateCopyWithImpl(this._value, this._then);
+class _$QuestionDetailStateCopyWithImpl<$Res>
+    implements $QuestionDetailStateCopyWith<$Res> {
+  _$QuestionDetailStateCopyWithImpl(this._value, this._then);
 
-  final QuestionState _value;
+  final QuestionDetailState _value;
   // ignore: unused_field
-  final $Res Function(QuestionState) _then;
+  final $Res Function(QuestionDetailState) _then;
 }
 
 /// @nodoc
-abstract class _$$_QuestionLoadingCopyWith<$Res> {
-  factory _$$_QuestionLoadingCopyWith(
-          _$_QuestionLoading value, $Res Function(_$_QuestionLoading) then) =
-      __$$_QuestionLoadingCopyWithImpl<$Res>;
+abstract class _$$QuestionDetailStateInitialCopyWith<$Res> {
+  factory _$$QuestionDetailStateInitialCopyWith(
+          _$QuestionDetailStateInitial value,
+          $Res Function(_$QuestionDetailStateInitial) then) =
+      __$$QuestionDetailStateInitialCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_QuestionLoadingCopyWithImpl<$Res>
-    extends _$QuestionStateCopyWithImpl<$Res>
-    implements _$$_QuestionLoadingCopyWith<$Res> {
-  __$$_QuestionLoadingCopyWithImpl(
-      _$_QuestionLoading _value, $Res Function(_$_QuestionLoading) _then)
-      : super(_value, (v) => _then(v as _$_QuestionLoading));
+class __$$QuestionDetailStateInitialCopyWithImpl<$Res>
+    extends _$QuestionDetailStateCopyWithImpl<$Res>
+    implements _$$QuestionDetailStateInitialCopyWith<$Res> {
+  __$$QuestionDetailStateInitialCopyWithImpl(
+      _$QuestionDetailStateInitial _value,
+      $Res Function(_$QuestionDetailStateInitial) _then)
+      : super(_value, (v) => _then(v as _$QuestionDetailStateInitial));
 
   @override
-  _$_QuestionLoading get _value => super._value as _$_QuestionLoading;
+  _$QuestionDetailStateInitial get _value =>
+      super._value as _$QuestionDetailStateInitial;
 }
 
 /// @nodoc
 
-class _$_QuestionLoading implements _QuestionLoading {
-  const _$_QuestionLoading();
+class _$QuestionDetailStateInitial implements QuestionDetailStateInitial {
+  const _$QuestionDetailStateInitial();
 
   @override
   String toString() {
-    return 'QuestionState.loading()';
+    return 'QuestionDetailState.initial()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_QuestionLoading);
+        (other.runtimeType == runtimeType &&
+            other is _$QuestionDetailStateInitial);
   }
 
   @override
@@ -126,10 +138,140 @@ class _$_QuestionLoading implements _QuestionLoading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() rollBack,
+    required TResult Function(Question question) loadedQuestion,
     required TResult Function(Error error) error,
-    required TResult Function(Question question) loaded,
+    required TResult Function() deleteSuccess,
+  }) {
+    return initial();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Question question)? loadedQuestion,
+    TResult Function(Error error)? error,
+    TResult Function()? deleteSuccess,
+  }) {
+    return initial?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Question question)? loadedQuestion,
+    TResult Function(Error error)? error,
+    TResult Function()? deleteSuccess,
+    required TResult orElse(),
+  }) {
+    if (initial != null) {
+      return initial();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(QuestionDetailStateInitial value) initial,
+    required TResult Function(QuestionDetailStateLoading value) loading,
+    required TResult Function(QuestionDetailStateLoadedQuestion value)
+        loadedQuestion,
+    required TResult Function(QuestionDetailStateError value) error,
+    required TResult Function(QuestionDetailStateDeleteSuccess value)
+        deleteSuccess,
+  }) {
+    return initial(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(QuestionDetailStateInitial value)? initial,
+    TResult Function(QuestionDetailStateLoading value)? loading,
+    TResult Function(QuestionDetailStateLoadedQuestion value)? loadedQuestion,
+    TResult Function(QuestionDetailStateError value)? error,
+    TResult Function(QuestionDetailStateDeleteSuccess value)? deleteSuccess,
+  }) {
+    return initial?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(QuestionDetailStateInitial value)? initial,
+    TResult Function(QuestionDetailStateLoading value)? loading,
+    TResult Function(QuestionDetailStateLoadedQuestion value)? loadedQuestion,
+    TResult Function(QuestionDetailStateError value)? error,
+    TResult Function(QuestionDetailStateDeleteSuccess value)? deleteSuccess,
+    required TResult orElse(),
+  }) {
+    if (initial != null) {
+      return initial(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class QuestionDetailStateInitial implements QuestionDetailState {
+  const factory QuestionDetailStateInitial() = _$QuestionDetailStateInitial;
+}
+
+/// @nodoc
+abstract class _$$QuestionDetailStateLoadingCopyWith<$Res> {
+  factory _$$QuestionDetailStateLoadingCopyWith(
+          _$QuestionDetailStateLoading value,
+          $Res Function(_$QuestionDetailStateLoading) then) =
+      __$$QuestionDetailStateLoadingCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$QuestionDetailStateLoadingCopyWithImpl<$Res>
+    extends _$QuestionDetailStateCopyWithImpl<$Res>
+    implements _$$QuestionDetailStateLoadingCopyWith<$Res> {
+  __$$QuestionDetailStateLoadingCopyWithImpl(
+      _$QuestionDetailStateLoading _value,
+      $Res Function(_$QuestionDetailStateLoading) _then)
+      : super(_value, (v) => _then(v as _$QuestionDetailStateLoading));
+
+  @override
+  _$QuestionDetailStateLoading get _value =>
+      super._value as _$QuestionDetailStateLoading;
+}
+
+/// @nodoc
+
+class _$QuestionDetailStateLoading implements QuestionDetailStateLoading {
+  const _$QuestionDetailStateLoading();
+
+  @override
+  String toString() {
+    return 'QuestionDetailState.loading()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$QuestionDetailStateLoading);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(Question question) loadedQuestion,
+    required TResult Function(Error error) error,
+    required TResult Function() deleteSuccess,
   }) {
     return loading();
   }
@@ -137,10 +279,11 @@ class _$_QuestionLoading implements _QuestionLoading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? rollBack,
+    TResult Function(Question question)? loadedQuestion,
     TResult Function(Error error)? error,
-    TResult Function(Question question)? loaded,
+    TResult Function()? deleteSuccess,
   }) {
     return loading?.call();
   }
@@ -148,10 +291,11 @@ class _$_QuestionLoading implements _QuestionLoading {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? rollBack,
+    TResult Function(Question question)? loadedQuestion,
     TResult Function(Error error)? error,
-    TResult Function(Question question)? loaded,
+    TResult Function()? deleteSuccess,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -163,10 +307,13 @@ class _$_QuestionLoading implements _QuestionLoading {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_QuestionLoading value) loading,
-    required TResult Function(_QuestionRollBack value) rollBack,
-    required TResult Function(_QuestionError value) error,
-    required TResult Function(_QuestionFetched value) loaded,
+    required TResult Function(QuestionDetailStateInitial value) initial,
+    required TResult Function(QuestionDetailStateLoading value) loading,
+    required TResult Function(QuestionDetailStateLoadedQuestion value)
+        loadedQuestion,
+    required TResult Function(QuestionDetailStateError value) error,
+    required TResult Function(QuestionDetailStateDeleteSuccess value)
+        deleteSuccess,
   }) {
     return loading(this);
   }
@@ -174,10 +321,11 @@ class _$_QuestionLoading implements _QuestionLoading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_QuestionLoading value)? loading,
-    TResult Function(_QuestionRollBack value)? rollBack,
-    TResult Function(_QuestionError value)? error,
-    TResult Function(_QuestionFetched value)? loaded,
+    TResult Function(QuestionDetailStateInitial value)? initial,
+    TResult Function(QuestionDetailStateLoading value)? loading,
+    TResult Function(QuestionDetailStateLoadedQuestion value)? loadedQuestion,
+    TResult Function(QuestionDetailStateError value)? error,
+    TResult Function(QuestionDetailStateDeleteSuccess value)? deleteSuccess,
   }) {
     return loading?.call(this);
   }
@@ -185,10 +333,11 @@ class _$_QuestionLoading implements _QuestionLoading {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_QuestionLoading value)? loading,
-    TResult Function(_QuestionRollBack value)? rollBack,
-    TResult Function(_QuestionError value)? error,
-    TResult Function(_QuestionFetched value)? loaded,
+    TResult Function(QuestionDetailStateInitial value)? initial,
+    TResult Function(QuestionDetailStateLoading value)? loading,
+    TResult Function(QuestionDetailStateLoadedQuestion value)? loadedQuestion,
+    TResult Function(QuestionDetailStateError value)? error,
+    TResult Function(QuestionDetailStateDeleteSuccess value)? deleteSuccess,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -198,299 +347,39 @@ class _$_QuestionLoading implements _QuestionLoading {
   }
 }
 
-abstract class _QuestionLoading implements QuestionState {
-  const factory _QuestionLoading() = _$_QuestionLoading;
+abstract class QuestionDetailStateLoading implements QuestionDetailState {
+  const factory QuestionDetailStateLoading() = _$QuestionDetailStateLoading;
 }
 
 /// @nodoc
-abstract class _$$_QuestionRollBackCopyWith<$Res> {
-  factory _$$_QuestionRollBackCopyWith(
-          _$_QuestionRollBack value, $Res Function(_$_QuestionRollBack) then) =
-      __$$_QuestionRollBackCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_QuestionRollBackCopyWithImpl<$Res>
-    extends _$QuestionStateCopyWithImpl<$Res>
-    implements _$$_QuestionRollBackCopyWith<$Res> {
-  __$$_QuestionRollBackCopyWithImpl(
-      _$_QuestionRollBack _value, $Res Function(_$_QuestionRollBack) _then)
-      : super(_value, (v) => _then(v as _$_QuestionRollBack));
-
-  @override
-  _$_QuestionRollBack get _value => super._value as _$_QuestionRollBack;
-}
-
-/// @nodoc
-
-class _$_QuestionRollBack implements _QuestionRollBack {
-  const _$_QuestionRollBack();
-
-  @override
-  String toString() {
-    return 'QuestionState.rollBack()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_QuestionRollBack);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function() rollBack,
-    required TResult Function(Error error) error,
-    required TResult Function(Question question) loaded,
-  }) {
-    return rollBack();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function()? rollBack,
-    TResult Function(Error error)? error,
-    TResult Function(Question question)? loaded,
-  }) {
-    return rollBack?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function()? rollBack,
-    TResult Function(Error error)? error,
-    TResult Function(Question question)? loaded,
-    required TResult orElse(),
-  }) {
-    if (rollBack != null) {
-      return rollBack();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_QuestionLoading value) loading,
-    required TResult Function(_QuestionRollBack value) rollBack,
-    required TResult Function(_QuestionError value) error,
-    required TResult Function(_QuestionFetched value) loaded,
-  }) {
-    return rollBack(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_QuestionLoading value)? loading,
-    TResult Function(_QuestionRollBack value)? rollBack,
-    TResult Function(_QuestionError value)? error,
-    TResult Function(_QuestionFetched value)? loaded,
-  }) {
-    return rollBack?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_QuestionLoading value)? loading,
-    TResult Function(_QuestionRollBack value)? rollBack,
-    TResult Function(_QuestionError value)? error,
-    TResult Function(_QuestionFetched value)? loaded,
-    required TResult orElse(),
-  }) {
-    if (rollBack != null) {
-      return rollBack(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _QuestionRollBack implements QuestionState {
-  const factory _QuestionRollBack() = _$_QuestionRollBack;
-}
-
-/// @nodoc
-abstract class _$$_QuestionErrorCopyWith<$Res> {
-  factory _$$_QuestionErrorCopyWith(
-          _$_QuestionError value, $Res Function(_$_QuestionError) then) =
-      __$$_QuestionErrorCopyWithImpl<$Res>;
-  $Res call({Error error});
-}
-
-/// @nodoc
-class __$$_QuestionErrorCopyWithImpl<$Res>
-    extends _$QuestionStateCopyWithImpl<$Res>
-    implements _$$_QuestionErrorCopyWith<$Res> {
-  __$$_QuestionErrorCopyWithImpl(
-      _$_QuestionError _value, $Res Function(_$_QuestionError) _then)
-      : super(_value, (v) => _then(v as _$_QuestionError));
-
-  @override
-  _$_QuestionError get _value => super._value as _$_QuestionError;
-
-  @override
-  $Res call({
-    Object? error = freezed,
-  }) {
-    return _then(_$_QuestionError(
-      error == freezed
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as Error,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_QuestionError implements _QuestionError {
-  const _$_QuestionError(this.error);
-
-  @override
-  final Error error;
-
-  @override
-  String toString() {
-    return 'QuestionState.error(error: $error)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_QuestionError &&
-            const DeepCollectionEquality().equals(other.error, error));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(error));
-
-  @JsonKey(ignore: true)
-  @override
-  _$$_QuestionErrorCopyWith<_$_QuestionError> get copyWith =>
-      __$$_QuestionErrorCopyWithImpl<_$_QuestionError>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function() rollBack,
-    required TResult Function(Error error) error,
-    required TResult Function(Question question) loaded,
-  }) {
-    return error(this.error);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function()? rollBack,
-    TResult Function(Error error)? error,
-    TResult Function(Question question)? loaded,
-  }) {
-    return error?.call(this.error);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function()? rollBack,
-    TResult Function(Error error)? error,
-    TResult Function(Question question)? loaded,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(this.error);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_QuestionLoading value) loading,
-    required TResult Function(_QuestionRollBack value) rollBack,
-    required TResult Function(_QuestionError value) error,
-    required TResult Function(_QuestionFetched value) loaded,
-  }) {
-    return error(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_QuestionLoading value)? loading,
-    TResult Function(_QuestionRollBack value)? rollBack,
-    TResult Function(_QuestionError value)? error,
-    TResult Function(_QuestionFetched value)? loaded,
-  }) {
-    return error?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_QuestionLoading value)? loading,
-    TResult Function(_QuestionRollBack value)? rollBack,
-    TResult Function(_QuestionError value)? error,
-    TResult Function(_QuestionFetched value)? loaded,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _QuestionError implements QuestionState {
-  const factory _QuestionError(final Error error) = _$_QuestionError;
-
-  Error get error => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  _$$_QuestionErrorCopyWith<_$_QuestionError> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_QuestionFetchedCopyWith<$Res> {
-  factory _$$_QuestionFetchedCopyWith(
-          _$_QuestionFetched value, $Res Function(_$_QuestionFetched) then) =
-      __$$_QuestionFetchedCopyWithImpl<$Res>;
+abstract class _$$QuestionDetailStateLoadedQuestionCopyWith<$Res> {
+  factory _$$QuestionDetailStateLoadedQuestionCopyWith(
+          _$QuestionDetailStateLoadedQuestion value,
+          $Res Function(_$QuestionDetailStateLoadedQuestion) then) =
+      __$$QuestionDetailStateLoadedQuestionCopyWithImpl<$Res>;
   $Res call({Question question});
 
   $QuestionCopyWith<$Res> get question;
 }
 
 /// @nodoc
-class __$$_QuestionFetchedCopyWithImpl<$Res>
-    extends _$QuestionStateCopyWithImpl<$Res>
-    implements _$$_QuestionFetchedCopyWith<$Res> {
-  __$$_QuestionFetchedCopyWithImpl(
-      _$_QuestionFetched _value, $Res Function(_$_QuestionFetched) _then)
-      : super(_value, (v) => _then(v as _$_QuestionFetched));
+class __$$QuestionDetailStateLoadedQuestionCopyWithImpl<$Res>
+    extends _$QuestionDetailStateCopyWithImpl<$Res>
+    implements _$$QuestionDetailStateLoadedQuestionCopyWith<$Res> {
+  __$$QuestionDetailStateLoadedQuestionCopyWithImpl(
+      _$QuestionDetailStateLoadedQuestion _value,
+      $Res Function(_$QuestionDetailStateLoadedQuestion) _then)
+      : super(_value, (v) => _then(v as _$QuestionDetailStateLoadedQuestion));
 
   @override
-  _$_QuestionFetched get _value => super._value as _$_QuestionFetched;
+  _$QuestionDetailStateLoadedQuestion get _value =>
+      super._value as _$QuestionDetailStateLoadedQuestion;
 
   @override
   $Res call({
     Object? question = freezed,
   }) {
-    return _then(_$_QuestionFetched(
+    return _then(_$QuestionDetailStateLoadedQuestion(
       question == freezed
           ? _value.question
           : question // ignore: cast_nullable_to_non_nullable
@@ -508,22 +397,23 @@ class __$$_QuestionFetchedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_QuestionFetched implements _QuestionFetched {
-  const _$_QuestionFetched(this.question);
+class _$QuestionDetailStateLoadedQuestion
+    implements QuestionDetailStateLoadedQuestion {
+  const _$QuestionDetailStateLoadedQuestion(this.question);
 
   @override
   final Question question;
 
   @override
   String toString() {
-    return 'QuestionState.loaded(question: $question)';
+    return 'QuestionDetailState.loadedQuestion(question: $question)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_QuestionFetched &&
+            other is _$QuestionDetailStateLoadedQuestion &&
             const DeepCollectionEquality().equals(other.question, question));
   }
 
@@ -533,42 +423,47 @@ class _$_QuestionFetched implements _QuestionFetched {
 
   @JsonKey(ignore: true)
   @override
-  _$$_QuestionFetchedCopyWith<_$_QuestionFetched> get copyWith =>
-      __$$_QuestionFetchedCopyWithImpl<_$_QuestionFetched>(this, _$identity);
+  _$$QuestionDetailStateLoadedQuestionCopyWith<
+          _$QuestionDetailStateLoadedQuestion>
+      get copyWith => __$$QuestionDetailStateLoadedQuestionCopyWithImpl<
+          _$QuestionDetailStateLoadedQuestion>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() rollBack,
+    required TResult Function(Question question) loadedQuestion,
     required TResult Function(Error error) error,
-    required TResult Function(Question question) loaded,
+    required TResult Function() deleteSuccess,
   }) {
-    return loaded(question);
+    return loadedQuestion(question);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? rollBack,
+    TResult Function(Question question)? loadedQuestion,
     TResult Function(Error error)? error,
-    TResult Function(Question question)? loaded,
+    TResult Function()? deleteSuccess,
   }) {
-    return loaded?.call(question);
+    return loadedQuestion?.call(question);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? rollBack,
+    TResult Function(Question question)? loadedQuestion,
     TResult Function(Error error)? error,
-    TResult Function(Question question)? loaded,
+    TResult Function()? deleteSuccess,
     required TResult orElse(),
   }) {
-    if (loaded != null) {
-      return loaded(question);
+    if (loadedQuestion != null) {
+      return loadedQuestion(question);
     }
     return orElse();
   }
@@ -576,46 +471,343 @@ class _$_QuestionFetched implements _QuestionFetched {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_QuestionLoading value) loading,
-    required TResult Function(_QuestionRollBack value) rollBack,
-    required TResult Function(_QuestionError value) error,
-    required TResult Function(_QuestionFetched value) loaded,
+    required TResult Function(QuestionDetailStateInitial value) initial,
+    required TResult Function(QuestionDetailStateLoading value) loading,
+    required TResult Function(QuestionDetailStateLoadedQuestion value)
+        loadedQuestion,
+    required TResult Function(QuestionDetailStateError value) error,
+    required TResult Function(QuestionDetailStateDeleteSuccess value)
+        deleteSuccess,
   }) {
-    return loaded(this);
+    return loadedQuestion(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_QuestionLoading value)? loading,
-    TResult Function(_QuestionRollBack value)? rollBack,
-    TResult Function(_QuestionError value)? error,
-    TResult Function(_QuestionFetched value)? loaded,
+    TResult Function(QuestionDetailStateInitial value)? initial,
+    TResult Function(QuestionDetailStateLoading value)? loading,
+    TResult Function(QuestionDetailStateLoadedQuestion value)? loadedQuestion,
+    TResult Function(QuestionDetailStateError value)? error,
+    TResult Function(QuestionDetailStateDeleteSuccess value)? deleteSuccess,
   }) {
-    return loaded?.call(this);
+    return loadedQuestion?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_QuestionLoading value)? loading,
-    TResult Function(_QuestionRollBack value)? rollBack,
-    TResult Function(_QuestionError value)? error,
-    TResult Function(_QuestionFetched value)? loaded,
+    TResult Function(QuestionDetailStateInitial value)? initial,
+    TResult Function(QuestionDetailStateLoading value)? loading,
+    TResult Function(QuestionDetailStateLoadedQuestion value)? loadedQuestion,
+    TResult Function(QuestionDetailStateError value)? error,
+    TResult Function(QuestionDetailStateDeleteSuccess value)? deleteSuccess,
     required TResult orElse(),
   }) {
-    if (loaded != null) {
-      return loaded(this);
+    if (loadedQuestion != null) {
+      return loadedQuestion(this);
     }
     return orElse();
   }
 }
 
-abstract class _QuestionFetched implements QuestionState {
-  const factory _QuestionFetched(final Question question) = _$_QuestionFetched;
+abstract class QuestionDetailStateLoadedQuestion
+    implements QuestionDetailState {
+  const factory QuestionDetailStateLoadedQuestion(final Question question) =
+      _$QuestionDetailStateLoadedQuestion;
 
   Question get question => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$$_QuestionFetchedCopyWith<_$_QuestionFetched> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$QuestionDetailStateLoadedQuestionCopyWith<
+          _$QuestionDetailStateLoadedQuestion>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$QuestionDetailStateErrorCopyWith<$Res> {
+  factory _$$QuestionDetailStateErrorCopyWith(_$QuestionDetailStateError value,
+          $Res Function(_$QuestionDetailStateError) then) =
+      __$$QuestionDetailStateErrorCopyWithImpl<$Res>;
+  $Res call({Error error});
+}
+
+/// @nodoc
+class __$$QuestionDetailStateErrorCopyWithImpl<$Res>
+    extends _$QuestionDetailStateCopyWithImpl<$Res>
+    implements _$$QuestionDetailStateErrorCopyWith<$Res> {
+  __$$QuestionDetailStateErrorCopyWithImpl(_$QuestionDetailStateError _value,
+      $Res Function(_$QuestionDetailStateError) _then)
+      : super(_value, (v) => _then(v as _$QuestionDetailStateError));
+
+  @override
+  _$QuestionDetailStateError get _value =>
+      super._value as _$QuestionDetailStateError;
+
+  @override
+  $Res call({
+    Object? error = freezed,
+  }) {
+    return _then(_$QuestionDetailStateError(
+      error == freezed
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as Error,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$QuestionDetailStateError implements QuestionDetailStateError {
+  const _$QuestionDetailStateError(this.error);
+
+  @override
+  final Error error;
+
+  @override
+  String toString() {
+    return 'QuestionDetailState.error(error: $error)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$QuestionDetailStateError &&
+            const DeepCollectionEquality().equals(other.error, error));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(error));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$QuestionDetailStateErrorCopyWith<_$QuestionDetailStateError>
+      get copyWith =>
+          __$$QuestionDetailStateErrorCopyWithImpl<_$QuestionDetailStateError>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(Question question) loadedQuestion,
+    required TResult Function(Error error) error,
+    required TResult Function() deleteSuccess,
+  }) {
+    return error(this.error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Question question)? loadedQuestion,
+    TResult Function(Error error)? error,
+    TResult Function()? deleteSuccess,
+  }) {
+    return error?.call(this.error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Question question)? loadedQuestion,
+    TResult Function(Error error)? error,
+    TResult Function()? deleteSuccess,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(this.error);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(QuestionDetailStateInitial value) initial,
+    required TResult Function(QuestionDetailStateLoading value) loading,
+    required TResult Function(QuestionDetailStateLoadedQuestion value)
+        loadedQuestion,
+    required TResult Function(QuestionDetailStateError value) error,
+    required TResult Function(QuestionDetailStateDeleteSuccess value)
+        deleteSuccess,
+  }) {
+    return error(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(QuestionDetailStateInitial value)? initial,
+    TResult Function(QuestionDetailStateLoading value)? loading,
+    TResult Function(QuestionDetailStateLoadedQuestion value)? loadedQuestion,
+    TResult Function(QuestionDetailStateError value)? error,
+    TResult Function(QuestionDetailStateDeleteSuccess value)? deleteSuccess,
+  }) {
+    return error?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(QuestionDetailStateInitial value)? initial,
+    TResult Function(QuestionDetailStateLoading value)? loading,
+    TResult Function(QuestionDetailStateLoadedQuestion value)? loadedQuestion,
+    TResult Function(QuestionDetailStateError value)? error,
+    TResult Function(QuestionDetailStateDeleteSuccess value)? deleteSuccess,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class QuestionDetailStateError implements QuestionDetailState {
+  const factory QuestionDetailStateError(final Error error) =
+      _$QuestionDetailStateError;
+
+  Error get error => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$$QuestionDetailStateErrorCopyWith<_$QuestionDetailStateError>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$QuestionDetailStateDeleteSuccessCopyWith<$Res> {
+  factory _$$QuestionDetailStateDeleteSuccessCopyWith(
+          _$QuestionDetailStateDeleteSuccess value,
+          $Res Function(_$QuestionDetailStateDeleteSuccess) then) =
+      __$$QuestionDetailStateDeleteSuccessCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$QuestionDetailStateDeleteSuccessCopyWithImpl<$Res>
+    extends _$QuestionDetailStateCopyWithImpl<$Res>
+    implements _$$QuestionDetailStateDeleteSuccessCopyWith<$Res> {
+  __$$QuestionDetailStateDeleteSuccessCopyWithImpl(
+      _$QuestionDetailStateDeleteSuccess _value,
+      $Res Function(_$QuestionDetailStateDeleteSuccess) _then)
+      : super(_value, (v) => _then(v as _$QuestionDetailStateDeleteSuccess));
+
+  @override
+  _$QuestionDetailStateDeleteSuccess get _value =>
+      super._value as _$QuestionDetailStateDeleteSuccess;
+}
+
+/// @nodoc
+
+class _$QuestionDetailStateDeleteSuccess
+    implements QuestionDetailStateDeleteSuccess {
+  const _$QuestionDetailStateDeleteSuccess();
+
+  @override
+  String toString() {
+    return 'QuestionDetailState.deleteSuccess()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$QuestionDetailStateDeleteSuccess);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(Question question) loadedQuestion,
+    required TResult Function(Error error) error,
+    required TResult Function() deleteSuccess,
+  }) {
+    return deleteSuccess();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Question question)? loadedQuestion,
+    TResult Function(Error error)? error,
+    TResult Function()? deleteSuccess,
+  }) {
+    return deleteSuccess?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(Question question)? loadedQuestion,
+    TResult Function(Error error)? error,
+    TResult Function()? deleteSuccess,
+    required TResult orElse(),
+  }) {
+    if (deleteSuccess != null) {
+      return deleteSuccess();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(QuestionDetailStateInitial value) initial,
+    required TResult Function(QuestionDetailStateLoading value) loading,
+    required TResult Function(QuestionDetailStateLoadedQuestion value)
+        loadedQuestion,
+    required TResult Function(QuestionDetailStateError value) error,
+    required TResult Function(QuestionDetailStateDeleteSuccess value)
+        deleteSuccess,
+  }) {
+    return deleteSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(QuestionDetailStateInitial value)? initial,
+    TResult Function(QuestionDetailStateLoading value)? loading,
+    TResult Function(QuestionDetailStateLoadedQuestion value)? loadedQuestion,
+    TResult Function(QuestionDetailStateError value)? error,
+    TResult Function(QuestionDetailStateDeleteSuccess value)? deleteSuccess,
+  }) {
+    return deleteSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(QuestionDetailStateInitial value)? initial,
+    TResult Function(QuestionDetailStateLoading value)? loading,
+    TResult Function(QuestionDetailStateLoadedQuestion value)? loadedQuestion,
+    TResult Function(QuestionDetailStateError value)? error,
+    TResult Function(QuestionDetailStateDeleteSuccess value)? deleteSuccess,
+    required TResult orElse(),
+  }) {
+    if (deleteSuccess != null) {
+      return deleteSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class QuestionDetailStateDeleteSuccess implements QuestionDetailState {
+  const factory QuestionDetailStateDeleteSuccess() =
+      _$QuestionDetailStateDeleteSuccess;
 }
