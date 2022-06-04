@@ -519,6 +519,8 @@ abstract class _$$_QuestionFetchedCopyWith<$Res> {
           _$_QuestionFetched value, $Res Function(_$_QuestionFetched) then) =
       __$$_QuestionFetchedCopyWithImpl<$Res>;
   $Res call({Question question});
+
+  $QuestionCopyWith<$Res> get question;
 }
 
 /// @nodoc
@@ -542,6 +544,13 @@ class __$$_QuestionFetchedCopyWithImpl<$Res>
           : question // ignore: cast_nullable_to_non_nullable
               as Question,
     ));
+  }
+
+  @override
+  $QuestionCopyWith<$Res> get question {
+    return $QuestionCopyWith<$Res>(_value.question, (value) {
+      return _then(_value.copyWith(question: value));
+    });
   }
 }
 
@@ -677,6 +686,8 @@ abstract class _$$_QuestionUpVotedCopyWith<$Res> {
           _$_QuestionUpVoted value, $Res Function(_$_QuestionUpVoted) then) =
       __$$_QuestionUpVotedCopyWithImpl<$Res>;
   $Res call({Question question});
+
+  $QuestionCopyWith<$Res> get question;
 }
 
 /// @nodoc
@@ -700,6 +711,13 @@ class __$$_QuestionUpVotedCopyWithImpl<$Res>
           : question // ignore: cast_nullable_to_non_nullable
               as Question,
     ));
+  }
+
+  @override
+  $QuestionCopyWith<$Res> get question {
+    return $QuestionCopyWith<$Res>(_value.question, (value) {
+      return _then(_value.copyWith(question: value));
+    });
   }
 }
 
@@ -835,6 +853,8 @@ abstract class _$$_QuestionDownVotedCopyWith<$Res> {
           $Res Function(_$_QuestionDownVoted) then) =
       __$$_QuestionDownVotedCopyWithImpl<$Res>;
   $Res call({Question question});
+
+  $QuestionCopyWith<$Res> get question;
 }
 
 /// @nodoc
@@ -858,6 +878,13 @@ class __$$_QuestionDownVotedCopyWithImpl<$Res>
           : question // ignore: cast_nullable_to_non_nullable
               as Question,
     ));
+  }
+
+  @override
+  $QuestionCopyWith<$Res> get question {
+    return $QuestionCopyWith<$Res>(_value.question, (value) {
+      return _then(_value.copyWith(question: value));
+    });
   }
 }
 

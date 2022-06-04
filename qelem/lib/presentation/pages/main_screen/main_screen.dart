@@ -78,7 +78,9 @@ class _MainScreenState extends State<MainScreen> {
           return AppBar(
             title: const Text("Home"),
             actions: [
-              IconButton(onPressed: () => {}, icon: const Icon(Icons.search))
+              IconButton(
+                  onPressed: () => context.push('/search-question'),
+                  icon: const Icon(Icons.search))
             ],
           );
         }

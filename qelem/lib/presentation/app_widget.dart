@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:qelem/application/auth/auth_bloc.dart';
 import 'package:qelem/application/auth/auth_state.dart';
 import 'package:qelem/presentation/pages/boarding/register_login_screen.dart';
+import 'package:qelem/presentation/pages/search_question/search_screen.dart';
 import 'package:qelem/presentation/routes/routes.dart';
 
 import '../common/constants.dart';
@@ -80,6 +81,10 @@ class App extends StatelessWidget {
         GoRoute(
           path: Routes.postQuestion,
           builder: (context, state) => const PostQuestionScreen(),
+        ),
+        GoRoute(
+          path: Routes.searchQuestion,
+          builder: (context, state) => const SearchQuestionScreen(),
         ),
         GoRoute(
           path: '${Routes.editQuestion}/:qid',

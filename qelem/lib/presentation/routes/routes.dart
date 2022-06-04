@@ -8,4 +8,5 @@ class Routes {
   static const String postQuestion = '/post-question';
   static const String editQuestion = '/edit-question';
   static const String questionDetail = '/question-detail';
+  static const String searchQuestion = '/search-question';
 }
