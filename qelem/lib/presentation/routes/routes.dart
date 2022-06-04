@@ -2,6 +2,7 @@ class Routes {
   static const String home = '/';
   static const String boarding = '/boarding';
   static const String changePassword = '/change-password';
+  static const String myProfile = '/my-profile';
   static const String editProfile = '/edit-profile';
   static const String register = '/register';
   static const String signIn = '/sign-in';

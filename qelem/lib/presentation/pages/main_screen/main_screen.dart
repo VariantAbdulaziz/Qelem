@@ -9,7 +9,9 @@ import 'package:qelem/presentation/pages/question/my_questions_page/my_questions
 import 'package:qelem/presentation/routes/routes.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+  final int? index;
+
+  const MainScreen({Key? key, this.index}) : super(key: key);
 
   @override
   _MainScreenState createState() {
@@ -19,6 +21,12 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = (widget.index != null && widget.index! < 3) ? widget.index! : 0;
+  }
 
   @override
   Widget build(BuildContext context) {
