@@ -28,8 +28,14 @@ class QuestionApi {
   }
 
   // get all questions
-  Future<List<QuestionDto>> getAllQuestions() async {
-    var response = await _httpClient.get('questions');
+  Future<List<QuestionDto>> getAllQuestions({int? authorId}) async {
+    var url = 'questions?';
+
+    if (authorId != null) {
+      url += 'authorId=$authorId';
+    }
+
+    var response = await _httpClient.get(url);
 
     if (response.statusCode == 200) {
       return (json.decode(response.body) as List)

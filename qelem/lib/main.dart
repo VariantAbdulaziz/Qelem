@@ -56,15 +56,18 @@ void main() {
                       RepositoryProvider.of<SharedPrefsService>(context)),
                 ),
                 RepositoryProvider(
-                    create: (context) => ProfileRepository(
-                        RepositoryProvider.of<ProfileApi>(context))),
+                  create: (context) => ProfileRepository(
+                      RepositoryProvider.of<ProfileApi>(context)),
+                ),
                 RepositoryProvider(
                     create: (context) => AnswerRepository(
                         RepositoryProvider.of<AnswerApi>(context),
                         RepositoryProvider.of<QuestionApi>(context))),
                 RepositoryProvider(
-                    create: (context) => QuestionRepository(
-                        RepositoryProvider.of<QuestionApi>(context))),
+                  create: (context) => QuestionRepository(
+                      RepositoryProvider.of<QuestionApi>(context),
+                      RepositoryProvider.of<AuthRepository>(context)),
+                ),
               ],
 
               child: MultiBlocProvider(

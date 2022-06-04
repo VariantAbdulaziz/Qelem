@@ -16,43 +16,49 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$QuestionsListEvent {
-  List<Question> get questions => throw _privateConstructorUsedError;
-  double get offset => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<Question> questions, double offset) request,
+    required TResult Function() inital,
+    required TResult Function() load,
+    required TResult Function() refresh,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<Question> questions, double offset)? request,
+    TResult Function()? inital,
+    TResult Function()? load,
+    TResult Function()? refresh,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<Question> questions, double offset)? request,
+    TResult Function()? inital,
+    TResult Function()? load,
+    TResult Function()? refresh,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(QuestionsListRequestEvent value) request,
+    required TResult Function(QuestionsListEventInitial value) inital,
+    required TResult Function(QuestionsListEventLoad value) load,
+    required TResult Function(QuestionsListEventRefresh value) refresh,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(QuestionsListRequestEvent value)? request,
+    TResult Function(QuestionsListEventInitial value)? inital,
+    TResult Function(QuestionsListEventLoad value)? load,
+    TResult Function(QuestionsListEventRefresh value)? refresh,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(QuestionsListRequestEvent value)? request,
+    TResult Function(QuestionsListEventInitial value)? inital,
+    TResult Function(QuestionsListEventLoad value)? load,
+    TResult Function(QuestionsListEventRefresh value)? refresh,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $QuestionsListEventCopyWith<QuestionsListEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -61,7 +67,6 @@ abstract class $QuestionsListEventCopyWith<$Res> {
   factory $QuestionsListEventCopyWith(
           QuestionsListEvent value, $Res Function(QuestionsListEvent) then) =
       _$QuestionsListEventCopyWithImpl<$Res>;
-  $Res call({List<Question> questions, double offset});
 }
 
 /// @nodoc
@@ -72,133 +77,79 @@ class _$QuestionsListEventCopyWithImpl<$Res>
   final QuestionsListEvent _value;
   // ignore: unused_field
   final $Res Function(QuestionsListEvent) _then;
-
-  @override
-  $Res call({
-    Object? questions = freezed,
-    Object? offset = freezed,
-  }) {
-    return _then(_value.copyWith(
-      questions: questions == freezed
-          ? _value.questions
-          : questions // ignore: cast_nullable_to_non_nullable
-              as List<Question>,
-      offset: offset == freezed
-          ? _value.offset
-          : offset // ignore: cast_nullable_to_non_nullable
-              as double,
-    ));
-  }
 }
 
 /// @nodoc
-abstract class _$$QuestionsListRequestEventCopyWith<$Res>
-    implements $QuestionsListEventCopyWith<$Res> {
-  factory _$$QuestionsListRequestEventCopyWith(
-          _$QuestionsListRequestEvent value,
-          $Res Function(_$QuestionsListRequestEvent) then) =
-      __$$QuestionsListRequestEventCopyWithImpl<$Res>;
-  @override
-  $Res call({List<Question> questions, double offset});
+abstract class _$$QuestionsListEventInitialCopyWith<$Res> {
+  factory _$$QuestionsListEventInitialCopyWith(
+          _$QuestionsListEventInitial value,
+          $Res Function(_$QuestionsListEventInitial) then) =
+      __$$QuestionsListEventInitialCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$QuestionsListRequestEventCopyWithImpl<$Res>
+class __$$QuestionsListEventInitialCopyWithImpl<$Res>
     extends _$QuestionsListEventCopyWithImpl<$Res>
-    implements _$$QuestionsListRequestEventCopyWith<$Res> {
-  __$$QuestionsListRequestEventCopyWithImpl(_$QuestionsListRequestEvent _value,
-      $Res Function(_$QuestionsListRequestEvent) _then)
-      : super(_value, (v) => _then(v as _$QuestionsListRequestEvent));
+    implements _$$QuestionsListEventInitialCopyWith<$Res> {
+  __$$QuestionsListEventInitialCopyWithImpl(_$QuestionsListEventInitial _value,
+      $Res Function(_$QuestionsListEventInitial) _then)
+      : super(_value, (v) => _then(v as _$QuestionsListEventInitial));
 
   @override
-  _$QuestionsListRequestEvent get _value =>
-      super._value as _$QuestionsListRequestEvent;
-
-  @override
-  $Res call({
-    Object? questions = freezed,
-    Object? offset = freezed,
-  }) {
-    return _then(_$QuestionsListRequestEvent(
-      questions == freezed
-          ? _value._questions
-          : questions // ignore: cast_nullable_to_non_nullable
-              as List<Question>,
-      offset == freezed
-          ? _value.offset
-          : offset // ignore: cast_nullable_to_non_nullable
-              as double,
-    ));
-  }
+  _$QuestionsListEventInitial get _value =>
+      super._value as _$QuestionsListEventInitial;
 }
 
 /// @nodoc
 
-class _$QuestionsListRequestEvent implements QuestionsListRequestEvent {
-  const _$QuestionsListRequestEvent(final List<Question> questions, this.offset)
-      : _questions = questions;
-
-  final List<Question> _questions;
-  @override
-  List<Question> get questions {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_questions);
-  }
-
-  @override
-  final double offset;
+class _$QuestionsListEventInitial implements QuestionsListEventInitial {
+  const _$QuestionsListEventInitial();
 
   @override
   String toString() {
-    return 'QuestionsListEvent.request(questions: $questions, offset: $offset)';
+    return 'QuestionsListEvent.inital()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$QuestionsListRequestEvent &&
-            const DeepCollectionEquality()
-                .equals(other._questions, _questions) &&
-            const DeepCollectionEquality().equals(other.offset, offset));
+            other is _$QuestionsListEventInitial);
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_questions),
-      const DeepCollectionEquality().hash(offset));
-
-  @JsonKey(ignore: true)
-  @override
-  _$$QuestionsListRequestEventCopyWith<_$QuestionsListRequestEvent>
-      get copyWith => __$$QuestionsListRequestEventCopyWithImpl<
-          _$QuestionsListRequestEvent>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<Question> questions, double offset) request,
+    required TResult Function() inital,
+    required TResult Function() load,
+    required TResult Function() refresh,
   }) {
-    return request(questions, offset);
+    return inital();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<Question> questions, double offset)? request,
+    TResult Function()? inital,
+    TResult Function()? load,
+    TResult Function()? refresh,
   }) {
-    return request?.call(questions, offset);
+    return inital?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<Question> questions, double offset)? request,
+    TResult Function()? inital,
+    TResult Function()? load,
+    TResult Function()? refresh,
     required TResult orElse(),
   }) {
-    if (request != null) {
-      return request(questions, offset);
+    if (inital != null) {
+      return inital();
     }
     return orElse();
   }
@@ -206,43 +157,264 @@ class _$QuestionsListRequestEvent implements QuestionsListRequestEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(QuestionsListRequestEvent value) request,
+    required TResult Function(QuestionsListEventInitial value) inital,
+    required TResult Function(QuestionsListEventLoad value) load,
+    required TResult Function(QuestionsListEventRefresh value) refresh,
   }) {
-    return request(this);
+    return inital(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(QuestionsListRequestEvent value)? request,
+    TResult Function(QuestionsListEventInitial value)? inital,
+    TResult Function(QuestionsListEventLoad value)? load,
+    TResult Function(QuestionsListEventRefresh value)? refresh,
   }) {
-    return request?.call(this);
+    return inital?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(QuestionsListRequestEvent value)? request,
+    TResult Function(QuestionsListEventInitial value)? inital,
+    TResult Function(QuestionsListEventLoad value)? load,
+    TResult Function(QuestionsListEventRefresh value)? refresh,
     required TResult orElse(),
   }) {
-    if (request != null) {
-      return request(this);
+    if (inital != null) {
+      return inital(this);
     }
     return orElse();
   }
 }
 
-abstract class QuestionsListRequestEvent implements QuestionsListEvent {
-  const factory QuestionsListRequestEvent(
-          final List<Question> questions, final double offset) =
-      _$QuestionsListRequestEvent;
+abstract class QuestionsListEventInitial implements QuestionsListEvent {
+  const factory QuestionsListEventInitial() = _$QuestionsListEventInitial;
+}
+
+/// @nodoc
+abstract class _$$QuestionsListEventLoadCopyWith<$Res> {
+  factory _$$QuestionsListEventLoadCopyWith(_$QuestionsListEventLoad value,
+          $Res Function(_$QuestionsListEventLoad) then) =
+      __$$QuestionsListEventLoadCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$QuestionsListEventLoadCopyWithImpl<$Res>
+    extends _$QuestionsListEventCopyWithImpl<$Res>
+    implements _$$QuestionsListEventLoadCopyWith<$Res> {
+  __$$QuestionsListEventLoadCopyWithImpl(_$QuestionsListEventLoad _value,
+      $Res Function(_$QuestionsListEventLoad) _then)
+      : super(_value, (v) => _then(v as _$QuestionsListEventLoad));
 
   @override
-  List<Question> get questions => throw _privateConstructorUsedError;
+  _$QuestionsListEventLoad get _value =>
+      super._value as _$QuestionsListEventLoad;
+}
+
+/// @nodoc
+
+class _$QuestionsListEventLoad implements QuestionsListEventLoad {
+  const _$QuestionsListEventLoad();
+
   @override
-  double get offset => throw _privateConstructorUsedError;
+  String toString() {
+    return 'QuestionsListEvent.load()';
+  }
+
   @override
-  @JsonKey(ignore: true)
-  _$$QuestionsListRequestEventCopyWith<_$QuestionsListRequestEvent>
-      get copyWith => throw _privateConstructorUsedError;
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$QuestionsListEventLoad);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() inital,
+    required TResult Function() load,
+    required TResult Function() refresh,
+  }) {
+    return load();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? inital,
+    TResult Function()? load,
+    TResult Function()? refresh,
+  }) {
+    return load?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? inital,
+    TResult Function()? load,
+    TResult Function()? refresh,
+    required TResult orElse(),
+  }) {
+    if (load != null) {
+      return load();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(QuestionsListEventInitial value) inital,
+    required TResult Function(QuestionsListEventLoad value) load,
+    required TResult Function(QuestionsListEventRefresh value) refresh,
+  }) {
+    return load(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(QuestionsListEventInitial value)? inital,
+    TResult Function(QuestionsListEventLoad value)? load,
+    TResult Function(QuestionsListEventRefresh value)? refresh,
+  }) {
+    return load?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(QuestionsListEventInitial value)? inital,
+    TResult Function(QuestionsListEventLoad value)? load,
+    TResult Function(QuestionsListEventRefresh value)? refresh,
+    required TResult orElse(),
+  }) {
+    if (load != null) {
+      return load(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class QuestionsListEventLoad implements QuestionsListEvent {
+  const factory QuestionsListEventLoad() = _$QuestionsListEventLoad;
+}
+
+/// @nodoc
+abstract class _$$QuestionsListEventRefreshCopyWith<$Res> {
+  factory _$$QuestionsListEventRefreshCopyWith(
+          _$QuestionsListEventRefresh value,
+          $Res Function(_$QuestionsListEventRefresh) then) =
+      __$$QuestionsListEventRefreshCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$QuestionsListEventRefreshCopyWithImpl<$Res>
+    extends _$QuestionsListEventCopyWithImpl<$Res>
+    implements _$$QuestionsListEventRefreshCopyWith<$Res> {
+  __$$QuestionsListEventRefreshCopyWithImpl(_$QuestionsListEventRefresh _value,
+      $Res Function(_$QuestionsListEventRefresh) _then)
+      : super(_value, (v) => _then(v as _$QuestionsListEventRefresh));
+
+  @override
+  _$QuestionsListEventRefresh get _value =>
+      super._value as _$QuestionsListEventRefresh;
+}
+
+/// @nodoc
+
+class _$QuestionsListEventRefresh implements QuestionsListEventRefresh {
+  const _$QuestionsListEventRefresh();
+
+  @override
+  String toString() {
+    return 'QuestionsListEvent.refresh()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$QuestionsListEventRefresh);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() inital,
+    required TResult Function() load,
+    required TResult Function() refresh,
+  }) {
+    return refresh();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? inital,
+    TResult Function()? load,
+    TResult Function()? refresh,
+  }) {
+    return refresh?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? inital,
+    TResult Function()? load,
+    TResult Function()? refresh,
+    required TResult orElse(),
+  }) {
+    if (refresh != null) {
+      return refresh();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(QuestionsListEventInitial value) inital,
+    required TResult Function(QuestionsListEventLoad value) load,
+    required TResult Function(QuestionsListEventRefresh value) refresh,
+  }) {
+    return refresh(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(QuestionsListEventInitial value)? inital,
+    TResult Function(QuestionsListEventLoad value)? load,
+    TResult Function(QuestionsListEventRefresh value)? refresh,
+  }) {
+    return refresh?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(QuestionsListEventInitial value)? inital,
+    TResult Function(QuestionsListEventLoad value)? load,
+    TResult Function(QuestionsListEventRefresh value)? refresh,
+    required TResult orElse(),
+  }) {
+    if (refresh != null) {
+      return refresh(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class QuestionsListEventRefresh implements QuestionsListEvent {
+  const factory QuestionsListEventRefresh() = _$QuestionsListEventRefresh;
 }

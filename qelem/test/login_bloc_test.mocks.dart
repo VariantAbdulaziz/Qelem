@@ -92,4 +92,8 @@ class MockAuthRepository extends _i1.Mock implements _i5.AuthRepository {
       (super.noSuchMethod(Invocation.method(#logout, []),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i7.Future<void>);
+  @override
+  _i7.Future<int?> getUserId() =>
+      (super.noSuchMethod(Invocation.method(#getUserId, []),
+          returnValue: Future<int?>.value()) as _i7.Future<int?>);
 }

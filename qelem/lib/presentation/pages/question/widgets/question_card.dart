@@ -19,23 +19,28 @@ class QuestionCard extends StatelessWidget {
             Container(
               margin: const EdgeInsets.fromLTRB(0, 14, 16, 12),
               child: ListTile(
-                leading: CircleAvatar(
-                  backgroundImage: Image.network(
-                    question.author.profilePicture,
-                    fit: BoxFit.cover,
-                  ).image,
-                  radius: 40,
+                leading: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: CircleAvatar(
+                    backgroundImage: Image.network(
+                      question.author.profilePicture,
+                      fit: BoxFit.cover,
+                    ).image,
+                    radius: 20,
+                  ),
                 ),
                 title: Text(
                   question.topic,
                   style: Theme.of(context).textTheme.headline6,
                   textAlign: TextAlign.left,
                 ),
-                subtitle: Text(
-                  question.author.userName,
-                  style: Theme.of(context).textTheme.bodyText2,
-                  textAlign: TextAlign.left,
-                ),
+                subtitle: Row(children: [
+                  Text(
+                    "${question.author.firstName} ${question.author.lastName}",
+                    style: Theme.of(context).textTheme.bodyText2,
+                    textAlign: TextAlign.left,
+                  ),
+                ]),
               ),
             ),
             Container(
