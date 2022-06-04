@@ -27,6 +27,10 @@ mixin _$QuestionEntity {
   int get upVotes => throw _privateConstructorUsedError;
   int get downVotes => throw _privateConstructorUsedError;
   int get userVote => throw _privateConstructorUsedError;
+  @TimestampConverter()
+  DateTime get createdAt => throw _privateConstructorUsedError;
+  @TimestampConverter()
+  DateTime get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -46,7 +50,9 @@ abstract class $QuestionEntityCopyWith<$Res> {
       int authorId,
       int upVotes,
       int downVotes,
-      int userVote});
+      int userVote,
+      @TimestampConverter() DateTime createdAt,
+      @TimestampConverter() DateTime updatedAt});
 }
 
 /// @nodoc
@@ -67,6 +73,8 @@ class _$QuestionEntityCopyWithImpl<$Res>
     Object? upVotes = freezed,
     Object? downVotes = freezed,
     Object? userVote = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -97,6 +105,14 @@ class _$QuestionEntityCopyWithImpl<$Res>
           ? _value.userVote
           : userVote // ignore: cast_nullable_to_non_nullable
               as int,
+      createdAt: createdAt == freezed
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: updatedAt == freezed
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -115,7 +131,9 @@ abstract class _$$_QuestionEntityCopyWith<$Res>
       int authorId,
       int upVotes,
       int downVotes,
-      int userVote});
+      int userVote,
+      @TimestampConverter() DateTime createdAt,
+      @TimestampConverter() DateTime updatedAt});
 }
 
 /// @nodoc
@@ -138,6 +156,8 @@ class __$$_QuestionEntityCopyWithImpl<$Res>
     Object? upVotes = freezed,
     Object? downVotes = freezed,
     Object? userVote = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
   }) {
     return _then(_$_QuestionEntity(
       id: id == freezed
@@ -168,6 +188,14 @@ class __$$_QuestionEntityCopyWithImpl<$Res>
           ? _value.userVote
           : userVote // ignore: cast_nullable_to_non_nullable
               as int,
+      createdAt: createdAt == freezed
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: updatedAt == freezed
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -182,7 +210,9 @@ class _$_QuestionEntity implements _QuestionEntity {
       required this.authorId,
       required this.upVotes,
       required this.downVotes,
-      required this.userVote});
+      required this.userVote,
+      @TimestampConverter() required this.createdAt,
+      @TimestampConverter() required this.updatedAt});
 
   factory _$_QuestionEntity.fromJson(Map<String, dynamic> json) =>
       _$$_QuestionEntityFromJson(json);
@@ -201,10 +231,16 @@ class _$_QuestionEntity implements _QuestionEntity {
   final int downVotes;
   @override
   final int userVote;
+  @override
+  @TimestampConverter()
+  final DateTime createdAt;
+  @override
+  @TimestampConverter()
+  final DateTime updatedAt;
 
   @override
   String toString() {
-    return 'QuestionEntity(id: $id, topic: $topic, content: $content, authorId: $authorId, upVotes: $upVotes, downVotes: $downVotes, userVote: $userVote)';
+    return 'QuestionEntity(id: $id, topic: $topic, content: $content, authorId: $authorId, upVotes: $upVotes, downVotes: $downVotes, userVote: $userVote, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -218,7 +254,9 @@ class _$_QuestionEntity implements _QuestionEntity {
             const DeepCollectionEquality().equals(other.authorId, authorId) &&
             const DeepCollectionEquality().equals(other.upVotes, upVotes) &&
             const DeepCollectionEquality().equals(other.downVotes, downVotes) &&
-            const DeepCollectionEquality().equals(other.userVote, userVote));
+            const DeepCollectionEquality().equals(other.userVote, userVote) &&
+            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
+            const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
   }
 
   @JsonKey(ignore: true)
@@ -231,7 +269,9 @@ class _$_QuestionEntity implements _QuestionEntity {
       const DeepCollectionEquality().hash(authorId),
       const DeepCollectionEquality().hash(upVotes),
       const DeepCollectionEquality().hash(downVotes),
-      const DeepCollectionEquality().hash(userVote));
+      const DeepCollectionEquality().hash(userVote),
+      const DeepCollectionEquality().hash(createdAt),
+      const DeepCollectionEquality().hash(updatedAt));
 
   @JsonKey(ignore: true)
   @override
@@ -246,13 +286,16 @@ class _$_QuestionEntity implements _QuestionEntity {
 
 abstract class _QuestionEntity implements QuestionEntity {
   const factory _QuestionEntity(
-      {required final int id,
-      required final String topic,
-      required final String content,
-      required final int authorId,
-      required final int upVotes,
-      required final int downVotes,
-      required final int userVote}) = _$_QuestionEntity;
+          {required final int id,
+          required final String topic,
+          required final String content,
+          required final int authorId,
+          required final int upVotes,
+          required final int downVotes,
+          required final int userVote,
+          @TimestampConverter() required final DateTime createdAt,
+          @TimestampConverter() required final DateTime updatedAt}) =
+      _$_QuestionEntity;
 
   factory _QuestionEntity.fromJson(Map<String, dynamic> json) =
       _$_QuestionEntity.fromJson;
@@ -271,6 +314,12 @@ abstract class _QuestionEntity implements QuestionEntity {
   int get downVotes => throw _privateConstructorUsedError;
   @override
   int get userVote => throw _privateConstructorUsedError;
+  @override
+  @TimestampConverter()
+  DateTime get createdAt => throw _privateConstructorUsedError;
+  @override
+  @TimestampConverter()
+  DateTime get updatedAt => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_QuestionEntityCopyWith<_$_QuestionEntity> get copyWith =>
