@@ -2,6 +2,7 @@ import 'dart:developer' as developer;
 import 'dart:io';
 
 import 'package:qelem/data/local/shared_prefs/shared_prefs_service.dart';
+import 'package:qelem/domain/auth/auth_repository_interface.dart';
 import 'package:qelem/domain/auth/change_password_form.dart';
 import 'package:qelem/domain/auth/login_form.dart';
 import 'package:qelem/domain/auth/login_response.dart';
@@ -16,13 +17,14 @@ import 'package:qelem/infrastructure/common/qelem_http_exception.dart';
 import 'package:qelem/util/either.dart';
 import 'package:qelem/util/error.dart';
 
-class AuthRepository {
+class AuthRepository implements AuthRepositoryInterface {
   AuthApi authApi;
   SharedPrefsService sharedPrefsService;
   User? authenticatedUser;
 
   AuthRepository(this.authApi, this.sharedPrefsService);
 
+  @override
   Future<Either<User>> register(
       {required RegistrationForm registerForm}) async {
     try {
@@ -39,6 +41,7 @@ class AuthRepository {
     }
   }
 
+  @override
   Future<Either<LoginReponse>> login({required LoginForm loginForm}) async {
     try {
       AuthResponseDto response = await authApi.login(
@@ -62,6 +65,7 @@ class AuthRepository {
     }
   }
 
+  @override
   Future<Either<void>> changePassword(
       {required ChangePasswordForm changePasswordForm}) async {
     try {
@@ -78,15 +82,18 @@ class AuthRepository {
     }
   }
 
+  @override
   Future<String?> getAuthToken() {
     return sharedPrefsService.getToken();
   }
 
+  @override
   Future<void> logout() async {
     sharedPrefsService.removeToken();
     sharedPrefsService.removeUserId();
   }
 
+  @override
   Future<int?> getUserId() async {
     return sharedPrefsService.getUserId();
   }
