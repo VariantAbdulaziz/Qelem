@@ -118,7 +118,7 @@ public class AnswerRestController {
     }
 
     @PutMapping(path = "/{id}/vote", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<AnswerDto> updateAnswer(@PathVariable("id") Long id, @RequestBody @Valid AnswerVote answerVote) {
+    public ResponseEntity<AnswerDto> voteAnswer(@PathVariable("id") Long id, @RequestBody @Valid AnswerVote answerVote) {
         UserModel user = loggedInUser();
 
         // finding the answer from the answer database based on the id
