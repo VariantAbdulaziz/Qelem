@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:qelem/infrastructure/answer/answer_model_mapper.dart';
 import 'package:qelem/infrastructure/auth/user_model_mapper.dart';
@@ -35,7 +34,6 @@ class DatabaseHelper {
         lastName TEXT NOT NULL,
         profilePicture TEXT NOT NULL)
       ''');
-
 
     await db.execute('''
       CREATE TABLE question (
@@ -80,7 +78,6 @@ class DatabaseHelper {
 
   // get a single question
   Future<QuestionEntity?> getQuestion(int id) async {
-    debugPrint('getQuestion: \n\n\n\n\n\n\n');
     final Database db = await database;
     final List<Map<String, dynamic>> questionsList =
         await db.query("question", where: "id = ?", whereArgs: [id]);
@@ -152,10 +149,10 @@ class DatabaseHelper {
       final batch = txn.batch();
 
       for (var e in questionDtoList) {
-
-          batch.insert("question", e.toQuestionEntity().toJson(), conflictAlgorithm: ConflictAlgorithm.replace);
-          batch.insert("user", e.author.toUserEntity().toJson(), conflictAlgorithm: ConflictAlgorithm.replace);
-
+        batch.insert("question", e.toQuestionEntity().toJson(),
+            conflictAlgorithm: ConflictAlgorithm.replace);
+        batch.insert("user", e.author.toUserEntity().toJson(),
+            conflictAlgorithm: ConflictAlgorithm.replace);
       }
       await batch.commit(noResult: true);
     });
@@ -168,10 +165,10 @@ class DatabaseHelper {
       final batch = txn.batch();
 
       for (var e in answerDtoList) {
-
-          batch.insert("answer", e.toAnswerEntity().toJson(), conflictAlgorithm: ConflictAlgorithm.replace);
-          batch.insert("user", e.author.toUserEntity().toJson(), conflictAlgorithm: ConflictAlgorithm.replace);
-
+        batch.insert("answer", e.toAnswerEntity().toJson(),
+            conflictAlgorithm: ConflictAlgorithm.replace);
+        batch.insert("user", e.author.toUserEntity().toJson(),
+            conflictAlgorithm: ConflictAlgorithm.replace);
       }
       await batch.commit(noResult: true);
     });
@@ -180,7 +177,8 @@ class DatabaseHelper {
   // update a question
   Future<void> updateQuestion(QuestionEntity questionEntity) async {
     final Database db = await database;
-    await db.insert("question", questionEntity.toJson(), conflictAlgorithm: ConflictAlgorithm.replace);
+    await db.insert("question", questionEntity.toJson(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
   // update an answer
@@ -192,6 +190,7 @@ class DatabaseHelper {
   // update a user
   Future<void> updateUser(UserDto userDto) async {
     final Database db = await database;
-    await db.insert("user", userDto.toUserEntity().toJson(), conflictAlgorithm: ConflictAlgorithm.replace);
+    await db.insert("user", userDto.toUserEntity().toJson(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
   }
 }
