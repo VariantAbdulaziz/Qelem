@@ -1,14 +1,14 @@
 import 'dart:developer' as developer;
 import 'dart:io';
 
-import 'package:qelem/data/local/entity/question/question_entity_mapper.dart';
-import 'package:qelem/data/local/entity/user/user_entity_mapper.dart';
 import 'package:qelem/domain/common/vote.dart';
 import 'package:qelem/domain/question/question_form.dart';
+import 'package:qelem/infrastructure/question/local/question/question_entity_mapper.dart';
 import 'package:qelem/infrastructure/question/question_api.dart';
 import 'package:qelem/infrastructure/question/question_dto.dart';
 import 'package:qelem/infrastructure/question/question_form_mapper.dart';
 import 'package:qelem/infrastructure/question/question_mapper.dart';
+import 'package:qelem/infrastructure/user/local/user_entity_mapper.dart';
 
 import '../../data/local/local_database/qelem_local_storage.dart';
 import '../../domain/question/question.dart';
@@ -78,8 +78,11 @@ class QuestionRepository {
 
   Future<Either<Question>> createQuestion(QuestionForm questionForm) async {
     try {
+
       final questionDto = await questionApi.createQuestion(questionForm.toDto());
+      await databaseHelper.addQuestions([questionDto]);
       return Either(val: questionDto.toQuestion());
+
     } on QHttpException catch (e) {
       return Either(error: Error(e.message));
     } on SocketException catch (_) {
@@ -93,9 +96,11 @@ class QuestionRepository {
 
   Future<Either<void>> deleteQuestion(int id) async {
     try {
+
       await databaseHelper.removeQuestion(id);
       await questionApi.deleteQuestion(id);
       return Either();
+
     } on QHttpException catch (e) {
       return Either(error: Error(e.message));
     } on SocketException catch (_) {
@@ -109,9 +114,11 @@ class QuestionRepository {
 
   Future<Either<Question>> updateQuestion(QuestionForm questionForm, int questionId) async {
     try {
+
       final questionDto = await questionApi.updateQuestion(questionForm.toDto(), questionId);
       await databaseHelper.updateQuestion(questionDto.toQuestionEntity());
       return Either(val: questionDto.toQuestion());
+
     } on QHttpException catch (e) {
       return Either(error: Error(e.message));
     } on SocketException catch (_) {
@@ -131,6 +138,7 @@ class QuestionRepository {
     }
 
     try {
+
       await questionApi.upVoteQuestion(question.id);
       final newQuestion = question.copyWith(
         userVote: Vote.upVote,
@@ -139,6 +147,7 @@ class QuestionRepository {
       );
       await databaseHelper.updateQuestion(newQuestion.toQuestionEntity());
       return Either(val: question);
+
     } on QHttpException catch (e) {
       return Either(error: Error(e.message));
     } on SocketException catch (_) {
