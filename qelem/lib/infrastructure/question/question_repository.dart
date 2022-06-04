@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:qelem/domain/common/vote.dart';
 import 'package:qelem/domain/question/question_form.dart';
+import 'package:qelem/infrastructure/auth/auth_repository.dart';
 import 'package:qelem/infrastructure/question/question_api.dart';
 import 'package:qelem/infrastructure/question/question_dto.dart';
 import 'package:qelem/infrastructure/question/question_form_mapper.dart';
@@ -15,8 +16,27 @@ import '../common/qelem_http_exception.dart';
 
 class QuestionRepository {
   final QuestionApi questionApi;
+  final AuthRepository authRepository;
 
-  QuestionRepository(this.questionApi);
+  QuestionRepository(this.questionApi, this.authRepository);
+
+  Future<Either<List<Question>>> getMyQuestions() async {
+    try {
+      final userId = (await authRepository.getUserId())!;
+      final questionsDtos = await questionApi.getAllQuestions(authorId: userId);
+
+      return Either(val: questionsDtos.map((e) => e.toQuestion()).toList());
+    } on QHttpException catch (e) {
+      return Either(error: Error(e.message));
+    } on SocketException catch (_) {
+      return Either(error: Error("Check your internet connection"));
+    } on Exception catch (e) {
+      developer.log(
+          "Unexpected error while up voting while fetching all questions in Question Repo",
+          error: e);
+      return Either(error: Error("Unknown error"));
+    }
+  }
 
   Future<Either<List<Question>>> getAllQuestions() async {
     try {

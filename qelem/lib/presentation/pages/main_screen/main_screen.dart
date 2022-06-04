@@ -5,6 +5,7 @@ import 'package:qelem/common/constants.dart';
 import 'package:qelem/presentation/pages/home_screen/home_screen.dart';
 import 'package:qelem/presentation/pages/main_screen/widgets/logout_dialog.dart';
 import 'package:qelem/presentation/pages/my_profile/my_profile_overview/my_profile_page.dart';
+import 'package:qelem/presentation/pages/question/my_questions_page/my_questions_page.dart';
 import 'package:qelem/presentation/pages/question/my_questions_page/my_questions_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -27,7 +28,7 @@ class _MainScreenState extends State<MainScreen> {
         index: _selectedIndex,
         children: [
           homeScreen(),
-          const MyQuestionsScreen(),
+          const MyQuestionsPage(),
           const MyProfilePage()
         ],
       ),
