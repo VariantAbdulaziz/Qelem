@@ -1,5 +1,6 @@
 import 'package:path/path.dart';
 import 'package:qelem/infrastructure/answer/answer_model_mapper.dart';
+import 'package:qelem/infrastructure/auth/user_model_mapper.dart';
 import 'package:qelem/infrastructure/question/local/question/question_entity_mapper.dart';
 import 'package:qelem/infrastructure/question/question_dto.dart';
 import 'package:qelem/infrastructure/question/question_mapper.dart';

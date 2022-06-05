@@ -16,6 +16,17 @@ extension UserMapper on UserDto {
       role: role == 'ADMIN' ? Role.admin : Role.member,
     );
   }
+
+  UserEntity toUserEntity() {
+    return UserEntity(
+      id: id,
+      userName: userName,
+      firstName: firstName,
+      lastName: lastName,
+      profilePicture: Constants.imagesBaseUrl + profilePictureRelativeUrl,
+      role: role,
+    );
+  }
 }
 
 extension UserDtoMapper on User {
