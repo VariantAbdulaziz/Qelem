@@ -22,7 +22,7 @@ public interface QuestionRepository extends JpaRepository<QuestionModel, Long> {
             + "AGAINST (?1)", nativeQuery = true)
     public Page<QuestionModel> search(String keyWord, Pageable pageable);
 
-    List<QuestionModel> findByTag(TagModel tagModel);
+    List<QuestionModel> findByTags(TagModel tagModel);
 
     Page<QuestionModel> findByAuthorId(Long authorId, Pageable pageable);
 }
