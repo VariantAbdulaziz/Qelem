@@ -9,6 +9,7 @@ import 'package:qelem/domain/answer/answer_form.dart';
 import 'package:qelem/domain/answer/answer_repository_interface.dart';
 import 'package:qelem/domain/auth/auth_repository_interface.dart';
 import 'package:qelem/domain/auth/user.dart';
+import 'package:qelem/domain/auth/user_role.dart';
 import 'package:qelem/domain/common/vote.dart';
 import 'package:qelem/util/either.dart';
 import 'package:qelem/util/error.dart';
@@ -31,6 +32,14 @@ void main() {
   setUp(() {
     mockAnswerRepository = MockAnswerRepositoryInterface();
     mockAuthRepository = MockAuthRepositoryInterface();
+    when(mockAuthRepository.getAuthenticatedUser()).thenAnswer((_) async =>
+        (User(
+            id: 1,
+            userName: 'userName',
+            firstName: 'firstName',
+            lastName: 'lastName',
+            profilePicture: 'profilePicture',
+            role: Role.member)));
     mockAnswer = MockAnswer();
     mockAnswerForm = MockAnswerForm();
   });
@@ -126,7 +135,6 @@ void main() {
       expectLater(
           answerBloc.stream,
           emitsInOrder([
-            const AnswerState.loading(),
             const AnswerState.success("Answer added successfully"),
             const AnswerState.loadedAnswers(<Answer>[], 1),
           ]));
@@ -149,7 +157,6 @@ void main() {
       expectLater(
           answerBloc.stream,
           emitsInOrder([
-            const AnswerState.loading(),
             AnswerStateError(Error("error")),
           ]));
     });

@@ -1,6 +1,9 @@
 import 'package:path/path.dart';
+import 'package:qelem/domain/profile/profile.dart';
 import 'package:qelem/infrastructure/answer/answer_model_mapper.dart';
 import 'package:qelem/infrastructure/auth/user_model_mapper.dart';
+import 'package:qelem/infrastructure/profile/profile_dto.dart';
+import 'package:qelem/infrastructure/profile/profile_entity.dart';
 import 'package:qelem/infrastructure/question/local/question/question_entity_mapper.dart';
 import 'package:qelem/infrastructure/question/question_dto.dart';
 import 'package:qelem/infrastructure/question/question_mapper.dart';
@@ -44,7 +47,8 @@ class DatabaseHelper {
         userName TEXT NOT NULL,
         firstName TEXT NOT NULL,
         lastName TEXT NOT NULL,
-        profilePicture TEXT NOT NULL)
+        profilePicture TEXT NOT NULL,
+        role TEXT NOT NULL)
       ''');
 
     await db.execute('''
@@ -78,11 +82,42 @@ class DatabaseHelper {
         FOREIGN KEY (authorId)
         REFERENCES user(id) )
       ''');
+
+    await db.execute('''
+      CREATE TABLE profile (
+        id INTEGER PRIMARY KEY,
+        userName TEXT NOT NULL,
+        firstName TEXT NOT NULL,
+        lastName TEXT NOT NULL,
+        profilePicture TEXT NOT NULL,
+        role TEXT NOT NULL)
+      ''');
   }
 
   Future<List<Question>> getQuestions() async {
     final Database db = await database;
     final List<Map<String, dynamic>> questionsList = await db.query("question");
+    List<QuestionEntity> questionEntityList = questionsList.isEmpty
+        ? []
+        : questionsList.map((e) => QuestionEntity.fromJson(e)).toList();
+    List<Question> finalResult = [];
+    for (QuestionEntity questionEntity in questionEntityList) {
+      final user = await getUser(questionEntity.authorId);
+      var tags = await db.query("tags",
+          where: "questionId = ?", whereArgs: [questionEntity.id]);
+      List<TagDto> tempTag = [];
+      for (var t in tags) {
+        tempTag.add(TagDto.fromJson(t));
+      }
+      finalResult.add(questionEntity.toQuestion(user.toUser(), tempTag));
+    }
+    return finalResult;
+  }
+
+  Future<List<Question>> getQuestionsByAuthorId(int authorId) async {
+    final Database db = await database;
+    final List<Map<String, dynamic>> questionsList = await db
+        .query("question", where: "authorId = ?", whereArgs: [authorId]);
     List<QuestionEntity> questionEntityList = questionsList.isEmpty
         ? []
         : questionsList.map((e) => QuestionEntity.fromJson(e)).toList();
@@ -135,6 +170,22 @@ class DatabaseHelper {
         await db.query("answer", where: "id = ?", whereArgs: [answerId]);
     AnswerEntity answerEntity = AnswerEntity.fromJson(answersList.first);
     return answerEntity;
+  }
+
+  // Profile
+  Future<Profile> getProfile(int id) async {
+    final Database db = await database;
+    final List<Map<String, dynamic>> profileList =
+        await db.query("profile", where: "id = ?", whereArgs: [id]);
+    ProfileEntity profileEntity = ProfileEntity.fromJson(profileList.first);
+    return profileEntity.toProfile();
+  }
+
+  // update a profile
+  Future<void> putProfile(ProfileEntity profileDto) async {
+    final Database db = await database;
+    await db.insert("user", profileDto.toJson(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
   // get a single user

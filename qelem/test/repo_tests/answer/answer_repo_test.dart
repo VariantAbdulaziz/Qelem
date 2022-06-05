@@ -4,6 +4,7 @@ import 'package:mockito/mockito.dart';
 import 'package:qelem/domain/answer/answer.dart';
 import 'package:qelem/domain/answer/answer_form.dart';
 import 'package:qelem/domain/answer/answer_repository_interface.dart';
+import 'package:qelem/domain/auth/auth_repository_interface.dart';
 import 'package:qelem/domain/auth/user.dart';
 import 'package:qelem/domain/auth/user_role.dart';
 import 'package:qelem/domain/common/vote.dart';
@@ -11,13 +12,15 @@ import 'package:qelem/util/either.dart';
 
 import 'answer_repo_test.mocks.dart';
 
-@GenerateMocks([AnswerRepositoryInterface])
+@GenerateMocks([AnswerRepositoryInterface, AuthRepositoryInterface])
 void main() {
   late MockAnswerRepositoryInterface mockAnswerRepository;
+  late MockAuthRepositoryInterface mockAuthRepository;
   late List<Answer> mockAnswers;
 
   setUp(() {
     mockAnswerRepository = MockAnswerRepositoryInterface();
+    mockAuthRepository = MockAuthRepositoryInterface();
     mockAnswers = [
       Answer(
           id: 12,
@@ -55,16 +58,6 @@ void main() {
   });
 
   group('Answer repo tests', () {
-    test('test get answers', () async {
-      when(mockAnswerRepository.getAllAnswers())
-          .thenAnswer((_) async => Either(val: mockAnswers));
-
-      final result = await mockAnswerRepository.getAllAnswers();
-
-      expect(result, isA<Either<List<Answer>>>());
-      expect(result.val, mockAnswers);
-    });
-
     test('test get answer by id', () async {
       final mockAnswer = mockAnswers[0];
 

@@ -8,6 +8,10 @@ import 'package:mockito/mockito.dart' as _i1;
 import 'package:qelem/data/local/local_database/qelem_local_storage.dart'
     as _i4;
 import 'package:qelem/domain/auth/auth_repository_interface.dart' as _i3;
+import 'package:qelem/domain/auth/change_password_form.dart' as _i19;
+import 'package:qelem/domain/auth/login_form.dart' as _i18;
+import 'package:qelem/domain/auth/login_response.dart' as _i17;
+import 'package:qelem/domain/auth/registration_form.dart' as _i16;
 import 'package:qelem/domain/auth/user.dart' as _i6;
 import 'package:qelem/domain/auth/user_role.dart' as _i12;
 import 'package:qelem/domain/common/vote.dart' as _i11;
@@ -252,4 +256,53 @@ class MockTagRepository extends _i1.Mock implements _i14.TagRepository {
               returnValue:
                   Future<_i5.Either<_i13.Tag>>.value(_FakeEither_3<_i13.Tag>()))
           as _i10.Future<_i5.Either<_i13.Tag>>);
+}
+
+/// A class which mocks [AuthRepositoryInterface].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockAuthRepositoryInterface extends _i1.Mock
+    implements _i3.AuthRepositoryInterface {
+  MockAuthRepositoryInterface() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i10.Future<_i5.Either<_i6.User>> register(
+          {_i16.RegistrationForm? registerForm}) =>
+      (super.noSuchMethod(
+              Invocation.method(#register, [], {#registerForm: registerForm}),
+              returnValue:
+                  Future<_i5.Either<_i6.User>>.value(_FakeEither_3<_i6.User>()))
+          as _i10.Future<_i5.Either<_i6.User>>);
+  @override
+  _i10.Future<_i5.Either<_i17.LoginReponse>> login(
+          {_i18.LoginForm? loginForm}) =>
+      (super.noSuchMethod(
+              Invocation.method(#login, [], {#loginForm: loginForm}),
+              returnValue: Future<_i5.Either<_i17.LoginReponse>>.value(
+                  _FakeEither_3<_i17.LoginReponse>()))
+          as _i10.Future<_i5.Either<_i17.LoginReponse>>);
+  @override
+  _i10.Future<_i5.Either<void>> changePassword(
+          {_i19.ChangePasswordForm? changePasswordForm}) =>
+      (super.noSuchMethod(
+          Invocation.method(
+              #changePassword, [], {#changePasswordForm: changePasswordForm}),
+          returnValue:
+              Future<_i5.Either<void>>.value(_FakeEither_3<void>())) as _i10
+          .Future<_i5.Either<void>>);
+  @override
+  _i10.Future<String?> getAuthToken() =>
+      (super.noSuchMethod(Invocation.method(#getAuthToken, []),
+          returnValue: Future<String?>.value()) as _i10.Future<String?>);
+  @override
+  _i10.Future<void> logout() => (super.noSuchMethod(
+      Invocation.method(#logout, []),
+      returnValue: Future<void>.value(),
+      returnValueForMissingStub: Future<void>.value()) as _i10.Future<void>);
+  @override
+  _i10.Future<_i6.User?> getAuthenticatedUser() =>
+      (super.noSuchMethod(Invocation.method(#getAuthenticatedUser, []),
+          returnValue: Future<_i6.User?>.value()) as _i10.Future<_i6.User?>);
 }

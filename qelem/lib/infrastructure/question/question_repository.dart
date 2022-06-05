@@ -27,16 +27,22 @@ class QuestionRepository implements QuestionRepositoryInterface {
   Future<Either<List<Question>>> getMyQuestions() async {
     try {
       final userId = (await authRepository.getAuthenticatedUser())!.id;
-      final questionsDtos = await questionApi.getAllQuestions(authorId: userId);
 
-      return Either(val: questionsDtos.map((e) => e.toQuestion()).toList());
+      var result = await databaseHelper.getQuestionsByAuthorId(userId);
+      if (result.isEmpty) {
+        List<QuestionDto> questionsDto = await questionApi.getAllQuestions();
+        await databaseHelper.addQuestions(questionsDto);
+        result = await databaseHelper.getQuestions();
+      }
+
+      return Either(val: result);
     } on QHttpException catch (e) {
       return Either(error: Error(e.message));
     } on SocketException catch (_) {
       return Either(error: Error("Check your internet connection"));
     } on Exception catch (e) {
       developer.log(
-          "Unexpected error while up voting while fetching all questions in Question Repo",
+          "Unexpected error while fetching my questions in Question Repo",
           error: e);
       return Either(error: Error("Unknown error"));
     }
@@ -60,7 +66,7 @@ class QuestionRepository implements QuestionRepositoryInterface {
       return Either(error: Error("Check your internet connection"));
     } on Exception catch (e) {
       developer.log(
-          "Unexpected error while up voting while fetching all questions in Question Repo",
+          "Unexpected error while fetching all questions in Question Repo",
           error: e);
       return Either(error: Error("Unknown error"));
     }
