@@ -10,6 +10,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -47,6 +48,9 @@ public class AnswerModel {
     @OneToMany(mappedBy = "answer", cascade = CascadeType.REMOVE)
     @Exclude
     private List<AnswerVote> votes;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<TagModel> tags;
 
     @CreatedDate
     @Column(nullable = false, updatable = false)

@@ -94,15 +94,27 @@ public class AuthenticationController {
             throw new UserAlreadyExists();
         }
 
-        Avatar avatar = GitHubAvatar.newAvatarBuilder().layers(new ColorPaintBackgroundLayer(Color.WHITE)).padding(20)
-                .build();
-        String avatarFile = storageService.store(avatar.createAsPngBytes(123456L));
-
-        user.setProfilePicture(avatarFile);
-
         log.info("Saving user : {}", user);
         user = userRepository.save(user);
         log.info("User saved : {}", user);
+
+        try {
+            log.info("Generating avatar for user : {}", user);
+            Avatar avatar = GitHubAvatar.newAvatarBuilder()
+                    .layers(new ColorPaintBackgroundLayer(Color.decode("#f0f0f0")))
+                    .padding(20)
+                    .build();
+            String avatarFile = storageService.store(avatar.createAsPngBytes(System.currentTimeMillis()));
+
+            user.setProfilePicture(avatarFile);
+
+            log.info("Saving user with avatar : {}", user);
+            userRepository.save(user);
+            log.info("User saved with avatar : {}", user);
+        } catch (Exception e) {
+            log.error("Error while generating avatar for user : {}", user);
+        }
+
         return new UserDto(user);
     }
 
