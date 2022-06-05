@@ -106,11 +106,11 @@ class DatabaseHelper {
   }
 
   // get a single user
-  Future<UserEntity?> getUser(int id) async {
+  Future<UserEntity> getUser(int id) async {
     final Database db = await database;
     final List<Map<String, dynamic>> usersList =
         await db.query("user", where: "id = ?", whereArgs: [id]);
-    UserEntity? userModel = usersList.isEmpty ? null : UserEntity.fromJson(usersList.first);
+    UserEntity userModel = UserEntity.fromJson(usersList.first);
     return userModel;
   }
 
