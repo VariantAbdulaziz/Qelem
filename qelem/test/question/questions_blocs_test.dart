@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -23,7 +22,6 @@ import 'questions_blocs_test.mocks.dart';
 
 @GenerateMocks([QuestionRepository, User, Question, QuestionForm])
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
   late MockQuestionRepository mockQuestionRepository;
   late MockQuestion mockQuestion;
   late MockQuestionForm mockQuestionForm;
