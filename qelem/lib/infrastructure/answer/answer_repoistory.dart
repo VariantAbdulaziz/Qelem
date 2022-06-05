@@ -169,11 +169,4 @@ class AnswerRepository implements AnswerRepositoryInterface {
       return Either(error: Error("Unknown error"));
     }
   }
-
-  // todo: why do we need this?
-  @override
-  Future<Either<List<Answer>>> getAllAnswers() {
-    // TODO: implement getAllAnswers
-    throw UnimplementedError();
-  }
 }
