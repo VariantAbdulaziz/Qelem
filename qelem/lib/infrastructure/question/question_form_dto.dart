@@ -6,8 +6,11 @@ part 'question_form_dto.g.dart';
 
 @freezed
 class QuestionFormDto with _$QuestionFormDto {
-  const factory QuestionFormDto(
-      {required String topic, required String content}) = _QuestionFormDto;
+  const factory QuestionFormDto({
+    required String topic,
+    required String content,
+    required List<int> tagIds,
+  }) = _QuestionFormDto;
 
   factory QuestionFormDto.fromJson(Map<String, dynamic> json) =>
       _$QuestionFormDtoFromJson(json);

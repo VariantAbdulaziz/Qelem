@@ -6,6 +6,7 @@ extension QuestionFormMapper on QuestionForm {
     return QuestionFormDto(
       topic: topic,
       content: content,
+      tagIds: tags.map((tag) => tag.id).toList(),
     );
   }
 }
