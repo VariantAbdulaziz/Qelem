@@ -29,6 +29,7 @@ class QuestionRepository implements QuestionRepositoryInterface {
       final userId = (await authRepository.getAuthenticatedUser())!.id;
 
       var result = await databaseHelper.getQuestionsByAuthorId(userId);
+
       if (result.isEmpty) {
         List<QuestionDto> questionsDto = await questionApi.getAllQuestions();
         await databaseHelper.addQuestions(questionsDto);

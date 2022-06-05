@@ -11,7 +11,13 @@ class TagBloc extends Bloc<TagEvent, TagState> {
     on<LoadTagsTagEvent>(
       (event, emit) async {
         emit(const TagState.loading());
-        add(const ReloadTagsTagEvent());
+        final tags = await tagRepository.getTags();
+
+        if (tags.hasError) {
+          emit(TagStateError(tags.error!));
+        } else {
+          emit(TagState.loadedTags(tags.val!));
+        }
       },
     );
 
