@@ -65,15 +65,13 @@ class _EditQuestionScreenState extends State<EditQuestionScreen> {
               appBar: AppBar(
                 title: const Text("Edit"),
                 leading: IconButton(
-                    onPressed: () {
-                      showDialog<void>(
-                          context: context,
-                          builder: (context) => DiscardQuestionEditDialog(
-                              curPath: "/edit-question/",
-                              id: widget.qid,
-                              prevPath: "/question-detail/"));
-                    },
-                    icon: const Icon(Icons.chevron_left)),
+                  icon: const Icon(Icons.chevron_left),
+                  onPressed: () {
+                    showDialog<void>(
+                        context: context,
+                        builder: (context) => DiscardQuestionEditDialog());
+                  },
+                ),
               ),
               body: SingleChildScrollView(
                 child: Padding(
@@ -122,7 +120,7 @@ class _EditQuestionScreenState extends State<EditQuestionScreen> {
                                   BlocProvider.of<EditQuestionBloc>(context)
                                       .add(EditQuestionEventEdit(
                                           questionForm, widget.qid));
-                                  context.go("/question-detail/${widget.qid}");
+                                  context.pop();
                                 }
                               },
                         child: const Text('SAVE'),

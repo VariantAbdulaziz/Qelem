@@ -61,7 +61,7 @@ class _QuestionDetailScreenState extends State<QuestionDetailScreen> {
             IconButton(
               icon: const Icon(Icons.edit),
               onPressed: () =>
-                  context.go('/edit-question/${widget.questionId}'),
+                  context.push('/edit-question/${widget.questionId}'),
             ),
             IconButton(
               icon: const Icon(Icons.delete),
