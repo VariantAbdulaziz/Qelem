@@ -36,7 +36,6 @@ Either<String>? validateUserName(String userName) {
   if (userName.length < 8) {
     return Either(error: Error("Username must be aleast 8 charachters long"));
   } else {
-    print("i returned null");
     return null;
   }
 }
