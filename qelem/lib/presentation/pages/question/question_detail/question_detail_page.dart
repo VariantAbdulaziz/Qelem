@@ -5,6 +5,7 @@ import 'package:qelem/application/answer/answer_event.dart';
 import 'package:qelem/application/question/question_detail/question_detail_bloc.dart';
 import 'package:qelem/application/question/question_detail/question_detail_event.dart';
 import 'package:qelem/infrastructure/answer/answer_repoistory.dart';
+import 'package:qelem/infrastructure/auth/auth_repository.dart';
 import 'package:qelem/infrastructure/question/question_repository.dart';
 import 'package:qelem/presentation/pages/question/question_detail/question_detail_screen.dart';
 
@@ -24,6 +25,7 @@ class QuestionDetailPage extends StatelessWidget {
           create: (context) => QuestionDetailBloc(
             questionRepository:
                 RepositoryProvider.of<QuestionRepository>(context),
+            authRepository: RepositoryProvider.of<AuthRepository>(context),
           )..add(
               QuestionDetailLoadEvent(questionId),
             ),
@@ -31,6 +33,7 @@ class QuestionDetailPage extends StatelessWidget {
         BlocProvider<AnswerBloc>(
           create: (context) => AnswerBloc(
             answerRepository: RepositoryProvider.of<AnswerRepository>(context),
+            authRepository: RepositoryProvider.of<AuthRepository>(context),
           )..add(LoadAnswersAnswerEvent(questionId)),
         ),
       ],

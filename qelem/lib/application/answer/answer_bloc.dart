@@ -2,24 +2,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qelem/application/answer/answer_event.dart';
 import 'package:qelem/application/answer/answer_state.dart';
 import 'package:qelem/infrastructure/answer/answer_repoistory.dart';
+import 'package:qelem/infrastructure/auth/auth_repository.dart';
 
 class AnswerBloc extends Bloc<AnswerEvent, AnswerState> {
   final AnswerRepository answerRepository;
+  final AuthRepository authRepository;
 
-  AnswerBloc({required this.answerRepository})
+  AnswerBloc({required this.answerRepository, required this.authRepository})
       : super(const AnswerStateInitial()) {
     // Load the answers
     on<LoadAnswersAnswerEvent>(
       (event, emit) async {
         emit(const AnswerState.loading());
-        final answers =
-            await answerRepository.getAnswersByQuestionId(event.questionId);
-
-        if (answers.hasError) {
-          emit(AnswerStateError(answers.error!));
-        } else {
-          emit(AnswerState.loadedAnswers(answers.val!));
-        }
+        add(ReloadAnswersAnswerEvent(event.questionId));
       },
     );
 
@@ -30,12 +25,12 @@ class AnswerBloc extends Bloc<AnswerEvent, AnswerState> {
       if (answers.hasError) {
         emit(AnswerStateError(answers.error!));
       } else {
-        emit(AnswerState.loadedAnswers(answers.val!));
+        emit(AnswerState.loadedAnswers(
+            answers.val!, (await authRepository.getUserId())!));
       }
     });
 
     on<AddAnswerEvent>((event, emit) async {
-      emit(const AnswerState.loading());
       final answer =
           await answerRepository.createAnswer(answerForm: event.answerForm);
 
