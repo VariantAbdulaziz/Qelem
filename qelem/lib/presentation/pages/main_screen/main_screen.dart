@@ -6,10 +6,12 @@ import 'package:qelem/presentation/pages/home_screen/home_screen.dart';
 import 'package:qelem/presentation/pages/main_screen/widgets/logout_dialog.dart';
 import 'package:qelem/presentation/pages/my_profile/my_profile_overview/my_profile_page.dart';
 import 'package:qelem/presentation/pages/question/my_questions_page/my_questions_page.dart';
-import 'package:qelem/presentation/pages/question/my_questions_page/my_questions_screen.dart';
+import 'package:qelem/presentation/routes/routes.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+  final int? index;
+
+  const MainScreen({Key? key, this.index}) : super(key: key);
 
   @override
   _MainScreenState createState() {
@@ -21,21 +23,27 @@ class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
   @override
+  void initState() {
+    super.initState();
+    _selectedIndex = (widget.index != null && widget.index! < 3) ? widget.index! : 0;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _getAppBar(),
       body: IndexedStack(
         index: _selectedIndex,
-        children: [
-          homeScreen(),
-          const MyQuestionsPage(),
-          const MyProfilePage()
+        children: const [
+          HomeScreen(),
+          MyQuestionsPage(),
+          MyProfilePage()
         ],
       ),
       bottomNavigationBar: bottomNav(),
       floatingActionButton: FloatingActionButton.extended(
         icon: const Icon(Icons.add),
-        onPressed: () => context.push('/post-question'),
+        onPressed: () => context.push(Routes.postQuestion),
         label: const Text("Ask"),
         backgroundColor: const Color(0xFF03DAC5),
         foregroundColor: Colors.black,

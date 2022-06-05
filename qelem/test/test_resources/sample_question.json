@@ -1,20 +1,24 @@
-
 {
-  "id": 6,
-  "topic": "asdfad",
-  "content": "this is the question's content",
+  "id": 5,
+  "topic": "question with physics",
+  "content": "sdg sd gsf gd",
   "author": {
-    "id": 3,
-    "username": "brukted",
-    "firstName": "bruk",
-    "lastName": "tedla",
-    "role": "MEMBER",
-    "profilePicture": "/user-photos/1/abebe.jpeg"
+      "id": 2,
+      "username": "bruktedla",
+      "firstName": "Bruk",
+      "lastName": "Tedla",
+      "role": "MEMBER",
+      "profilePicture": "/files/cd09124f-0553-45b4-b531-24972c252cd2"
   },
-  "createdAt": "2022-05-30 13:14:18.582299z",
-  "updatedAt": "2022-05-30 13:14:18.582299z",
+  "createdAt": "2022-06-04T23:59:58.917374Z",
+  "updatedAt": "2022-06-04T23:59:58.917374Z",
   "upVotes": 0,
   "downVotes": 0,
-  "userVote": 0
+  "userVote": 0,
+  "tags": [
+      {
+          "id": 2,
+          "name": "Phyiscs"
+      }
+  ]
 }
-    

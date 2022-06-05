@@ -21,6 +21,8 @@ mixin _$QuestionsListEvent {
     required TResult Function() inital,
     required TResult Function() load,
     required TResult Function() refresh,
+    required TResult Function() loadAll,
+    required TResult Function() refreshAll,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +30,8 @@ mixin _$QuestionsListEvent {
     TResult Function()? inital,
     TResult Function()? load,
     TResult Function()? refresh,
+    TResult Function()? loadAll,
+    TResult Function()? refreshAll,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +39,8 @@ mixin _$QuestionsListEvent {
     TResult Function()? inital,
     TResult Function()? load,
     TResult Function()? refresh,
+    TResult Function()? loadAll,
+    TResult Function()? refreshAll,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +49,8 @@ mixin _$QuestionsListEvent {
     required TResult Function(QuestionsListEventInitial value) inital,
     required TResult Function(QuestionsListEventLoad value) load,
     required TResult Function(QuestionsListEventRefresh value) refresh,
+    required TResult Function(QuestionsListEventLoadAll value) loadAll,
+    required TResult Function(QuestionsListEventRefreshAll value) refreshAll,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +58,8 @@ mixin _$QuestionsListEvent {
     TResult Function(QuestionsListEventInitial value)? inital,
     TResult Function(QuestionsListEventLoad value)? load,
     TResult Function(QuestionsListEventRefresh value)? refresh,
+    TResult Function(QuestionsListEventLoadAll value)? loadAll,
+    TResult Function(QuestionsListEventRefreshAll value)? refreshAll,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +67,8 @@ mixin _$QuestionsListEvent {
     TResult Function(QuestionsListEventInitial value)? inital,
     TResult Function(QuestionsListEventLoad value)? load,
     TResult Function(QuestionsListEventRefresh value)? refresh,
+    TResult Function(QuestionsListEventLoadAll value)? loadAll,
+    TResult Function(QuestionsListEventRefreshAll value)? refreshAll,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -126,6 +138,8 @@ class _$QuestionsListEventInitial implements QuestionsListEventInitial {
     required TResult Function() inital,
     required TResult Function() load,
     required TResult Function() refresh,
+    required TResult Function() loadAll,
+    required TResult Function() refreshAll,
   }) {
     return inital();
   }
@@ -136,6 +150,8 @@ class _$QuestionsListEventInitial implements QuestionsListEventInitial {
     TResult Function()? inital,
     TResult Function()? load,
     TResult Function()? refresh,
+    TResult Function()? loadAll,
+    TResult Function()? refreshAll,
   }) {
     return inital?.call();
   }
@@ -146,6 +162,8 @@ class _$QuestionsListEventInitial implements QuestionsListEventInitial {
     TResult Function()? inital,
     TResult Function()? load,
     TResult Function()? refresh,
+    TResult Function()? loadAll,
+    TResult Function()? refreshAll,
     required TResult orElse(),
   }) {
     if (inital != null) {
@@ -160,6 +178,8 @@ class _$QuestionsListEventInitial implements QuestionsListEventInitial {
     required TResult Function(QuestionsListEventInitial value) inital,
     required TResult Function(QuestionsListEventLoad value) load,
     required TResult Function(QuestionsListEventRefresh value) refresh,
+    required TResult Function(QuestionsListEventLoadAll value) loadAll,
+    required TResult Function(QuestionsListEventRefreshAll value) refreshAll,
   }) {
     return inital(this);
   }
@@ -170,6 +190,8 @@ class _$QuestionsListEventInitial implements QuestionsListEventInitial {
     TResult Function(QuestionsListEventInitial value)? inital,
     TResult Function(QuestionsListEventLoad value)? load,
     TResult Function(QuestionsListEventRefresh value)? refresh,
+    TResult Function(QuestionsListEventLoadAll value)? loadAll,
+    TResult Function(QuestionsListEventRefreshAll value)? refreshAll,
   }) {
     return inital?.call(this);
   }
@@ -180,6 +202,8 @@ class _$QuestionsListEventInitial implements QuestionsListEventInitial {
     TResult Function(QuestionsListEventInitial value)? inital,
     TResult Function(QuestionsListEventLoad value)? load,
     TResult Function(QuestionsListEventRefresh value)? refresh,
+    TResult Function(QuestionsListEventLoadAll value)? loadAll,
+    TResult Function(QuestionsListEventRefreshAll value)? refreshAll,
     required TResult orElse(),
   }) {
     if (inital != null) {
@@ -238,6 +262,8 @@ class _$QuestionsListEventLoad implements QuestionsListEventLoad {
     required TResult Function() inital,
     required TResult Function() load,
     required TResult Function() refresh,
+    required TResult Function() loadAll,
+    required TResult Function() refreshAll,
   }) {
     return load();
   }
@@ -248,6 +274,8 @@ class _$QuestionsListEventLoad implements QuestionsListEventLoad {
     TResult Function()? inital,
     TResult Function()? load,
     TResult Function()? refresh,
+    TResult Function()? loadAll,
+    TResult Function()? refreshAll,
   }) {
     return load?.call();
   }
@@ -258,6 +286,8 @@ class _$QuestionsListEventLoad implements QuestionsListEventLoad {
     TResult Function()? inital,
     TResult Function()? load,
     TResult Function()? refresh,
+    TResult Function()? loadAll,
+    TResult Function()? refreshAll,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -272,6 +302,8 @@ class _$QuestionsListEventLoad implements QuestionsListEventLoad {
     required TResult Function(QuestionsListEventInitial value) inital,
     required TResult Function(QuestionsListEventLoad value) load,
     required TResult Function(QuestionsListEventRefresh value) refresh,
+    required TResult Function(QuestionsListEventLoadAll value) loadAll,
+    required TResult Function(QuestionsListEventRefreshAll value) refreshAll,
   }) {
     return load(this);
   }
@@ -282,6 +314,8 @@ class _$QuestionsListEventLoad implements QuestionsListEventLoad {
     TResult Function(QuestionsListEventInitial value)? inital,
     TResult Function(QuestionsListEventLoad value)? load,
     TResult Function(QuestionsListEventRefresh value)? refresh,
+    TResult Function(QuestionsListEventLoadAll value)? loadAll,
+    TResult Function(QuestionsListEventRefreshAll value)? refreshAll,
   }) {
     return load?.call(this);
   }
@@ -292,6 +326,8 @@ class _$QuestionsListEventLoad implements QuestionsListEventLoad {
     TResult Function(QuestionsListEventInitial value)? inital,
     TResult Function(QuestionsListEventLoad value)? load,
     TResult Function(QuestionsListEventRefresh value)? refresh,
+    TResult Function(QuestionsListEventLoadAll value)? loadAll,
+    TResult Function(QuestionsListEventRefreshAll value)? refreshAll,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -352,6 +388,8 @@ class _$QuestionsListEventRefresh implements QuestionsListEventRefresh {
     required TResult Function() inital,
     required TResult Function() load,
     required TResult Function() refresh,
+    required TResult Function() loadAll,
+    required TResult Function() refreshAll,
   }) {
     return refresh();
   }
@@ -362,6 +400,8 @@ class _$QuestionsListEventRefresh implements QuestionsListEventRefresh {
     TResult Function()? inital,
     TResult Function()? load,
     TResult Function()? refresh,
+    TResult Function()? loadAll,
+    TResult Function()? refreshAll,
   }) {
     return refresh?.call();
   }
@@ -372,6 +412,8 @@ class _$QuestionsListEventRefresh implements QuestionsListEventRefresh {
     TResult Function()? inital,
     TResult Function()? load,
     TResult Function()? refresh,
+    TResult Function()? loadAll,
+    TResult Function()? refreshAll,
     required TResult orElse(),
   }) {
     if (refresh != null) {
@@ -386,6 +428,8 @@ class _$QuestionsListEventRefresh implements QuestionsListEventRefresh {
     required TResult Function(QuestionsListEventInitial value) inital,
     required TResult Function(QuestionsListEventLoad value) load,
     required TResult Function(QuestionsListEventRefresh value) refresh,
+    required TResult Function(QuestionsListEventLoadAll value) loadAll,
+    required TResult Function(QuestionsListEventRefreshAll value) refreshAll,
   }) {
     return refresh(this);
   }
@@ -396,6 +440,8 @@ class _$QuestionsListEventRefresh implements QuestionsListEventRefresh {
     TResult Function(QuestionsListEventInitial value)? inital,
     TResult Function(QuestionsListEventLoad value)? load,
     TResult Function(QuestionsListEventRefresh value)? refresh,
+    TResult Function(QuestionsListEventLoadAll value)? loadAll,
+    TResult Function(QuestionsListEventRefreshAll value)? refreshAll,
   }) {
     return refresh?.call(this);
   }
@@ -406,6 +452,8 @@ class _$QuestionsListEventRefresh implements QuestionsListEventRefresh {
     TResult Function(QuestionsListEventInitial value)? inital,
     TResult Function(QuestionsListEventLoad value)? load,
     TResult Function(QuestionsListEventRefresh value)? refresh,
+    TResult Function(QuestionsListEventLoadAll value)? loadAll,
+    TResult Function(QuestionsListEventRefreshAll value)? refreshAll,
     required TResult orElse(),
   }) {
     if (refresh != null) {
@@ -417,4 +465,257 @@ class _$QuestionsListEventRefresh implements QuestionsListEventRefresh {
 
 abstract class QuestionsListEventRefresh implements QuestionsListEvent {
   const factory QuestionsListEventRefresh() = _$QuestionsListEventRefresh;
+}
+
+/// @nodoc
+abstract class _$$QuestionsListEventLoadAllCopyWith<$Res> {
+  factory _$$QuestionsListEventLoadAllCopyWith(
+          _$QuestionsListEventLoadAll value,
+          $Res Function(_$QuestionsListEventLoadAll) then) =
+      __$$QuestionsListEventLoadAllCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$QuestionsListEventLoadAllCopyWithImpl<$Res>
+    extends _$QuestionsListEventCopyWithImpl<$Res>
+    implements _$$QuestionsListEventLoadAllCopyWith<$Res> {
+  __$$QuestionsListEventLoadAllCopyWithImpl(_$QuestionsListEventLoadAll _value,
+      $Res Function(_$QuestionsListEventLoadAll) _then)
+      : super(_value, (v) => _then(v as _$QuestionsListEventLoadAll));
+
+  @override
+  _$QuestionsListEventLoadAll get _value =>
+      super._value as _$QuestionsListEventLoadAll;
+}
+
+/// @nodoc
+
+class _$QuestionsListEventLoadAll implements QuestionsListEventLoadAll {
+  const _$QuestionsListEventLoadAll();
+
+  @override
+  String toString() {
+    return 'QuestionsListEvent.loadAll()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$QuestionsListEventLoadAll);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() inital,
+    required TResult Function() load,
+    required TResult Function() refresh,
+    required TResult Function() loadAll,
+    required TResult Function() refreshAll,
+  }) {
+    return loadAll();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? inital,
+    TResult Function()? load,
+    TResult Function()? refresh,
+    TResult Function()? loadAll,
+    TResult Function()? refreshAll,
+  }) {
+    return loadAll?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? inital,
+    TResult Function()? load,
+    TResult Function()? refresh,
+    TResult Function()? loadAll,
+    TResult Function()? refreshAll,
+    required TResult orElse(),
+  }) {
+    if (loadAll != null) {
+      return loadAll();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(QuestionsListEventInitial value) inital,
+    required TResult Function(QuestionsListEventLoad value) load,
+    required TResult Function(QuestionsListEventRefresh value) refresh,
+    required TResult Function(QuestionsListEventLoadAll value) loadAll,
+    required TResult Function(QuestionsListEventRefreshAll value) refreshAll,
+  }) {
+    return loadAll(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(QuestionsListEventInitial value)? inital,
+    TResult Function(QuestionsListEventLoad value)? load,
+    TResult Function(QuestionsListEventRefresh value)? refresh,
+    TResult Function(QuestionsListEventLoadAll value)? loadAll,
+    TResult Function(QuestionsListEventRefreshAll value)? refreshAll,
+  }) {
+    return loadAll?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(QuestionsListEventInitial value)? inital,
+    TResult Function(QuestionsListEventLoad value)? load,
+    TResult Function(QuestionsListEventRefresh value)? refresh,
+    TResult Function(QuestionsListEventLoadAll value)? loadAll,
+    TResult Function(QuestionsListEventRefreshAll value)? refreshAll,
+    required TResult orElse(),
+  }) {
+    if (loadAll != null) {
+      return loadAll(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class QuestionsListEventLoadAll implements QuestionsListEvent {
+  const factory QuestionsListEventLoadAll() = _$QuestionsListEventLoadAll;
+}
+
+/// @nodoc
+abstract class _$$QuestionsListEventRefreshAllCopyWith<$Res> {
+  factory _$$QuestionsListEventRefreshAllCopyWith(
+          _$QuestionsListEventRefreshAll value,
+          $Res Function(_$QuestionsListEventRefreshAll) then) =
+      __$$QuestionsListEventRefreshAllCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$QuestionsListEventRefreshAllCopyWithImpl<$Res>
+    extends _$QuestionsListEventCopyWithImpl<$Res>
+    implements _$$QuestionsListEventRefreshAllCopyWith<$Res> {
+  __$$QuestionsListEventRefreshAllCopyWithImpl(
+      _$QuestionsListEventRefreshAll _value,
+      $Res Function(_$QuestionsListEventRefreshAll) _then)
+      : super(_value, (v) => _then(v as _$QuestionsListEventRefreshAll));
+
+  @override
+  _$QuestionsListEventRefreshAll get _value =>
+      super._value as _$QuestionsListEventRefreshAll;
+}
+
+/// @nodoc
+
+class _$QuestionsListEventRefreshAll implements QuestionsListEventRefreshAll {
+  const _$QuestionsListEventRefreshAll();
+
+  @override
+  String toString() {
+    return 'QuestionsListEvent.refreshAll()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$QuestionsListEventRefreshAll);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() inital,
+    required TResult Function() load,
+    required TResult Function() refresh,
+    required TResult Function() loadAll,
+    required TResult Function() refreshAll,
+  }) {
+    return refreshAll();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? inital,
+    TResult Function()? load,
+    TResult Function()? refresh,
+    TResult Function()? loadAll,
+    TResult Function()? refreshAll,
+  }) {
+    return refreshAll?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? inital,
+    TResult Function()? load,
+    TResult Function()? refresh,
+    TResult Function()? loadAll,
+    TResult Function()? refreshAll,
+    required TResult orElse(),
+  }) {
+    if (refreshAll != null) {
+      return refreshAll();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(QuestionsListEventInitial value) inital,
+    required TResult Function(QuestionsListEventLoad value) load,
+    required TResult Function(QuestionsListEventRefresh value) refresh,
+    required TResult Function(QuestionsListEventLoadAll value) loadAll,
+    required TResult Function(QuestionsListEventRefreshAll value) refreshAll,
+  }) {
+    return refreshAll(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(QuestionsListEventInitial value)? inital,
+    TResult Function(QuestionsListEventLoad value)? load,
+    TResult Function(QuestionsListEventRefresh value)? refresh,
+    TResult Function(QuestionsListEventLoadAll value)? loadAll,
+    TResult Function(QuestionsListEventRefreshAll value)? refreshAll,
+  }) {
+    return refreshAll?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(QuestionsListEventInitial value)? inital,
+    TResult Function(QuestionsListEventLoad value)? load,
+    TResult Function(QuestionsListEventRefresh value)? refresh,
+    TResult Function(QuestionsListEventLoadAll value)? loadAll,
+    TResult Function(QuestionsListEventRefreshAll value)? refreshAll,
+    required TResult orElse(),
+  }) {
+    if (refreshAll != null) {
+      return refreshAll(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class QuestionsListEventRefreshAll implements QuestionsListEvent {
+  const factory QuestionsListEventRefreshAll() = _$QuestionsListEventRefreshAll;
 }

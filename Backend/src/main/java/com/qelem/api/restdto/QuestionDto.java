@@ -1,8 +1,10 @@
 package com.qelem.api.restdto;
 
 import java.time.Instant;
+import java.util.List;
 
 import com.qelem.api.model.QuestionModel;
+import com.qelem.api.model.TagModel;
 
 import lombok.Data;
 
@@ -17,8 +19,9 @@ public class QuestionDto {
     private Long upVotes;
     private Long downVotes;
     private Integer userVote;
+    private List<TagModel> tags;
 
-    public QuestionDto(QuestionModel question, Long upVotes, Long downVotes, Integer userVote) {
+    public QuestionDto(QuestionModel question, Long upVotes, Long downVotes, Integer userVote, List<TagModel> tags) {
         this.id = question.getId();
         this.topic = question.getTopic();
         this.content = question.getContent();
@@ -28,5 +31,6 @@ public class QuestionDto {
         this.upVotes = upVotes;
         this.downVotes = downVotes;
         this.userVote = userVote == null ? 0 : userVote.intValue();
+        this.tags = tags;
     }
 }
