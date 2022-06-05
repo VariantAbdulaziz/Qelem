@@ -2,6 +2,7 @@ package com.qelem.api.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -28,10 +29,12 @@ import com.qelem.api.model.AnswerModel;
 import com.qelem.api.model.AnswerVote;
 import com.qelem.api.model.QuestionModel;
 import com.qelem.api.model.QuestionVote;
+import com.qelem.api.model.TagModel;
 import com.qelem.api.model.UserModel;
 import com.qelem.api.repository.AnswerVoteRepository;
 import com.qelem.api.repository.QuestionRepository;
 import com.qelem.api.repository.QuestionVoteRepository;
+import com.qelem.api.repository.TagRepository;
 import com.qelem.api.repository.UserRepository;
 import com.qelem.api.restdto.AnswerDto;
 import com.qelem.api.restdto.QuestionDto;
@@ -52,6 +55,7 @@ public class QuestionRestController {
     private final QuestionVoteRepository questionVoteRepository;
     private final AnswerVoteRepository answerVoteRepository;
     private final UserRepository userRepository;
+    private final TagRepository tagRepository;
 
     private UserModel loggedInUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -74,7 +78,8 @@ public class QuestionRestController {
         Optional<QuestionVote> userVote = questionVoteRepository.findByQuestionAndAuthor(question, loggedInUser());
         int userVoteValue = userVote.isPresent() ? userVote.get().getVote() : 0;
 
-        QuestionDto questionDto = new QuestionDto(question, upVotes, downVotes, userVoteValue);
+        QuestionDto questionDto = new QuestionDto(question, upVotes, downVotes, userVoteValue,
+                question.getTags().stream().collect(Collectors.toList()));
         return questionDto;
     }
 
@@ -139,6 +144,14 @@ public class QuestionRestController {
         question.setTopic(form.getTopic());
         question.setContent(form.getContent());
 
+        // setting tags
+        for (Long tagId : form.getTagIds()) {
+            TagModel tag = tagRepository.findById(tagId)
+                    .orElseThrow(() -> new ResourceNotFoundException("Tag not found"));
+            question.addTag(tag);
+        }
+
+        log.info("Saving question {}", question);
         question = questionRepository.save(question);
         log.info("Question created: {}", question);
 
