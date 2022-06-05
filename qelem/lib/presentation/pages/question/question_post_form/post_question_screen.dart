@@ -79,6 +79,7 @@ class _PostQuestionScreenState extends State<PostQuestionScreen> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     TextFormField(
+                      key: const Key('topic'),
                       controller: topicController,
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -96,6 +97,7 @@ class _PostQuestionScreenState extends State<PostQuestionScreen> {
                     ),
                     const SizedBox(height: 16.0),
                     TextFormField(
+                      key: const Key('content'),
                       controller: contentController,
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -113,6 +115,7 @@ class _PostQuestionScreenState extends State<PostQuestionScreen> {
                     ),
                     const SizedBox(height: 25.0),
                     ElevatedButton(
+                      key: const Key('post_question'),
                       onPressed: _isNetworkInProgress
                           ? null
                           : () {

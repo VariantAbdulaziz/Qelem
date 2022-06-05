@@ -84,7 +84,9 @@ class _MainScreenState extends State<MainScreen> {
         }
       case 1:
         {
-          return AppBar(title: const Text("My Questions"));
+          return AppBar(
+            title: const Text("My Questions"),
+          );
         }
       case 2:
         {

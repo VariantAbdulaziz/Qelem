@@ -98,6 +98,7 @@ class _SigninScreenState extends State<SigninScreen> {
                         child: Column(
                           children: [
                             TextFormField(
+                              key: const Key('username'),
                               controller: usernameController,
                               validator: (value) {
                                 if (value!.isEmpty) {
@@ -116,6 +117,7 @@ class _SigninScreenState extends State<SigninScreen> {
                             ),
                             const SizedBox(height: 30.0),
                             TextFormField(
+                              key: const Key('password'),
                               obscureText: _isPasswordHidden,
                               controller: passwordController,
                               validator: (value) {

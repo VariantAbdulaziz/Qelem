@@ -103,6 +103,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         ),
                         const SizedBox(height: 30.0),
                         TextFormField(
+                          key: const Key('firstName'),
                           controller: firstController,
                           validator: (value) {
                             if (value!.isEmpty) {
@@ -117,6 +118,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         ),
                         const SizedBox(height: 30.0),
                         TextFormField(
+                          key: const Key('lastName'),
                           controller: lastController,
                           validator: (value) {
                             if (value!.isEmpty) {
@@ -131,6 +133,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         ),
                         const SizedBox(height: 30.0),
                         TextFormField(
+                          key: const Key('username'),
                           controller: usernameController,
                           validator: (value) {
                             if (value!.length < 8) {
@@ -145,6 +148,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         ),
                         const SizedBox(height: 30.0),
                         TextFormField(
+                          key: const Key('password'),
                           controller: passwordController,
                           obscureText: _isPasswordHidden,
                           validator: (value) {
@@ -171,6 +175,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: ElevatedButton(
+                            key: const Key('sign_up'),
                             onPressed: _isNetworkInProgress
                                 ? null
                                 : () {
