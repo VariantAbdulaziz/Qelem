@@ -115,9 +115,9 @@ class _EditQuestionScreenState extends State<EditQuestionScreen> {
                             : () async {
                                 if (_formKey.currentState!.validate()) {
                                   var questionForm = QuestionForm(
-                                    topic: topicController.text,
-                                    content: contentController.text,
-                                  );
+                                      topic: topicController.text,
+                                      content: contentController.text,
+                                      tags: []);
 
                                   BlocProvider.of<EditQuestionBloc>(context)
                                       .add(EditQuestionEventEdit(

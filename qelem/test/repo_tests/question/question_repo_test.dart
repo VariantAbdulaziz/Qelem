@@ -32,7 +32,8 @@ void main() {
           downVotes: 3,
           userVote: Vote.upVote,
           createdAt: DateTime(2017, 9, 7, 17, 30),
-          updatedAt: DateTime(2017, 9, 7, 17, 30)),
+          updatedAt: DateTime(2017, 9, 7, 17, 30),
+          tags: []),
       Question(
           id: 2,
           topic: 'topic2',
@@ -47,7 +48,8 @@ void main() {
           downVotes: 13,
           userVote: Vote.upVote,
           createdAt: DateTime(2019, 6, 2, 17, 30),
-          updatedAt: DateTime(2019, 6, 2, 17, 30)),
+          updatedAt: DateTime(2019, 6, 2, 17, 30),
+          tags: []),
     ];
   });
 
@@ -76,12 +78,14 @@ void main() {
 
     test('test create question', () async {
       final mockQuestion = mockQuestions[0];
-      const mockQuestionForm = QuestionForm(topic: 'topic', content: 'content');
+      const mockQuestionForm =
+          QuestionForm(topic: 'topic', content: 'content', tags: []);
 
       when(mockQuestionRepository.createQuestion(mockQuestionForm))
           .thenAnswer((_) async => Either(val: mockQuestion));
 
-      final result = await mockQuestionRepository.createQuestion(mockQuestionForm);
+      final result =
+          await mockQuestionRepository.createQuestion(mockQuestionForm);
 
       expect(result, isA<Either<Question>>());
       expect(result.val, mockQuestion);
