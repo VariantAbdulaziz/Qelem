@@ -23,6 +23,7 @@ Widget homeScreen() {
         userVote: Vote.none,
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
+        tags: [],
       ),
     );
   });

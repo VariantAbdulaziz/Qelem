@@ -198,17 +198,15 @@ class _QuestionDetailScreenState extends State<QuestionDetailScreen> {
 
   Widget _buildQuestionHeader(BuildContext context, Question question) {
     final author = question.author;
-    final vottedTheme = Theme.of(context)
-        .textTheme
-        .bodyText1
-        ?.copyWith(color: Theme.of(context).primaryColor);
-    final notVottedTextTheme = Theme.of(context).textTheme.bodyText1;
+    final notVottedTextTheme = Theme.of(context).textTheme.bodyLarge;
+    final vottedTheme =
+        notVottedTextTheme?.copyWith(color: Theme.of(context).primaryColor);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: 23.0, left: 16.0, right: 16.0),
+          padding: const EdgeInsets.only(top: 16.0, left: 8.0, right: 8.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -219,7 +217,15 @@ class _QuestionDetailScreenState extends State<QuestionDetailScreen> {
               const SizedBox(height: 10),
               Wrap(
                 runAlignment: WrapAlignment.spaceBetween,
+                crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: CircleAvatar(
+                      radius: 10,
+                      backgroundImage: NetworkImage(author.profilePicture),
+                    ),
+                  ),
                   Text("${author.firstName} ${author.lastName}"),
                   const SizedBox(width: 10.0),
                   const Text("3000 Reputation"),
@@ -246,6 +252,19 @@ class _QuestionDetailScreenState extends State<QuestionDetailScreen> {
                 Theme.of(context).textTheme.bodyText2?.copyWith(fontSize: 16.0),
           ),
         ),
+        if (question.tags.isNotEmpty) const Divider(),
+        if (question.tags.isNotEmpty)
+          Wrap(
+            children: [
+              for (final tag in question.tags)
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Chip(
+                    label: Text(tag.name.value),
+                  ),
+                ),
+            ],
+          ),
         const Divider(),
         ButtonBar(
           alignment: MainAxisAlignment.end,

@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$QuestionForm {
   String get topic => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
+  List<Tag> get tags => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $QuestionFormCopyWith<QuestionForm> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $QuestionFormCopyWith<$Res> {
   factory $QuestionFormCopyWith(
           QuestionForm value, $Res Function(QuestionForm) then) =
       _$QuestionFormCopyWithImpl<$Res>;
-  $Res call({String topic, String content});
+  $Res call({String topic, String content, List<Tag> tags});
 }
 
 /// @nodoc
@@ -44,6 +45,7 @@ class _$QuestionFormCopyWithImpl<$Res> implements $QuestionFormCopyWith<$Res> {
   $Res call({
     Object? topic = freezed,
     Object? content = freezed,
+    Object? tags = freezed,
   }) {
     return _then(_value.copyWith(
       topic: topic == freezed
@@ -54,6 +56,10 @@ class _$QuestionFormCopyWithImpl<$Res> implements $QuestionFormCopyWith<$Res> {
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
+      tags: tags == freezed
+          ? _value.tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<Tag>,
     ));
   }
 }
@@ -65,7 +71,7 @@ abstract class _$$_QuestionFormCopyWith<$Res>
           _$_QuestionForm value, $Res Function(_$_QuestionForm) then) =
       __$$_QuestionFormCopyWithImpl<$Res>;
   @override
-  $Res call({String topic, String content});
+  $Res call({String topic, String content, List<Tag> tags});
 }
 
 /// @nodoc
@@ -83,6 +89,7 @@ class __$$_QuestionFormCopyWithImpl<$Res>
   $Res call({
     Object? topic = freezed,
     Object? content = freezed,
+    Object? tags = freezed,
   }) {
     return _then(_$_QuestionForm(
       topic: topic == freezed
@@ -93,6 +100,10 @@ class __$$_QuestionFormCopyWithImpl<$Res>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
+      tags: tags == freezed
+          ? _value._tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<Tag>,
     ));
   }
 }
@@ -100,16 +111,26 @@ class __$$_QuestionFormCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_QuestionForm implements _QuestionForm {
-  const _$_QuestionForm({required this.topic, required this.content});
+  const _$_QuestionForm(
+      {required this.topic,
+      required this.content,
+      required final List<Tag> tags})
+      : _tags = tags;
 
   @override
   final String topic;
   @override
   final String content;
+  final List<Tag> _tags;
+  @override
+  List<Tag> get tags {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_tags);
+  }
 
   @override
   String toString() {
-    return 'QuestionForm(topic: $topic, content: $content)';
+    return 'QuestionForm(topic: $topic, content: $content, tags: $tags)';
   }
 
   @override
@@ -118,14 +139,16 @@ class _$_QuestionForm implements _QuestionForm {
         (other.runtimeType == runtimeType &&
             other is _$_QuestionForm &&
             const DeepCollectionEquality().equals(other.topic, topic) &&
-            const DeepCollectionEquality().equals(other.content, content));
+            const DeepCollectionEquality().equals(other.content, content) &&
+            const DeepCollectionEquality().equals(other._tags, _tags));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(topic),
-      const DeepCollectionEquality().hash(content));
+      const DeepCollectionEquality().hash(content),
+      const DeepCollectionEquality().hash(_tags));
 
   @JsonKey(ignore: true)
   @override
@@ -136,12 +159,15 @@ class _$_QuestionForm implements _QuestionForm {
 abstract class _QuestionForm implements QuestionForm {
   const factory _QuestionForm(
       {required final String topic,
-      required final String content}) = _$_QuestionForm;
+      required final String content,
+      required final List<Tag> tags}) = _$_QuestionForm;
 
   @override
   String get topic => throw _privateConstructorUsedError;
   @override
   String get content => throw _privateConstructorUsedError;
+  @override
+  List<Tag> get tags => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_QuestionFormCopyWith<_$_QuestionForm> get copyWith =>
