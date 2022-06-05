@@ -1,3 +1,5 @@
+import 'package:qelem/presentation/app_widget.dart';
+
 class Routes {
   static const String home = '/';
   static const String myProfile = '/my-profile';
@@ -10,4 +12,6 @@ class Routes {
   static const String postQuestion = '/post-question';
   static const String editQuestion = '/edit-question';
   static const String questionDetail = '/question-detail';
+
+  static const String splashScreen = '/splash-screen';
 }
