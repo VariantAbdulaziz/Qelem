@@ -145,8 +145,6 @@ void main() {
     test(
         "should emit [QuestionDetailStateLoadedQuestion] when event VoteQuestionEvent is called and no error occurs",
         () async {
-      final mockQuestion = await getQuestion();
-
       when(mockQuestionRepository.getQuestionById(mockQuestion.id))
           .thenAnswer((_) async => Either(val: mockQuestion));
       when(mockQuestionRepository.voteQuestion(mockQuestion.id, Vote.upVote))
@@ -167,8 +165,6 @@ void main() {
     test(
         "should emit [QuestionDetailStateLoadedQuestion] when event VoteQuestionEvent is called and an error occurs",
         () async {
-      final mockQuestion = await getQuestion();
-
       when(mockQuestionRepository.getQuestionById(mockQuestion.id))
           .thenAnswer((_) async => Either(val: mockQuestion));
       when(mockQuestionRepository.voteQuestion(mockQuestion.id, Vote.upVote))
