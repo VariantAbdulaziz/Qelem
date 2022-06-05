@@ -105,9 +105,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         TextFormField(
                           controller: firstController,
                           validator: (value) {
-                            if (validateNotEmpty(value!, "first name")!.error !=
+                            if (validateNotEmpty(value!, "first name") !=
                                 null) {
-                              return validatePassword(value)!.error!.message;
+                              return validateNotEmpty(value, "first name")!
+                                  .error!
+                                  .message;
                             } else {
                               return null;
                             }
@@ -121,9 +123,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         TextFormField(
                           controller: lastController,
                           validator: (value) {
-                            if (validateNotEmpty(value!, "first name")!.error !=
-                                null) {
-                              return validatePassword(value)!.error!.message;
+                            if (validateNotEmpty(value!, "last name") != null) {
+                              return validateNotEmpty(value, "last name")!
+                                  .error!
+                                  .message;
                             } else {
                               return null;
                             }
@@ -137,7 +140,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         TextFormField(
                           controller: usernameController,
                           validator: (value) {
-                            if (validateUserName(value!)!.error != null) {
+                            if (validateUserName(value!) != null) {
                               return validateUserName(value)!.error!.message;
                             } else {
                               return null;
@@ -153,7 +156,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           controller: passwordController,
                           obscureText: _isPasswordHidden,
                           validator: (value) {
-                            if (validatePassword(value!)!.error != null) {
+                            if (validatePassword(value!) != null) {
                               return validatePassword(value)!.error!.message;
                             } else {
                               return null;

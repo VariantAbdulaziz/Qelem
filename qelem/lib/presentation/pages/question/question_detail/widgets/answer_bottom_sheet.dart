@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qelem/domain/core/validiator.dart';
 
 class AnswerBottomSheet extends StatefulWidget {
   final bool isEdit;
@@ -37,6 +38,13 @@ class _AnswerBottomSheetState extends State<AnswerBottomSheet> {
             const SizedBox(height: 40),
             TextFormField(
               controller: textEditingController,
+              validator: (value) {
+                if (validateNotEmpty(value!, "topic") != null) {
+                  return validateNotEmpty(value, "topic")!.error!.message;
+                } else {
+                  return null;
+                }
+              },
               decoration: const InputDecoration(
                 labelText: 'Content',
                 border: OutlineInputBorder(),

@@ -9,6 +9,7 @@ import 'package:qelem/application/profile/edit_profile/edit_profile_bloc.dart';
 import 'package:qelem/application/profile/edit_profile/edit_profile_event.dart';
 import 'package:qelem/application/profile/edit_profile/edit_profile_state.dart';
 import 'package:qelem/common/constants.dart';
+import 'package:qelem/domain/core/validiator.dart';
 import 'package:qelem/domain/profile/edit_profile_form.dart';
 import 'package:qelem/domain/profile/profile.dart';
 import 'package:go_router/go_router.dart';
@@ -211,6 +212,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           child: TextFormField(
             style: Theme.of(context).textTheme.bodyMedium,
             controller: firstNameController,
+            validator: (value) {
+              if (validateNotEmpty(value!, "first name") != null) {
+                return validateNotEmpty(value, "first name")!.error!.message;
+              } else {
+                return null;
+              }
+            },
             decoration: const InputDecoration(
                 labelText: 'First Name', border: OutlineInputBorder()),
           ),
@@ -220,6 +228,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           child: TextFormField(
             style: Theme.of(context).textTheme.bodyMedium,
             controller: lastNameController,
+            validator: (value) {
+              if (validateNotEmpty(value!, "last name") != null) {
+                return validateNotEmpty(value, "last name")!.error!.message;
+              } else {
+                return null;
+              }
+            },
             decoration: const InputDecoration(
                 labelText: 'Last Name', border: OutlineInputBorder()),
           ),

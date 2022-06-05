@@ -101,8 +101,17 @@ class _SigninScreenState extends State<SigninScreen> {
                             TextFormField(
                               controller: usernameController,
                               validator: (value) {
-                                if (validateUserName(value!)!.error != null) {
-                                  return validateUserName(value)!
+                                if (validateNotEmpty(value!, "usename") !=
+                                    null) {
+                                  return validateNotEmpty(value, "usename")!
+                                      .error!
+                                      .message;
+                                }
+                                if (validateStringLength(
+                                        value, "username", 8) !=
+                                    null) {
+                                  return validateStringLength(
+                                          value, "username", 8)!
                                       .error!
                                       .message;
                                 } else {
@@ -118,16 +127,25 @@ class _SigninScreenState extends State<SigninScreen> {
                             const SizedBox(height: 30.0),
                             TextFormField(
                               obscureText: _isPasswordHidden,
-                              controller: passwordController,
                               validator: (value) {
-                                if (validatePassword(value!)!.error != null) {
-                                  return validatePassword(value)!
+                                if (validateNotEmpty(value!, "password") !=
+                                    null) {
+                                  return validateNotEmpty(value, "password")!
+                                      .error!
+                                      .message;
+                                }
+                                if (validateStringLength(
+                                        value, "password", 8) !=
+                                    null) {
+                                  return validateStringLength(
+                                          value, "password", 8)!
                                       .error!
                                       .message;
                                 } else {
                                   return null;
                                 }
                               },
+                              controller: passwordController,
                               decoration: InputDecoration(
                                   labelText: 'Password',
                                   hintText: 'Enter your password',
