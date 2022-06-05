@@ -1,15 +1,19 @@
 import 'package:path/path.dart';
 import 'package:qelem/infrastructure/answer/answer_model_mapper.dart';
 import 'package:qelem/infrastructure/auth/user_model_mapper.dart';
+import 'package:qelem/infrastructure/question/local/question/question_entity_mapper.dart';
 import 'package:qelem/infrastructure/question/question_dto.dart';
 import 'package:qelem/infrastructure/question/question_mapper.dart';
 import 'package:qelem/infrastructure/user/local/user_entity.dart';
+import 'package:qelem/infrastructure/user/local/user_entity_mapper.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../../../domain/question/question.dart';
 import '../../../infrastructure/answer/answer_dto.dart';
 import '../../../infrastructure/answer/local/answer/answer_entity.dart';
 import '../../../infrastructure/auth/user_dto.dart';
 import '../../../infrastructure/question/local/question/question_entity.dart';
+import '../../../infrastructure/tag/tag_dto.dart';
 
 class DatabaseHelper {
   DatabaseHelper._privateConstructor();
@@ -21,11 +25,19 @@ class DatabaseHelper {
   Future<Database> get database async => _database ??= await _initDatabase();
 
   Future<Database> _initDatabase() async {
-    String path = join(await getDatabasesPath(), 'grocery_database.db');
+    String path = join(await getDatabasesPath(), 'qelem.db');
     return await openDatabase(path, version: 3, onCreate: _onCreate);
   }
 
   Future _onCreate(Database db, int version) async {
+    await db.execute('''
+      CREATE TABLE tags (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        questionId INTEGER NOT NULL,
+        tagId INTEGER NOT NULL,
+        name TEXT NOT NULL
+      )''');
+
     await db.execute('''
       CREATE TABLE user (
         id INTEGER PRIMARY KEY,
@@ -68,22 +80,37 @@ class DatabaseHelper {
       ''');
   }
 
-  Future<List<QuestionEntity>> getQuestions() async {
+  Future<List<Question>> getQuestions() async {
     final Database db = await database;
     final List<Map<String, dynamic>> questionsList = await db.query("question");
     List<QuestionEntity> questionEntityList =
         questionsList.isEmpty ? [] : questionsList.map((e) => QuestionEntity.fromJson(e)).toList();
-    return questionEntityList;
+    List<Question> finalResult = [];
+    for (QuestionEntity questionEntity in questionEntityList) {
+      final user = await getUser(questionEntity.authorId);
+      var tags = await db.query("tags", where: "questionId = ?", whereArgs: [questionEntity.id]);
+      List<TagDto> tempTag = [];
+      for (var t in tags) {
+        tempTag.add(TagDto.fromJson(t));
+      }
+      finalResult.add(questionEntity.toQuestion(user.toUser(), tempTag));
+    }
+    return finalResult;
   }
 
   // get a single question
-  Future<QuestionEntity?> getQuestion(int id) async {
+  Future<Question> getQuestion(int id) async {
     final Database db = await database;
     final List<Map<String, dynamic>> questionsList =
         await db.query("question", where: "id = ?", whereArgs: [id]);
-    QuestionEntity? questionEntity =
-        questionsList.isEmpty ? null : QuestionEntity.fromJson(questionsList.first);
-    return questionEntity;
+    QuestionEntity questionEntity = QuestionEntity.fromJson(questionsList.first);
+    final user = await getUser(questionEntity.authorId);
+    var tags = await db.query("tags", where: "questionId = ?", whereArgs: [questionEntity.id]);
+    List<TagDto> tempTag = [];
+    for (var t in tags) {
+      tempTag.add(TagDto.fromJson(t));
+    }
+    return questionEntity.toQuestion(user.toUser(), tempTag);
   }
 
   // get answers to a question
@@ -139,6 +166,7 @@ class DatabaseHelper {
     batch.delete("question");
     batch.delete("user");
     batch.delete("answer");
+    batch.delete("tags");
     await batch.commit(noResult: true);
   }
 
@@ -153,6 +181,14 @@ class DatabaseHelper {
             conflictAlgorithm: ConflictAlgorithm.replace);
         batch.insert("user", e.author.toUserEntity().toJson(),
             conflictAlgorithm: ConflictAlgorithm.replace);
+        for (var t in e.tags) {
+          Map<String, dynamic> tagMap = {
+            "questionId": e.id,
+            "tagId": t.id,
+            "name": t.name,
+          };
+          batch.insert("tags", tagMap, conflictAlgorithm: ConflictAlgorithm.replace);
+        }
       }
       await batch.commit(noResult: true);
     });
