@@ -1,20 +1,20 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:qelem/application/question/questions_list/questions_list_bloc.dart';
 import 'package:qelem/application/question/questions_list/questions_list_event.dart';
 import 'package:qelem/application/question/questions_list/questions_list_state.dart';
-import 'package:qelem/domain/auth/user.dart';
-import 'package:qelem/domain/common/vote.dart';
-import 'package:qelem/domain/question/question.dart';
 import 'package:qelem/infrastructure/question/question_repository.dart';
 import 'package:qelem/util/either.dart';
 import 'package:qelem/util/error.dart';
 
+import 'questions_tests_util.dart';
 import 'questions_list_bloc_test.mocks.dart';
 
 @GenerateMocks([QuestionRepository])
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   late MockQuestionRepository mockQuestionRepository;
 
   setUp(() {
@@ -23,27 +23,10 @@ void main() {
 
   group("QuestionsListsBloc", () {
     test(
-        "should emit [QuestionListStateLoading, QuestionListStateSuccess] when event QuestionsListEventLoad is called and no error occured",
+        "should emit [QuestionListStateLoading, QuestionListStateSuccess] when event QuestionsListEventLoad is called and no error occur",
         () async {
-      final mockQuestions = List.generate(3, (index) {
-        return Question(
-          id: index,
-          topic: 'topic $index',
-          content: 'content $index',
-          author: User(
-            id: index,
-            firstName: 'name $index',
-            lastName: 'email $index',
-            userName: 'avatar $index',
-            profilePicture: 'assets/abebe.jpeg',
-          ),
-          upVotes: index,
-          downVotes: index,
-          userVote: Vote.upVote,
-          createdAt: DateTime.now(),
-          updatedAt: DateTime.now(),
-        );
-      });
+      final mockQuestion = await getQuestion();
+      final mockQuestions = List.generate(3, (index) => mockQuestion.val!);
 
       when(mockQuestionRepository.getMyQuestions())
           .thenAnswer((_) async => Either(val: mockQuestions));
@@ -62,7 +45,7 @@ void main() {
     });
 
     test(
-        "should emit [QuestionListStateLoading, QuestionListStateError] when event QuestionsListEventLoad is called and an error occured",
+        "should emit [QuestionListStateLoading, QuestionListStateError] when event QuestionsListEventLoad is called and an error occurs",
         () async {
       when(mockQuestionRepository.getMyQuestions())
           .thenAnswer((_) async => Either(error: Error('error')));
