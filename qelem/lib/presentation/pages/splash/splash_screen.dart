@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:qelem/presentation/routes/routes.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -17,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void _navigateToHome() async {
     await Future.delayed(const Duration(seconds: 2), () {});
-    context.go('/main');
+    context.go(Routes.home);
   }
 
   @override
