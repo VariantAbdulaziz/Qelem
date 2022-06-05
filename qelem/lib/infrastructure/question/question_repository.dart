@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:qelem/domain/common/vote.dart';
 import 'package:qelem/domain/question/question_form.dart';
 import 'package:qelem/infrastructure/question/local/question/question_entity_mapper.dart';
+import 'package:qelem/domain/question/question_repository_interface.dart';
 import 'package:qelem/infrastructure/auth/auth_repository.dart';
 import 'package:qelem/infrastructure/question/question_api.dart';
 import 'package:qelem/infrastructure/question/question_dto.dart';
@@ -17,13 +18,14 @@ import '../../util/either.dart';
 import '../../util/error.dart';
 import '../common/qelem_http_exception.dart';
 
-class QuestionRepository {
+class QuestionRepository implements QuestionRepositoryInterface {
   final QuestionApi questionApi;
   final DatabaseHelper databaseHelper = DatabaseHelper.instance;
   final AuthRepository authRepository;
 
   QuestionRepository(this.questionApi, this.authRepository);
 
+  @override
   Future<Either<List<Question>>> getMyQuestions() async {
     try {
       final userId = (await authRepository.getUserId())!;
@@ -42,6 +44,7 @@ class QuestionRepository {
     }
   }
 
+  @override
   Future<Either<List<Question>>> getAllQuestions() async {
     try {
       List<Question> finalResult = [];
@@ -71,6 +74,7 @@ class QuestionRepository {
     }
   }
 
+  @override
   Future<Either<Question>> getQuestionById(int id) async {
     try {
       Question finalResult;
@@ -95,6 +99,7 @@ class QuestionRepository {
     }
   }
 
+  @override
   Future<Either<Question>> createQuestion(QuestionForm questionForm) async {
     try {
 
@@ -113,6 +118,7 @@ class QuestionRepository {
     }
   }
 
+  @override
   Future<Either<void>> deleteQuestion(int id) async {
     try {
 
@@ -150,6 +156,7 @@ class QuestionRepository {
     }
   }
 
+  @override
   Future<Either<Question>> voteQuestion(int questionId, Vote vote) async {
     try {
       QuestionDto updatedQuestion =

@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:qelem/domain/answer/answer.dart';
 import 'package:qelem/domain/answer/answer_form.dart';
+import 'package:qelem/domain/answer/answer_repository_interface.dart';
 import 'package:qelem/domain/common/vote.dart';
 import 'package:qelem/infrastructure/answer/answer_api.dart';
 import 'package:qelem/infrastructure/answer/answer_dto.dart';
@@ -19,6 +20,7 @@ import 'package:qelem/util/error.dart';
 import '../../data/local/local_database/qelem_local_storage.dart';
 
 class AnswerRepository {
+class AnswerRepository implements AnswerRepositoryInterface {
   final AnswerApi answerApi;
   final QuestionApi questionApi;
   final DatabaseHelper databaseHelper = DatabaseHelper.instance;
@@ -71,6 +73,7 @@ class AnswerRepository {
     }
   }
 
+  @override
   Future<Either<Answer>> createAnswer({required AnswerForm answerForm}) async {
     try {
       AnswerDto answer = await answerApi.createAnswer(answerForm.toDto());
@@ -86,6 +89,7 @@ class AnswerRepository {
     }
   }
 
+  @override
   Future<Either<void>> deleteAnswer(int answerId) async {
     try {
       await databaseHelper.removeAnswer(answerId);
@@ -101,6 +105,7 @@ class AnswerRepository {
     }
   }
 
+  @override
   Future<Either<Answer>> updateAnswer(Answer answer) async {
     try {
       AnswerDto updatedAnswer = await answerApi.updateAnswer(answer.id, answer.content);
@@ -117,6 +122,7 @@ class AnswerRepository {
     }
   }
 
+  @override
   Future<Either<Answer>> voteAnswer(int answerId, Vote vote) async {
     try {
       AnswerDto updatedAnswer = await answerApi.voteAnswer(answerId, vote);
@@ -133,6 +139,7 @@ class AnswerRepository {
     }
   }
 
+  @override
   Future<Either<List<Answer>>> getAnswersByQuestionId(int questionId) async {
     try {
       List<Answer> finalResult = [];
