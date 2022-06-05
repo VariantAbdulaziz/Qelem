@@ -3,14 +3,12 @@ import 'dart:io';
 
 import 'package:qelem/domain/common/vote.dart';
 import 'package:qelem/domain/question/question_form.dart';
-import 'package:qelem/infrastructure/question/local/question/question_entity_mapper.dart';
 import 'package:qelem/domain/question/question_repository_interface.dart';
 import 'package:qelem/infrastructure/auth/auth_repository.dart';
 import 'package:qelem/infrastructure/question/question_api.dart';
 import 'package:qelem/infrastructure/question/question_dto.dart';
 import 'package:qelem/infrastructure/question/question_form_mapper.dart';
 import 'package:qelem/infrastructure/question/question_mapper.dart';
-import 'package:qelem/infrastructure/user/local/user_entity_mapper.dart';
 
 import '../../data/local/local_database/qelem_local_storage.dart';
 import '../../domain/question/question.dart';
@@ -29,9 +27,8 @@ class QuestionRepository implements QuestionRepositoryInterface {
   Future<Either<List<Question>>> getMyQuestions() async {
     try {
       final userId = (await authRepository.getUserId())!;
-      final questionsDtos = await questionApi.getAllQuestions(authorId: userId);
-
-      return Either(val: questionsDtos.map((e) => e.toQuestion()).toList());
+      final questions = await questionApi.getAllQuestions(authorId: userId);
+      return Either(val: questions.map((e) => e.toQuestion()).toList());
     } on QHttpException catch (e) {
       return Either(error: Error(e.message));
     } on SocketException catch (_) {
@@ -47,21 +44,15 @@ class QuestionRepository implements QuestionRepositoryInterface {
   @override
   Future<Either<List<Question>>> getAllQuestions() async {
     try {
-      List<Question> finalResult = [];
-
       var result = await databaseHelper.getQuestions();
+
       if (result.isEmpty) {
         List<QuestionDto> questionsDto = await questionApi.getAllQuestions();
         await databaseHelper.addQuestions(questionsDto);
         result = await databaseHelper.getQuestions();
       }
 
-      result.map((questionEntity) async {
-        var user = await databaseHelper.getUser(questionEntity.authorId);
-        finalResult.add(questionEntity.toQuestion(user.toUser()));
-      }).toList();
-
-      return Either(val: finalResult);
+      return Either(val: result);
     } on QHttpException catch (e) {
       return Either(error: Error(e.message));
     } on SocketException catch (_) {
@@ -77,17 +68,8 @@ class QuestionRepository implements QuestionRepositoryInterface {
   @override
   Future<Either<Question>> getQuestionById(int id) async {
     try {
-      Question finalResult;
-
       var result = await databaseHelper.getQuestion(id);
-      if (result == null) {
-        List<QuestionDto> questionsDto = await questionApi.getAllQuestions();
-        await databaseHelper.addQuestions(questionsDto);
-        result = await databaseHelper.getQuestion(id);
-      }
-      var user = await databaseHelper.getUser(result!.authorId);
-      finalResult = result.toQuestion(user.toUser());
-      return Either(val: finalResult);
+      return Either(val: result);
     } on QHttpException catch (e) {
       return Either(error: Error(e.message));
     } on SocketException catch (_) {
@@ -102,11 +84,9 @@ class QuestionRepository implements QuestionRepositoryInterface {
   @override
   Future<Either<Question>> createQuestion(QuestionForm questionForm) async {
     try {
-
       final questionDto = await questionApi.createQuestion(questionForm.toDto());
       await databaseHelper.addQuestions([questionDto]);
       return Either(val: questionDto.toQuestion());
-
     } on QHttpException catch (e) {
       return Either(error: Error(e.message));
     } on SocketException catch (_) {
@@ -121,11 +101,9 @@ class QuestionRepository implements QuestionRepositoryInterface {
   @override
   Future<Either<void>> deleteQuestion(int id) async {
     try {
-
       await databaseHelper.removeQuestion(id);
       await questionApi.deleteQuestion(id);
       return Either();
-
     } on QHttpException catch (e) {
       return Either(error: Error(e.message));
     } on SocketException catch (_) {
@@ -140,11 +118,9 @@ class QuestionRepository implements QuestionRepositoryInterface {
   @override
   Future<Either<Question>> updateQuestion(QuestionForm questionForm, int questionId) async {
     try {
-
       final questionDto = await questionApi.updateQuestion(questionForm.toDto(), questionId);
       await databaseHelper.updateQuestion(questionDto.toQuestionEntity());
       return Either(val: questionDto.toQuestion());
-
     } on QHttpException catch (e) {
       return Either(error: Error(e.message));
     } on SocketException catch (_) {
@@ -160,8 +136,7 @@ class QuestionRepository implements QuestionRepositoryInterface {
   @override
   Future<Either<Question>> voteQuestion(int questionId, Vote vote) async {
     try {
-      QuestionDto updatedQuestion =
-          await questionApi.voteQuestion(questionId, vote);
+      QuestionDto updatedQuestion = await questionApi.voteQuestion(questionId, vote);
       await databaseHelper.updateQuestion(updatedQuestion.toQuestionEntity());
       return Either(val: updatedQuestion.toQuestion());
     } on QHttpException catch (exception) {
