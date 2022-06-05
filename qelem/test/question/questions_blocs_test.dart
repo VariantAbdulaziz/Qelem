@@ -26,13 +26,11 @@ import 'questions_blocs_test.mocks.dart';
 void main() {
   late MockQuestionRepository mockQuestionRepository;
   late MockQuestion mockQuestion;
-  late MockQuestionForm mockQuestionForm;
   late MockTagRepository mockTagRepository;
 
   setUp(() {
     mockQuestionRepository = MockQuestionRepository();
     mockQuestion = MockQuestion();
-    mockQuestionForm = MockQuestionForm();
     mockTagRepository = MockTagRepository();
   });
 
@@ -121,7 +119,7 @@ void main() {
         "should emit [QuestionDetailStateLoading, QuestionDetailStateDeleteSuccess] when event QuestionDetailDeleteEvent is called and no error occur",
         () async {
       when(mockQuestionRepository.deleteQuestion(mockQuestion.id))
-          .thenAnswer((_) async => Either(val: true));
+          .thenAnswer((_) async => Either());
       when(mockQuestion.id).thenReturn(0);
 
       final questionDetailBloc =

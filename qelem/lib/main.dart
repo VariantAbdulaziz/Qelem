@@ -65,9 +65,9 @@ void main() {
                       RepositoryProvider.of<ProfileApi>(context)),
                 ),
                 RepositoryProvider(
-                  create: (context) => AnswerRepository(
-                      RepositoryProvider.of<AnswerApi>(context)),
-                ),
+                    create: (context) => AnswerRepository(
+                        RepositoryProvider.of<AnswerApi>(context),
+                        RepositoryProvider.of<QuestionApi>(context))),
                 RepositoryProvider(
                   create: (context) => QuestionRepository(
                       RepositoryProvider.of<QuestionApi>(context),
