@@ -58,7 +58,7 @@ class QuestionRepository implements QuestionRepositoryInterface {
 
       result.map((questionEntity) async {
         var user = await databaseHelper.getUser(questionEntity.authorId);
-        finalResult.add(questionEntity.toQuestion(user!.toUser()));
+        finalResult.add(questionEntity.toQuestion(user.toUser()));
       }).toList();
 
       return Either(val: finalResult);
@@ -86,7 +86,7 @@ class QuestionRepository implements QuestionRepositoryInterface {
         result = await databaseHelper.getQuestion(id);
       }
       var user = await databaseHelper.getUser(result!.authorId);
-      finalResult = result.toQuestion(user!.toUser());
+      finalResult = result.toQuestion(user.toUser());
       return Either(val: finalResult);
     } on QHttpException catch (e) {
       return Either(error: Error(e.message));
@@ -137,6 +137,7 @@ class QuestionRepository implements QuestionRepositoryInterface {
     }
   }
 
+  @override
   Future<Either<Question>> updateQuestion(QuestionForm questionForm, int questionId) async {
     try {
 
