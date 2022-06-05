@@ -1,35 +1,36 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
+import 'package:qelem/domain/auth/auth_repository_interface.dart';
 import 'package:qelem/domain/auth/change_password_form.dart';
 import 'package:qelem/domain/auth/login_form.dart';
 import 'package:qelem/domain/auth/login_response.dart';
 import 'package:qelem/domain/auth/password.dart';
 import 'package:qelem/domain/auth/registration_form.dart';
 import 'package:qelem/domain/auth/user.dart';
+import 'package:qelem/domain/auth/user_role.dart';
 import 'package:qelem/domain/auth/username.dart';
-import 'package:mockito/mockito.dart';
-import 'package:qelem/infrastructure/auth/auth_repository.dart';
 import 'package:qelem/util/either.dart';
 
 import 'auth_repo_test.mocks.dart';
 
-@GenerateMocks([AuthRepository])
+@GenerateMocks([AuthRepositoryInterface])
 void main() {
-  late MockAuthRepository mockAuthRepository;
+  late MockAuthRepositoryInterface mockAuthRepository;
 
   setUp(() {
-    mockAuthRepository = MockAuthRepository();
+    mockAuthRepository = MockAuthRepositoryInterface();
   });
 
   group('Auth repo tests', () {
     test('test login', () async {
       final mockUser = User(
-        userName: "username",
-        lastName: "lastName",
-        firstName: "firstName",
-        id: 1,
-        profilePicture: "profilePicture",
-      );
+          userName: "username",
+          lastName: "lastName",
+          firstName: "firstName",
+          id: 1,
+          profilePicture: "profilePicture",
+          role: Role.member);
 
       final loginForm = LoginForm(
         userName: UserName("username"),
@@ -49,12 +50,12 @@ void main() {
 
     test('test register', () async {
       final mockUser = User(
-        userName: "username",
-        lastName: "lastName",
-        firstName: "firstName",
-        id: 1,
-        profilePicture: "profilePicture",
-      );
+          userName: "username",
+          lastName: "lastName",
+          firstName: "firstName",
+          id: 1,
+          profilePicture: "profilePicture",
+          role: Role.member);
 
       final registerForm = RegistrationForm(
           userName: UserName("username"),
@@ -77,10 +78,12 @@ void main() {
           currentPassword: Password('currentPassword'),
           newPassword: Password('newPassword'));
 
-      when(mockAuthRepository.changePassword(changePasswordForm: changePasswordForm))
+      when(mockAuthRepository.changePassword(
+              changePasswordForm: changePasswordForm))
           .thenAnswer((_) async => Either(val: null));
 
-      final result = await mockAuthRepository.changePassword(changePasswordForm: changePasswordForm);
+      final result = await mockAuthRepository.changePassword(
+          changePasswordForm: changePasswordForm);
 
       expect(result, isA<Either<void>>());
     });

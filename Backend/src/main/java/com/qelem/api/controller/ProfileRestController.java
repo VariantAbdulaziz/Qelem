@@ -30,8 +30,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping(path = "/api/v1/profile", produces = "application/json")
 @CrossOrigin(origins = "*")
+@RequestMapping(path = "/api/v1/profile", produces = "application/json")
 @RequiredArgsConstructor
 @Slf4j
 public class ProfileRestController {

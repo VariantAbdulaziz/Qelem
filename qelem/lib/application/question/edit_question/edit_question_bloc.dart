@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qelem/application/question/edit_question/edit_question_event.dart';
 import 'package:qelem/application/question/edit_question/edit_question_state.dart';
-import 'package:qelem/infrastructure/question/question_repository.dart';
+import 'package:qelem/domain/question/question_repository_interface.dart';
 
 class EditQuestionBloc extends Bloc<EditQuestionEvent, EditQuestionState> {
-  final QuestionRepository _questionRepository;
+  final QuestionRepositoryInterface _questionRepository;
 
   EditQuestionBloc(this._questionRepository)
       : super(const EditQuestionState.initial()) {

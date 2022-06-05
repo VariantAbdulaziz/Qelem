@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:qelem/application/question/question_construction/question_construction_bloc.dart';
 import 'package:qelem/application/question/question_construction/question_construction_event.dart';
 import 'package:qelem/application/question/question_construction/question_construction_state.dart';
-import 'package:qelem/application/tag/tag_bloc.dart';
-import 'package:qelem/application/tag/tag_event.dart';
-import 'package:qelem/application/tag/tag_state.dart';
 import 'package:qelem/domain/question/question_form.dart';
-import 'package:go_router/go_router.dart';
-import 'package:qelem/infrastructure/question/question_repository.dart';
+import 'package:qelem/domain/question/question_repository_interface.dart';
+import 'package:qelem/domain/tag/tag_repository_interface.dart';
 import 'package:qelem/infrastructure/tag/tag_repository.dart';
 import 'package:qelem/presentation/routes/routes.dart';
 
@@ -34,8 +32,9 @@ class _PostQuestionScreenState extends State<PostQuestionScreen> {
         BlocProvider<QuestionContructionBloc>(
           create: (context) => QuestionContructionBloc(
             questionRepository:
-                RepositoryProvider.of<QuestionRepository>(context),
-            tagRepository: RepositoryProvider.of<TagRepository>(context),
+                RepositoryProvider.of<QuestionRepositoryInterface>(context),
+            tagRepository:
+                RepositoryProvider.of<TagRepositoryInterface>(context),
           )..add(const QuestionConstructionLoadTagsEvent()),
         ),
       ],

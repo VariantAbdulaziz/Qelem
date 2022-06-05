@@ -17,5 +17,7 @@ abstract class AuthRepositoryInterface {
 
   Future<void> logout();
 
-  Future<int?> getUserId();
+  Future<User?> getAuthenticatedUser();
+
+  User? getAuthenticatedUserSync();
 }

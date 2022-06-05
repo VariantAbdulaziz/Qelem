@@ -11,8 +11,8 @@ class QuestionDetailState with _$QuestionDetailState {
 
   // Initial loading state.
   const factory QuestionDetailState.loading() = QuestionDetailStateLoading;
-  const factory QuestionDetailState.loadedQuestion(Question question) =
-      QuestionDetailStateLoadedQuestion;
+  const factory QuestionDetailState.loadedQuestion(
+      Question question, int userId) = QuestionDetailStateLoadedQuestion;
 
   const factory QuestionDetailState.error(Error error) =
       QuestionDetailStateError;

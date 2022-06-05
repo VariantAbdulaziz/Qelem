@@ -10,7 +10,9 @@ import 'package:qelem/application/question/question_detail/question_detail_state
 import 'package:qelem/application/question/questions_list/questions_list_bloc.dart';
 import 'package:qelem/application/question/questions_list/questions_list_event.dart';
 import 'package:qelem/application/question/questions_list/questions_list_state.dart';
+import 'package:qelem/domain/auth/auth_repository_interface.dart';
 import 'package:qelem/domain/auth/user.dart';
+import 'package:qelem/domain/auth/user_role.dart';
 import 'package:qelem/domain/common/vote.dart';
 import 'package:qelem/domain/question/question.dart';
 import 'package:qelem/domain/question/question_form.dart';
@@ -21,18 +23,32 @@ import 'package:qelem/util/error.dart';
 
 import 'questions_blocs_test.mocks.dart';
 
-@GenerateMocks(
-    [QuestionRepository, User, Question, QuestionForm, TagRepository])
+@GenerateMocks([
+  QuestionRepository,
+  User,
+  Question,
+  QuestionForm,
+  TagRepository,
+  AuthRepositoryInterface
+])
 void main() {
   late MockQuestionRepository mockQuestionRepository;
   late MockQuestion mockQuestion;
-  late MockQuestionForm mockQuestionForm;
   late MockTagRepository mockTagRepository;
+  late MockAuthRepositoryInterface mockAuthRepository;
 
   setUp(() {
     mockQuestionRepository = MockQuestionRepository();
+    mockAuthRepository = MockAuthRepositoryInterface();
+    when(mockAuthRepository.getAuthenticatedUser()).thenAnswer((_) async =>
+        (User(
+            id: 1,
+            userName: 'userName',
+            firstName: 'firstName',
+            lastName: 'lastName',
+            profilePicture: 'profilePicture',
+            role: Role.member)));
     mockQuestion = MockQuestion();
-    mockQuestionForm = MockQuestionForm();
     mockTagRepository = MockTagRepository();
   });
 
@@ -85,14 +101,15 @@ void main() {
           .thenAnswer((_) async => Either(val: mockQuestion));
       when(mockQuestion.id).thenReturn(0);
 
-      final questionDetailBloc =
-          QuestionDetailBloc(questionRepository: mockQuestionRepository);
+      final questionDetailBloc = QuestionDetailBloc(
+          questionRepository: mockQuestionRepository,
+          authRepository: mockAuthRepository);
 
       questionDetailBloc.add(QuestionDetailLoadEvent(mockQuestion.id));
 
       final expected = [
         const QuestionDetailStateLoading(),
-        QuestionDetailStateLoadedQuestion(mockQuestion),
+        QuestionDetailStateLoadedQuestion(mockQuestion, 1),
       ];
 
       expectLater(questionDetailBloc.stream, emitsInOrder(expected));
@@ -105,8 +122,9 @@ void main() {
           .thenAnswer((_) async => Either(error: Error('error')));
       when(mockQuestion.id).thenReturn(0);
 
-      final questionDetailBloc =
-          QuestionDetailBloc(questionRepository: mockQuestionRepository);
+      final questionDetailBloc = QuestionDetailBloc(
+          questionRepository: mockQuestionRepository,
+          authRepository: mockAuthRepository);
 
       questionDetailBloc.add(QuestionDetailLoadEvent(mockQuestion.id));
 
@@ -121,11 +139,12 @@ void main() {
         "should emit [QuestionDetailStateLoading, QuestionDetailStateDeleteSuccess] when event QuestionDetailDeleteEvent is called and no error occur",
         () async {
       when(mockQuestionRepository.deleteQuestion(mockQuestion.id))
-          .thenAnswer((_) async => Either(val: true));
+          .thenAnswer((_) async => Either());
       when(mockQuestion.id).thenReturn(0);
 
-      final questionDetailBloc =
-          QuestionDetailBloc(questionRepository: mockQuestionRepository);
+      final questionDetailBloc = QuestionDetailBloc(
+          questionRepository: mockQuestionRepository,
+          authRepository: mockAuthRepository);
 
       questionDetailBloc.add(QuestionDetailDeleteEvent(mockQuestion.id));
 
@@ -144,8 +163,9 @@ void main() {
           .thenAnswer((_) async => Either(error: Error('error')));
       when(mockQuestion.id).thenReturn(0);
 
-      final questionDetailBloc =
-          QuestionDetailBloc(questionRepository: mockQuestionRepository);
+      final questionDetailBloc = QuestionDetailBloc(
+          questionRepository: mockQuestionRepository,
+          authRepository: mockAuthRepository);
 
       questionDetailBloc.add(QuestionDetailDeleteEvent(mockQuestion.id));
 
@@ -166,13 +186,14 @@ void main() {
           .thenAnswer((_) async => Either(val: mockQuestion));
       when(mockQuestion.id).thenReturn(0);
 
-      final questionDetailBloc =
-          QuestionDetailBloc(questionRepository: mockQuestionRepository);
+      final questionDetailBloc = QuestionDetailBloc(
+          questionRepository: mockQuestionRepository,
+          authRepository: mockAuthRepository);
 
       questionDetailBloc.add(VoteQuestionEvent(mockQuestion, Vote.upVote));
 
       final expected = [
-        QuestionDetailStateLoadedQuestion(mockQuestion),
+        QuestionDetailStateLoadedQuestion(mockQuestion, 1),
       ];
 
       expectLater(questionDetailBloc.stream, emitsInOrder(expected));
@@ -187,8 +208,9 @@ void main() {
           .thenAnswer((_) async => Either(error: Error('error')));
       when(mockQuestion.id).thenReturn(0);
 
-      final questionDetailBloc =
-          QuestionDetailBloc(questionRepository: mockQuestionRepository);
+      final questionDetailBloc = QuestionDetailBloc(
+          questionRepository: mockQuestionRepository,
+          authRepository: mockAuthRepository);
 
       questionDetailBloc.add(VoteQuestionEvent(mockQuestion, Vote.upVote));
 
