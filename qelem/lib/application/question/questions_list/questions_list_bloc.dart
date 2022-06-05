@@ -22,7 +22,8 @@ class QuestionsListBloc extends Bloc<QuestionsListEvent, QuestionsListState> {
       } else {
         emit(QuestionsListStateSuccess(questions.val!));
       }
-     
+    });
+
     on<QuestionsListEventLoadAll>((event, emit) async {
       emit(const QuestionsListStateLoading());
       add(const QuestionsListEventRefreshAll());

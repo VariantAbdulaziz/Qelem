@@ -9,9 +9,12 @@ import 'package:qelem/domain/auth/user.dart' as _i5;
 import 'package:qelem/domain/common/vote.dart' as _i10;
 import 'package:qelem/domain/question/question.dart' as _i6;
 import 'package:qelem/domain/question/question_form.dart' as _i7;
+import 'package:qelem/domain/tag/tag.dart' as _i11;
+import 'package:qelem/domain/tag/tag_name.dart' as _i13;
 import 'package:qelem/infrastructure/auth/auth_repository.dart' as _i3;
 import 'package:qelem/infrastructure/question/question_api.dart' as _i2;
 import 'package:qelem/infrastructure/question/question_repository.dart' as _i8;
+import 'package:qelem/infrastructure/tag/tag_repository.dart' as _i12;
 import 'package:qelem/util/either.dart' as _i4;
 
 // ignore_for_file: type=lint
@@ -172,6 +175,10 @@ class MockQuestion extends _i1.Mock implements _i6.Question {
   DateTime get updatedAt => (super.noSuchMethod(Invocation.getter(#updatedAt),
       returnValue: _FakeDateTime_4()) as DateTime);
   @override
+  List<_i11.Tag> get tags =>
+      (super.noSuchMethod(Invocation.getter(#tags), returnValue: <_i11.Tag>[])
+          as List<_i11.Tag>);
+  @override
   _i6.$QuestionCopyWith<_i6.Question> get copyWith =>
       (super.noSuchMethod(Invocation.getter(#copyWith),
               returnValue: _Fake$QuestionCopyWith_5<_i6.Question>())
@@ -195,8 +202,40 @@ class MockQuestionForm extends _i1.Mock implements _i7.QuestionForm {
       (super.noSuchMethod(Invocation.getter(#content), returnValue: '')
           as String);
   @override
+  List<_i11.Tag> get tags =>
+      (super.noSuchMethod(Invocation.getter(#tags), returnValue: <_i11.Tag>[])
+          as List<_i11.Tag>);
+  @override
   _i7.$QuestionFormCopyWith<_i7.QuestionForm> get copyWith =>
       (super.noSuchMethod(Invocation.getter(#copyWith),
               returnValue: _Fake$QuestionFormCopyWith_6<_i7.QuestionForm>())
           as _i7.$QuestionFormCopyWith<_i7.QuestionForm>);
+}
+
+/// A class which mocks [TagRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockTagRepository extends _i1.Mock implements _i12.TagRepository {
+  MockTagRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i9.Future<_i4.Either<List<_i11.Tag>>> getTags() =>
+      (super.noSuchMethod(Invocation.method(#getTags, []),
+              returnValue: Future<_i4.Either<List<_i11.Tag>>>.value(
+                  _FakeEither_2<List<_i11.Tag>>()))
+          as _i9.Future<_i4.Either<List<_i11.Tag>>>);
+  @override
+  _i9.Future<_i4.Either<_i11.Tag>> createTag(_i13.TagName? tagName) =>
+      (super.noSuchMethod(Invocation.method(#createTag, [tagName]),
+              returnValue:
+                  Future<_i4.Either<_i11.Tag>>.value(_FakeEither_2<_i11.Tag>()))
+          as _i9.Future<_i4.Either<_i11.Tag>>);
+  @override
+  _i9.Future<_i4.Either<_i11.Tag>> updateTag(_i11.Tag? tag) =>
+      (super.noSuchMethod(Invocation.method(#updateTag, [tag]),
+              returnValue:
+                  Future<_i4.Either<_i11.Tag>>.value(_FakeEither_2<_i11.Tag>()))
+          as _i9.Future<_i4.Either<_i11.Tag>>);
 }

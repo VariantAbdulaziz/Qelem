@@ -15,21 +15,25 @@ import 'package:qelem/domain/common/vote.dart';
 import 'package:qelem/domain/question/question.dart';
 import 'package:qelem/domain/question/question_form.dart';
 import 'package:qelem/infrastructure/question/question_repository.dart';
+import 'package:qelem/infrastructure/tag/tag_repository.dart';
 import 'package:qelem/util/either.dart';
 import 'package:qelem/util/error.dart';
 
 import 'questions_blocs_test.mocks.dart';
 
-@GenerateMocks([QuestionRepository, User, Question, QuestionForm])
+@GenerateMocks(
+    [QuestionRepository, User, Question, QuestionForm, TagRepository])
 void main() {
   late MockQuestionRepository mockQuestionRepository;
   late MockQuestion mockQuestion;
   late MockQuestionForm mockQuestionForm;
+  late MockTagRepository mockTagRepository;
 
   setUp(() {
     mockQuestionRepository = MockQuestionRepository();
     mockQuestion = MockQuestion();
     mockQuestionForm = MockQuestionForm();
+    mockTagRepository = MockTagRepository();
   });
 
   group("QuestionsListsBloc", () {
@@ -200,14 +204,21 @@ void main() {
     test(
         "should emit [QuestionPostStateLoading, QuestionPostStateSuccess] when event QuestionEventPost is called and no error occur",
         () async {
-      when(mockQuestionRepository.createQuestion(mockQuestionForm))
+      const QuestionForm questionForm = QuestionForm(
+        topic: "title",
+        content: "description",
+        tags: [],
+      );
+
+      when(mockQuestionRepository.createQuestion(questionForm))
           .thenAnswer((_) async => Either(val: mockQuestion));
       when(mockQuestion.id).thenReturn(0);
 
-      final questionContructionBloc =
-          QuestionContructionBloc(questionRepository: mockQuestionRepository);
+      final questionContructionBloc = QuestionContructionBloc(
+          questionRepository: mockQuestionRepository,
+          tagRepository: mockTagRepository);
 
-      questionContructionBloc.add(QuestionEventPost(mockQuestionForm));
+      questionContructionBloc.add(const QuestionEventPost(questionForm));
 
       final expected = [
         const QuestionPostStateLoading(),
@@ -220,14 +231,17 @@ void main() {
     test(
         "should emit [QuestionPostStateLoading, QuestionPostStateError] when event QuestionEventPost is called and an error occurs",
         () async {
-      when(mockQuestionRepository.createQuestion(mockQuestionForm))
+      const questionForm = QuestionForm(topic: "", content: "", tags: []);
+
+      when(mockQuestionRepository.createQuestion(questionForm))
           .thenAnswer((_) async => Either(error: Error('error')));
       when(mockQuestion.id).thenReturn(0);
 
-      final questionContructionBloc =
-          QuestionContructionBloc(questionRepository: mockQuestionRepository);
+      final questionContructionBloc = QuestionContructionBloc(
+          questionRepository: mockQuestionRepository,
+          tagRepository: mockTagRepository);
 
-      questionContructionBloc.add(QuestionEventPost(mockQuestionForm));
+      questionContructionBloc.add(const QuestionEventPost(questionForm));
 
       final expected = [
         const QuestionPostStateLoading(),
