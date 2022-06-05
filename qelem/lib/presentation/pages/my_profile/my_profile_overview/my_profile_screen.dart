@@ -7,6 +7,7 @@ import 'package:qelem/application/profile/profile_overview/profile_bloc.dart';
 import 'package:qelem/application/profile/profile_overview/profile_state.dart';
 import 'package:qelem/domain/profile/profile.dart';
 import 'package:qelem/presentation/pages/my_profile/my_profile_overview/widgets/delete_account_dialog.dart';
+import 'package:qelem/presentation/routes/routes.dart';
 
 class MyProfileScreen extends StatefulWidget {
   const MyProfileScreen({Key? key}) : super(key: key);
@@ -88,7 +89,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
       ),
       Material(
         child: InkWell(
-            onTap: () => context.push('/edit-profile'),
+            onTap: () => context.push(Routes.editProfile),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Row(
@@ -119,7 +120,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
       ),
       Material(
         child: InkWell(
-            onTap: () => context.push('/change-password'),
+            onTap: () => context.push(Routes.changePassword),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Row(
