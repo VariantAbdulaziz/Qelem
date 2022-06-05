@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:qelem/application/question/question_construction/question_construction_bloc.dart';
+import 'package:qelem/application/question/question_construction/question_construction_event.dart';
+import 'package:qelem/application/question/question_construction/question_construction_state.dart';
 import 'package:qelem/application/question/question_detail/question_detail_bloc.dart';
 import 'package:qelem/application/question/question_detail/question_detail_event.dart';
 import 'package:qelem/application/question/question_detail/question_detail_state.dart';
@@ -180,6 +183,45 @@ void main() {
       ];
 
       expectLater(questionDetailBloc.stream, emitsInOrder(expected));
+    });
+  });
+
+  group("QuestionConstructionBloc", () {
+    test(
+        "should emit [QuestionPostStateLoading, QuestionPostStateSuccess] when event QuestionEventPost is called and no error occur",
+        () async {
+      when(mockQuestionRepository.createQuestion(mockQuestionForm))
+          .thenAnswer((_) async => Either(val: mockQuestion));
+
+      final questionContructionBloc =
+          QuestionContructionBloc(questionRepository: mockQuestionRepository);
+
+      questionContructionBloc.add(const QuestionEventPost(mockQuestionForm));
+
+      final expected = [
+        const QuestionPostStateLoading(),
+        QuestionPostStateSuccess(mockQuestion),
+      ];
+
+      expectLater(questionContructionBloc.stream, emitsInOrder(expected));
+    });
+
+    test(
+        "should emit [QuestionPostStateLoading, QuestionPostStateError] when event QuestionEventPost is called and an error occurs",
+        () async {
+      when(mockQuestionRepository.createQuestion(mockQuestionForm))
+          .thenAnswer((_) async => Either(error: Error('error')));
+
+      final questionContructionBloc =
+          QuestionContructionBloc(questionRepository: mockQuestionRepository);
+
+      questionContructionBloc.add(const QuestionEventPost(mockQuestionForm));
+
+      final expected = [
+        const QuestionPostStateLoading(),
+        QuestionPostStateError(Error('error')),
+      ];
+      expectLater(questionContructionBloc.stream, emitsInOrder(expected));
     });
   });
 }

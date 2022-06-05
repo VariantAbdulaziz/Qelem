@@ -4,8 +4,11 @@ import 'package:flutter/services.dart';
 import 'package:qelem/domain/auth/user.dart';
 import 'package:qelem/domain/common/vote.dart';
 import 'package:qelem/domain/question/question.dart';
+import 'package:qelem/domain/question/question_form.dart';
 import 'package:qelem/infrastructure/question/question_dto.dart';
 import 'package:qelem/infrastructure/question/question_mapper.dart';
+
+import 'questions_blocs_test.mocks.dart';
 
 Future<Question> getQuestion() async {
   final dataString =
@@ -39,4 +42,9 @@ final mockQuestion = Question(
   upVotes: 0,
   downVotes: 0,
   userVote: Vote.upVote,
+);
+
+const mockQuestionForm = QuestionForm(
+  topic: 'asdfad',
+  content: 'this is the question\'s content',
 );
