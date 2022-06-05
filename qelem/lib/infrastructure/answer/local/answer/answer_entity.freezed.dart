@@ -21,36 +21,28 @@ AnswerEntity _$AnswerEntityFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$AnswerEntity {
   int get id => throw _privateConstructorUsedError;
-
   String get content => throw _privateConstructorUsedError;
-
   int get questionId => throw _privateConstructorUsedError;
-
   int get authorId => throw _privateConstructorUsedError;
-
   int get upVotes => throw _privateConstructorUsedError;
-
   int get downVotes => throw _privateConstructorUsedError;
-
   int get userVote => throw _privateConstructorUsedError;
-
   @TimestampConverter()
   DateTime get createdAt => throw _privateConstructorUsedError;
-
   @TimestampConverter()
   DateTime get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
-  $AnswerEntityCopyWith<AnswerEntity> get copyWith => throw _privateConstructorUsedError;
+  $AnswerEntityCopyWith<AnswerEntity> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $AnswerEntityCopyWith<$Res> {
-  factory $AnswerEntityCopyWith(AnswerEntity value, $Res Function(AnswerEntity) then) =
+  factory $AnswerEntityCopyWith(
+          AnswerEntity value, $Res Function(AnswerEntity) then) =
       _$AnswerEntityCopyWithImpl<$Res>;
-
   $Res call(
       {int id,
       String content,
@@ -68,7 +60,6 @@ class _$AnswerEntityCopyWithImpl<$Res> implements $AnswerEntityCopyWith<$Res> {
   _$AnswerEntityCopyWithImpl(this._value, this._then);
 
   final AnswerEntity _value;
-
   // ignore: unused_field
   final $Res Function(AnswerEntity) _then;
 
@@ -126,10 +117,11 @@ class _$AnswerEntityCopyWithImpl<$Res> implements $AnswerEntityCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$$_AnswerEntityCopyWith<$Res> implements $AnswerEntityCopyWith<$Res> {
-  factory _$$_AnswerEntityCopyWith(_$_AnswerEntity value, $Res Function(_$_AnswerEntity) then) =
+abstract class _$$_AnswerEntityCopyWith<$Res>
+    implements $AnswerEntityCopyWith<$Res> {
+  factory _$$_AnswerEntityCopyWith(
+          _$_AnswerEntity value, $Res Function(_$_AnswerEntity) then) =
       __$$_AnswerEntityCopyWithImpl<$Res>;
-
   @override
   $Res call(
       {int id,
@@ -144,9 +136,11 @@ abstract class _$$_AnswerEntityCopyWith<$Res> implements $AnswerEntityCopyWith<$
 }
 
 /// @nodoc
-class __$$_AnswerEntityCopyWithImpl<$Res> extends _$AnswerEntityCopyWithImpl<$Res>
+class __$$_AnswerEntityCopyWithImpl<$Res>
+    extends _$AnswerEntityCopyWithImpl<$Res>
     implements _$$_AnswerEntityCopyWith<$Res> {
-  __$$_AnswerEntityCopyWithImpl(_$_AnswerEntity _value, $Res Function(_$_AnswerEntity) _then)
+  __$$_AnswerEntityCopyWithImpl(
+      _$_AnswerEntity _value, $Res Function(_$_AnswerEntity) _then)
       : super(_value, (v) => _then(v as _$_AnswerEntity));
 
   @override
@@ -219,7 +213,8 @@ class _$_AnswerEntity implements _AnswerEntity {
       @TimestampConverter() required this.createdAt,
       @TimestampConverter() required this.updatedAt});
 
-  factory _$_AnswerEntity.fromJson(Map<String, dynamic> json) => _$$_AnswerEntityFromJson(json);
+  factory _$_AnswerEntity.fromJson(Map<String, dynamic> json) =>
+      _$$_AnswerEntityFromJson(json);
 
   @override
   final int id;
@@ -254,7 +249,8 @@ class _$_AnswerEntity implements _AnswerEntity {
             other is _$_AnswerEntity &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.content, content) &&
-            const DeepCollectionEquality().equals(other.questionId, questionId) &&
+            const DeepCollectionEquality()
+                .equals(other.questionId, questionId) &&
             const DeepCollectionEquality().equals(other.authorId, authorId) &&
             const DeepCollectionEquality().equals(other.upVotes, upVotes) &&
             const DeepCollectionEquality().equals(other.downVotes, downVotes) &&
@@ -290,48 +286,42 @@ class _$_AnswerEntity implements _AnswerEntity {
 
 abstract class _AnswerEntity implements AnswerEntity {
   const factory _AnswerEntity(
-      {required final int id,
-      required final String content,
-      required final int questionId,
-      required final int authorId,
-      required final int upVotes,
-      required final int downVotes,
-      required final int userVote,
-      @TimestampConverter() required final DateTime createdAt,
-      @TimestampConverter() required final DateTime updatedAt}) = _$_AnswerEntity;
+          {required final int id,
+          required final String content,
+          required final int questionId,
+          required final int authorId,
+          required final int upVotes,
+          required final int downVotes,
+          required final int userVote,
+          @TimestampConverter() required final DateTime createdAt,
+          @TimestampConverter() required final DateTime updatedAt}) =
+      _$_AnswerEntity;
 
-  factory _AnswerEntity.fromJson(Map<String, dynamic> json) = _$_AnswerEntity.fromJson;
+  factory _AnswerEntity.fromJson(Map<String, dynamic> json) =
+      _$_AnswerEntity.fromJson;
 
   @override
   int get id => throw _privateConstructorUsedError;
-
   @override
   String get content => throw _privateConstructorUsedError;
-
   @override
   int get questionId => throw _privateConstructorUsedError;
-
   @override
   int get authorId => throw _privateConstructorUsedError;
-
   @override
   int get upVotes => throw _privateConstructorUsedError;
-
   @override
   int get downVotes => throw _privateConstructorUsedError;
-
   @override
   int get userVote => throw _privateConstructorUsedError;
-
   @override
   @TimestampConverter()
   DateTime get createdAt => throw _privateConstructorUsedError;
-
   @override
   @TimestampConverter()
   DateTime get updatedAt => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(ignore: true)
-  _$$_AnswerEntityCopyWith<_$_AnswerEntity> get copyWith => throw _privateConstructorUsedError;
+  _$$_AnswerEntityCopyWith<_$_AnswerEntity> get copyWith =>
+      throw _privateConstructorUsedError;
 }
