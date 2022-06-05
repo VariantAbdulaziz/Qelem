@@ -2,20 +2,22 @@
 // in qelem/test/question/questions_blocs_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i9;
+import 'dart:async' as _i10;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:qelem/domain/auth/user.dart' as _i5;
-import 'package:qelem/domain/common/vote.dart' as _i10;
-import 'package:qelem/domain/question/question.dart' as _i6;
-import 'package:qelem/domain/question/question_form.dart' as _i7;
-import 'package:qelem/domain/tag/tag.dart' as _i11;
-import 'package:qelem/domain/tag/tag_name.dart' as _i13;
-import 'package:qelem/infrastructure/auth/auth_repository.dart' as _i3;
+import 'package:qelem/data/local/local_database/qelem_local_storage.dart'
+    as _i3;
+import 'package:qelem/domain/auth/user.dart' as _i6;
+import 'package:qelem/domain/common/vote.dart' as _i11;
+import 'package:qelem/domain/question/question.dart' as _i7;
+import 'package:qelem/domain/question/question_form.dart' as _i8;
+import 'package:qelem/domain/tag/tag.dart' as _i12;
+import 'package:qelem/domain/tag/tag_name.dart' as _i14;
+import 'package:qelem/infrastructure/auth/auth_repository.dart' as _i4;
 import 'package:qelem/infrastructure/question/question_api.dart' as _i2;
-import 'package:qelem/infrastructure/question/question_repository.dart' as _i8;
-import 'package:qelem/infrastructure/tag/tag_repository.dart' as _i12;
-import 'package:qelem/util/either.dart' as _i4;
+import 'package:qelem/infrastructure/question/question_repository.dart' as _i9;
+import 'package:qelem/infrastructure/tag/tag_repository.dart' as _i13;
+import 'package:qelem/util/either.dart' as _i5;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -29,25 +31,27 @@ import 'package:qelem/util/either.dart' as _i4;
 
 class _FakeQuestionApi_0 extends _i1.Fake implements _i2.QuestionApi {}
 
-class _FakeAuthRepository_1 extends _i1.Fake implements _i3.AuthRepository {}
+class _FakeDatabaseHelper_1 extends _i1.Fake implements _i3.DatabaseHelper {}
 
-class _FakeEither_2<T> extends _i1.Fake implements _i4.Either<T> {}
+class _FakeAuthRepository_2 extends _i1.Fake implements _i4.AuthRepository {}
 
-class _FakeUser_3 extends _i1.Fake implements _i5.User {}
+class _FakeEither_3<T> extends _i1.Fake implements _i5.Either<T> {}
 
-class _FakeDateTime_4 extends _i1.Fake implements DateTime {}
+class _FakeUser_4 extends _i1.Fake implements _i6.User {}
 
-class _Fake$QuestionCopyWith_5<$Res> extends _i1.Fake
-    implements _i6.$QuestionCopyWith<$Res> {}
+class _FakeDateTime_5 extends _i1.Fake implements DateTime {}
 
-class _Fake$QuestionFormCopyWith_6<$Res> extends _i1.Fake
-    implements _i7.$QuestionFormCopyWith<$Res> {}
+class _Fake$QuestionCopyWith_6<$Res> extends _i1.Fake
+    implements _i7.$QuestionCopyWith<$Res> {}
+
+class _Fake$QuestionFormCopyWith_7<$Res> extends _i1.Fake
+    implements _i8.$QuestionFormCopyWith<$Res> {}
 
 /// A class which mocks [QuestionRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockQuestionRepository extends _i1.Mock
-    implements _i8.QuestionRepository {
+    implements _i9.QuestionRepository {
   MockQuestionRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -57,60 +61,64 @@ class MockQuestionRepository extends _i1.Mock
       (super.noSuchMethod(Invocation.getter(#questionApi),
           returnValue: _FakeQuestionApi_0()) as _i2.QuestionApi);
   @override
-  _i3.AuthRepository get authRepository =>
+  _i3.DatabaseHelper get databaseHelper =>
+      (super.noSuchMethod(Invocation.getter(#databaseHelper),
+          returnValue: _FakeDatabaseHelper_1()) as _i3.DatabaseHelper);
+  @override
+  _i4.AuthRepository get authRepository =>
       (super.noSuchMethod(Invocation.getter(#authRepository),
-          returnValue: _FakeAuthRepository_1()) as _i3.AuthRepository);
+          returnValue: _FakeAuthRepository_2()) as _i4.AuthRepository);
   @override
-  _i9.Future<_i4.Either<List<_i6.Question>>> getMyQuestions() =>
+  _i10.Future<_i5.Either<List<_i7.Question>>> getMyQuestions() =>
       (super.noSuchMethod(Invocation.method(#getMyQuestions, []),
-              returnValue: Future<_i4.Either<List<_i6.Question>>>.value(
-                  _FakeEither_2<List<_i6.Question>>()))
-          as _i9.Future<_i4.Either<List<_i6.Question>>>);
+              returnValue: Future<_i5.Either<List<_i7.Question>>>.value(
+                  _FakeEither_3<List<_i7.Question>>()))
+          as _i10.Future<_i5.Either<List<_i7.Question>>>);
   @override
-  _i9.Future<_i4.Either<List<_i6.Question>>> getAllQuestions() =>
+  _i10.Future<_i5.Either<List<_i7.Question>>> getAllQuestions() =>
       (super.noSuchMethod(Invocation.method(#getAllQuestions, []),
-              returnValue: Future<_i4.Either<List<_i6.Question>>>.value(
-                  _FakeEither_2<List<_i6.Question>>()))
-          as _i9.Future<_i4.Either<List<_i6.Question>>>);
+              returnValue: Future<_i5.Either<List<_i7.Question>>>.value(
+                  _FakeEither_3<List<_i7.Question>>()))
+          as _i10.Future<_i5.Either<List<_i7.Question>>>);
   @override
-  _i9.Future<_i4.Either<_i6.Question>> getQuestionById(int? id) =>
+  _i10.Future<_i5.Either<_i7.Question>> getQuestionById(int? id) =>
       (super.noSuchMethod(Invocation.method(#getQuestionById, [id]),
-              returnValue: Future<_i4.Either<_i6.Question>>.value(
-                  _FakeEither_2<_i6.Question>()))
-          as _i9.Future<_i4.Either<_i6.Question>>);
+              returnValue: Future<_i5.Either<_i7.Question>>.value(
+                  _FakeEither_3<_i7.Question>()))
+          as _i10.Future<_i5.Either<_i7.Question>>);
   @override
-  _i9.Future<_i4.Either<_i6.Question>> createQuestion(
-          _i7.QuestionForm? questionForm) =>
+  _i10.Future<_i5.Either<_i7.Question>> createQuestion(
+          _i8.QuestionForm? questionForm) =>
       (super.noSuchMethod(Invocation.method(#createQuestion, [questionForm]),
-              returnValue: Future<_i4.Either<_i6.Question>>.value(
-                  _FakeEither_2<_i6.Question>()))
-          as _i9.Future<_i4.Either<_i6.Question>>);
+              returnValue: Future<_i5.Either<_i7.Question>>.value(
+                  _FakeEither_3<_i7.Question>()))
+          as _i10.Future<_i5.Either<_i7.Question>>);
   @override
-  _i9.Future<_i4.Either<void>> deleteQuestion(int? id) => (super.noSuchMethod(
+  _i10.Future<_i5.Either<void>> deleteQuestion(int? id) => (super.noSuchMethod(
           Invocation.method(#deleteQuestion, [id]),
-          returnValue: Future<_i4.Either<void>>.value(_FakeEither_2<void>()))
-      as _i9.Future<_i4.Either<void>>);
+          returnValue: Future<_i5.Either<void>>.value(_FakeEither_3<void>()))
+      as _i10.Future<_i5.Either<void>>);
   @override
-  _i9.Future<_i4.Either<_i6.Question>> updateQuestion(
-          _i7.QuestionForm? questionForm, int? questionId) =>
+  _i10.Future<_i5.Either<_i7.Question>> updateQuestion(
+          _i8.QuestionForm? questionForm, int? questionId) =>
       (super.noSuchMethod(
               Invocation.method(#updateQuestion, [questionForm, questionId]),
-              returnValue: Future<_i4.Either<_i6.Question>>.value(
-                  _FakeEither_2<_i6.Question>()))
-          as _i9.Future<_i4.Either<_i6.Question>>);
+              returnValue: Future<_i5.Either<_i7.Question>>.value(
+                  _FakeEither_3<_i7.Question>()))
+          as _i10.Future<_i5.Either<_i7.Question>>);
   @override
-  _i9.Future<_i4.Either<_i6.Question>> voteQuestion(
-          int? questionId, _i10.Vote? vote) =>
+  _i10.Future<_i5.Either<_i7.Question>> voteQuestion(
+          int? questionId, _i11.Vote? vote) =>
       (super.noSuchMethod(Invocation.method(#voteQuestion, [questionId, vote]),
-              returnValue: Future<_i4.Either<_i6.Question>>.value(
-                  _FakeEither_2<_i6.Question>()))
-          as _i9.Future<_i4.Either<_i6.Question>>);
+              returnValue: Future<_i5.Either<_i7.Question>>.value(
+                  _FakeEither_3<_i7.Question>()))
+          as _i10.Future<_i5.Either<_i7.Question>>);
 }
 
 /// A class which mocks [User].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUser extends _i1.Mock implements _i5.User {
+class MockUser extends _i1.Mock implements _i6.User {
   MockUser() {
     _i1.throwOnMissingStub(this);
   }
@@ -139,7 +147,7 @@ class MockUser extends _i1.Mock implements _i5.User {
 /// A class which mocks [Question].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockQuestion extends _i1.Mock implements _i6.Question {
+class MockQuestion extends _i1.Mock implements _i7.Question {
   MockQuestion() {
     _i1.throwOnMissingStub(this);
   }
@@ -156,8 +164,8 @@ class MockQuestion extends _i1.Mock implements _i6.Question {
       (super.noSuchMethod(Invocation.getter(#content), returnValue: '')
           as String);
   @override
-  _i5.User get author => (super.noSuchMethod(Invocation.getter(#author),
-      returnValue: _FakeUser_3()) as _i5.User);
+  _i6.User get author => (super.noSuchMethod(Invocation.getter(#author),
+      returnValue: _FakeUser_4()) as _i6.User);
   @override
   int get upVotes =>
       (super.noSuchMethod(Invocation.getter(#upVotes), returnValue: 0) as int);
@@ -166,29 +174,29 @@ class MockQuestion extends _i1.Mock implements _i6.Question {
       (super.noSuchMethod(Invocation.getter(#downVotes), returnValue: 0)
           as int);
   @override
-  _i10.Vote get userVote => (super.noSuchMethod(Invocation.getter(#userVote),
-      returnValue: _i10.Vote.upVote) as _i10.Vote);
+  _i11.Vote get userVote => (super.noSuchMethod(Invocation.getter(#userVote),
+      returnValue: _i11.Vote.upVote) as _i11.Vote);
   @override
   DateTime get createdAt => (super.noSuchMethod(Invocation.getter(#createdAt),
-      returnValue: _FakeDateTime_4()) as DateTime);
+      returnValue: _FakeDateTime_5()) as DateTime);
   @override
   DateTime get updatedAt => (super.noSuchMethod(Invocation.getter(#updatedAt),
-      returnValue: _FakeDateTime_4()) as DateTime);
+      returnValue: _FakeDateTime_5()) as DateTime);
   @override
-  List<_i11.Tag> get tags =>
-      (super.noSuchMethod(Invocation.getter(#tags), returnValue: <_i11.Tag>[])
-          as List<_i11.Tag>);
+  List<_i12.Tag> get tags =>
+      (super.noSuchMethod(Invocation.getter(#tags), returnValue: <_i12.Tag>[])
+          as List<_i12.Tag>);
   @override
-  _i6.$QuestionCopyWith<_i6.Question> get copyWith =>
+  _i7.$QuestionCopyWith<_i7.Question> get copyWith =>
       (super.noSuchMethod(Invocation.getter(#copyWith),
-              returnValue: _Fake$QuestionCopyWith_5<_i6.Question>())
-          as _i6.$QuestionCopyWith<_i6.Question>);
+              returnValue: _Fake$QuestionCopyWith_6<_i7.Question>())
+          as _i7.$QuestionCopyWith<_i7.Question>);
 }
 
 /// A class which mocks [QuestionForm].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockQuestionForm extends _i1.Mock implements _i7.QuestionForm {
+class MockQuestionForm extends _i1.Mock implements _i8.QuestionForm {
   MockQuestionForm() {
     _i1.throwOnMissingStub(this);
   }
@@ -202,40 +210,40 @@ class MockQuestionForm extends _i1.Mock implements _i7.QuestionForm {
       (super.noSuchMethod(Invocation.getter(#content), returnValue: '')
           as String);
   @override
-  List<_i11.Tag> get tags =>
-      (super.noSuchMethod(Invocation.getter(#tags), returnValue: <_i11.Tag>[])
-          as List<_i11.Tag>);
+  List<_i12.Tag> get tags =>
+      (super.noSuchMethod(Invocation.getter(#tags), returnValue: <_i12.Tag>[])
+          as List<_i12.Tag>);
   @override
-  _i7.$QuestionFormCopyWith<_i7.QuestionForm> get copyWith =>
+  _i8.$QuestionFormCopyWith<_i8.QuestionForm> get copyWith =>
       (super.noSuchMethod(Invocation.getter(#copyWith),
-              returnValue: _Fake$QuestionFormCopyWith_6<_i7.QuestionForm>())
-          as _i7.$QuestionFormCopyWith<_i7.QuestionForm>);
+              returnValue: _Fake$QuestionFormCopyWith_7<_i8.QuestionForm>())
+          as _i8.$QuestionFormCopyWith<_i8.QuestionForm>);
 }
 
 /// A class which mocks [TagRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockTagRepository extends _i1.Mock implements _i12.TagRepository {
+class MockTagRepository extends _i1.Mock implements _i13.TagRepository {
   MockTagRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i9.Future<_i4.Either<List<_i11.Tag>>> getTags() =>
+  _i10.Future<_i5.Either<List<_i12.Tag>>> getTags() =>
       (super.noSuchMethod(Invocation.method(#getTags, []),
-              returnValue: Future<_i4.Either<List<_i11.Tag>>>.value(
-                  _FakeEither_2<List<_i11.Tag>>()))
-          as _i9.Future<_i4.Either<List<_i11.Tag>>>);
+              returnValue: Future<_i5.Either<List<_i12.Tag>>>.value(
+                  _FakeEither_3<List<_i12.Tag>>()))
+          as _i10.Future<_i5.Either<List<_i12.Tag>>>);
   @override
-  _i9.Future<_i4.Either<_i11.Tag>> createTag(_i13.TagName? tagName) =>
+  _i10.Future<_i5.Either<_i12.Tag>> createTag(_i14.TagName? tagName) =>
       (super.noSuchMethod(Invocation.method(#createTag, [tagName]),
               returnValue:
-                  Future<_i4.Either<_i11.Tag>>.value(_FakeEither_2<_i11.Tag>()))
-          as _i9.Future<_i4.Either<_i11.Tag>>);
+                  Future<_i5.Either<_i12.Tag>>.value(_FakeEither_3<_i12.Tag>()))
+          as _i10.Future<_i5.Either<_i12.Tag>>);
   @override
-  _i9.Future<_i4.Either<_i11.Tag>> updateTag(_i11.Tag? tag) =>
+  _i10.Future<_i5.Either<_i12.Tag>> updateTag(_i12.Tag? tag) =>
       (super.noSuchMethod(Invocation.method(#updateTag, [tag]),
               returnValue:
-                  Future<_i4.Either<_i11.Tag>>.value(_FakeEither_2<_i11.Tag>()))
-          as _i9.Future<_i4.Either<_i11.Tag>>);
+                  Future<_i5.Either<_i12.Tag>>.value(_FakeEither_3<_i12.Tag>()))
+          as _i10.Future<_i5.Either<_i12.Tag>>);
 }

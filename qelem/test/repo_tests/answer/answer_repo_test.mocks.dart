@@ -102,10 +102,4 @@ class MockAnswerRepository extends _i1.Mock implements _i6.AnswerRepository {
               returnValue: Future<_i5.Either<List<_i8.Answer>>>.value(
                   _FakeEither_3<List<_i8.Answer>>()))
           as _i7.Future<_i5.Either<List<_i8.Answer>>>);
-  @override
-  _i7.Future<_i5.Either<List<_i8.Answer>>> getAllAnswers() =>
-      (super.noSuchMethod(Invocation.method(#getAllAnswers, []),
-              returnValue: Future<_i5.Either<List<_i8.Answer>>>.value(
-                  _FakeEither_3<List<_i8.Answer>>()))
-          as _i7.Future<_i5.Either<List<_i8.Answer>>>);
 }
