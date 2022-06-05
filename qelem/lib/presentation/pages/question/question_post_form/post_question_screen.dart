@@ -6,6 +6,7 @@ import 'package:qelem/application/question/question_construction/question_constr
 import 'package:qelem/domain/question/question_form.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qelem/infrastructure/question/question_repository.dart';
+import 'package:qelem/presentation/routes/routes.dart';
 
 class PostQuestionScreen extends StatefulWidget {
   const PostQuestionScreen({Key? key}) : super(key: key);
@@ -51,7 +52,7 @@ class _PostQuestionScreenState extends State<PostQuestionScreen> {
                 backgroundColor: Colors.green,
               ),
             );
-            context.pop();
+            context.go(Routes.myQuestions);
           }
 
           if (state is QuestionPostStateError) {
