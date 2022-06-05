@@ -117,9 +117,8 @@ class MyHttpClient {
 
     // Add files to the request.
     if (files.isNotEmpty) {
-      files.forEach((key, value) {
-        request.files
-            .add(http.MultipartFile.fromBytes(key, value.readAsBytesSync()));
+      files.forEach((key, value) async {
+        request.files.add(await http.MultipartFile.fromPath(key, value.path));
       });
     }
 

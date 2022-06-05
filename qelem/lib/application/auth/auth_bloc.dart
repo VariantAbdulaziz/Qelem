@@ -7,17 +7,19 @@ import 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository authRepository;
+  final SharedPrefsService sharedPrefsService;
 
-  AuthBloc({required this.authRepository}) : super(const AuthUnInitialized()) {
+  AuthBloc({required this.authRepository, required this.sharedPrefsService})
+      : super(const AuthUnInitialized()) {
     () async {
       var authToken = await authRepository.getAuthToken();
-      bool firstRun = await SharedPrefsService.isFirstRun();
+      bool firstRun = await sharedPrefsService.isFirstRun();
       emit(AppInitialized(token: authToken, isFirstRun: firstRun));
     }();
 
     on<AuthEventSignedIn>(
       ((event, emit) async {
-        SharedPrefsService.setFirstRun(false);
+        sharedPrefsService.setFirstRun(false);
         emit(AuthAuthenticated(event.user, event.token));
       }),
     );

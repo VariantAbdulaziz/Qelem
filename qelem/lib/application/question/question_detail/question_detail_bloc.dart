@@ -1,65 +1,57 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../infrastructure/question/question_repository.dart';
+import 'package:qelem/infrastructure/question/question_repository.dart';
 
 import 'question_detail_event.dart';
 import 'question_detail_state.dart';
 
-class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
+class QuestionDetailBloc
+    extends Bloc<QuestionDetailEvent, QuestionDetailState> {
   final QuestionRepository questionRepository;
 
-  QuestionBloc({required this.questionRepository})
-      : super(const QuestionState.loading()) {
-    () {
-      emit(const QuestionState.loading());
-    }();
+  QuestionDetailBloc({required this.questionRepository})
+      : super(const QuestionDetailStateInitial()) {
+    // Load the question
+    on<QuestionDetailLoadEvent>(
+      ((event, emit) async {
+        emit(const QuestionDetailStateLoading());
+        add(QuestionDetailReloadEvent(event.questionId));
+      }),
+    );
 
-    on<QuestionLoadEvent>(
+    // Reload the question
+    on<QuestionDetailReloadEvent>(
       ((event, emit) async {
         final question =
             await questionRepository.getQuestionById(event.questionId);
-        emit(const QuestionState.loading());
 
         if (question.hasError) {
-          emit(QuestionState.error(question.error!));
+          emit(QuestionDetailStateError(question.error!));
         } else {
-          emit(QuestionState.loaded(question.val!));
+          emit(QuestionDetailStateLoadedQuestion(question.val!));
         }
       }),
     );
 
-    on<QuestionDeleteEvent>(
-      ((event, emit) async {
-        final question =
-            await questionRepository.deleteQuestion(event.questionId);
-        emit(const QuestionState.loading());
-
-        if (question.hasError) {
-          emit(QuestionState.error(question.error!));
-        } else {
-          emit(QuestionState.rollBack());
-        }
-      }),
-    );
-
-    on<QuestionDownVoteEvent>((event, emit) async {
+    on<QuestionDetailDeleteEvent>(((event, emit) async {
+      emit(const QuestionDetailStateLoading());
       final question =
-          await questionRepository.downVoteQuestion(event.question);
+          await questionRepository.deleteQuestion(event.questionId);
 
       if (question.hasError) {
-        emit(QuestionState.error(question.error!));
+        emit(QuestionDetailStateError(question.error!));
       } else {
-        emit(QuestionState.downVoted(question.val!));
+        emit(const QuestionDetailStateDeleteSuccess());
       }
-    });
+    }));
 
-    on<QuestionUpVoteEvent>((event, emit) async {
-      final question = await questionRepository.upvoteQuestion(event.question);
+    on<VoteQuestionEvent>((event, emit) async {
+      final result =
+          await questionRepository.voteQuestion(event.question.id, event.vote);
 
-      if (question.hasError) {
-        emit(QuestionState.error(question.error!));
+      if (result.hasError) {
+        emit(QuestionDetailStateError(result.error!));
       } else {
-        emit(QuestionState.upVoted(question.val!));
+        add(QuestionDetailReloadEvent(event.question.id));
       }
     });
   }

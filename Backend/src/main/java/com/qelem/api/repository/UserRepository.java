@@ -13,4 +13,6 @@ public interface UserRepository extends JpaRepository<UserModel, Long> {
     public List<UserModel> findAllByRole(String role);
 
     public boolean existsByUsername(String username);
+
+    long countByRole(String role);
 }

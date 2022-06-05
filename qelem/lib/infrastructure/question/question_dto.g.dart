@@ -19,6 +19,9 @@ _$_QuestionDto _$$_QuestionDtoFromJson(Map<String, dynamic> json) =>
       upVotes: json['upVotes'] as int,
       downVotes: json['downVotes'] as int,
       userVote: json['userVote'] as int,
+      tags: (json['tags'] as List<dynamic>)
+          .map((e) => TagDto.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$_QuestionDtoToJson(_$_QuestionDto instance) =>
@@ -32,4 +35,5 @@ Map<String, dynamic> _$$_QuestionDtoToJson(_$_QuestionDto instance) =>
       'upVotes': instance.upVotes,
       'downVotes': instance.downVotes,
       'userVote': instance.userVote,
+      'tags': instance.tags,
     };

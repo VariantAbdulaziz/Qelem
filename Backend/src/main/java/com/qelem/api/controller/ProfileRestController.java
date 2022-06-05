@@ -9,17 +9,20 @@ import com.qelem.api.restdto.UserDto;
 import com.qelem.api.util.PasswordException;
 import com.qelem.api.util.UnauthorizedAccess;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -60,7 +63,7 @@ public class ProfileRestController {
         UserModel user = userRepository.getById(loggedInUser().getId());
         log.info("Changing password for user {}, password form {}", user.getUsername(), changePasswordForm);
 
-        if (!passwordEncoder.matches(changePasswordForm.getOldPassword(), user.getPassword())) {
+        if (!passwordEncoder.matches(changePasswordForm.getCurrentPassword(), user.getPassword())) {
             throw new PasswordException("Password doesn't match!");
         }
         user.setPassword(passwordEncoder.encode(changePasswordForm.getNewPassword()));
@@ -79,6 +82,8 @@ public class ProfileRestController {
             @RequestParam(value = "lastName", required = false) String lastName,
             @RequestPart(value = "profilePicture", required = false) MultipartFile file) {
         UserModel user = loggedInUser();
+        log.info("Updating profile for user {}, firstName {}, lastName {}, file {}", user.getUsername(), firstName,
+                lastName, file);
 
         if (firstName != null) {
             user.setFirstName(firstName);
@@ -94,6 +99,16 @@ public class ProfileRestController {
 
         user = userRepository.save(user);
         return new UserDto(user);
+    }
+
+    @DeleteMapping()
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void deleteAccount() {
+        UserModel user = loggedInUser();
+        log.info("Delete user with id : {} request", user.getId());
+
+        userRepository.delete(user);
+        log.info("User deleted : {}", user);
     }
 
     @GetMapping()

@@ -1,4 +1,6 @@
-class Error {
+import 'package:equatable/equatable.dart';
+
+class Error extends Equatable{
   String message;
 
   Error(this.message);
@@ -7,4 +9,7 @@ class Error {
   String toString() {
     return "Error: $message";
   }
+
+  @override
+  List<Object?> get props => [message];
 }
