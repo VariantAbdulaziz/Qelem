@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:qelem/application/auth/auth_bloc.dart';
-import 'package:qelem/application/auth/auth_event.dart';
+import 'package:go_router/go_router.dart';
 import 'package:qelem/common/app_palette.dart';
 import 'package:qelem/common/constants.dart';
 import 'package:qelem/presentation/pages/home_screen/home_screen.dart';
 import 'package:qelem/presentation/pages/main_screen/widgets/logout_dialog.dart';
+import 'package:qelem/presentation/pages/my_profile/my_profile_overview/my_profile_page.dart';
+import 'package:qelem/presentation/pages/question/my_questions_page/my_questions_page.dart';
 import 'package:qelem/presentation/pages/question/my_questions_page/my_questions_screen.dart';
-import 'package:go_router/go_router.dart';
-import 'package:qelem/presentation/routes/routes.dart';
-
-import '../my_profile/my_profile_overview/my_profile_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -30,7 +26,11 @@ class _MainScreenState extends State<MainScreen> {
       appBar: _getAppBar(),
       body: IndexedStack(
         index: _selectedIndex,
-        children: [homeScreen(), myQuestionsScreen(), const MyProfileScreen()],
+        children: [
+          homeScreen(),
+          const MyQuestionsPage(),
+          const MyProfilePage()
+        ],
       ),
       bottomNavigationBar: bottomNav(),
       floatingActionButton: FloatingActionButton.extended(

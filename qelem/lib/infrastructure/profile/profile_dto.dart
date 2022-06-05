@@ -12,7 +12,7 @@ class ProfileDto with _$ProfileDto {
     required String firstName,
     required String lastName,
     required String role,
-    required String profilePicture,
+    @JsonKey(name: 'profilePicture') required String profilePictureRelativeUrl,
   }) = _ProfileDto;
 
   factory ProfileDto.fromJson(Map<String, dynamic> json) =>

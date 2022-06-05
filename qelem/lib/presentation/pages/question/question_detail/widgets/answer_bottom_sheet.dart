@@ -1,7 +1,26 @@
 import 'package:flutter/material.dart';
 
-class AnswerBottomSheet extends StatelessWidget {
-  const AnswerBottomSheet({Key? key}) : super(key: key);
+class AnswerBottomSheet extends StatefulWidget {
+  final bool isEdit;
+  final String? answerText;
+  final Function(String) onSubmit;
+
+  const AnswerBottomSheet(
+      {Key? key, required this.isEdit, this.answerText, required this.onSubmit})
+      : super(key: key);
+
+  @override
+  State<AnswerBottomSheet> createState() => _AnswerBottomSheetState();
+}
+
+class _AnswerBottomSheetState extends State<AnswerBottomSheet> {
+  TextEditingController textEditingController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    textEditingController.text = widget.answerText ?? "";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +36,7 @@ class AnswerBottomSheet extends StatelessWidget {
             ),
             const SizedBox(height: 40),
             TextFormField(
-              initialValue: '',
+              controller: textEditingController,
               decoration: const InputDecoration(
                 labelText: 'Content',
                 border: OutlineInputBorder(),
@@ -34,11 +53,11 @@ class AnswerBottomSheet extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 ElevatedButton(
-                    onPressed: () {},
-                    child: Text(
-                      "POST",
-                      style: Theme.of(context).primaryTextTheme.button,
-                    )),
+                    onPressed: () {
+                      widget.onSubmit(textEditingController.text);
+                    },
+                    child: Text(widget.isEdit ? "Update" : "Submit",
+                        style: Theme.of(context).primaryTextTheme.button)),
               ],
             )
           ],

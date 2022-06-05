@@ -1,7 +1,24 @@
 package com.qelem.api.controller;
 
+import java.awt.Color;
 import java.text.ParseException;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.qelem.api.file.StorageService;
 import com.qelem.api.model.KelemUserDetail;
 import com.qelem.api.model.RegistrationForm;
 import com.qelem.api.model.UserModel;
@@ -12,24 +29,10 @@ import com.qelem.api.restdto.UserDto;
 import com.qelem.api.services.MyUserDetailsService;
 import com.qelem.api.util.JwtUtil;
 import com.qelem.api.util.KelemBadCredentialsException;
-import com.qelem.api.util.UnauthorizedAccess;
 import com.qelem.api.util.UserAlreadyExists;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import com.talanlabs.avatargenerator.Avatar;
+import com.talanlabs.avatargenerator.GitHubAvatar;
+import com.talanlabs.avatargenerator.layers.backgrounds.ColorPaintBackgroundLayer;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -45,21 +48,7 @@ public class AuthenticationController {
     private final JwtUtil jwtUtil;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-
-    private UserModel loggedInUser() {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username;
-        if (principal instanceof UserDetails) {
-            username = ((UserDetails) principal).getUsername();
-        } else {
-            username = principal.toString();
-        }
-
-        // finding the user from the user database based on the principal's name
-        UserModel user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UnauthorizedAccess("User not found"));
-        return user;
-    }
+    private final StorageService storageService;
 
     @PostMapping(value = "/login")
     public ResponseEntity<AuthenticationResponse> createAuthenticationToken(
@@ -105,19 +94,16 @@ public class AuthenticationController {
             throw new UserAlreadyExists();
         }
 
+        Avatar avatar = GitHubAvatar.newAvatarBuilder().layers(new ColorPaintBackgroundLayer(Color.WHITE)).padding(20)
+                .build();
+        String avatarFile = storageService.store(avatar.createAsPngBytes(123456L));
+
+        user.setProfilePicture(avatarFile);
+
         log.info("Saving user : {}", user);
         user = userRepository.save(user);
         log.info("User saved : {}", user);
         return new UserDto(user);
-    }
-
-    @PostMapping(value = "/deleteaccount", consumes = "*/*")
-    public void deleteAccount() {
-        UserModel user = loggedInUser();
-        log.info("Delete user with id : {} request", user.getId());
-
-        userRepository.delete(user);
-        log.info("User deleted : {}", user);
     }
 
 }

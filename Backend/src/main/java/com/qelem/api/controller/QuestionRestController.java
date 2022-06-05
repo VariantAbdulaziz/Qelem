@@ -5,6 +5,25 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.qelem.api.model.AnswerModel;
 import com.qelem.api.model.AnswerVote;
 import com.qelem.api.model.QuestionModel;
@@ -17,26 +36,8 @@ import com.qelem.api.repository.UserRepository;
 import com.qelem.api.restdto.AnswerDto;
 import com.qelem.api.restdto.QuestionDto;
 import com.qelem.api.restdto.QuestionForm;
-import com.qelem.api.util.NoVoteFoundException;
 import com.qelem.api.util.ResourceNotFoundException;
 import com.qelem.api.util.UnauthorizedAccess;
-
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -66,7 +67,7 @@ public class QuestionRestController {
         return user;
     }
 
-    private QuestionDto questionDtoFromAnswerModel(QuestionModel question) {
+    private QuestionDto questionDtoFromQuestionModel(QuestionModel question) {
         Long upVotes = questionVoteRepository.countByQuestionIdAndVote(question.getId(), 1);
         Long downVotes = questionVoteRepository.countByQuestionIdAndVote(question.getId(), -1);
 
@@ -100,13 +101,20 @@ public class QuestionRestController {
     @GetMapping()
     public List<QuestionDto> allQuestions(@RequestParam(name = "page", defaultValue = "0") int page,
             @RequestParam(name = "size", defaultValue = "10") int size,
-            @RequestParam(name = "sort", defaultValue = "id") String sort) {
+            @RequestParam(name = "sort", defaultValue = "id") String sort,
+            @RequestParam(name = "authorId", required = false) Long authorId) {
         PageRequest pageable = PageRequest.of(page, size,
                 Sort.by("id").descending());
 
-        List<QuestionModel> questions = questionRepository.findAll(pageable).toList();
+        List<QuestionModel> questions;
 
-        return questions.stream().map(this::questionDtoFromAnswerModel)
+        if (authorId != null) {
+            questions = questionRepository.findByAuthorId(authorId, pageable).toList();
+        } else {
+            questions = questionRepository.findAll(pageable).toList();
+        }
+
+        return questions.stream().map(this::questionDtoFromQuestionModel)
                 .collect(java.util.stream.Collectors.toList());
     }
 
@@ -118,7 +126,7 @@ public class QuestionRestController {
                 .orElseThrow(() -> new ResourceNotFoundException("Question not found"));
 
         log.info("Question with id {} found", id);
-        return questionDtoFromAnswerModel(question);
+        return questionDtoFromQuestionModel(question);
     }
 
     @PostMapping(consumes = "application/json")
@@ -134,7 +142,7 @@ public class QuestionRestController {
         question = questionRepository.save(question);
         log.info("Question created: {}", question);
 
-        return questionDtoFromAnswerModel(question);
+        return questionDtoFromQuestionModel(question);
     }
 
     @PatchMapping(path = "/{id}", consumes = "application/json")
@@ -165,7 +173,7 @@ public class QuestionRestController {
 
         log.info("Question updated: {}", question);
 
-        return questionDtoFromAnswerModel(question);
+        return questionDtoFromQuestionModel(question);
     }
 
     @DeleteMapping("/{id}")
@@ -189,90 +197,35 @@ public class QuestionRestController {
         log.info("Question with id {} deleted", id);
     }
 
-    // Voting
-
-    @PostMapping("/{id}/upvote")
-    public void upVoteQuestion(@PathVariable("id") Long id) {
-        log.info("Upvote question request with id {}", id);
-
+    @PutMapping(path = "/{id}/vote", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<QuestionDto> voteQuestion(@PathVariable("id") Long id,
+            @RequestBody @Valid QuestionVote questionVote) {
         UserModel user = loggedInUser();
 
-        // find the question by id or throw 404
+        // finding the question from the question database based on the id
         QuestionModel question = questionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Question with id " + id + " not found"));
 
         // find the vote by the user and question
         Optional<QuestionVote> vote = questionVoteRepository.findByQuestionAndAuthor(question, user);
 
-        // if the user has already voted, update the vote
-        if (vote.isPresent() && vote.get().getVote() != 1) {
-            QuestionVote questionVote = vote.get();
-            questionVote.setVote(1);
-            questionVoteRepository.save(questionVote);
-            log.info("Question with id {} upvoted", id);
-        } else {
-            // if the user has not voted, create a new vote
-            QuestionVote questionVote = new QuestionVote();
-            questionVote.setQuestion(question);
-            questionVote.setAuthor(user);
-            questionVote.setVote(1);
-            questionVoteRepository.save(questionVote);
-            log.info("Question with id {} upvoted", id);
-        }
-    }
-
-    @PostMapping("/{id}/downvote")
-    public void downVoteQuestion(@PathVariable("id") Long id) {
-        log.info("Downvote question request with id {}", id);
-
-        UserModel user = loggedInUser();
-
-        // find the question by id or throw 404
-        QuestionModel question = questionRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Question with id " + id + " not found"));
-
-        // find the vote by the user and question
-        Optional<QuestionVote> vote = questionVoteRepository.findByQuestionAndAuthor(question, user);
+        int responseStatus = vote.isPresent() ? HttpStatus.OK.value() : HttpStatus.CREATED.value();
 
         // if the user has already voted, update the vote
-        if (vote.isPresent() && vote.get().getVote() != -1) {
-            QuestionVote questionVote = vote.get();
-            questionVote.setVote(-1);
-            questionVoteRepository.save(questionVote);
-            log.info("Question with id {} downvoted", id);
+        if (vote.isPresent()) {
+            vote.get().setVote(questionVote.getVote());
         } else {
             // if the user has not voted, create a new vote
-            QuestionVote questionVote = new QuestionVote();
-            questionVote.setQuestion(question);
-            questionVote.setAuthor(user);
-            questionVote.setVote(-1);
-            questionVoteRepository.save(questionVote);
-            log.info("Question with id {} downvoted", id);
+            QuestionVote newVote = new QuestionVote();
+            newVote.setQuestion(question);
+            newVote.setAuthor(user);
+            newVote.setVote(questionVote.getVote());
+            questionVoteRepository.save(newVote);
         }
-    }
 
-    @PostMapping("/{id}/unvote")
-    public void unVoteQuestion(@PathVariable("id") Long id) {
-        log.info("Unvote question with id {} request", id);
-
-        UserModel user = loggedInUser();
-
-        // find the question by id or throw 404
-        QuestionModel question = questionRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Question with id " + id + " not found"));
-
-        // find the vote by the user and question
-        QuestionVote vote = questionVoteRepository.findByQuestionAndAuthor(question, user).orElseThrow(
-                () -> new NoVoteFoundException("User has not votted this question"));
-
-        Boolean isUpvote = vote.getVote() == 1;
-        questionVoteRepository.delete(vote);
-
-        if (isUpvote) {
-            log.info("Question with id {} un upvoted", id);
-        } else {
-            log.info("Question with id {} un downvoted", id);
-        }
+        // saving the question to the question database
+        question = questionRepository.save(question);
+        return ResponseEntity.status(responseStatus).body(questionDtoFromQuestionModel(question));
     }
 
 }

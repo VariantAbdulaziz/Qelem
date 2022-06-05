@@ -49,12 +49,6 @@ class _SigninScreenState extends State<SigninScreen> {
 
           if (state is LoginStateSuccess) {
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Logged in'),
-                backgroundColor: Colors.green,
-              ),
-            );
             // Notify auth bloc that user has logged in
             BlocProvider.of<AuthBloc>(context)
                 .add(AuthEventSignedIn(state.user, state.token));
