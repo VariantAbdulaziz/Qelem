@@ -7,7 +7,6 @@ import 'package:qelem/application/profile/profile_overview/profile_bloc.dart';
 import 'package:qelem/application/profile/profile_overview/profile_state.dart';
 import 'package:qelem/domain/profile/profile.dart';
 import 'package:qelem/presentation/pages/my_profile/my_profile_overview/widgets/delete_account_dialog.dart';
-import 'package:qelem/presentation/routes/routes.dart';
 
 class MyProfileScreen extends StatefulWidget {
   const MyProfileScreen({Key? key}) : super(key: key);
