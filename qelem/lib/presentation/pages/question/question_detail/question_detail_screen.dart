@@ -60,7 +60,8 @@ class _QuestionDetailScreenState extends State<QuestionDetailScreen> {
             // Shown when the user is the author of the question.
             IconButton(
               icon: const Icon(Icons.edit),
-              onPressed: () {},
+              onPressed: () =>
+                  context.go('/edit-question/${widget.questionId}'),
             ),
             IconButton(
               icon: const Icon(Icons.delete),
