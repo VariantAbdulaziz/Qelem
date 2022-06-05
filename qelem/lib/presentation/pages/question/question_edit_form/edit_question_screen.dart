@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:qelem/application/question/edit_question/edit_question_bloc.dart';
 import 'package:qelem/application/question/edit_question/edit_question_event.dart';
 import 'package:qelem/application/question/edit_question/edit_question_state.dart';
@@ -67,8 +68,10 @@ class _EditQuestionScreenState extends State<EditQuestionScreen> {
                     onPressed: () {
                       showDialog<void>(
                           context: context,
-                          builder: (context) =>
-                              const DiscardQuestionEditDialog());
+                          builder: (context) => DiscardQuestionEditDialog(
+                              curPath: "/edit-question/",
+                              id: widget.qid,
+                              prevPath: "/question-detail/"));
                     },
                     icon: const Icon(Icons.chevron_left)),
               ),
@@ -119,6 +122,7 @@ class _EditQuestionScreenState extends State<EditQuestionScreen> {
                                   BlocProvider.of<EditQuestionBloc>(context)
                                       .add(EditQuestionEventEdit(
                                           questionForm, widget.qid));
+                                  context.go("/question-detail/${widget.qid}");
                                 }
                               },
                         child: const Text('SAVE'),
