@@ -77,13 +77,14 @@ void main() {
     test(
         "should emit [QuestionDetailStateLoading, QuestionDetailStateLoadedQuestion] when event QuestionDetailLoadEvent is called and no error occur",
         () async {
-      when(mockQuestionRepository.getQuestionById(0))
+      when(mockQuestionRepository.getQuestionById(mockQuestion.id))
           .thenAnswer((_) async => Either(val: mockQuestion));
+      when(mockQuestion.id).thenReturn(0);
 
       final questionDetailBloc =
           QuestionDetailBloc(questionRepository: mockQuestionRepository);
 
-      questionDetailBloc.add(const QuestionDetailLoadEvent(0));
+      questionDetailBloc.add(QuestionDetailLoadEvent(mockQuestion.id));
 
       final expected = [
         const QuestionDetailStateLoading(),
@@ -96,13 +97,14 @@ void main() {
     test(
         "should emit [QuestionDetailStateLoading, QuestionDetailStateError] when event QuestionDetailLoadEvent is called and an error occurs",
         () async {
-      when(mockQuestionRepository.getQuestionById(0))
+      when(mockQuestionRepository.getQuestionById(mockQuestion.id))
           .thenAnswer((_) async => Either(error: Error('error')));
+      when(mockQuestion.id).thenReturn(0);
 
       final questionDetailBloc =
           QuestionDetailBloc(questionRepository: mockQuestionRepository);
 
-      questionDetailBloc.add(const QuestionDetailLoadEvent(0));
+      questionDetailBloc.add(QuestionDetailLoadEvent(mockQuestion.id));
 
       final expected = [
         const QuestionDetailStateLoading(),
@@ -114,13 +116,14 @@ void main() {
     test(
         "should emit [QuestionDetailStateLoading, QuestionDetailStateDeleteSuccess] when event QuestionDetailDeleteEvent is called and no error occur",
         () async {
-      when(mockQuestionRepository.deleteQuestion(0))
+      when(mockQuestionRepository.deleteQuestion(mockQuestion.id))
           .thenAnswer((_) async => Either(val: true));
+      when(mockQuestion.id).thenReturn(0);
 
       final questionDetailBloc =
           QuestionDetailBloc(questionRepository: mockQuestionRepository);
 
-      questionDetailBloc.add(const QuestionDetailDeleteEvent(0));
+      questionDetailBloc.add(QuestionDetailDeleteEvent(mockQuestion.id));
 
       final expected = [
         const QuestionDetailStateLoading(),
@@ -133,13 +136,14 @@ void main() {
     test(
         "should emit [QuestionDetailStateLoading, QuestionDetailStateError] when event QuestionDetailDeleteEvent is called and an error occurs",
         () async {
-      when(mockQuestionRepository.deleteQuestion(0))
+      when(mockQuestionRepository.deleteQuestion(mockQuestion.id))
           .thenAnswer((_) async => Either(error: Error('error')));
+      when(mockQuestion.id).thenReturn(0);
 
       final questionDetailBloc =
           QuestionDetailBloc(questionRepository: mockQuestionRepository);
 
-      questionDetailBloc.add(const QuestionDetailDeleteEvent(0));
+      questionDetailBloc.add(QuestionDetailDeleteEvent(mockQuestion.id));
 
       final expected = [
         const QuestionDetailStateLoading(),
@@ -152,9 +156,9 @@ void main() {
     test(
         "should emit [QuestionDetailStateLoadedQuestion] when event VoteQuestionEvent is called and no error occurs",
         () async {
-      when(mockQuestionRepository.getQuestionById(0))
+      when(mockQuestionRepository.getQuestionById(mockQuestion.id))
           .thenAnswer((_) async => Either(val: mockQuestion));
-      when(mockQuestionRepository.voteQuestion(0, Vote.upVote))
+      when(mockQuestionRepository.voteQuestion(mockQuestion.id, Vote.upVote))
           .thenAnswer((_) async => Either(val: mockQuestion));
       when(mockQuestion.id).thenReturn(0);
 
@@ -173,9 +177,9 @@ void main() {
     test(
         "should emit [QuestionDetailStateLoadedQuestion] when event VoteQuestionEvent is called and an error occurs",
         () async {
-      when(mockQuestionRepository.getQuestionById(0))
+      when(mockQuestionRepository.getQuestionById(mockQuestion.id))
           .thenAnswer((_) async => Either(val: mockQuestion));
-      when(mockQuestionRepository.voteQuestion(0, Vote.upVote))
+      when(mockQuestionRepository.voteQuestion(mockQuestion.id, Vote.upVote))
           .thenAnswer((_) async => Either(error: Error('error')));
       when(mockQuestion.id).thenReturn(0);
 
@@ -218,6 +222,7 @@ void main() {
         () async {
       when(mockQuestionRepository.createQuestion(mockQuestionForm))
           .thenAnswer((_) async => Either(error: Error('error')));
+      when(mockQuestion.id).thenReturn(0);
 
       final questionContructionBloc =
           QuestionContructionBloc(questionRepository: mockQuestionRepository);
