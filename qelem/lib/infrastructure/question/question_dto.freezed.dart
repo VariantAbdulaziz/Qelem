@@ -31,6 +31,8 @@ mixin _$QuestionDto {
   int get upVotes => throw _privateConstructorUsedError;
   int get downVotes => throw _privateConstructorUsedError;
   int get userVote => throw _privateConstructorUsedError;
+  @JsonKey(name: 'tags')
+  List<TagDto> get tags => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -52,7 +54,8 @@ abstract class $QuestionDtoCopyWith<$Res> {
       @TimestampConverter() DateTime updatedAt,
       int upVotes,
       int downVotes,
-      int userVote});
+      int userVote,
+      @JsonKey(name: 'tags') List<TagDto> tags});
 
   $UserDtoCopyWith<$Res> get author;
 }
@@ -76,6 +79,7 @@ class _$QuestionDtoCopyWithImpl<$Res> implements $QuestionDtoCopyWith<$Res> {
     Object? upVotes = freezed,
     Object? downVotes = freezed,
     Object? userVote = freezed,
+    Object? tags = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -114,6 +118,10 @@ class _$QuestionDtoCopyWithImpl<$Res> implements $QuestionDtoCopyWith<$Res> {
           ? _value.userVote
           : userVote // ignore: cast_nullable_to_non_nullable
               as int,
+      tags: tags == freezed
+          ? _value.tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<TagDto>,
     ));
   }
 
@@ -141,7 +149,8 @@ abstract class _$$_QuestionDtoCopyWith<$Res>
       @TimestampConverter() DateTime updatedAt,
       int upVotes,
       int downVotes,
-      int userVote});
+      int userVote,
+      @JsonKey(name: 'tags') List<TagDto> tags});
 
   @override
   $UserDtoCopyWith<$Res> get author;
@@ -168,6 +177,7 @@ class __$$_QuestionDtoCopyWithImpl<$Res> extends _$QuestionDtoCopyWithImpl<$Res>
     Object? upVotes = freezed,
     Object? downVotes = freezed,
     Object? userVote = freezed,
+    Object? tags = freezed,
   }) {
     return _then(_$_QuestionDto(
       id: id == freezed
@@ -206,6 +216,10 @@ class __$$_QuestionDtoCopyWithImpl<$Res> extends _$QuestionDtoCopyWithImpl<$Res>
           ? _value.userVote
           : userVote // ignore: cast_nullable_to_non_nullable
               as int,
+      tags: tags == freezed
+          ? _value._tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<TagDto>,
     ));
   }
 }
@@ -222,7 +236,9 @@ class _$_QuestionDto with DiagnosticableTreeMixin implements _QuestionDto {
       @TimestampConverter() required this.updatedAt,
       required this.upVotes,
       required this.downVotes,
-      required this.userVote});
+      required this.userVote,
+      @JsonKey(name: 'tags') required final List<TagDto> tags})
+      : _tags = tags;
 
   factory _$_QuestionDto.fromJson(Map<String, dynamic> json) =>
       _$$_QuestionDtoFromJson(json);
@@ -247,10 +263,17 @@ class _$_QuestionDto with DiagnosticableTreeMixin implements _QuestionDto {
   final int downVotes;
   @override
   final int userVote;
+  final List<TagDto> _tags;
+  @override
+  @JsonKey(name: 'tags')
+  List<TagDto> get tags {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_tags);
+  }
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'QuestionDto(id: $id, topic: $topic, content: $content, author: $author, createdAt: $createdAt, updatedAt: $updatedAt, upVotes: $upVotes, downVotes: $downVotes, userVote: $userVote)';
+    return 'QuestionDto(id: $id, topic: $topic, content: $content, author: $author, createdAt: $createdAt, updatedAt: $updatedAt, upVotes: $upVotes, downVotes: $downVotes, userVote: $userVote, tags: $tags)';
   }
 
   @override
@@ -266,7 +289,8 @@ class _$_QuestionDto with DiagnosticableTreeMixin implements _QuestionDto {
       ..add(DiagnosticsProperty('updatedAt', updatedAt))
       ..add(DiagnosticsProperty('upVotes', upVotes))
       ..add(DiagnosticsProperty('downVotes', downVotes))
-      ..add(DiagnosticsProperty('userVote', userVote));
+      ..add(DiagnosticsProperty('userVote', userVote))
+      ..add(DiagnosticsProperty('tags', tags));
   }
 
   @override
@@ -282,7 +306,8 @@ class _$_QuestionDto with DiagnosticableTreeMixin implements _QuestionDto {
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt) &&
             const DeepCollectionEquality().equals(other.upVotes, upVotes) &&
             const DeepCollectionEquality().equals(other.downVotes, downVotes) &&
-            const DeepCollectionEquality().equals(other.userVote, userVote));
+            const DeepCollectionEquality().equals(other.userVote, userVote) &&
+            const DeepCollectionEquality().equals(other._tags, _tags));
   }
 
   @JsonKey(ignore: true)
@@ -297,7 +322,8 @@ class _$_QuestionDto with DiagnosticableTreeMixin implements _QuestionDto {
       const DeepCollectionEquality().hash(updatedAt),
       const DeepCollectionEquality().hash(upVotes),
       const DeepCollectionEquality().hash(downVotes),
-      const DeepCollectionEquality().hash(userVote));
+      const DeepCollectionEquality().hash(userVote),
+      const DeepCollectionEquality().hash(_tags));
 
   @JsonKey(ignore: true)
   @override
@@ -312,15 +338,17 @@ class _$_QuestionDto with DiagnosticableTreeMixin implements _QuestionDto {
 
 abstract class _QuestionDto implements QuestionDto {
   const factory _QuestionDto(
-      {required final int id,
-      required final String topic,
-      required final String content,
-      required final UserDto author,
-      @TimestampConverter() required final DateTime createdAt,
-      @TimestampConverter() required final DateTime updatedAt,
-      required final int upVotes,
-      required final int downVotes,
-      required final int userVote}) = _$_QuestionDto;
+          {required final int id,
+          required final String topic,
+          required final String content,
+          required final UserDto author,
+          @TimestampConverter() required final DateTime createdAt,
+          @TimestampConverter() required final DateTime updatedAt,
+          required final int upVotes,
+          required final int downVotes,
+          required final int userVote,
+          @JsonKey(name: 'tags') required final List<TagDto> tags}) =
+      _$_QuestionDto;
 
   factory _QuestionDto.fromJson(Map<String, dynamic> json) =
       _$_QuestionDto.fromJson;
@@ -345,6 +373,9 @@ abstract class _QuestionDto implements QuestionDto {
   int get downVotes => throw _privateConstructorUsedError;
   @override
   int get userVote => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: 'tags')
+  List<TagDto> get tags => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_QuestionDtoCopyWith<_$_QuestionDto> get copyWith =>

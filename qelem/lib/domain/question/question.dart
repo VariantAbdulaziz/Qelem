@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:qelem/domain/auth/user.dart';
 import 'package:qelem/domain/common/vote.dart';
+import 'package:qelem/domain/tag/tag.dart';
 
 part 'question.freezed.dart';
 
@@ -16,5 +17,6 @@ class Question with _$Question {
     required Vote userVote,
     required DateTime createdAt,
     required DateTime updatedAt,
+    required List<Tag> tags,
   }) = _Question;
 }

@@ -4,7 +4,7 @@ import 'package:qelem/presentation/pages/home_screen/home_screen.dart';
 
 void main() {
   testWidgets('Home screen test', (WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(home: homeScreen()));
+    await tester.pumpWidget(const MaterialApp(home: HomeScreen()));
 
     expect(find.byType(ListView), findsOneWidget);
   });
