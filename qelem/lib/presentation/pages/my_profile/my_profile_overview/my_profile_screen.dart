@@ -7,6 +7,7 @@ import 'package:qelem/application/profile/profile_overview/profile_bloc.dart';
 import 'package:qelem/application/profile/profile_overview/profile_state.dart';
 import 'package:qelem/domain/profile/profile.dart';
 import 'package:qelem/presentation/pages/my_profile/my_profile_overview/widgets/delete_account_dialog.dart';
+import 'package:qelem/presentation/routes/routes.dart';
 
 class MyProfileScreen extends StatefulWidget {
   const MyProfileScreen({Key? key}) : super(key: key);
@@ -88,7 +89,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
       ),
       Material(
         child: InkWell(
-            onTap: () => context.push('/edit-profile'),
+            onTap: () => context.push(Routes.editProfile),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Row(
@@ -119,7 +120,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
       ),
       Material(
         child: InkWell(
-            onTap: () => context.push('/change-password'),
+            onTap: () => context.push(Routes.changePassword),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Row(
@@ -148,31 +149,33 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
         endIndent: 20,
         color: Colors.black45,
       ),
-      InkWell(
-          onTap: () {
-            showDialog(
-              context: this.context,
-              builder: (context) => DeleteAccountDialog(
-                profileBloc: BlocProvider.of<ProfileBloc>(this.context),
+      Material(
+        child: InkWell(
+            onTap: () {
+              showDialog(
+                context: this.context,
+                builder: (context) => DeleteAccountDialog(
+                  profileBloc: BlocProvider.of<ProfileBloc>(this.context),
+                ),
+              );
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(children: [
+                    Icon(
+                      Icons.delete_forever,
+                      color: Theme.of(context).errorColor,
+                    ),
+                    const SizedBox(width: 20, height: 40),
+                    Text("Delete Account", style: textStyle),
+                  ]),
+                ],
               ),
-            );
-          },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(children: [
-                  Icon(
-                    Icons.delete_forever,
-                    color: Theme.of(context).errorColor,
-                  ),
-                  const SizedBox(width: 20, height: 40),
-                  Text("Delete Account", style: textStyle),
-                ]),
-              ],
-            ),
-          )),
+            )),
+      ),
       const Divider(
         height: 1,
         thickness: 0.2,

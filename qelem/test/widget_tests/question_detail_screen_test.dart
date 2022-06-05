@@ -4,7 +4,7 @@ import 'package:qelem/presentation/pages/question/question_detail/question_detai
 
 void main() {
   testWidgets('Question detail screen test', (WidgetTester tester) async {
-    await tester.pumpWidget(const MaterialApp(home: QuestionDetailScreen(qid: 12)));
+    await tester.pumpWidget(const MaterialApp(home: QuestionDetailScreen(questionId: 3,)));
 
     expect(find.byType(NestedScrollView), findsOneWidget);
   });

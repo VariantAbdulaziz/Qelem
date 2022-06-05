@@ -177,7 +177,7 @@ packages:
     source: hosted
     version: "2.2.3"
   equatable:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: equatable
       url: "https://pub.dartlang.org"
@@ -216,13 +216,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_arc_speed_dial:
-    dependency: "direct main"
-    description:
-      name: flutter_arc_speed_dial
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
   flutter_bloc:
     dependency: "direct main"
     description:
@@ -276,7 +269,7 @@ packages:
     source: hosted
     version: "2.1.3"
   get_it:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: get_it
       url: "https://pub.dartlang.org"
@@ -367,7 +360,7 @@ packages:
     source: hosted
     version: "2.5.0"
   injectable:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: injectable
       url: "https://pub.dartlang.org"
@@ -437,7 +430,7 @@ packages:
     source: hosted
     version: "0.1.3"
   meta:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: meta
       url: "https://pub.dartlang.org"

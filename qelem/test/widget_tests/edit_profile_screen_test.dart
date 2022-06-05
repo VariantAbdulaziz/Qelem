@@ -4,7 +4,7 @@ import 'package:qelem/presentation/pages/my_profile/my_profile_edit/edit_profile
 
 void main() {
   testWidgets('Edit profile screen test', (WidgetTester tester) async {
-    await tester.pumpWidget(const MaterialApp(home: EditProfileScreen()));
+    await tester.pumpWidget(MaterialApp(home: EditProfileScreen()));
 
     expect(find.widgetWithText(ElevatedButton, "UPDATE"), findsOneWidget);
 

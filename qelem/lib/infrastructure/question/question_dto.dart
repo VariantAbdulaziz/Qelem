@@ -2,6 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:qelem/infrastructure/auth/user_dto.dart';
 import 'package:qelem/infrastructure/common/time_stamp_converter.dart';
+import 'package:qelem/infrastructure/tag/tag_dto.dart';
 
 part 'question_dto.freezed.dart';
 part 'question_dto.g.dart';
@@ -18,6 +19,7 @@ class QuestionDto with _$QuestionDto {
     required int upVotes,
     required int downVotes,
     required int userVote,
+    @JsonKey(name: 'tags') required List<TagDto> tags,
   }) = _QuestionDto;
 
   factory QuestionDto.fromJson(Map<String, dynamic> json) =>
