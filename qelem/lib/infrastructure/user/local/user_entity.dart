@@ -12,7 +12,9 @@ class UserEntity with _$UserEntity {
     required String firstName,
     required String lastName,
     required String profilePicture,
+    required String role,
   }) = _UserEntity;
 
-  factory UserEntity.fromJson(Map<String, dynamic> json) => _$UserEntityFromJson(json);
+  factory UserEntity.fromJson(Map<String, dynamic> json) =>
+      _$UserEntityFromJson(json);
 }

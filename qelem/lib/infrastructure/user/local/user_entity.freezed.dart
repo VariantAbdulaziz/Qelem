@@ -25,6 +25,7 @@ mixin _$UserEntity {
   String get firstName => throw _privateConstructorUsedError;
   String get lastName => throw _privateConstructorUsedError;
   String get profilePicture => throw _privateConstructorUsedError;
+  String get role => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,7 +43,8 @@ abstract class $UserEntityCopyWith<$Res> {
       String userName,
       String firstName,
       String lastName,
-      String profilePicture});
+      String profilePicture,
+      String role});
 }
 
 /// @nodoc
@@ -60,6 +62,7 @@ class _$UserEntityCopyWithImpl<$Res> implements $UserEntityCopyWith<$Res> {
     Object? firstName = freezed,
     Object? lastName = freezed,
     Object? profilePicture = freezed,
+    Object? role = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -82,6 +85,10 @@ class _$UserEntityCopyWithImpl<$Res> implements $UserEntityCopyWith<$Res> {
           ? _value.profilePicture
           : profilePicture // ignore: cast_nullable_to_non_nullable
               as String,
+      role: role == freezed
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -98,7 +105,8 @@ abstract class _$$_UserEntityCopyWith<$Res>
       String userName,
       String firstName,
       String lastName,
-      String profilePicture});
+      String profilePicture,
+      String role});
 }
 
 /// @nodoc
@@ -118,6 +126,7 @@ class __$$_UserEntityCopyWithImpl<$Res> extends _$UserEntityCopyWithImpl<$Res>
     Object? firstName = freezed,
     Object? lastName = freezed,
     Object? profilePicture = freezed,
+    Object? role = freezed,
   }) {
     return _then(_$_UserEntity(
       id: id == freezed
@@ -140,6 +149,10 @@ class __$$_UserEntityCopyWithImpl<$Res> extends _$UserEntityCopyWithImpl<$Res>
           ? _value.profilePicture
           : profilePicture // ignore: cast_nullable_to_non_nullable
               as String,
+      role: role == freezed
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -152,7 +165,8 @@ class _$_UserEntity implements _UserEntity {
       required this.userName,
       required this.firstName,
       required this.lastName,
-      required this.profilePicture});
+      required this.profilePicture,
+      required this.role});
 
   factory _$_UserEntity.fromJson(Map<String, dynamic> json) =>
       _$$_UserEntityFromJson(json);
@@ -167,10 +181,12 @@ class _$_UserEntity implements _UserEntity {
   final String lastName;
   @override
   final String profilePicture;
+  @override
+  final String role;
 
   @override
   String toString() {
-    return 'UserEntity(id: $id, userName: $userName, firstName: $firstName, lastName: $lastName, profilePicture: $profilePicture)';
+    return 'UserEntity(id: $id, userName: $userName, firstName: $firstName, lastName: $lastName, profilePicture: $profilePicture, role: $role)';
   }
 
   @override
@@ -183,7 +199,8 @@ class _$_UserEntity implements _UserEntity {
             const DeepCollectionEquality().equals(other.firstName, firstName) &&
             const DeepCollectionEquality().equals(other.lastName, lastName) &&
             const DeepCollectionEquality()
-                .equals(other.profilePicture, profilePicture));
+                .equals(other.profilePicture, profilePicture) &&
+            const DeepCollectionEquality().equals(other.role, role));
   }
 
   @JsonKey(ignore: true)
@@ -194,7 +211,8 @@ class _$_UserEntity implements _UserEntity {
       const DeepCollectionEquality().hash(userName),
       const DeepCollectionEquality().hash(firstName),
       const DeepCollectionEquality().hash(lastName),
-      const DeepCollectionEquality().hash(profilePicture));
+      const DeepCollectionEquality().hash(profilePicture),
+      const DeepCollectionEquality().hash(role));
 
   @JsonKey(ignore: true)
   @override
@@ -213,7 +231,8 @@ abstract class _UserEntity implements UserEntity {
       required final String userName,
       required final String firstName,
       required final String lastName,
-      required final String profilePicture}) = _$_UserEntity;
+      required final String profilePicture,
+      required final String role}) = _$_UserEntity;
 
   factory _UserEntity.fromJson(Map<String, dynamic> json) =
       _$_UserEntity.fromJson;
@@ -228,6 +247,8 @@ abstract class _UserEntity implements UserEntity {
   String get lastName => throw _privateConstructorUsedError;
   @override
   String get profilePicture => throw _privateConstructorUsedError;
+  @override
+  String get role => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_UserEntityCopyWith<_$_UserEntity> get copyWith =>

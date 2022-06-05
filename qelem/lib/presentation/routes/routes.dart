@@ -10,4 +10,6 @@ class Routes {
   static const String postQuestion = '/post-question';
   static const String editQuestion = '/edit-question';
   static const String questionDetail = '/question-detail';
+  static const String adminDashboard = '/admin-dashboard';
+  static const String splashScreen = '/splash-screen';
 }

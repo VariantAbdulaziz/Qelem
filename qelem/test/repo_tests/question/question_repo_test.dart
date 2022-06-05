@@ -2,38 +2,41 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:qelem/domain/auth/user.dart';
+import 'package:qelem/domain/auth/user_role.dart';
 import 'package:qelem/domain/common/vote.dart';
 import 'package:qelem/domain/question/question.dart';
 import 'package:qelem/domain/question/question_form.dart';
-import 'package:qelem/infrastructure/question/question_repository.dart';
+import 'package:qelem/domain/question/question_repository_interface.dart';
 import 'package:qelem/util/either.dart';
 
 import 'question_repo_test.mocks.dart';
 
-@GenerateMocks([QuestionRepository])
+@GenerateMocks([QuestionRepositoryInterface])
 void main() {
-  late MockQuestionRepository mockQuestionRepository;
+  late MockQuestionRepositoryInterface mockQuestionRepository;
   late List<Question> mockQuestions;
 
   setUp(() {
-    mockQuestionRepository = MockQuestionRepository();
+    mockQuestionRepository = MockQuestionRepositoryInterface();
     mockQuestions = [
       Question(
-          id: 1,
-          topic: 'topic',
-          content: 'content',
-          author: User(
-              id: 1,
-              userName: 'uname',
-              firstName: 'fname',
-              lastName: 'lname',
-              profilePicture: 'profilePic'),
-          upVotes: 12,
-          downVotes: 3,
-          userVote: Vote.upVote,
-          createdAt: DateTime(2017, 9, 7, 17, 30),
-          updatedAt: DateTime(2017, 9, 7, 17, 30),
-          tags: []),
+        id: 1,
+        topic: 'topic',
+        content: 'content',
+        author: User(
+            id: 1,
+            userName: 'uname',
+            firstName: 'fname',
+            lastName: 'lname',
+            profilePicture: 'profilePic',
+            role: Role.member),
+        upVotes: 12,
+        downVotes: 3,
+        userVote: Vote.upVote,
+        createdAt: DateTime(2017, 9, 7, 17, 30),
+        updatedAt: DateTime(2017, 9, 7, 17, 30),
+        tags: [],
+      ),
       Question(
           id: 2,
           topic: 'topic2',
@@ -43,7 +46,8 @@ void main() {
               userName: 'uname',
               firstName: 'fname',
               lastName: 'lname',
-              profilePicture: 'profilePic'),
+              profilePicture: 'profilePic',
+              role: Role.member),
           upVotes: 22,
           downVotes: 13,
           userVote: Vote.upVote,

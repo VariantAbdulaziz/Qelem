@@ -1,17 +1,18 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qelem/data/local/shared_prefs/shared_prefs_service.dart';
-import 'package:qelem/infrastructure/auth/auth_repository.dart';
+import 'package:qelem/domain/auth/auth_repository_interface.dart';
 
 import 'auth_event.dart';
 import 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final AuthRepository authRepository;
+  final AuthRepositoryInterface authRepository;
   final SharedPrefsService sharedPrefsService;
 
   AuthBloc({required this.authRepository, required this.sharedPrefsService})
       : super(const AuthUnInitialized()) {
     () async {
+      await authRepository.getAuthenticatedUser();
       var authToken = await authRepository.getAuthToken();
       bool firstRun = await sharedPrefsService.isFirstRun();
       emit(AppInitialized(token: authToken, isFirstRun: firstRun));

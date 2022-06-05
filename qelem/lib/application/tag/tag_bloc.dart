@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qelem/application/tag/tag_event.dart';
 import 'package:qelem/application/tag/tag_state.dart';
-import 'package:qelem/infrastructure/tag/tag_repository.dart';
+import 'package:qelem/domain/tag/tag_repository_interface.dart';
 
 class TagBloc extends Bloc<TagEvent, TagState> {
-  final TagRepository tagRepository;
+  final TagRepositoryInterface tagRepository;
 
   TagBloc({required this.tagRepository}) : super(const TagStateInitial()) {
     // Load the tags

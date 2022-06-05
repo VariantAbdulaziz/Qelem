@@ -2,18 +2,20 @@
 // in qelem/test/repo_tests/answer/answer_repo_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i7;
+import 'dart:async' as _i4;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:qelem/data/local/local_database/qelem_local_storage.dart'
-    as _i4;
-import 'package:qelem/domain/answer/answer.dart' as _i8;
-import 'package:qelem/domain/answer/answer_form.dart' as _i9;
-import 'package:qelem/domain/common/vote.dart' as _i10;
-import 'package:qelem/infrastructure/answer/answer_api.dart' as _i2;
-import 'package:qelem/infrastructure/answer/answer_repoistory.dart' as _i6;
-import 'package:qelem/infrastructure/question/question_api.dart' as _i3;
-import 'package:qelem/util/either.dart' as _i5;
+import 'package:qelem/domain/answer/answer.dart' as _i5;
+import 'package:qelem/domain/answer/answer_form.dart' as _i6;
+import 'package:qelem/domain/answer/answer_repository_interface.dart' as _i3;
+import 'package:qelem/domain/auth/auth_repository_interface.dart' as _i8;
+import 'package:qelem/domain/auth/change_password_form.dart' as _i13;
+import 'package:qelem/domain/auth/login_form.dart' as _i12;
+import 'package:qelem/domain/auth/login_response.dart' as _i11;
+import 'package:qelem/domain/auth/registration_form.dart' as _i10;
+import 'package:qelem/domain/auth/user.dart' as _i9;
+import 'package:qelem/domain/common/vote.dart' as _i7;
+import 'package:qelem/util/either.dart' as _i2;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -25,81 +27,105 @@ import 'package:qelem/util/either.dart' as _i5;
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 
-class _FakeAnswerApi_0 extends _i1.Fake implements _i2.AnswerApi {}
+class _FakeEither_0<T> extends _i1.Fake implements _i2.Either<T> {}
 
-class _FakeQuestionApi_1 extends _i1.Fake implements _i3.QuestionApi {}
-
-class _FakeDatabaseHelper_2 extends _i1.Fake implements _i4.DatabaseHelper {}
-
-class _FakeEither_3<T> extends _i1.Fake implements _i5.Either<T> {}
-
-/// A class which mocks [AnswerRepository].
+/// A class which mocks [AnswerRepositoryInterface].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAnswerRepository extends _i1.Mock implements _i6.AnswerRepository {
-  MockAnswerRepository() {
+class MockAnswerRepositoryInterface extends _i1.Mock
+    implements _i3.AnswerRepositoryInterface {
+  MockAnswerRepositoryInterface() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.AnswerApi get answerApi =>
-      (super.noSuchMethod(Invocation.getter(#answerApi),
-          returnValue: _FakeAnswerApi_0()) as _i2.AnswerApi);
-  @override
-  _i3.QuestionApi get questionApi =>
-      (super.noSuchMethod(Invocation.getter(#questionApi),
-          returnValue: _FakeQuestionApi_1()) as _i3.QuestionApi);
-  @override
-  _i4.DatabaseHelper get databaseHelper =>
-      (super.noSuchMethod(Invocation.getter(#databaseHelper),
-          returnValue: _FakeDatabaseHelper_2()) as _i4.DatabaseHelper);
-  @override
-  _i7.Future<_i5.Either<List<_i8.Answer>>> getAnswerForQuestion(
-          int? questionId) =>
-      (super.noSuchMethod(
-              Invocation.method(#getAnswerForQuestion, [questionId]),
-              returnValue: Future<_i5.Either<List<_i8.Answer>>>.value(
-                  _FakeEither_3<List<_i8.Answer>>()))
-          as _i7.Future<_i5.Either<List<_i8.Answer>>>);
-  @override
-  _i7.Future<_i5.Either<_i8.Answer>> getAnswerById(int? answerId) =>
+  _i4.Future<_i2.Either<_i5.Answer>> getAnswerById(int? answerId) =>
       (super.noSuchMethod(Invocation.method(#getAnswerById, [answerId]),
-              returnValue: Future<_i5.Either<_i8.Answer>>.value(
-                  _FakeEither_3<_i8.Answer>()))
-          as _i7.Future<_i5.Either<_i8.Answer>>);
+              returnValue: Future<_i2.Either<_i5.Answer>>.value(
+                  _FakeEither_0<_i5.Answer>()))
+          as _i4.Future<_i2.Either<_i5.Answer>>);
   @override
-  _i7.Future<_i5.Either<_i8.Answer>> createAnswer(
-          {_i9.AnswerForm? answerForm}) =>
+  _i4.Future<_i2.Either<_i5.Answer>> createAnswer(
+          {_i6.AnswerForm? answerForm}) =>
       (super.noSuchMethod(
               Invocation.method(#createAnswer, [], {#answerForm: answerForm}),
-              returnValue: Future<_i5.Either<_i8.Answer>>.value(
-                  _FakeEither_3<_i8.Answer>()))
-          as _i7.Future<_i5.Either<_i8.Answer>>);
+              returnValue: Future<_i2.Either<_i5.Answer>>.value(
+                  _FakeEither_0<_i5.Answer>()))
+          as _i4.Future<_i2.Either<_i5.Answer>>);
   @override
-  _i7.Future<_i5.Either<void>> deleteAnswer(int? answerId) =>
+  _i4.Future<_i2.Either<void>> deleteAnswer(int? answerId) =>
       (super.noSuchMethod(Invocation.method(#deleteAnswer, [answerId]),
               returnValue:
-                  Future<_i5.Either<void>>.value(_FakeEither_3<void>()))
-          as _i7.Future<_i5.Either<void>>);
+                  Future<_i2.Either<void>>.value(_FakeEither_0<void>()))
+          as _i4.Future<_i2.Either<void>>);
   @override
-  _i7.Future<_i5.Either<_i8.Answer>> updateAnswer(_i8.Answer? answer) =>
+  _i4.Future<_i2.Either<_i5.Answer>> updateAnswer(_i5.Answer? answer) =>
       (super.noSuchMethod(Invocation.method(#updateAnswer, [answer]),
-              returnValue: Future<_i5.Either<_i8.Answer>>.value(
-                  _FakeEither_3<_i8.Answer>()))
-          as _i7.Future<_i5.Either<_i8.Answer>>);
+              returnValue: Future<_i2.Either<_i5.Answer>>.value(
+                  _FakeEither_0<_i5.Answer>()))
+          as _i4.Future<_i2.Either<_i5.Answer>>);
   @override
-  _i7.Future<_i5.Either<_i8.Answer>> voteAnswer(
-          int? answerId, _i10.Vote? vote) =>
+  _i4.Future<_i2.Either<_i5.Answer>> voteAnswer(
+          int? answerId, _i7.Vote? vote) =>
       (super.noSuchMethod(Invocation.method(#voteAnswer, [answerId, vote]),
-              returnValue: Future<_i5.Either<_i8.Answer>>.value(
-                  _FakeEither_3<_i8.Answer>()))
-          as _i7.Future<_i5.Either<_i8.Answer>>);
+              returnValue: Future<_i2.Either<_i5.Answer>>.value(
+                  _FakeEither_0<_i5.Answer>()))
+          as _i4.Future<_i2.Either<_i5.Answer>>);
   @override
-  _i7.Future<_i5.Either<List<_i8.Answer>>> getAnswersByQuestionId(
+  _i4.Future<_i2.Either<List<_i5.Answer>>> getAnswersByQuestionId(
           int? questionId) =>
       (super.noSuchMethod(
               Invocation.method(#getAnswersByQuestionId, [questionId]),
-              returnValue: Future<_i5.Either<List<_i8.Answer>>>.value(
-                  _FakeEither_3<List<_i8.Answer>>()))
-          as _i7.Future<_i5.Either<List<_i8.Answer>>>);
+              returnValue: Future<_i2.Either<List<_i5.Answer>>>.value(
+                  _FakeEither_0<List<_i5.Answer>>()))
+          as _i4.Future<_i2.Either<List<_i5.Answer>>>);
+}
+
+/// A class which mocks [AuthRepositoryInterface].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockAuthRepositoryInterface extends _i1.Mock
+    implements _i8.AuthRepositoryInterface {
+  MockAuthRepositoryInterface() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.Future<_i2.Either<_i9.User>> register(
+          {_i10.RegistrationForm? registerForm}) =>
+      (super.noSuchMethod(
+              Invocation.method(#register, [], {#registerForm: registerForm}),
+              returnValue:
+                  Future<_i2.Either<_i9.User>>.value(_FakeEither_0<_i9.User>()))
+          as _i4.Future<_i2.Either<_i9.User>>);
+  @override
+  _i4.Future<_i2.Either<_i11.LoginReponse>> login(
+          {_i12.LoginForm? loginForm}) =>
+      (super.noSuchMethod(
+              Invocation.method(#login, [], {#loginForm: loginForm}),
+              returnValue: Future<_i2.Either<_i11.LoginReponse>>.value(
+                  _FakeEither_0<_i11.LoginReponse>()))
+          as _i4.Future<_i2.Either<_i11.LoginReponse>>);
+  @override
+  _i4.Future<_i2.Either<void>> changePassword(
+          {_i13.ChangePasswordForm? changePasswordForm}) =>
+      (super.noSuchMethod(
+          Invocation.method(
+              #changePassword, [], {#changePasswordForm: changePasswordForm}),
+          returnValue:
+              Future<_i2.Either<void>>.value(_FakeEither_0<void>())) as _i4
+          .Future<_i2.Either<void>>);
+  @override
+  _i4.Future<String?> getAuthToken() =>
+      (super.noSuchMethod(Invocation.method(#getAuthToken, []),
+          returnValue: Future<String?>.value()) as _i4.Future<String?>);
+  @override
+  _i4.Future<void> logout() =>
+      (super.noSuchMethod(Invocation.method(#logout, []),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+  @override
+  _i4.Future<_i9.User?> getAuthenticatedUser() =>
+      (super.noSuchMethod(Invocation.method(#getAuthenticatedUser, []),
+          returnValue: Future<_i9.User?>.value()) as _i4.Future<_i9.User?>);
 }

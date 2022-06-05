@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qelem/common/app_palette.dart';
 import 'package:qelem/common/constants.dart';
+import 'package:qelem/domain/auth/auth_repository_interface.dart';
+import 'package:qelem/domain/auth/user_role.dart';
+import 'package:qelem/presentation/pages/admin/admin_dashboard/admin_dashboard_page.dart';
 import 'package:qelem/presentation/pages/home_screen/home_screen.dart';
 import 'package:qelem/presentation/pages/main_screen/widgets/logout_dialog.dart';
 import 'package:qelem/presentation/pages/my_profile/my_profile_overview/my_profile_page.dart';
@@ -25,7 +29,8 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
-    _selectedIndex = (widget.index != null && widget.index! < 3) ? widget.index! : 0;
+    _selectedIndex =
+        (widget.index != null && widget.index! < 4) ? widget.index! : 0;
   }
 
   @override
@@ -34,39 +39,55 @@ class _MainScreenState extends State<MainScreen> {
       appBar: _getAppBar(),
       body: IndexedStack(
         index: _selectedIndex,
-        children: const [
-          HomeScreen(),
-          MyQuestionsPage(),
-          MyProfilePage()
+        children: [
+          const HomeScreen(),
+          const MyQuestionsPage(),
+          const MyProfilePage(),
+          if (RepositoryProvider.of<AuthRepositoryInterface>(context)
+                  .getAuthenticatedUserSync()!
+                  .role ==
+              Role.admin)
+            const AdminDashBoardPage(),
         ],
       ),
       bottomNavigationBar: bottomNav(),
-      floatingActionButton: FloatingActionButton.extended(
-        icon: const Icon(Icons.add),
-        onPressed: () => context.push(Routes.postQuestion),
-        label: const Text("Ask"),
-        backgroundColor: const Color(0xFF03DAC5),
-        foregroundColor: Colors.black,
-      ),
+      floatingActionButton: _selectedIndex == 3
+          ? null
+          : FloatingActionButton.extended(
+              icon: const Icon(Icons.add),
+              onPressed: () => context.push(Routes.postQuestion),
+              label: const Text("Ask"),
+              backgroundColor: const Color(0xFF03DAC5),
+              foregroundColor: Colors.black,
+            ),
     );
   }
 
   Widget bottomNav() {
     return BottomNavigationBar(
       backgroundColor: AppPalette.qelemPurple,
-      items: const [
-        BottomNavigationBarItem(
+      type: BottomNavigationBarType.fixed,
+      items: [
+        const BottomNavigationBarItem(
           icon: Icon(Icons.home),
           label: Constants.home,
         ),
-        BottomNavigationBarItem(
+        const BottomNavigationBarItem(
           icon: Icon(Icons.help),
           label: Constants.myQuestions,
         ),
-        BottomNavigationBarItem(
+        const BottomNavigationBarItem(
           icon: Icon(Icons.person),
           label: Constants.profile,
         ),
+        if (RepositoryProvider.of<AuthRepositoryInterface>(context)
+                .getAuthenticatedUserSync()!
+                .role ==
+            Role.admin)
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.dashboard),
+            label: "Dashboard",
+          ),
       ],
       currentIndex: _selectedIndex,
       onTap: _onTap,
@@ -79,7 +100,7 @@ class _MainScreenState extends State<MainScreen> {
     });
   }
 
-  AppBar _getAppBar() {
+  AppBar? _getAppBar() {
     switch (_selectedIndex) {
       case 0:
         {
@@ -108,6 +129,10 @@ class _MainScreenState extends State<MainScreen> {
                   icon: const Icon(Icons.logout))
             ],
           );
+        }
+      case 3:
+        {
+          return null;
         }
     }
     throw Exception("Invalid index");

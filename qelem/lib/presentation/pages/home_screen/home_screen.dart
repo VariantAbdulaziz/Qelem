@@ -1,9 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../application/question/questions_list/questions_list_bloc.dart';
-import 'package:qelem/infrastructure/question/question_repository.dart';
 import 'package:qelem/application/question/questions_list/questions_list_event.dart';
 import 'package:qelem/application/question/questions_list/questions_list_state.dart';
-import 'package:flutter/material.dart';
+import 'package:qelem/domain/question/question_repository_interface.dart';
+
+import '../../../../application/question/questions_list/questions_list_bloc.dart';
 import '../question/widgets/question_card.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -19,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return BlocProvider(
       create: (context) => QuestionsListBloc(
           questionRepository:
-              RepositoryProvider.of<QuestionRepository>(context))
+              RepositoryProvider.of<QuestionRepositoryInterface>(context))
         ..add(const QuestionsListEventLoadAll()),
       child: BlocBuilder<QuestionsListBloc, QuestionsListState>(
           builder: (context, state) {
