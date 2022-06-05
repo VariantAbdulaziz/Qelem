@@ -62,26 +62,7 @@ extension QuestionMapper on QuestionDto {
       createdAt: questionEntity.createdAt,
       updatedAt: questionEntity.updatedAt,
       topic: questionEntity.topic,
-    );
-  }
-}
-
-extension QuestionEntityMapper on Question {
-  QuestionEntity toQuestionEntity() {
-    return QuestionEntity(
-      id: id,
-      topic: topic,
-      content: content,
-      authorId: author.id,
-      upVotes: upVotes,
-      downVotes: downVotes,
-      userVote: userVote == Vote.upVote
-          ? 1
-          : userVote == Vote.downVote
-              ? -1
-              : 0,
-      createdAt: createdAt,
-      updatedAt: updatedAt,
+      tags: [],
     );
   }
 }
