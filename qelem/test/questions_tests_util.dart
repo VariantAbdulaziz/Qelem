@@ -6,7 +6,8 @@ import 'package:qelem/infrastructure/question/question_dto.dart';
 import 'package:qelem/infrastructure/question/question_mapper.dart';
 
 Future<Question> getQuestion() async {
-  final dataString = await _loadAsset('sample_question.json');
+  final dataString =
+      await _loadAsset('test/test_resources/sample_question.json');
 
   final Map<String, dynamic> json = jsonDecode(dataString);
 

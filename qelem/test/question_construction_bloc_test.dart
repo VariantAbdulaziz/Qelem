@@ -5,7 +5,6 @@ import 'package:mockito/mockito.dart';
 import 'package:qelem/application/question/question_detail/question_detail_bloc.dart';
 import 'package:qelem/application/question/question_detail/question_detail_event.dart';
 import 'package:qelem/application/question/question_detail/question_detail_state.dart';
-import 'package:qelem/domain/common/vote.dart';
 import 'package:qelem/infrastructure/question/question_repository.dart';
 import 'package:qelem/util/either.dart';
 import 'package:qelem/util/error.dart';
@@ -94,50 +93,6 @@ void main() {
 
       final expected = [
         const QuestionDetailStateLoading(),
-        QuestionDetailStateError(Error('error')),
-      ];
-
-      expectLater(questionDetailBloc.stream, emitsInOrder(expected));
-    });
-
-    test(
-        "should emit [QuestionDetailStateLoadedQuestion] when event VoteQuestionEvent is called and no error occurs",
-        () async {
-      final mockQuestion = await getQuestion();
-
-      when(mockQuestionRepository.getQuestionById(mockQuestion.id))
-          .thenAnswer((_) async => Either(val: mockQuestion));
-      when(mockQuestionRepository.voteQuestion(mockQuestion.id, Vote.upVote))
-          .thenAnswer((_) async => Either(val: mockQuestion));
-
-      final questionDetailBloc =
-          QuestionDetailBloc(questionRepository: mockQuestionRepository);
-
-      questionDetailBloc.add(VoteQuestionEvent(mockQuestion, Vote.upVote));
-
-      final expected = [
-        QuestionDetailStateLoadedQuestion(mockQuestion),
-      ];
-
-      expectLater(questionDetailBloc.stream, emitsInOrder(expected));
-    });
-
-    test(
-        "should emit [QuestionDetailStateLoadedQuestion] when event VoteQuestionEvent is called and an error occurs",
-        () async {
-      final mockQuestion = await getQuestion();
-
-      when(mockQuestionRepository.getQuestionById(mockQuestion.id))
-          .thenAnswer((_) async => Either(val: mockQuestion));
-      when(mockQuestionRepository.voteQuestion(mockQuestion.id, Vote.upVote))
-          .thenAnswer((_) async => Either(error: Error('error')));
-
-      final questionDetailBloc =
-          QuestionDetailBloc(questionRepository: mockQuestionRepository);
-
-      questionDetailBloc.add(VoteQuestionEvent(mockQuestion, Vote.upVote));
-
-      final expected = [
         QuestionDetailStateError(Error('error')),
       ];
 
