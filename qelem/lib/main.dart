@@ -11,6 +11,8 @@ import 'package:qelem/infrastructure/profile/profile_api.dart';
 import 'package:qelem/infrastructure/profile/profile_repository.dart';
 import 'package:qelem/infrastructure/question/question_api.dart';
 import 'package:qelem/infrastructure/question/question_repository.dart';
+import 'package:qelem/infrastructure/tag/tag_repository.dart';
+import 'package:qelem/infrastructure/tag/tags_api.dart';
 import 'package:qelem/util/my_http_client.dart';
 
 import 'bloc_observer.dart';
@@ -45,6 +47,9 @@ void main() {
               RepositoryProvider(
                   create: (context) => QuestionApi(
                       RepositoryProvider.of<MyHttpClient>(context))),
+              RepositoryProvider(
+                  create: (context) =>
+                      TagsApi(RepositoryProvider.of<MyHttpClient>(context))),
             ],
 
             child: MultiRepositoryProvider(
@@ -60,13 +65,17 @@ void main() {
                       RepositoryProvider.of<ProfileApi>(context)),
                 ),
                 RepositoryProvider(
-                  create: (context) => AnswerRepository(
-                      RepositoryProvider.of<AnswerApi>(context)),
-                ),
+                    create: (context) => AnswerRepository(
+                        RepositoryProvider.of<AnswerApi>(context),
+                        RepositoryProvider.of<QuestionApi>(context))),
                 RepositoryProvider(
                   create: (context) => QuestionRepository(
                       RepositoryProvider.of<QuestionApi>(context),
                       RepositoryProvider.of<AuthRepository>(context)),
+                ),
+                RepositoryProvider(
+                  create: (context) =>
+                      TagRepository(RepositoryProvider.of<TagsApi>(context)),
                 ),
               ],
 

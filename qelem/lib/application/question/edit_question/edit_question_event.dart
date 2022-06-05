@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:qelem/domain/auth/change_password_form.dart';
 import 'package:qelem/domain/question/question_form.dart';
 
 part 'edit_question_event.freezed.dart';

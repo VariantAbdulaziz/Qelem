@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:qelem/infrastructure/auth/user_dto.dart';
 import 'package:qelem/infrastructure/question/question_dto.dart';
+import 'package:qelem/infrastructure/tag/tag_dto.dart';
 
 void main() {
   test("test user", () {
@@ -25,20 +26,30 @@ void main() {
         File('test/test_resources/sample_question.json').readAsStringSync();
 
     final question = QuestionDto.fromJson(json.decode(file));
+    const user = UserDto(
+      id: 2,
+      userName: "bruktedla",
+      firstName: "Bruk",
+      lastName: "Tedla",
+      role: "MEMBER",
+      profilePictureRelativeUrl: "/files/cd09124f-0553-45b4-b531-24972c252cd2",
+    );
 
-    expect(question.author.userName, "brukted");
-    expect(question.content, "this is the question's content");
-    // "2022-05-30T13:14:18.582299Z"
-    expect(
-        question.createdAt, DateTime.utc(2022, 5, 30, 13, 14, 18, 0, 582299));
-    expect(
-        question.updatedAt, DateTime.utc(2022, 5, 30, 13, 14, 18, 0, 582299));
-    expect(question.downVotes, 0);
-    expect(question.upVotes, 0);
-    expect(question.id, 6);
-    expect(question.topic, "asdfad");
-    expect(question.userVote, 0);
+    final tags = [const TagDto(id: 2, name: "Phyiscs")];
+
+    final expectedQuestion = QuestionDto(
+      id: 5,
+      topic: "question with physics",
+      content: "sdg sd gsf gd",
+      author: user,
+      createdAt: DateTime.utc(2022, 06, 04, 23, 59, 58, 0, 917374),
+      updatedAt: DateTime.utc(2022, 06, 04, 23, 59, 58, 0, 917374),
+      upVotes: 0,
+      downVotes: 0,
+      userVote: 0,
+      tags: tags,
+    );
+
+    expect(question, expectedQuestion);
   });
-
-  0;
 }
