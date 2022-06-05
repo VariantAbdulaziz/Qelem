@@ -87,89 +87,95 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
         thickness: 0.4,
         color: Colors.black45,
       ),
-      InkWell(
-          onTap: () => context.go(Routes.editProfile),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(children: [
+      Material(
+        child: InkWell(
+            onTap: () => context.push(Routes.editProfile),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(children: [
+                    Icon(
+                      Icons.edit,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                    const SizedBox(width: 20, height: 40),
+                    Text("Edit Profile", style: textStyle),
+                  ]),
                   Icon(
-                    Icons.edit,
+                    Icons.arrow_forward_ios,
                     color: Theme.of(context).primaryColor,
                   ),
-                  const SizedBox(width: 20, height: 40),
-                  Text("Edit Profile", style: textStyle),
-                ]),
-                Icon(
-                  Icons.arrow_forward_ios,
-                  color: Theme.of(context).primaryColor,
-                ),
-              ],
-            ),
-          )),
-      const Divider(
-        height: 1,
-        thickness: 0.2,
-        indent: 20,
-        endIndent: 20,
-        color: Colors.black45,
-      ),
-      InkWell(
-          onTap: () => context.push(Routes.changePassword),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(children: [
-                  Icon(
-                    Icons.lock,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  const SizedBox(width: 20, height: 40),
-                  Text("Change Password", style: textStyle),
-                ]),
-                Icon(
-                  Icons.arrow_forward_ios,
-                  color: Theme.of(context).primaryColor,
-                ),
-              ],
-            ),
-          )),
-      const Divider(
-        height: 1,
-        thickness: 0.2,
-        indent: 20,
-        endIndent: 20,
-        color: Colors.black45,
-      ),
-      InkWell(
-          onTap: () {
-            showDialog(
-              context: this.context,
-              builder: (context) => DeleteAccountDialog(
-                profileBloc: BlocProvider.of<ProfileBloc>(this.context),
+                ],
               ),
-            );
-          },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(children: [
+            )),
+      ),
+      const Divider(
+        height: 1,
+        thickness: 0.2,
+        indent: 20,
+        endIndent: 20,
+        color: Colors.black45,
+      ),
+      Material(
+        child: InkWell(
+            onTap: () => context.push(Routes.changePassword),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(children: [
+                    Icon(
+                      Icons.lock,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                    const SizedBox(width: 20, height: 40),
+                    Text("Change Password", style: textStyle),
+                  ]),
                   Icon(
-                    Icons.delete_forever,
-                    color: Theme.of(context).errorColor,
+                    Icons.arrow_forward_ios,
+                    color: Theme.of(context).primaryColor,
                   ),
-                  const SizedBox(width: 20, height: 40),
-                  Text("Delete Account", style: textStyle),
-                ]),
-              ],
-            ),
-          )),
+                ],
+              ),
+            )),
+      ),
+      const Divider(
+        height: 1,
+        thickness: 0.2,
+        indent: 20,
+        endIndent: 20,
+        color: Colors.black45,
+      ),
+      Material(
+        child: InkWell(
+            onTap: () {
+              showDialog(
+                context: this.context,
+                builder: (context) => DeleteAccountDialog(
+                  profileBloc: BlocProvider.of<ProfileBloc>(this.context),
+                ),
+              );
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(children: [
+                    Icon(
+                      Icons.delete_forever,
+                      color: Theme.of(context).errorColor,
+                    ),
+                    const SizedBox(width: 20, height: 40),
+                    Text("Delete Account", style: textStyle),
+                  ]),
+                ],
+              ),
+            )),
+      ),
       const Divider(
         height: 1,
         thickness: 0.2,
