@@ -11,6 +11,8 @@ import 'package:qelem/application/profile/edit_profile/edit_profile_state.dart';
 import 'package:qelem/common/constants.dart';
 import 'package:qelem/domain/profile/edit_profile_form.dart';
 import 'package:qelem/domain/profile/profile.dart';
+import 'package:go_router/go_router.dart';
+import 'package:qelem/presentation/routes/routes.dart';
 
 class EditProfileScreen extends StatefulWidget {
   final ImagePicker _picker = ImagePicker();
@@ -33,7 +35,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         if (state is EditProfileStateUpdating) {
           ScaffoldMessenger.of(context).hideCurrentSnackBar();
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Saving...')),
+            const SnackBar(content: Text('Updating...')),
           );
         } else if (state is EditProfileStateUpdateFailure) {
           ScaffoldMessenger.of(context).hideCurrentSnackBar();
@@ -55,8 +57,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         if (state is EditProfileStateSuccess) {
           ScaffoldMessenger.of(context).hideCurrentSnackBar();
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Updated')),
+            const SnackBar(content: Text('Profile Updated')),
           );
+          context.go(Routes.myProfile);
         }
       },
       buildWhen: (prev, curr) => (curr is! EditProfileStateUpdating),
@@ -118,6 +121,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   AppBar _buildAppBar(BuildContext context) {
     return AppBar(
       title: const Text(Constants.editProfile),
+      actions: [
+        IconButton(
+            onPressed: () {
+              context.go(Routes.myProfile);
+            },
+            icon: const Icon(Icons.close))
+      ],
     );
   }
 

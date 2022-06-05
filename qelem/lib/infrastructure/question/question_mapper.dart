@@ -2,6 +2,7 @@ import 'package:qelem/domain/common/vote.dart';
 import 'package:qelem/domain/question/question.dart';
 import 'package:qelem/infrastructure/auth/user_model_mapper.dart';
 import 'package:qelem/infrastructure/question/question_dto.dart';
+import 'package:qelem/infrastructure/tag/tag_mapper.dart';
 
 import '../../domain/auth/user.dart';
 import 'local/question/question_entity.dart';
@@ -26,6 +27,7 @@ extension QuestionMapper on QuestionDto {
       userVote: vote,
       createdAt: createdAt,
       updatedAt: updatedAt,
+      tags: tags.map((tag) => tag.toTag()).toList(),
     );
   }
 
