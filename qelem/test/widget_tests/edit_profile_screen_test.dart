@@ -1,17 +1,43 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
+import 'package:qelem/application/profile/edit_profile/edit_profile_state.dart';
+import 'package:qelem/domain/profile/profile.dart';
 import 'package:qelem/presentation/pages/my_profile/my_profile_edit/edit_profile_screen.dart';
+import 'package:qelem/application/profile/edit_profile/edit_profile_bloc.dart';
+import 'package:qelem/util/error.dart';
 
+import 'edit_profile_screen_test.mocks.dart';
+
+@GenerateMocks([EditProfileBloc, Profile])
 void main() {
-  testWidgets('Edit profile screen test', (WidgetTester tester) async {
-    await tester.pumpWidget(const MaterialApp(home: EditProfileScreen()));
+  late MockEditProfileBloc mockEditProfileBloc;
+  late MockProfile mockProfile;
 
-    expect(find.widgetWithText(ElevatedButton, "UPDATE"), findsOneWidget);
+  setUp(() {
+    mockEditProfileBloc = MockEditProfileBloc();
+    mockProfile = MockProfile();
+  });
+  testWidgets('Edit Profile screen test', (WidgetTester tester) async {
+    when(mockEditProfileBloc.state).thenReturn(EditProfileState.initial());
+    when(mockEditProfileBloc.stream).thenAnswer((_) => Stream.fromIterable(
+          [
+            EditProfileState.loading(),
+            EditProfileState.updating(),
+            EditProfileState.updateFailure(Error('error')),
+            EditProfileState.success(mockProfile),
+            EditProfileState.updateFailure(Error('error')),
+            EditProfileState.loadingFailure(Error('error')),
+          ],
+        ));
 
-    expect(find.widgetWithIcon(IconButton, Icons.camera_alt), findsOneWidget);
-
-    expect(find.byType(TextFormField), findsNWidgets(3));
-
-    expect(find.byType(CircleAvatar), findsOneWidget);
+    await tester.pumpWidget(
+      BlocProvider<EditProfileBloc>(
+        create: (c) => mockEditProfileBloc,
+        child: MaterialApp(home: EditProfileScreen()),
+      ),
+    );
   });
 }
