@@ -1,10 +1,10 @@
 import 'dart:developer' as developer;
 import 'dart:io';
 
+import 'package:qelem/domain/auth/auth_repository_interface.dart';
 import 'package:qelem/domain/common/vote.dart';
 import 'package:qelem/domain/question/question_form.dart';
 import 'package:qelem/domain/question/question_repository_interface.dart';
-import 'package:qelem/infrastructure/auth/auth_repository.dart';
 import 'package:qelem/infrastructure/question/question_api.dart';
 import 'package:qelem/infrastructure/question/question_dto.dart';
 import 'package:qelem/infrastructure/question/question_form_mapper.dart';
@@ -17,14 +17,14 @@ import '../common/qelem_http_exception.dart';
 
 class QuestionRepository implements QuestionRepositoryInterface {
   final QuestionApi questionApi;
-  final AuthRepository authRepository;
+  final AuthRepositoryInterface authRepository;
 
   QuestionRepository(this.questionApi, this.authRepository);
 
   @override
   Future<Either<List<Question>>> getMyQuestions() async {
     try {
-      final userId = (await authRepository.getUserId())!;
+      final userId = (await authRepository.getAuthenticatedUser())!.id;
       final questionsDtos = await questionApi.getAllQuestions(authorId: userId);
 
       return Either(val: questionsDtos.map((e) => e.toQuestion()).toList());

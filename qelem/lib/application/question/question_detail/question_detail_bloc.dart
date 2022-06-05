@@ -1,14 +1,14 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:qelem/infrastructure/auth/auth_repository.dart';
-import 'package:qelem/infrastructure/question/question_repository.dart';
+import 'package:qelem/domain/auth/auth_repository_interface.dart';
+import 'package:qelem/domain/question/question_repository_interface.dart';
 
 import 'question_detail_event.dart';
 import 'question_detail_state.dart';
 
 class QuestionDetailBloc
     extends Bloc<QuestionDetailEvent, QuestionDetailState> {
-  final QuestionRepository questionRepository;
-  final AuthRepository authRepository;
+  final QuestionRepositoryInterface questionRepository;
+  final AuthRepositoryInterface authRepository;
 
   QuestionDetailBloc(
       {required this.questionRepository, required this.authRepository})
@@ -30,8 +30,8 @@ class QuestionDetailBloc
         if (question.hasError) {
           emit(QuestionDetailStateError(question.error!));
         } else {
-          emit(QuestionDetailStateLoadedQuestion(
-              question.val!, (await authRepository.getUserId())!));
+          emit(QuestionDetailStateLoadedQuestion(question.val!,
+              (await authRepository.getAuthenticatedUser())!.id));
         }
       }),
     );

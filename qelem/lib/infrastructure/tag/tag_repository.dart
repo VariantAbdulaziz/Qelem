@@ -3,17 +3,19 @@ import 'dart:developer' as developer;
 
 import 'package:qelem/domain/tag/tag.dart';
 import 'package:qelem/domain/tag/tag_name.dart';
+import 'package:qelem/domain/tag/tag_repository_interface.dart';
 import 'package:qelem/infrastructure/common/qelem_http_exception.dart';
 import 'package:qelem/infrastructure/tag/tag_mapper.dart';
 import 'package:qelem/infrastructure/tag/tags_api.dart';
 import 'package:qelem/util/either.dart';
 import 'package:qelem/util/error.dart';
 
-class TagRepository {
+class TagRepository implements TagRepositoryInterface {
   final TagsApi _tagsApi;
 
   TagRepository(this._tagsApi);
 
+  @override
   Future<Either<List<Tag>>> getTags() async {
     try {
       final tags = await _tagsApi.getTags();
@@ -29,6 +31,7 @@ class TagRepository {
     }
   }
 
+  @override
   Future<Either<Tag>> createTag(TagName tagName) async {
     try {
       final newTag = await _tagsApi.createTag(tagName.value);
@@ -44,6 +47,7 @@ class TagRepository {
     }
   }
 
+  @override
   Future<Either<Tag>> updateTag(Tag tag) async {
     try {
       final newTag = await _tagsApi.updateTag(tag.toTagDto());

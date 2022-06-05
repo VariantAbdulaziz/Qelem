@@ -5,6 +5,7 @@ import 'package:qelem/application/registration/registration_bloc.dart';
 import 'package:qelem/application/registration/registration_event.dart';
 import 'package:qelem/application/registration/registration_state.dart';
 import 'package:qelem/application/registration/registration_state.dart';
+import 'package:qelem/domain/auth/auth_repository_interface.dart';
 import 'package:qelem/domain/auth/password.dart';
 import 'package:qelem/domain/auth/registration_form.dart';
 import 'package:qelem/domain/auth/username.dart';
@@ -31,8 +32,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          RegistrationBloc(RepositoryProvider.of<AuthRepository>(context)),
+      create: (context) => RegistrationBloc(
+          RepositoryProvider.of<AuthRepositoryInterface>(context)),
       child: BlocConsumer<RegistrationBloc, RegistrationState>(
         listener: (context, state) {
           if (state is RegistrationStateLoading) {

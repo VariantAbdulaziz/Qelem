@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qelem/application/profile/profile_overview/profile_event.dart';
 import 'package:qelem/application/profile/profile_overview/profile_state.dart';
-import 'package:qelem/infrastructure/profile/profile_repository.dart';
+import 'package:qelem/domain/profile/profile_repository_interface.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
-  final ProfileRepository _profileRepository;
+  final ProfileRepositoryInterface _profileRepository;
 
   ProfileBloc(this._profileRepository) : super(const ProfileState.initial()) {
     // Load profile on init

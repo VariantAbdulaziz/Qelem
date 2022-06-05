@@ -1,12 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qelem/application/answer/answer_event.dart';
 import 'package:qelem/application/answer/answer_state.dart';
-import 'package:qelem/infrastructure/answer/answer_repoistory.dart';
-import 'package:qelem/infrastructure/auth/auth_repository.dart';
+import 'package:qelem/domain/answer/answer_repository_interface.dart';
+import 'package:qelem/domain/auth/auth_repository_interface.dart';
 
 class AnswerBloc extends Bloc<AnswerEvent, AnswerState> {
-  final AnswerRepository answerRepository;
-  final AuthRepository authRepository;
+  final AnswerRepositoryInterface answerRepository;
+  final AuthRepositoryInterface authRepository;
 
   AnswerBloc({required this.answerRepository, required this.authRepository})
       : super(const AnswerStateInitial()) {
@@ -26,7 +26,7 @@ class AnswerBloc extends Bloc<AnswerEvent, AnswerState> {
         emit(AnswerStateError(answers.error!));
       } else {
         emit(AnswerState.loadedAnswers(
-            answers.val!, (await authRepository.getUserId())!));
+            answers.val!, (await authRepository.getAuthenticatedUser())!.id));
       }
     });
 

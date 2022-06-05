@@ -4,9 +4,11 @@ import 'package:mockito/mockito.dart';
 import 'package:qelem/application/registration/registration_bloc.dart';
 import 'package:qelem/application/registration/registration_event.dart';
 import 'package:qelem/application/registration/registration_state.dart';
+import 'package:qelem/domain/auth/auth_repository_interface.dart';
 import 'package:qelem/domain/auth/password.dart';
 import 'package:qelem/domain/auth/registration_form.dart';
 import 'package:qelem/domain/auth/user.dart';
+import 'package:qelem/domain/auth/user_role.dart';
 import 'package:qelem/domain/auth/username.dart';
 import 'package:qelem/infrastructure/auth/auth_repository.dart';
 import 'package:qelem/util/either.dart';
@@ -14,12 +16,12 @@ import 'package:qelem/util/error.dart';
 
 import 'registration_bloc_test.mocks.dart';
 
-@GenerateMocks([AuthRepository])
+@GenerateMocks([AuthRepositoryInterface])
 void main() {
-  late MockAuthRepository mockAuthRepository;
+  late MockAuthRepositoryInterface mockAuthRepository;
 
   setUp(() {
-    mockAuthRepository = MockAuthRepository();
+    mockAuthRepository = MockAuthRepositoryInterface();
   });
 
   group("RegistrationBloc", () {
@@ -32,6 +34,7 @@ void main() {
         firstName: "firstName",
         id: 1,
         profilePicture: "profilePicture",
+        role: Role.member,
       );
 
       final registrationForm = RegistrationForm(
@@ -56,7 +59,8 @@ void main() {
           ]));
     });
 
-    test("should emit [RegistrationStateLoading, RegistrationStateFailure] when registration fails",
+    test(
+        "should emit [RegistrationStateLoading, RegistrationStateFailure] when registration fails",
         () async {
       final registrationForm = RegistrationForm(
         userName: UserName("username"),

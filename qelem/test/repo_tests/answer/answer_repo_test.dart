@@ -3,20 +3,21 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:qelem/domain/answer/answer.dart';
 import 'package:qelem/domain/answer/answer_form.dart';
+import 'package:qelem/domain/answer/answer_repository_interface.dart';
 import 'package:qelem/domain/auth/user.dart';
+import 'package:qelem/domain/auth/user_role.dart';
 import 'package:qelem/domain/common/vote.dart';
-import 'package:qelem/infrastructure/answer/answer_repoistory.dart';
 import 'package:qelem/util/either.dart';
 
 import 'answer_repo_test.mocks.dart';
 
-@GenerateMocks([AnswerRepository])
+@GenerateMocks([AnswerRepositoryInterface])
 void main() {
-  late MockAnswerRepository mockAnswerRepository;
+  late MockAnswerRepositoryInterface mockAnswerRepository;
   late List<Answer> mockAnswers;
 
   setUp(() {
-    mockAnswerRepository = MockAnswerRepository();
+    mockAnswerRepository = MockAnswerRepositoryInterface();
     mockAnswers = [
       Answer(
           id: 12,
@@ -27,7 +28,8 @@ void main() {
               userName: 'userName',
               firstName: 'firstName',
               lastName: 'lastName',
-              profilePicture: 'profilePicture'),
+              profilePicture: 'profilePicture',
+              role: Role.member),
           upVotes: 14,
           downVotes: 2,
           userVote: Vote.none,
@@ -42,7 +44,8 @@ void main() {
               userName: 'userName',
               firstName: 'firstName',
               lastName: 'lastName',
-              profilePicture: 'profilePicture'),
+              profilePicture: 'profilePicture',
+              role: Role.member),
           upVotes: 14,
           downVotes: 2,
           userVote: Vote.none,
@@ -81,7 +84,8 @@ void main() {
       when(mockAnswerRepository.createAnswer(answerForm: mockAnswerForm))
           .thenAnswer((_) async => Either(val: mockAnswer));
 
-      final result = await mockAnswerRepository.createAnswer(answerForm: mockAnswerForm);
+      final result =
+          await mockAnswerRepository.createAnswer(answerForm: mockAnswerForm);
 
       expect(result, isA<Either<Answer>>());
       expect(result.val, mockAnswer);
