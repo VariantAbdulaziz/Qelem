@@ -18,8 +18,8 @@ import 'package:qelem/util/either.dart';
 import 'package:qelem/util/error.dart';
 
 import '../../data/local/local_database/qelem_local_storage.dart';
+import '../user/local/user_entity.dart';
 
-class AnswerRepository {
 class AnswerRepository implements AnswerRepositoryInterface {
   final AnswerApi answerApi;
   final QuestionApi questionApi;
@@ -40,7 +40,7 @@ class AnswerRepository implements AnswerRepositoryInterface {
 
       result.map((answerEntity) async {
         var user = await databaseHelper.getUser(answerEntity.authorId);
-        finalResult.add(answerEntity.toAnswer(user!.toUser()));
+        finalResult.add(answerEntity.toAnswer(user.toUser()));
       }).toList();
 
       return Either(val: finalResult);
@@ -56,12 +56,13 @@ class AnswerRepository implements AnswerRepositoryInterface {
     }
   }
 
+  @override
   Future<Either<Answer>> getAnswerById(int answerId) async {
     try {
       AnswerEntity finalResult;
       finalResult = await databaseHelper.getAnswer(answerId);
       final user = await databaseHelper.getUser(finalResult.authorId);
-      return Either(val: finalResult.toAnswer(user!.toUser()));
+      return Either(val: finalResult.toAnswer(user.toUser()));
     } on QHttpException catch (exception) {
       return Either(error: Error(exception.message));
     } on SocketException catch (_) {
@@ -127,7 +128,9 @@ class AnswerRepository implements AnswerRepositoryInterface {
     try {
       AnswerDto updatedAnswer = await answerApi.voteAnswer(answerId, vote);
       databaseHelper.updateAnswer(updatedAnswer.toAnswerEntity());
-      return Either(val: updatedAnswer.toAnswer());
+      AnswerEntity answer = await databaseHelper.getAnswer(answerId);
+      UserEntity user = await databaseHelper.getUser(answer.authorId);
+      return Either(val: answer.toAnswer(user.toUser()));
     } on QHttpException catch (exception) {
       return Either(error: Error(exception.message));
     } on SocketException catch (_) {
@@ -151,7 +154,7 @@ class AnswerRepository implements AnswerRepositoryInterface {
       answers = await databaseHelper.getAnswers(questionId);
       for (var e in answers) {
         var user = await databaseHelper.getUser(e.authorId);
-        e.toAnswer(user!.toUser());
+        e.toAnswer(user.toUser());
         finalResult.add(e.toAnswer(user.toUser()));
       }
       return Either(val: finalResult);
@@ -165,5 +168,12 @@ class AnswerRepository implements AnswerRepositoryInterface {
           error: e);
       return Either(error: Error("Unknown error"));
     }
+  }
+
+  // todo: why do we need this?
+  @override
+  Future<Either<List<Answer>>> getAllAnswers() {
+    // TODO: implement getAllAnswers
+    throw UnimplementedError();
   }
 }
