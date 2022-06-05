@@ -27,17 +27,17 @@ void main() {
         () async {
       final mockQuestion = await getQuestion();
 
-      when(mockQuestionRepository.getQuestionById(6))
-          .thenAnswer((_) async => mockQuestion);
+      when(mockQuestionRepository.getQuestionById(mockQuestion.id))
+          .thenAnswer((_) async => Either(val: mockQuestion));
 
       final questionDetailBloc =
           QuestionDetailBloc(questionRepository: mockQuestionRepository);
 
-      questionDetailBloc.add(const QuestionDetailLoadEvent(6));
+      questionDetailBloc.add(QuestionDetailLoadEvent(mockQuestion.id));
 
       final expected = [
         const QuestionDetailStateLoading(),
-        QuestionDetailStateLoadedQuestion(mockQuestion.val!),
+        QuestionDetailStateLoadedQuestion(mockQuestion),
       ];
 
       expectLater(questionDetailBloc.stream, emitsInOrder(expected));

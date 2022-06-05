@@ -26,7 +26,7 @@ void main() {
         "should emit [QuestionListStateLoading, QuestionListStateSuccess] when event QuestionsListEventLoad is called and no error occur",
         () async {
       final mockQuestion = await getQuestion();
-      final mockQuestions = List.generate(3, (index) => mockQuestion.val!);
+      final mockQuestions = List.generate(3, (index) => mockQuestion);
 
       when(mockQuestionRepository.getMyQuestions())
           .thenAnswer((_) async => Either(val: mockQuestions));
