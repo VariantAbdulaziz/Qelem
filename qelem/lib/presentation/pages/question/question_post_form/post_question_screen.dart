@@ -3,9 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qelem/application/question/question_construction/question_construction_bloc.dart';
 import 'package:qelem/application/question/question_construction/question_construction_event.dart';
 import 'package:qelem/application/question/question_construction/question_construction_state.dart';
+import 'package:qelem/application/tag/tag_bloc.dart';
+import 'package:qelem/application/tag/tag_event.dart';
+import 'package:qelem/application/tag/tag_state.dart';
 import 'package:qelem/domain/question/question_form.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qelem/infrastructure/question/question_repository.dart';
+import 'package:qelem/infrastructure/tag/tag_repository.dart';
 import 'package:qelem/presentation/routes/routes.dart';
 
 class PostQuestionScreen extends StatefulWidget {
@@ -17,17 +21,24 @@ class PostQuestionScreen extends StatefulWidget {
 
 class _PostQuestionScreenState extends State<PostQuestionScreen> {
   bool _isNetworkInProgress = false;
-  final _postQuestionFormKey = GlobalKey<FormState>();
+  final _postQuestionFormKey =
+      GlobalKey<FormState>(debugLabel: "post_question_form");
 
   TextEditingController topicController = TextEditingController();
   TextEditingController contentController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => QuestionContructionBloc(
-          questionRepository:
-              RepositoryProvider.of<QuestionRepository>(context)),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<QuestionContructionBloc>(
+          create: (context) => QuestionContructionBloc(
+            questionRepository:
+                RepositoryProvider.of<QuestionRepository>(context),
+            tagRepository: RepositoryProvider.of<TagRepository>(context),
+          )..add(const QuestionConstructionLoadTagsEvent()),
+        ),
+      ],
       child: BlocConsumer<QuestionContructionBloc, QuestionConstructionState>(
         listener: (context, state) {
           if (state is QuestionPostStateLoading) {
@@ -66,7 +77,7 @@ class _PostQuestionScreenState extends State<PostQuestionScreen> {
             );
           }
         },
-        builder: (context, state) {
+        builder: (builder_context, state) {
           return Scaffold(
             appBar: AppBar(
               title: const Text("Post A Question"),
@@ -77,7 +88,7 @@ class _PostQuestionScreenState extends State<PostQuestionScreen> {
               child: Form(
                 key: _postQuestionFormKey,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TextFormField(
                       controller: topicController,
@@ -113,24 +124,79 @@ class _PostQuestionScreenState extends State<PostQuestionScreen> {
                       textAlignVertical: TextAlignVertical.top,
                     ),
                     const SizedBox(height: 25.0),
-                    ElevatedButton(
-                      onPressed: _isNetworkInProgress
-                          ? null
-                          : () {
-                              if (_postQuestionFormKey.currentState!
-                                  .validate()) {
-                                var form = QuestionForm(
-                                    topic: topicController.text,
-                                    content: contentController.text);
+                    BlocBuilder<QuestionContructionBloc,
+                        QuestionConstructionState>(
+                      builder: (context, state) {
+                        if (state is QuestionPostStateLoadingTags) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Text('Loading Tags...'),
+                              SizedBox(height: 16.0),
+                              LinearProgressIndicator(),
+                            ],
+                          );
+                        }
 
-                                BlocProvider.of<QuestionContructionBloc>(
-                                        context)
-                                    .add(
-                                  QuestionEventPost(form),
-                                );
-                              }
-                            },
-                      child: const Text('POST'),
+                        if (state is QuestionPostStateLoadedTags) {
+                          return Wrap(
+                            spacing: 8.0,
+                            runSpacing: 8.0,
+                            children: [
+                              for (final tag in state.selectedTags)
+                                ChoiceChip(
+                                    label: Text(tag.name.value),
+                                    selected: true,
+                                    onSelected: (selected) {
+                                      BlocProvider.of<QuestionContructionBloc>(
+                                              context)
+                                          .add(QuestionConstructionEvent
+                                              .toggleTag(tag));
+                                    }),
+                              for (final tag in state.unslectedTags)
+                                ChoiceChip(
+                                    label: Text(tag.name.value),
+                                    selected: false,
+                                    onSelected: (selected) {
+                                      BlocProvider.of<QuestionContructionBloc>(
+                                              context)
+                                          .add(QuestionConstructionEvent
+                                              .toggleTag(tag));
+                                    }),
+                            ],
+                          );
+                        }
+
+                        if (state is QuestionPostStateLoadedTags) {}
+
+                        return Container();
+                      },
+                    ),
+                    const SizedBox(height: 16.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        ElevatedButton(
+                          onPressed: _isNetworkInProgress
+                              ? null
+                              : () {
+                                  if (_postQuestionFormKey.currentState!
+                                      .validate()) {
+                                    var form = QuestionForm(
+                                        topic: topicController.text,
+                                        content: contentController.text,
+                                        tags: []);
+
+                                    BlocProvider.of<QuestionContructionBloc>(
+                                            builder_context)
+                                        .add(
+                                      QuestionEventPost(form),
+                                    );
+                                  }
+                                },
+                          child: const Text('POST'),
+                        ),
+                      ],
                     ),
                   ],
                 ),

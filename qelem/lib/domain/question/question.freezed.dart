@@ -25,6 +25,7 @@ mixin _$Question {
   Vote get userVote => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
+  List<Tag> get tags => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $QuestionCopyWith<Question> get copyWith =>
@@ -44,7 +45,8 @@ abstract class $QuestionCopyWith<$Res> {
       int downVotes,
       Vote userVote,
       DateTime createdAt,
-      DateTime updatedAt});
+      DateTime updatedAt,
+      List<Tag> tags});
 }
 
 /// @nodoc
@@ -66,6 +68,7 @@ class _$QuestionCopyWithImpl<$Res> implements $QuestionCopyWith<$Res> {
     Object? userVote = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? tags = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -104,6 +107,10 @@ class _$QuestionCopyWithImpl<$Res> implements $QuestionCopyWith<$Res> {
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      tags: tags == freezed
+          ? _value.tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<Tag>,
     ));
   }
 }
@@ -123,7 +130,8 @@ abstract class _$$_QuestionCopyWith<$Res> implements $QuestionCopyWith<$Res> {
       int downVotes,
       Vote userVote,
       DateTime createdAt,
-      DateTime updatedAt});
+      DateTime updatedAt,
+      List<Tag> tags});
 }
 
 /// @nodoc
@@ -147,6 +155,7 @@ class __$$_QuestionCopyWithImpl<$Res> extends _$QuestionCopyWithImpl<$Res>
     Object? userVote = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? tags = freezed,
   }) {
     return _then(_$_Question(
       id: id == freezed
@@ -185,6 +194,10 @@ class __$$_QuestionCopyWithImpl<$Res> extends _$QuestionCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      tags: tags == freezed
+          ? _value._tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<Tag>,
     ));
   }
 }
@@ -201,7 +214,9 @@ class _$_Question implements _Question {
       required this.downVotes,
       required this.userVote,
       required this.createdAt,
-      required this.updatedAt});
+      required this.updatedAt,
+      required final List<Tag> tags})
+      : _tags = tags;
 
   @override
   final int id;
@@ -221,10 +236,16 @@ class _$_Question implements _Question {
   final DateTime createdAt;
   @override
   final DateTime updatedAt;
+  final List<Tag> _tags;
+  @override
+  List<Tag> get tags {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_tags);
+  }
 
   @override
   String toString() {
-    return 'Question(id: $id, topic: $topic, content: $content, author: $author, upVotes: $upVotes, downVotes: $downVotes, userVote: $userVote, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'Question(id: $id, topic: $topic, content: $content, author: $author, upVotes: $upVotes, downVotes: $downVotes, userVote: $userVote, createdAt: $createdAt, updatedAt: $updatedAt, tags: $tags)';
   }
 
   @override
@@ -240,7 +261,8 @@ class _$_Question implements _Question {
             const DeepCollectionEquality().equals(other.downVotes, downVotes) &&
             const DeepCollectionEquality().equals(other.userVote, userVote) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
-            const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
+            const DeepCollectionEquality().equals(other.updatedAt, updatedAt) &&
+            const DeepCollectionEquality().equals(other._tags, _tags));
   }
 
   @override
@@ -254,7 +276,8 @@ class _$_Question implements _Question {
       const DeepCollectionEquality().hash(downVotes),
       const DeepCollectionEquality().hash(userVote),
       const DeepCollectionEquality().hash(createdAt),
-      const DeepCollectionEquality().hash(updatedAt));
+      const DeepCollectionEquality().hash(updatedAt),
+      const DeepCollectionEquality().hash(_tags));
 
   @JsonKey(ignore: true)
   @override
@@ -272,7 +295,8 @@ abstract class _Question implements Question {
       required final int downVotes,
       required final Vote userVote,
       required final DateTime createdAt,
-      required final DateTime updatedAt}) = _$_Question;
+      required final DateTime updatedAt,
+      required final List<Tag> tags}) = _$_Question;
 
   @override
   int get id => throw _privateConstructorUsedError;
@@ -292,6 +316,8 @@ abstract class _Question implements Question {
   DateTime get createdAt => throw _privateConstructorUsedError;
   @override
   DateTime get updatedAt => throw _privateConstructorUsedError;
+  @override
+  List<Tag> get tags => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_QuestionCopyWith<_$_Question> get copyWith =>
