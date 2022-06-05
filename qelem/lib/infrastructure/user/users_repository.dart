@@ -5,7 +5,7 @@ import 'package:qelem/domain/auth/user.dart';
 import 'package:qelem/domain/auth/user_role.dart';
 import 'package:qelem/domain/users/users_repository_interface.dart';
 import 'package:qelem/infrastructure/auth/user_model_mapper.dart';
-import 'package:qelem/infrastructure/users/users_api.dart';
+import 'package:qelem/infrastructure/user/users_api.dart';
 import 'package:qelem/util/either.dart';
 import 'package:qelem/util/error.dart';
 

@@ -19,8 +19,8 @@ import 'package:qelem/infrastructure/question/question_api.dart';
 import 'package:qelem/infrastructure/question/question_repository.dart';
 import 'package:qelem/infrastructure/tag/tag_repository.dart';
 import 'package:qelem/infrastructure/tag/tags_api.dart';
-import 'package:qelem/infrastructure/users/users_api.dart';
-import 'package:qelem/infrastructure/users/users_repository.dart';
+import 'package:qelem/infrastructure/user/users_api.dart';
+import 'package:qelem/infrastructure/user/users_repository.dart';
 import 'package:qelem/util/my_http_client.dart';
 
 import 'bloc_observer.dart';
@@ -83,7 +83,8 @@ void main() {
                 ),
                 RepositoryProvider<AnswerRepositoryInterface>(
                   create: (context) => AnswerRepository(
-                      RepositoryProvider.of<AnswerApi>(context)),
+                      RepositoryProvider.of<AnswerApi>(context),
+                      RepositoryProvider.of<QuestionApi>(context)),
                 ),
                 RepositoryProvider<QuestionRepositoryInterface>(
                   create: (context) => QuestionRepository(

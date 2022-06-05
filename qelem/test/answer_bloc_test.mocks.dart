@@ -50,12 +50,6 @@ class MockAnswerRepositoryInterface extends _i1.Mock
   }
 
   @override
-  _i7.Future<_i2.Either<List<_i4.Answer>>> getAllAnswers() =>
-      (super.noSuchMethod(Invocation.method(#getAllAnswers, []),
-              returnValue: Future<_i2.Either<List<_i4.Answer>>>.value(
-                  _FakeEither_0<List<_i4.Answer>>()))
-          as _i7.Future<_i2.Either<List<_i4.Answer>>>);
-  @override
   _i7.Future<_i2.Either<_i4.Answer>> getAnswerById(int? answerId) =>
       (super.noSuchMethod(Invocation.method(#getAnswerById, [answerId]),
               returnValue: Future<_i2.Either<_i4.Answer>>.value(

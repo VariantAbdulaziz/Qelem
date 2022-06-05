@@ -3,6 +3,8 @@ import 'package:qelem/domain/auth/user.dart';
 import 'package:qelem/domain/auth/user_role.dart';
 import 'package:qelem/infrastructure/auth/user_dto.dart';
 
+import '../user/local/user_entity.dart';
+
 extension UserMapper on UserDto {
   User toUser() {
     return User(
@@ -27,6 +29,17 @@ extension UserDtoMapper on User {
         Constants.imagesBaseUrl,
         '',
       ),
+      role: role == Role.admin ? 'ADMIN' : 'MEMBER',
+    );
+  }
+
+  UserEntity toUserEntity() {
+    return UserEntity(
+      id: id,
+      userName: userName,
+      firstName: firstName,
+      lastName: lastName,
+      profilePicture: profilePicture,
       role: role == Role.admin ? 'ADMIN' : 'MEMBER',
     );
   }

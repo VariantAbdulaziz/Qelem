@@ -1,5 +1,4 @@
-package com.qelem.api.controller;
-
+package com.qelem.api.controller.admin;
 
 import java.io.IOException;
 
@@ -10,6 +9,7 @@ import com.qelem.api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -19,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping(path = "/api/v1/admin", produces = "application/json")
 public class AdminRestController {
     @Autowired
