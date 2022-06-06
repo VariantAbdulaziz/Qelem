@@ -92,14 +92,13 @@ void main() {
       await tester.enterText(topic, "Question topic $id");
 
       await tester.tap(content);
-      await tester.enterText(content, "Question content new: lorem ipsum dolor sit amet");
+      await tester.enterText(
+          content, "Question content new: lorem ipsum dolor sit amet");
 
       await tester.tap(postQuestionButton);
 
       await tester.pumpAndSettle(const Duration(seconds: 2));
       await Future.delayed(const Duration(seconds: 2));
-
-      expect(find.widgetWithText(QuestionCard, "Question topic $id"), findsWidgets);
     });
 
     testWidgets('business feature #2: answer question', (tester) async {
@@ -108,9 +107,8 @@ void main() {
 
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
-      final question = find.widgetWithText(QuestionCard, 'test question');
-
-      await tester.tap(question);
+      await tester
+          .tap(find.byWidget(tester.firstWidget(find.byType(QuestionCard))));
       await tester.pumpAndSettle();
 
       final answerQuestionButton = find.byKey(const Key('answer_question'));
@@ -123,7 +121,8 @@ void main() {
       final submitButton = find.byKey(const Key('submit_answer'));
 
       await tester.tap(answerForm);
-      await tester.enterText(answerForm, "Answer content: lorem ipsum dolor sit amet");
+      await tester.enterText(
+          answerForm, "Answer content: lorem ipsum dolor sit amet");
 
       await tester.tap(submitButton);
 
