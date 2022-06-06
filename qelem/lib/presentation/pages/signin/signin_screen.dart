@@ -169,6 +169,7 @@ class _SigninScreenState extends State<SigninScreen> {
                         height: 30.0,
                       ),
                       ElevatedButton(
+                        key: const Key('sign_in'),
                         onPressed: _isNetworkInProgress
                             ? null
                             : () {
