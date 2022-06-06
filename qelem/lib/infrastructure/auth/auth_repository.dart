@@ -20,7 +20,7 @@ import 'package:qelem/util/error.dart';
 class AuthRepository implements AuthRepositoryInterface {
   AuthApi authApi;
   SharedPrefsService sharedPrefsService;
-  User? authenticatedUser;
+  User? _authenticatedUser;
 
   AuthRepository(this.authApi, this.sharedPrefsService);
 
@@ -47,8 +47,10 @@ class AuthRepository implements AuthRepositoryInterface {
       AuthResponseDto response = await authApi.login(
           username: loginForm.userName.value,
           password: loginForm.password.value);
-      sharedPrefsService.setJwtToken(response.jwt);
-      sharedPrefsService.setUserId(response.user.id);
+      await sharedPrefsService.setJwtToken(response.jwt);
+      await sharedPrefsService.setAuthenticatedUser(response.user.toUser());
+
+      _authenticatedUser = response.user.toUser();
       return Either(
           val: LoginReponse(
         jwt: response.jwt,
@@ -89,12 +91,19 @@ class AuthRepository implements AuthRepositoryInterface {
 
   @override
   Future<void> logout() async {
-    sharedPrefsService.removeToken();
-    sharedPrefsService.removeUserId();
+    await sharedPrefsService.removeToken();
+    await sharedPrefsService.removeAuthenticatedUser();
+    _authenticatedUser = null;
   }
 
   @override
-  Future<int?> getUserId() async {
-    return sharedPrefsService.getUserId();
+  Future<User?> getAuthenticatedUser() async {
+    _authenticatedUser = await sharedPrefsService.getAuthenticatedUser();
+    return _authenticatedUser;
+  }
+
+  @override
+  User? getAuthenticatedUserSync() {
+    return _authenticatedUser;
   }
 }

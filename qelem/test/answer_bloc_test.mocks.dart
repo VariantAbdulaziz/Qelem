@@ -2,16 +2,21 @@
 // in qelem/test/answer_bloc_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i8;
+import 'dart:async' as _i7;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:qelem/domain/answer/answer.dart' as _i5;
-import 'package:qelem/domain/answer/answer_form.dart' as _i6;
-import 'package:qelem/domain/auth/user.dart' as _i4;
-import 'package:qelem/domain/common/vote.dart' as _i9;
-import 'package:qelem/infrastructure/answer/answer_api.dart' as _i2;
-import 'package:qelem/infrastructure/answer/answer_repoistory.dart' as _i7;
-import 'package:qelem/util/either.dart' as _i3;
+import 'package:qelem/domain/answer/answer.dart' as _i4;
+import 'package:qelem/domain/answer/answer_form.dart' as _i5;
+import 'package:qelem/domain/answer/answer_repository_interface.dart' as _i6;
+import 'package:qelem/domain/auth/auth_repository_interface.dart' as _i10;
+import 'package:qelem/domain/auth/change_password_form.dart' as _i14;
+import 'package:qelem/domain/auth/login_form.dart' as _i13;
+import 'package:qelem/domain/auth/login_response.dart' as _i12;
+import 'package:qelem/domain/auth/registration_form.dart' as _i11;
+import 'package:qelem/domain/auth/user.dart' as _i3;
+import 'package:qelem/domain/auth/user_role.dart' as _i9;
+import 'package:qelem/domain/common/vote.dart' as _i8;
+import 'package:qelem/util/either.dart' as _i2;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -23,85 +28,74 @@ import 'package:qelem/util/either.dart' as _i3;
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 
-class _FakeAnswerApi_0 extends _i1.Fake implements _i2.AnswerApi {}
+class _FakeEither_0<T> extends _i1.Fake implements _i2.Either<T> {}
 
-class _FakeEither_1<T> extends _i1.Fake implements _i3.Either<T> {}
+class _FakeUser_1 extends _i1.Fake implements _i3.User {}
 
-class _FakeUser_2 extends _i1.Fake implements _i4.User {}
+class _FakeDateTime_2 extends _i1.Fake implements DateTime {}
 
-class _FakeDateTime_3 extends _i1.Fake implements DateTime {}
+class _Fake$AnswerCopyWith_3<$Res> extends _i1.Fake
+    implements _i4.$AnswerCopyWith<$Res> {}
 
-class _Fake$AnswerCopyWith_4<$Res> extends _i1.Fake
-    implements _i5.$AnswerCopyWith<$Res> {}
+class _Fake$AnswerFormCopyWith_4<$Res> extends _i1.Fake
+    implements _i5.$AnswerFormCopyWith<$Res> {}
 
-class _Fake$AnswerFormCopyWith_5<$Res> extends _i1.Fake
-    implements _i6.$AnswerFormCopyWith<$Res> {}
-
-/// A class which mocks [AnswerRepository].
+/// A class which mocks [AnswerRepositoryInterface].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAnswerRepository extends _i1.Mock implements _i7.AnswerRepository {
-  MockAnswerRepository() {
+class MockAnswerRepositoryInterface extends _i1.Mock
+    implements _i6.AnswerRepositoryInterface {
+  MockAnswerRepositoryInterface() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.AnswerApi get answerApi =>
-      (super.noSuchMethod(Invocation.getter(#answerApi),
-          returnValue: _FakeAnswerApi_0()) as _i2.AnswerApi);
-  @override
-  _i8.Future<_i3.Either<List<_i5.Answer>>> getAllAnswers() =>
-      (super.noSuchMethod(Invocation.method(#getAllAnswers, []),
-              returnValue: Future<_i3.Either<List<_i5.Answer>>>.value(
-                  _FakeEither_1<List<_i5.Answer>>()))
-          as _i8.Future<_i3.Either<List<_i5.Answer>>>);
-  @override
-  _i8.Future<_i3.Either<_i5.Answer>> getAnswerById(int? answerId) =>
+  _i7.Future<_i2.Either<_i4.Answer>> getAnswerById(int? answerId) =>
       (super.noSuchMethod(Invocation.method(#getAnswerById, [answerId]),
-              returnValue: Future<_i3.Either<_i5.Answer>>.value(
-                  _FakeEither_1<_i5.Answer>()))
-          as _i8.Future<_i3.Either<_i5.Answer>>);
+              returnValue: Future<_i2.Either<_i4.Answer>>.value(
+                  _FakeEither_0<_i4.Answer>()))
+          as _i7.Future<_i2.Either<_i4.Answer>>);
   @override
-  _i8.Future<_i3.Either<_i5.Answer>> createAnswer(
-          {_i6.AnswerForm? answerForm}) =>
+  _i7.Future<_i2.Either<_i4.Answer>> createAnswer(
+          {_i5.AnswerForm? answerForm}) =>
       (super.noSuchMethod(
               Invocation.method(#createAnswer, [], {#answerForm: answerForm}),
-              returnValue: Future<_i3.Either<_i5.Answer>>.value(
-                  _FakeEither_1<_i5.Answer>()))
-          as _i8.Future<_i3.Either<_i5.Answer>>);
+              returnValue: Future<_i2.Either<_i4.Answer>>.value(
+                  _FakeEither_0<_i4.Answer>()))
+          as _i7.Future<_i2.Either<_i4.Answer>>);
   @override
-  _i8.Future<_i3.Either<void>> deleteAnswer(int? answerId) =>
+  _i7.Future<_i2.Either<void>> deleteAnswer(int? answerId) =>
       (super.noSuchMethod(Invocation.method(#deleteAnswer, [answerId]),
               returnValue:
-                  Future<_i3.Either<void>>.value(_FakeEither_1<void>()))
-          as _i8.Future<_i3.Either<void>>);
+                  Future<_i2.Either<void>>.value(_FakeEither_0<void>()))
+          as _i7.Future<_i2.Either<void>>);
   @override
-  _i8.Future<_i3.Either<_i5.Answer>> updateAnswer(_i5.Answer? answer) =>
+  _i7.Future<_i2.Either<_i4.Answer>> updateAnswer(_i4.Answer? answer) =>
       (super.noSuchMethod(Invocation.method(#updateAnswer, [answer]),
-              returnValue: Future<_i3.Either<_i5.Answer>>.value(
-                  _FakeEither_1<_i5.Answer>()))
-          as _i8.Future<_i3.Either<_i5.Answer>>);
+              returnValue: Future<_i2.Either<_i4.Answer>>.value(
+                  _FakeEither_0<_i4.Answer>()))
+          as _i7.Future<_i2.Either<_i4.Answer>>);
   @override
-  _i8.Future<_i3.Either<_i5.Answer>> voteAnswer(
-          int? answerId, _i9.Vote? vote) =>
+  _i7.Future<_i2.Either<_i4.Answer>> voteAnswer(
+          int? answerId, _i8.Vote? vote) =>
       (super.noSuchMethod(Invocation.method(#voteAnswer, [answerId, vote]),
-              returnValue: Future<_i3.Either<_i5.Answer>>.value(
-                  _FakeEither_1<_i5.Answer>()))
-          as _i8.Future<_i3.Either<_i5.Answer>>);
+              returnValue: Future<_i2.Either<_i4.Answer>>.value(
+                  _FakeEither_0<_i4.Answer>()))
+          as _i7.Future<_i2.Either<_i4.Answer>>);
   @override
-  _i8.Future<_i3.Either<List<_i5.Answer>>> getAnswersByQuestionId(
+  _i7.Future<_i2.Either<List<_i4.Answer>>> getAnswersByQuestionId(
           int? questionId) =>
       (super.noSuchMethod(
               Invocation.method(#getAnswersByQuestionId, [questionId]),
-              returnValue: Future<_i3.Either<List<_i5.Answer>>>.value(
-                  _FakeEither_1<List<_i5.Answer>>()))
-          as _i8.Future<_i3.Either<List<_i5.Answer>>>);
+              returnValue: Future<_i2.Either<List<_i4.Answer>>>.value(
+                  _FakeEither_0<List<_i4.Answer>>()))
+          as _i7.Future<_i2.Either<List<_i4.Answer>>>);
 }
 
 /// A class which mocks [User].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUser extends _i1.Mock implements _i4.User {
+class MockUser extends _i1.Mock implements _i3.User {
   MockUser() {
     _i1.throwOnMissingStub(this);
   }
@@ -125,12 +119,16 @@ class MockUser extends _i1.Mock implements _i4.User {
   String get profilePicture =>
       (super.noSuchMethod(Invocation.getter(#profilePicture), returnValue: '')
           as String);
+  @override
+  _i9.Role get role =>
+      (super.noSuchMethod(Invocation.getter(#role), returnValue: _i9.Role.admin)
+          as _i9.Role);
 }
 
 /// A class which mocks [Answer].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAnswer extends _i1.Mock implements _i5.Answer {
+class MockAnswer extends _i1.Mock implements _i4.Answer {
   MockAnswer() {
     _i1.throwOnMissingStub(this);
   }
@@ -147,8 +145,8 @@ class MockAnswer extends _i1.Mock implements _i5.Answer {
       (super.noSuchMethod(Invocation.getter(#questionId), returnValue: 0)
           as int);
   @override
-  _i4.User get author => (super.noSuchMethod(Invocation.getter(#author),
-      returnValue: _FakeUser_2()) as _i4.User);
+  _i3.User get author => (super.noSuchMethod(Invocation.getter(#author),
+      returnValue: _FakeUser_1()) as _i3.User);
   @override
   int get upVotes =>
       (super.noSuchMethod(Invocation.getter(#upVotes), returnValue: 0) as int);
@@ -157,25 +155,25 @@ class MockAnswer extends _i1.Mock implements _i5.Answer {
       (super.noSuchMethod(Invocation.getter(#downVotes), returnValue: 0)
           as int);
   @override
-  _i9.Vote get userVote => (super.noSuchMethod(Invocation.getter(#userVote),
-      returnValue: _i9.Vote.upVote) as _i9.Vote);
+  _i8.Vote get userVote => (super.noSuchMethod(Invocation.getter(#userVote),
+      returnValue: _i8.Vote.upVote) as _i8.Vote);
   @override
   DateTime get createdAt => (super.noSuchMethod(Invocation.getter(#createdAt),
-      returnValue: _FakeDateTime_3()) as DateTime);
+      returnValue: _FakeDateTime_2()) as DateTime);
   @override
   DateTime get updatedAt => (super.noSuchMethod(Invocation.getter(#updatedAt),
-      returnValue: _FakeDateTime_3()) as DateTime);
+      returnValue: _FakeDateTime_2()) as DateTime);
   @override
-  _i5.$AnswerCopyWith<_i5.Answer> get copyWith =>
+  _i4.$AnswerCopyWith<_i4.Answer> get copyWith =>
       (super.noSuchMethod(Invocation.getter(#copyWith),
-              returnValue: _Fake$AnswerCopyWith_4<_i5.Answer>())
-          as _i5.$AnswerCopyWith<_i5.Answer>);
+              returnValue: _Fake$AnswerCopyWith_3<_i4.Answer>())
+          as _i4.$AnswerCopyWith<_i4.Answer>);
 }
 
 /// A class which mocks [AnswerForm].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAnswerForm extends _i1.Mock implements _i6.AnswerForm {
+class MockAnswerForm extends _i1.Mock implements _i5.AnswerForm {
   MockAnswerForm() {
     _i1.throwOnMissingStub(this);
   }
@@ -189,8 +187,57 @@ class MockAnswerForm extends _i1.Mock implements _i6.AnswerForm {
       (super.noSuchMethod(Invocation.getter(#content), returnValue: '')
           as String);
   @override
-  _i6.$AnswerFormCopyWith<_i6.AnswerForm> get copyWith =>
+  _i5.$AnswerFormCopyWith<_i5.AnswerForm> get copyWith =>
       (super.noSuchMethod(Invocation.getter(#copyWith),
-              returnValue: _Fake$AnswerFormCopyWith_5<_i6.AnswerForm>())
-          as _i6.$AnswerFormCopyWith<_i6.AnswerForm>);
+              returnValue: _Fake$AnswerFormCopyWith_4<_i5.AnswerForm>())
+          as _i5.$AnswerFormCopyWith<_i5.AnswerForm>);
+}
+
+/// A class which mocks [AuthRepositoryInterface].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockAuthRepositoryInterface extends _i1.Mock
+    implements _i10.AuthRepositoryInterface {
+  MockAuthRepositoryInterface() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i7.Future<_i2.Either<_i3.User>> register(
+          {_i11.RegistrationForm? registerForm}) =>
+      (super.noSuchMethod(
+              Invocation.method(#register, [], {#registerForm: registerForm}),
+              returnValue:
+                  Future<_i2.Either<_i3.User>>.value(_FakeEither_0<_i3.User>()))
+          as _i7.Future<_i2.Either<_i3.User>>);
+  @override
+  _i7.Future<_i2.Either<_i12.LoginReponse>> login(
+          {_i13.LoginForm? loginForm}) =>
+      (super.noSuchMethod(
+              Invocation.method(#login, [], {#loginForm: loginForm}),
+              returnValue: Future<_i2.Either<_i12.LoginReponse>>.value(
+                  _FakeEither_0<_i12.LoginReponse>()))
+          as _i7.Future<_i2.Either<_i12.LoginReponse>>);
+  @override
+  _i7.Future<_i2.Either<void>> changePassword(
+          {_i14.ChangePasswordForm? changePasswordForm}) =>
+      (super.noSuchMethod(
+          Invocation.method(
+              #changePassword, [], {#changePasswordForm: changePasswordForm}),
+          returnValue:
+              Future<_i2.Either<void>>.value(_FakeEither_0<void>())) as _i7
+          .Future<_i2.Either<void>>);
+  @override
+  _i7.Future<String?> getAuthToken() =>
+      (super.noSuchMethod(Invocation.method(#getAuthToken, []),
+          returnValue: Future<String?>.value()) as _i7.Future<String?>);
+  @override
+  _i7.Future<void> logout() =>
+      (super.noSuchMethod(Invocation.method(#logout, []),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i7.Future<void>);
+  @override
+  _i7.Future<_i3.User?> getAuthenticatedUser() =>
+      (super.noSuchMethod(Invocation.method(#getAuthenticatedUser, []),
+          returnValue: Future<_i3.User?>.value()) as _i7.Future<_i3.User?>);
 }

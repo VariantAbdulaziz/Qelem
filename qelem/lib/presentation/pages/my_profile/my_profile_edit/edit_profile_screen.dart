@@ -1,10 +1,9 @@
 import 'dart:developer' as developer;
-import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:go_router/go_router.dart';
 import 'package:qelem/application/profile/edit_profile/edit_profile_bloc.dart';
 import 'package:qelem/application/profile/edit_profile/edit_profile_event.dart';
 import 'package:qelem/application/profile/edit_profile/edit_profile_state.dart';
@@ -12,13 +11,10 @@ import 'package:qelem/common/constants.dart';
 import 'package:qelem/domain/core/validiator.dart';
 import 'package:qelem/domain/profile/edit_profile_form.dart';
 import 'package:qelem/domain/profile/profile.dart';
-import 'package:go_router/go_router.dart';
 import 'package:qelem/presentation/routes/routes.dart';
 
 class EditProfileScreen extends StatefulWidget {
-  final ImagePicker _picker = ImagePicker();
-
-  EditProfileScreen({Key? key}) : super(key: key);
+  const EditProfileScreen({Key? key}) : super(key: key);
 
   @override
   State<EditProfileScreen> createState() => _EditProfileScreenState();
@@ -27,7 +23,6 @@ class EditProfileScreen extends StatefulWidget {
 class _EditProfileScreenState extends State<EditProfileScreen> {
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
-  XFile? _image;
 
   @override
   Widget build(BuildContext context) {
@@ -133,15 +128,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 
   _currentImage(Profile profile) {
-    if (_image == null) {
-      return NetworkImage(profile.profilePictureUrl);
-    }
-
-    if (kIsWeb) {
-      return NetworkImage(_image!.path);
-    } else {
-      return FileImage(File(_image!.path));
-    }
+    return NetworkImage(profile.profilePictureUrl);
   }
 
   _buildBody(BuildContext context, Profile profile) {
@@ -192,15 +179,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       child: IconButton(
                         padding: const EdgeInsets.all(0.0),
                         icon: const Icon(Icons.camera_alt),
-                        onPressed: () async {
-                          final selectedImage = await widget._picker
-                              .pickImage(source: ImageSource.gallery);
-                          if (selectedImage != null) {
-                            setState(() {
-                              _image = selectedImage;
-                            });
-                          }
-                        },
+                        onPressed: () {},
                       ),
                     ),
                   ),
@@ -250,7 +229,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   final editProfileForm = EditProfileForm(
                     firstName: firstNameController.text,
                     lastName: lastNameController.text,
-                    profilePicture: _image != null ? File(_image!.path) : null,
+                    profilePicture: null,
                   );
 
                   BlocProvider.of<EditProfileBloc>(context)

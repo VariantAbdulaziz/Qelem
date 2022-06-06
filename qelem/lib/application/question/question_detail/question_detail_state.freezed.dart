@@ -20,7 +20,7 @@ mixin _$QuestionDetailState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Question question) loadedQuestion,
+    required TResult Function(Question question, int userId) loadedQuestion,
     required TResult Function(Error error) error,
     required TResult Function() deleteSuccess,
   }) =>
@@ -29,7 +29,7 @@ mixin _$QuestionDetailState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Question question)? loadedQuestion,
+    TResult Function(Question question, int userId)? loadedQuestion,
     TResult Function(Error error)? error,
     TResult Function()? deleteSuccess,
   }) =>
@@ -38,7 +38,7 @@ mixin _$QuestionDetailState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Question question)? loadedQuestion,
+    TResult Function(Question question, int userId)? loadedQuestion,
     TResult Function(Error error)? error,
     TResult Function()? deleteSuccess,
     required TResult orElse(),
@@ -140,7 +140,7 @@ class _$QuestionDetailStateInitial implements QuestionDetailStateInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Question question) loadedQuestion,
+    required TResult Function(Question question, int userId) loadedQuestion,
     required TResult Function(Error error) error,
     required TResult Function() deleteSuccess,
   }) {
@@ -152,7 +152,7 @@ class _$QuestionDetailStateInitial implements QuestionDetailStateInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Question question)? loadedQuestion,
+    TResult Function(Question question, int userId)? loadedQuestion,
     TResult Function(Error error)? error,
     TResult Function()? deleteSuccess,
   }) {
@@ -164,7 +164,7 @@ class _$QuestionDetailStateInitial implements QuestionDetailStateInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Question question)? loadedQuestion,
+    TResult Function(Question question, int userId)? loadedQuestion,
     TResult Function(Error error)? error,
     TResult Function()? deleteSuccess,
     required TResult orElse(),
@@ -269,7 +269,7 @@ class _$QuestionDetailStateLoading implements QuestionDetailStateLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Question question) loadedQuestion,
+    required TResult Function(Question question, int userId) loadedQuestion,
     required TResult Function(Error error) error,
     required TResult Function() deleteSuccess,
   }) {
@@ -281,7 +281,7 @@ class _$QuestionDetailStateLoading implements QuestionDetailStateLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Question question)? loadedQuestion,
+    TResult Function(Question question, int userId)? loadedQuestion,
     TResult Function(Error error)? error,
     TResult Function()? deleteSuccess,
   }) {
@@ -293,7 +293,7 @@ class _$QuestionDetailStateLoading implements QuestionDetailStateLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Question question)? loadedQuestion,
+    TResult Function(Question question, int userId)? loadedQuestion,
     TResult Function(Error error)? error,
     TResult Function()? deleteSuccess,
     required TResult orElse(),
@@ -357,7 +357,7 @@ abstract class _$$QuestionDetailStateLoadedQuestionCopyWith<$Res> {
           _$QuestionDetailStateLoadedQuestion value,
           $Res Function(_$QuestionDetailStateLoadedQuestion) then) =
       __$$QuestionDetailStateLoadedQuestionCopyWithImpl<$Res>;
-  $Res call({Question question});
+  $Res call({Question question, int userId});
 
   $QuestionCopyWith<$Res> get question;
 }
@@ -378,12 +378,17 @@ class __$$QuestionDetailStateLoadedQuestionCopyWithImpl<$Res>
   @override
   $Res call({
     Object? question = freezed,
+    Object? userId = freezed,
   }) {
     return _then(_$QuestionDetailStateLoadedQuestion(
       question == freezed
           ? _value.question
           : question // ignore: cast_nullable_to_non_nullable
               as Question,
+      userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 
@@ -399,14 +404,16 @@ class __$$QuestionDetailStateLoadedQuestionCopyWithImpl<$Res>
 
 class _$QuestionDetailStateLoadedQuestion
     implements QuestionDetailStateLoadedQuestion {
-  const _$QuestionDetailStateLoadedQuestion(this.question);
+  const _$QuestionDetailStateLoadedQuestion(this.question, this.userId);
 
   @override
   final Question question;
+  @override
+  final int userId;
 
   @override
   String toString() {
-    return 'QuestionDetailState.loadedQuestion(question: $question)';
+    return 'QuestionDetailState.loadedQuestion(question: $question, userId: $userId)';
   }
 
   @override
@@ -414,12 +421,15 @@ class _$QuestionDetailStateLoadedQuestion
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$QuestionDetailStateLoadedQuestion &&
-            const DeepCollectionEquality().equals(other.question, question));
+            const DeepCollectionEquality().equals(other.question, question) &&
+            const DeepCollectionEquality().equals(other.userId, userId));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(question));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(question),
+      const DeepCollectionEquality().hash(userId));
 
   @JsonKey(ignore: true)
   @override
@@ -433,11 +443,11 @@ class _$QuestionDetailStateLoadedQuestion
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Question question) loadedQuestion,
+    required TResult Function(Question question, int userId) loadedQuestion,
     required TResult Function(Error error) error,
     required TResult Function() deleteSuccess,
   }) {
-    return loadedQuestion(question);
+    return loadedQuestion(question, userId);
   }
 
   @override
@@ -445,11 +455,11 @@ class _$QuestionDetailStateLoadedQuestion
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Question question)? loadedQuestion,
+    TResult Function(Question question, int userId)? loadedQuestion,
     TResult Function(Error error)? error,
     TResult Function()? deleteSuccess,
   }) {
-    return loadedQuestion?.call(question);
+    return loadedQuestion?.call(question, userId);
   }
 
   @override
@@ -457,13 +467,13 @@ class _$QuestionDetailStateLoadedQuestion
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Question question)? loadedQuestion,
+    TResult Function(Question question, int userId)? loadedQuestion,
     TResult Function(Error error)? error,
     TResult Function()? deleteSuccess,
     required TResult orElse(),
   }) {
     if (loadedQuestion != null) {
-      return loadedQuestion(question);
+      return loadedQuestion(question, userId);
     }
     return orElse();
   }
@@ -513,10 +523,12 @@ class _$QuestionDetailStateLoadedQuestion
 
 abstract class QuestionDetailStateLoadedQuestion
     implements QuestionDetailState {
-  const factory QuestionDetailStateLoadedQuestion(final Question question) =
+  const factory QuestionDetailStateLoadedQuestion(
+          final Question question, final int userId) =
       _$QuestionDetailStateLoadedQuestion;
 
   Question get question => throw _privateConstructorUsedError;
+  int get userId => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$QuestionDetailStateLoadedQuestionCopyWith<
           _$QuestionDetailStateLoadedQuestion>
@@ -593,7 +605,7 @@ class _$QuestionDetailStateError implements QuestionDetailStateError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Question question) loadedQuestion,
+    required TResult Function(Question question, int userId) loadedQuestion,
     required TResult Function(Error error) error,
     required TResult Function() deleteSuccess,
   }) {
@@ -605,7 +617,7 @@ class _$QuestionDetailStateError implements QuestionDetailStateError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Question question)? loadedQuestion,
+    TResult Function(Question question, int userId)? loadedQuestion,
     TResult Function(Error error)? error,
     TResult Function()? deleteSuccess,
   }) {
@@ -617,7 +629,7 @@ class _$QuestionDetailStateError implements QuestionDetailStateError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Question question)? loadedQuestion,
+    TResult Function(Question question, int userId)? loadedQuestion,
     TResult Function(Error error)? error,
     TResult Function()? deleteSuccess,
     required TResult orElse(),
@@ -729,7 +741,7 @@ class _$QuestionDetailStateDeleteSuccess
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Question question) loadedQuestion,
+    required TResult Function(Question question, int userId) loadedQuestion,
     required TResult Function(Error error) error,
     required TResult Function() deleteSuccess,
   }) {
@@ -741,7 +753,7 @@ class _$QuestionDetailStateDeleteSuccess
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Question question)? loadedQuestion,
+    TResult Function(Question question, int userId)? loadedQuestion,
     TResult Function(Error error)? error,
     TResult Function()? deleteSuccess,
   }) {
@@ -753,7 +765,7 @@ class _$QuestionDetailStateDeleteSuccess
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Question question)? loadedQuestion,
+    TResult Function(Question question, int userId)? loadedQuestion,
     TResult Function(Error error)? error,
     TResult Function()? deleteSuccess,
     required TResult orElse(),

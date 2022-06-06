@@ -8,7 +8,7 @@ part 'answer_state.freezed.dart';
 class AnswerState with _$AnswerState {
   const factory AnswerState.initial() = AnswerStateInitial;
   const factory AnswerState.loading() = AnswerStateLoading;
-  const factory AnswerState.loadedAnswers(List<Answer> answers) =
+  const factory AnswerState.loadedAnswers(List<Answer> answers, int userId) =
       AnswerStateLoadedAnswers;
 
   const factory AnswerState.error(Error error) = AnswerStateError;

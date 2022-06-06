@@ -3,6 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qelem/application/auth/auth_bloc.dart';
 import 'package:qelem/application/auth/auth_state.dart';
 import 'package:qelem/data/local/shared_prefs/shared_prefs_service.dart';
+import 'package:qelem/domain/answer/answer_repository_interface.dart';
+import 'package:qelem/domain/auth/auth_repository_interface.dart';
+import 'package:qelem/domain/profile/profile_repository_interface.dart';
+import 'package:qelem/domain/question/question_repository_interface.dart';
+import 'package:qelem/domain/tag/tag_repository_interface.dart';
+import 'package:qelem/domain/users/users_repository_interface.dart';
 import 'package:qelem/infrastructure/answer/answer_api.dart';
 import 'package:qelem/infrastructure/answer/answer_repoistory.dart';
 import 'package:qelem/infrastructure/auth/auth_api.dart';
@@ -13,6 +19,8 @@ import 'package:qelem/infrastructure/question/question_api.dart';
 import 'package:qelem/infrastructure/question/question_repository.dart';
 import 'package:qelem/infrastructure/tag/tag_repository.dart';
 import 'package:qelem/infrastructure/tag/tags_api.dart';
+import 'package:qelem/infrastructure/user/users_api.dart';
+import 'package:qelem/infrastructure/user/users_repository.dart';
 import 'package:qelem/util/my_http_client.dart';
 
 import 'bloc_observer.dart';
@@ -36,46 +44,60 @@ void main() {
             // Data providers
             providers: [
               RepositoryProvider(
-                  create: (context) =>
-                      AuthApi(RepositoryProvider.of<MyHttpClient>(context))),
+                create: (context) =>
+                    AuthApi(RepositoryProvider.of<MyHttpClient>(context)),
+              ),
               RepositoryProvider(
-                  create: ((context) => ProfileApi(
-                      RepositoryProvider.of<MyHttpClient>(context)))),
+                create: ((context) =>
+                    ProfileApi(RepositoryProvider.of<MyHttpClient>(context))),
+              ),
               RepositoryProvider(
-                  create: (context) =>
-                      AnswerApi(RepositoryProvider.of<MyHttpClient>(context))),
+                create: (context) =>
+                    AnswerApi(RepositoryProvider.of<MyHttpClient>(context)),
+              ),
               RepositoryProvider(
-                  create: (context) => QuestionApi(
-                      RepositoryProvider.of<MyHttpClient>(context))),
+                create: (context) =>
+                    QuestionApi(RepositoryProvider.of<MyHttpClient>(context)),
+              ),
               RepositoryProvider(
-                  create: (context) =>
-                      TagsApi(RepositoryProvider.of<MyHttpClient>(context))),
+                create: (context) =>
+                    TagsApi(RepositoryProvider.of<MyHttpClient>(context)),
+              ),
+              RepositoryProvider(
+                create: (context) =>
+                    UsersApi(RepositoryProvider.of<MyHttpClient>(context)),
+              ),
             ],
 
             child: MultiRepositoryProvider(
               // Repository providers
               providers: [
-                RepositoryProvider(
+                RepositoryProvider<AuthRepositoryInterface>(
                   create: (context) => AuthRepository(
                       RepositoryProvider.of<AuthApi>(context),
                       RepositoryProvider.of<SharedPrefsService>(context)),
                 ),
-                RepositoryProvider(
+                RepositoryProvider<ProfileRepositoryInterface>(
                   create: (context) => ProfileRepository(
                       RepositoryProvider.of<ProfileApi>(context)),
                 ),
-                RepositoryProvider(
+                RepositoryProvider<AnswerRepositoryInterface>(
                   create: (context) => AnswerRepository(
-                      RepositoryProvider.of<AnswerApi>(context)),
+                      RepositoryProvider.of<AnswerApi>(context),
+                      RepositoryProvider.of<QuestionApi>(context)),
                 ),
-                RepositoryProvider(
+                RepositoryProvider<QuestionRepositoryInterface>(
                   create: (context) => QuestionRepository(
                       RepositoryProvider.of<QuestionApi>(context),
-                      RepositoryProvider.of<AuthRepository>(context)),
+                      RepositoryProvider.of<AuthRepositoryInterface>(context)),
                 ),
-                RepositoryProvider(
+                RepositoryProvider<TagRepositoryInterface>(
                   create: (context) =>
                       TagRepository(RepositoryProvider.of<TagsApi>(context)),
+                ),
+                RepositoryProvider<UsersRepositoryInterface>(
+                  create: (context) =>
+                      UsersRepository(RepositoryProvider.of<UsersApi>(context)),
                 ),
               ],
 
@@ -85,7 +107,8 @@ void main() {
                   BlocProvider(
                     create: (context) => AuthBloc(
                       authRepository:
-                          RepositoryProvider.of<AuthRepository>(context),
+                          RepositoryProvider.of<AuthRepositoryInterface>(
+                              context),
                       sharedPrefsService:
                           RepositoryProvider.of<SharedPrefsService>(context),
                     ),

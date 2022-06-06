@@ -5,6 +5,7 @@ import 'package:qelem/application/auth/auth_state.dart';
 import 'package:qelem/presentation/pages/boarding/register_login_screen.dart';
 import 'package:qelem/presentation/pages/my_profile/my_profile_edit/edit_profile_page.dart';
 import 'package:qelem/presentation/pages/question/question_detail/question_detail_page.dart';
+import 'package:qelem/presentation/pages/splash/splash_screen.dart';
 import 'package:qelem/presentation/routes/routes.dart';
 
 import '../common/constants.dart';
@@ -51,9 +52,17 @@ class App extends StatelessWidget {
             state.location != Routes.register) {
           return Routes.signIn;
         }
+
+        if (authBloc.state is AuthUnInitialized &&
+            state.location != Routes.splashScreen) {
+          return Routes.splashScreen;
+        }
         return null;
       },
       routes: [
+        GoRoute(
+            path: Routes.splashScreen,
+            builder: (_, __) => const SplashScreen()),
         GoRoute(
           path: Routes.home,
           builder: (context, state) => const MainScreen(),
@@ -106,6 +115,13 @@ class App extends StatelessWidget {
             final qid = int.parse(state.params['id']!);
             return QuestionDetailPage(questionId: qid);
           },
+        ),
+        // Admin Dashboard
+        GoRoute(
+          path: Routes.adminDashboard,
+          builder: (context, state) => const MainScreen(
+            index: 3,
+          ),
         ),
       ],
     );

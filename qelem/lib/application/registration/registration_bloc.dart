@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qelem/application/registration/registration_event.dart';
 import 'package:qelem/application/registration/registration_state.dart';
-import 'package:qelem/infrastructure/auth/auth_repository.dart';
+import 'package:qelem/domain/auth/auth_repository_interface.dart';
 
 class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
-  final AuthRepository _authRepository;
+  final AuthRepositoryInterface _authRepository;
 
   RegistrationBloc(this._authRepository)
       : super(const RegistrationState.initial()) {
