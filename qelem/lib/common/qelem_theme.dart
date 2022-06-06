@@ -15,6 +15,10 @@ class QelemTheme {
     ),
     primaryTextTheme: TextTheme(
       button: GoogleFonts.comfortaa(),
+      headline1: GoogleFonts.comfortaa(),
+      headline2: GoogleFonts.comfortaa(),
+      headline3: GoogleFonts.comfortaa(),
+      headline4: GoogleFonts.comfortaa(),
       headline5: GoogleFonts.comfortaa(),
       headline6: GoogleFonts.comfortaa(),
       subtitle2: GoogleFonts.comfortaa(),

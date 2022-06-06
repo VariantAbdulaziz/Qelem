@@ -15,6 +15,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await authRepository.getAuthenticatedUser();
       var authToken = await authRepository.getAuthToken();
       bool firstRun = await sharedPrefsService.isFirstRun();
+      await Future.delayed(const Duration(seconds: 1, milliseconds: 500));
       emit(AppInitialized(token: authToken, isFirstRun: firstRun));
     }();
 

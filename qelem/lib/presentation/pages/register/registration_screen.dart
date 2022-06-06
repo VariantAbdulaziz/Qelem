@@ -104,6 +104,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         ),
                         const SizedBox(height: 30.0),
                         TextFormField(
+                          key: const Key('firstName'),
                           controller: firstController,
                           validator: (value) {
                             if (validateNotEmpty(value!, "first name") !=
@@ -122,6 +123,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         ),
                         const SizedBox(height: 30.0),
                         TextFormField(
+                          key: const Key('lastName'),
                           controller: lastController,
                           validator: (value) {
                             if (validateNotEmpty(value!, "last name") != null) {
@@ -139,6 +141,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         ),
                         const SizedBox(height: 30.0),
                         TextFormField(
+                          key: const Key('username'),
                           controller: usernameController,
                           validator: (value) {
                             if (validateUserName(value!) != null) {
@@ -154,6 +157,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         ),
                         const SizedBox(height: 30.0),
                         TextFormField(
+                          key: const Key('password'),
                           controller: passwordController,
                           obscureText: _isPasswordHidden,
                           validator: (value) {
@@ -181,6 +185,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: ElevatedButton(
+                            key: const Key('sign_up'),
                             onPressed: _isNetworkInProgress
                                 ? null
                                 : () {

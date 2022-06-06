@@ -95,6 +95,7 @@ class _PostQuestionScreenState extends State<PostQuestionScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       TextFormField(
+                        key: const Key('topic'),
                         controller: topicController,
                         validator: (value) {
                           if (validateNotEmpty(value!, "topic") != null) {
@@ -112,6 +113,7 @@ class _PostQuestionScreenState extends State<PostQuestionScreen> {
                       ),
                       const SizedBox(height: 16.0),
                       TextFormField(
+                        key: const Key('content'),
                         controller: contentController,
                         validator: (value) {
                           if (validateNotEmpty(value!, "Content") != null) {
@@ -177,7 +179,6 @@ class _PostQuestionScreenState extends State<PostQuestionScreen> {
                           }
 
                           if (state is QuestionPostStateLoadedTags) {}
-
                           return Container();
                         },
                       ),
@@ -186,6 +187,7 @@ class _PostQuestionScreenState extends State<PostQuestionScreen> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           ElevatedButton(
+                            key: const Key('post_question'),
                             onPressed: _isNetworkInProgress
                                 ? null
                                 : () {
@@ -195,7 +197,6 @@ class _PostQuestionScreenState extends State<PostQuestionScreen> {
                                           topic: topicController.text,
                                           content: contentController.text,
                                           tags: []);
-
                                       BlocProvider.of<QuestionContructionBloc>(
                                               builder_context)
                                           .add(

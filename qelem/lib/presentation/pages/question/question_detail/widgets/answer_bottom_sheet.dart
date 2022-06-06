@@ -37,6 +37,7 @@ class _AnswerBottomSheetState extends State<AnswerBottomSheet> {
             ),
             const SizedBox(height: 40),
             TextFormField(
+              key: const Key('post_answer_form'),
               controller: textEditingController,
               validator: (value) {
                 if (validateNotEmpty(value!, "topic") != null) {
@@ -61,6 +62,7 @@ class _AnswerBottomSheetState extends State<AnswerBottomSheet> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 ElevatedButton(
+                  key: const Key('submit_answer'),
                     onPressed: () {
                       widget.onSubmit(textEditingController.text);
                     },

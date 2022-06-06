@@ -120,6 +120,7 @@ class _QuestionDetailScreenState extends State<QuestionDetailScreen> {
                   right: 0.0,
                   bottom: 0.0,
                   child: GestureDetector(
+                    key: const Key('answer_question'),
                     onTap: () {
                       showModalBottomSheet(
                         context: this.context,

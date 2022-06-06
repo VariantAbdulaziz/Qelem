@@ -40,6 +40,7 @@ class RegisterLoginScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 30.0),
                 ElevatedButton(
+                  key: const Key('sign_in'),
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(double.infinity, 40),
                   ),
@@ -51,6 +52,7 @@ class RegisterLoginScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 19.0),
                 ElevatedButton(
+                  key: const Key('create_account'),
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(double.infinity, 40),
                   ),

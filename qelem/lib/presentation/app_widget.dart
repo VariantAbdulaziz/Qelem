@@ -57,12 +57,14 @@ class App extends StatelessWidget {
             state.location != Routes.splashScreen) {
           return Routes.splashScreen;
         }
+        
         return null;
       },
       routes: [
         GoRoute(
-            path: Routes.splashScreen,
-            builder: (_, __) => const SplashScreen()),
+          path: Routes.splashScreen,
+          builder: (context, state) => const SplashScreen(),
+        ),
         GoRoute(
           path: Routes.home,
           builder: (context, state) => const MainScreen(),
