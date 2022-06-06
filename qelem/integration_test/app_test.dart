@@ -75,6 +75,8 @@ void main() {
       app.main();
       await tester.pumpAndSettle(const Duration(seconds: 1, milliseconds: 500));
 
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+
       expect(find.text('Home'), findsWidgets);
 
       final createQuestionButton = find.byType(FloatingActionButton);
