@@ -179,7 +179,6 @@ class _PostQuestionScreenState extends State<PostQuestionScreen> {
                           }
 
                           if (state is QuestionPostStateLoadedTags) {}
-
                           return Container();
                         },
                       ),
@@ -198,7 +197,6 @@ class _PostQuestionScreenState extends State<PostQuestionScreen> {
                                           topic: topicController.text,
                                           content: contentController.text,
                                           tags: []);
-
                                       BlocProvider.of<QuestionContructionBloc>(
                                               builder_context)
                                           .add(
