@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:qelem/application/question/edit_question/edit_question_bloc.dart';
 import 'package:qelem/application/question/edit_question/edit_question_event.dart';
 import 'package:qelem/application/question/edit_question/edit_question_state.dart';
+import 'package:qelem/domain/core/validiator.dart';
 import 'package:qelem/domain/question/question_form.dart';
 import 'package:qelem/presentation/pages/question/widgets/discard_question_edit_dialog.dart';
 
@@ -89,6 +90,16 @@ class _EditQuestionScreenState extends State<EditQuestionScreen> {
                               TextFormField(
                                 // initialValue: '',
                                 controller: topicController,
+                                validator: (value) {
+                                  if (validateNotEmpty(value!, "Topic") !=
+                                      null) {
+                                    return validateNotEmpty(value, "Topic")!
+                                        .error!
+                                        .message;
+                                  } else {
+                                    return null;
+                                  }
+                                },
                                 decoration: const InputDecoration(
                                   labelText: 'Topic',
                                   border: OutlineInputBorder(),
@@ -98,6 +109,16 @@ class _EditQuestionScreenState extends State<EditQuestionScreen> {
                               TextFormField(
                                 // initialValue: '',
                                 controller: contentController,
+                                validator: (value) {
+                                  if (validateNotEmpty(value!, "Content") !=
+                                      null) {
+                                    return validateNotEmpty(value, "Content")!
+                                        .error!
+                                        .message;
+                                  } else {
+                                    return null;
+                                  }
+                                },
                                 decoration: const InputDecoration(
                                   labelText: 'Content',
                                   border: OutlineInputBorder(),

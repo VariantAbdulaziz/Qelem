@@ -7,6 +7,7 @@ import 'package:qelem/application/change_password/change_password_state.dart';
 import 'package:qelem/common/constants.dart';
 import 'package:qelem/domain/auth/change_password_form.dart';
 import 'package:qelem/domain/auth/password.dart';
+import 'package:qelem/domain/core/validiator.dart';
 import 'package:qelem/presentation/routes/routes.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
@@ -86,8 +87,12 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                             obscureText: currentHidden,
                             controller: currentPasswordController,
                             validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Please enter your current password';
+                              if (validateNotEmpty(value!, "topic") != null) {
+                                return validateNotEmpty(value, "topic")!
+                                    .error!
+                                    .message;
+                              } else {
+                                return null;
                               }
                             },
                             decoration: InputDecoration(
@@ -112,8 +117,13 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                             obscureText: newHidden,
                             controller: newPasswordController,
                             validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Please enter your new password';
+                              if (validateNotEmpty(value!, "password") !=
+                                  null) {
+                                return validateNotEmpty(value, "password")!
+                                    .error!
+                                    .message;
+                              } else {
+                                return null;
                               }
                             },
                             decoration: InputDecoration(
@@ -138,11 +148,20 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                             obscureText: confirmHidden,
                             controller: confirmPasswordController,
                             validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Please confirm your current password';
-                              } else if (value != newPasswordController.text) {
-                                return 'Passwords don\'t match';
+                              if (validateNotEmpty(value!, "password") !=
+                                  null) {
+                                return validateNotEmpty(value, "password")!
+                                    .error!
+                                    .message;
+                              } else if (validateConfirmPassword(
+                                      newPasswordController.text, value) !=
+                                  null) {
+                                return validateConfirmPassword(
+                                        newPasswordController.text, value)!
+                                    .error!
+                                    .message;
                               }
+                              return null;
                             },
                             decoration: InputDecoration(
                                 labelText: 'New Password (again)',
