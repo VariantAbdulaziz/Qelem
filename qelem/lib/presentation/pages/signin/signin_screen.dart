@@ -9,6 +9,7 @@ import 'package:qelem/application/login/login_state.dart';
 import 'package:qelem/domain/auth/login_form.dart';
 import 'package:qelem/domain/auth/password.dart';
 import 'package:qelem/domain/auth/username.dart';
+import 'package:qelem/domain/core/validiator.dart';
 import 'package:qelem/presentation/routes/routes.dart';
 
 class SigninScreen extends StatefulWidget {
@@ -100,13 +101,22 @@ class _SigninScreenState extends State<SigninScreen> {
                             TextFormField(
                               controller: usernameController,
                               validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Please enter your username';
+                                if (validateNotEmpty(value!, "usename") !=
+                                    null) {
+                                  return validateNotEmpty(value, "usename")!
+                                      .error!
+                                      .message;
                                 }
-                                if (value.length < 8) {
-                                  return 'Username must be at least 8 characters';
+                                if (validateStringLength(
+                                        value, "username", 8) !=
+                                    null) {
+                                  return validateStringLength(
+                                          value, "username", 8)!
+                                      .error!
+                                      .message;
+                                } else {
+                                  return null;
                                 }
-                                return null;
                               },
                               decoration: const InputDecoration(
                                 labelText: 'Username',
@@ -117,16 +127,25 @@ class _SigninScreenState extends State<SigninScreen> {
                             const SizedBox(height: 30.0),
                             TextFormField(
                               obscureText: _isPasswordHidden,
-                              controller: passwordController,
                               validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Please enter your password';
+                                if (validateNotEmpty(value!, "password") !=
+                                    null) {
+                                  return validateNotEmpty(value, "password")!
+                                      .error!
+                                      .message;
                                 }
-                                if (value.length < 8) {
-                                  return 'Password must be at least 8 characters';
+                                if (validateStringLength(
+                                        value, "password", 8) !=
+                                    null) {
+                                  return validateStringLength(
+                                          value, "password", 8)!
+                                      .error!
+                                      .message;
+                                } else {
+                                  return null;
                                 }
-                                return null;
                               },
+                              controller: passwordController,
                               decoration: InputDecoration(
                                   labelText: 'Password',
                                   hintText: 'Enter your password',

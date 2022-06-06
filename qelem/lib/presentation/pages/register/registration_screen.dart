@@ -4,11 +4,11 @@ import 'package:go_router/go_router.dart';
 import 'package:qelem/application/registration/registration_bloc.dart';
 import 'package:qelem/application/registration/registration_event.dart';
 import 'package:qelem/application/registration/registration_state.dart';
-import 'package:qelem/application/registration/registration_state.dart';
 import 'package:qelem/domain/auth/auth_repository_interface.dart';
 import 'package:qelem/domain/auth/password.dart';
 import 'package:qelem/domain/auth/registration_form.dart';
 import 'package:qelem/domain/auth/username.dart';
+import 'package:qelem/domain/core/validiator.dart';
 import 'package:qelem/infrastructure/auth/auth_repository.dart';
 import 'package:qelem/presentation/routes/routes.dart';
 
@@ -106,10 +106,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         TextFormField(
                           controller: firstController,
                           validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter your first name';
+                            if (validateNotEmpty(value!, "first name") !=
+                                null) {
+                              return validateNotEmpty(value, "first name")!
+                                  .error!
+                                  .message;
+                            } else {
+                              return null;
                             }
-                            return null;
                           },
                           decoration: const InputDecoration(
                             labelText: 'First Name',
@@ -120,10 +124,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         TextFormField(
                           controller: lastController,
                           validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter your last name';
+                            if (validateNotEmpty(value!, "last name") != null) {
+                              return validateNotEmpty(value, "last name")!
+                                  .error!
+                                  .message;
+                            } else {
+                              return null;
                             }
-                            return null;
                           },
                           decoration: const InputDecoration(
                             labelText: 'Last Name',
@@ -134,10 +141,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         TextFormField(
                           controller: usernameController,
                           validator: (value) {
-                            if (value!.length < 8) {
-                              return 'Username must be at least 8 characters';
+                            if (validateUserName(value!) != null) {
+                              return validateUserName(value)!.error!.message;
+                            } else {
+                              return null;
                             }
-                            return null;
                           },
                           decoration: const InputDecoration(
                             labelText: 'User Name',
@@ -149,10 +157,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           controller: passwordController,
                           obscureText: _isPasswordHidden,
                           validator: (value) {
-                            if (value!.length < 8) {
-                              return 'Password must be at least 8 characters';
+                            if (validatePassword(value!) != null) {
+                              return validatePassword(value)!.error!.message;
+                            } else {
+                              return null;
                             }
-                            return null;
                           },
                           decoration: InputDecoration(
                             labelText: 'Password',
