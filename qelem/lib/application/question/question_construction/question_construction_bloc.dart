@@ -1,16 +1,15 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:qelem/domain/question/question_repository_interface.dart';
 import 'package:qelem/domain/tag/tag.dart';
-import 'package:qelem/infrastructure/tag/tag_repository.dart';
-
-import '../../../infrastructure/question/question_repository.dart';
+import 'package:qelem/domain/tag/tag_repository_interface.dart';
 
 import 'question_construction_event.dart';
 import 'question_construction_state.dart';
 
 class QuestionContructionBloc
     extends Bloc<QuestionConstructionEvent, QuestionConstructionState> {
-  final QuestionRepository questionRepository;
-  final TagRepository tagRepository;
+  final QuestionRepositoryInterface questionRepository;
+  final TagRepositoryInterface tagRepository;
 
   List<Tag> _selectedTags = List.empty();
   List<Tag> _tags = List.empty();

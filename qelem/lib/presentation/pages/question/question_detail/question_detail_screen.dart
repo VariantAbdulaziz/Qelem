@@ -11,6 +11,7 @@ import 'package:qelem/domain/answer/answer.dart';
 import 'package:qelem/domain/answer/answer_form.dart';
 import 'package:qelem/domain/common/vote.dart';
 import 'package:qelem/domain/question/question.dart';
+import 'package:qelem/infrastructure/auth/auth_repository.dart';
 import 'package:qelem/presentation/pages/answer/widgets/answer_card.dart';
 import 'package:qelem/presentation/pages/question/question_detail/widgets/answer_bottom_sheet.dart';
 import 'package:qelem/presentation/pages/question/question_detail/widgets/answer_placehoder.dart';
@@ -30,7 +31,6 @@ class QuestionDetailScreen extends StatefulWidget {
 
 class _QuestionDetailScreenState extends State<QuestionDetailScreen> {
   var dropdownValue = "Recency";
-
   @override
   Widget build(BuildContext context) {
     return BlocListener<QuestionDetailBloc, QuestionDetailState>(
@@ -55,31 +55,42 @@ class _QuestionDetailScreenState extends State<QuestionDetailScreen> {
         }
       },
       child: Scaffold(
-        appBar: AppBar(
-          actions: [
-            // Shown when the user is the author of the question.
-            IconButton(
-              icon: const Icon(Icons.edit),
-              onPressed: () =>
-                  context.go('/edit-question/${widget.questionId}'),
-            ),
-            IconButton(
-              icon: const Icon(Icons.delete),
-              onPressed: () {
-                showDialog(
-                  context: this.context,
-                  builder: (context) => DeleteQuestionDialog(
-                    onDelete: () {
-                      BlocProvider.of<QuestionDetailBloc>(this.context).add(
-                        QuestionDetailDeleteEvent(widget.questionId),
+        appBar: AppBar(actions: [
+          BlocBuilder<QuestionDetailBloc, QuestionDetailState>(
+              builder: (context, state) {
+            if (state is QuestionDetailStateLoadedQuestion &&
+                state.userId == state.question.author.id) {
+              return Row(
+                children: [
+                  // Shown when the user is the author of the question.
+                  IconButton(
+                    icon: const Icon(Icons.edit),
+                    onPressed: () =>
+                        context.go('/edit-question/${widget.questionId}'),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.delete),
+                    onPressed: () {
+                      showDialog(
+                        context: this.context,
+                        builder: (context) => DeleteQuestionDialog(
+                          onDelete: () {
+                            BlocProvider.of<QuestionDetailBloc>(this.context)
+                                .add(
+                              QuestionDetailDeleteEvent(widget.questionId),
+                            );
+                          },
+                        ),
                       );
                     },
                   ),
-                );
-              },
-            ),
-          ],
-        ),
+                ],
+              );
+            } else {
+              return const SizedBox();
+            }
+          }),
+        ]),
         body: NestedScrollView(
           body: Stack(
             children: [
@@ -92,7 +103,7 @@ class _QuestionDetailScreenState extends State<QuestionDetailScreen> {
                 },
                 builder: (context, state) {
                   if (state is AnswerStateLoadedAnswers) {
-                    return _buildAnswers(context, state.answers);
+                    return _buildAnswers(context, state.answers, state.userId);
                   } else if (state is AnswerStateError) {
                     return Center(
                       child: Text(state.error.message),
@@ -254,19 +265,33 @@ class _QuestionDetailScreenState extends State<QuestionDetailScreen> {
                 Theme.of(context).textTheme.bodyText2?.copyWith(fontSize: 16.0),
           ),
         ),
-        if (question.tags.isNotEmpty) const Divider(),
-        if (question.tags.isNotEmpty)
-          Wrap(
-            children: [
-              for (final tag in question.tags)
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Chip(
-                    label: Text(tag.name.value),
-                  ),
-                ),
-            ],
+        const Divider(),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Text(
+            "Tags",
+            style: Theme.of(context).textTheme.bodyText2,
           ),
+        ),
+        if (question.tags.isEmpty)
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              "No Tags",
+              style: Theme.of(context).textTheme.subtitle2,
+            ),
+          ),
+        Wrap(
+          children: [
+            for (final tag in question.tags)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Chip(
+                  label: Text(tag.name.value),
+                ),
+              ),
+          ],
+        ),
         const Divider(),
         ButtonBar(
           alignment: MainAxisAlignment.end,
@@ -312,7 +337,7 @@ class _QuestionDetailScreenState extends State<QuestionDetailScreen> {
     );
   }
 
-  Widget _buildAnswers(BuildContext context, List<Answer> answers) {
+  Widget _buildAnswers(BuildContext context, List<Answer> answers, int userId) {
     if (answers.isEmpty) {
       return Center(
         child: Text(
@@ -344,7 +369,7 @@ class _QuestionDetailScreenState extends State<QuestionDetailScreen> {
             BlocProvider.of<AnswerBloc>(context)
                 .add(VoteAnswerEvent(answers[index], Vote.none));
           },
-          isOwner: true,
+          isOwner: userId == answer.author.id,
           onEdit: () {
             showModalBottomSheet(
               context: context,

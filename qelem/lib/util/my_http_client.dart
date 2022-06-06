@@ -1,11 +1,12 @@
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
+import 'package:qelem/common/constants.dart';
 import './string_extension.dart';
 
 // Custom HTTP client to streamline the HTTP requests.
 class MyHttpClient {
-  static const baseUrl = "http://10.0.2.2:8080/api/v1/";
+  static String baseUrl = Constants.baseUrl;
 
   final http.Client _httpClient = http.Client();
   String? _authToken;

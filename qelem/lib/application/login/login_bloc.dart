@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qelem/application/login/login_event.dart';
 import 'package:qelem/application/login/login_state.dart';
-import 'package:qelem/infrastructure/auth/auth_repository.dart';
+import 'package:qelem/domain/auth/auth_repository_interface.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  final AuthRepository _authRepository;
+  final AuthRepositoryInterface _authRepository;
 
   LoginBloc(this._authRepository) : super(const LoginState.initial()) {
     on<LoginEventLogin>(

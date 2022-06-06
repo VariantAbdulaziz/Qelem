@@ -4,8 +4,6 @@ import 'package:qelem/domain/common/vote.dart';
 import 'package:qelem/util/either.dart';
 
 abstract class AnswerRepositoryInterface {
-  Future<Either<List<Answer>>> getAllAnswers();
-
   Future<Either<Answer>> getAnswerById(int answerId);
 
   Future<Either<Answer>> createAnswer({required AnswerForm answerForm});

@@ -1,11 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qelem/application/change_password/change_password_event.dart';
 import 'package:qelem/application/change_password/change_password_state.dart';
-import 'package:qelem/infrastructure/auth/auth_repository.dart';
+
+import '../../domain/auth/auth_repository_interface.dart';
 
 class ChangePasswordBloc
     extends Bloc<ChangePasswordEvent, ChangePasswordState> {
-  final AuthRepository _authRepository;
+  final AuthRepositoryInterface _authRepository;
 
   ChangePasswordBloc(this._authRepository)
       : super(const ChangePasswordState.initial()) {

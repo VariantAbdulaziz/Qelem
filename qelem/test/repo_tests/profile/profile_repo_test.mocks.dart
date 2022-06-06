@@ -2,14 +2,13 @@
 // in qelem/test/repo_tests/profile/profile_repo_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i5;
+import 'dart:async' as _i4;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:qelem/domain/profile/edit_profile_form.dart' as _i7;
-import 'package:qelem/domain/profile/profile.dart' as _i6;
-import 'package:qelem/infrastructure/profile/profile_api.dart' as _i2;
-import 'package:qelem/infrastructure/profile/profile_repository.dart' as _i4;
-import 'package:qelem/util/either.dart' as _i3;
+import 'package:qelem/domain/profile/edit_profile_form.dart' as _i6;
+import 'package:qelem/domain/profile/profile.dart' as _i5;
+import 'package:qelem/domain/profile/profile_repository_interface.dart' as _i3;
+import 'package:qelem/util/either.dart' as _i2;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -21,39 +20,34 @@ import 'package:qelem/util/either.dart' as _i3;
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 
-class _FakeProfileApi_0 extends _i1.Fake implements _i2.ProfileApi {}
+class _FakeEither_0<T> extends _i1.Fake implements _i2.Either<T> {}
 
-class _FakeEither_1<T> extends _i1.Fake implements _i3.Either<T> {}
-
-/// A class which mocks [ProfileRepository].
+/// A class which mocks [ProfileRepositoryInterface].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockProfileRepository extends _i1.Mock implements _i4.ProfileRepository {
-  MockProfileRepository() {
+class MockProfileRepositoryInterface extends _i1.Mock
+    implements _i3.ProfileRepositoryInterface {
+  MockProfileRepositoryInterface() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.ProfileApi get profileApi =>
-      (super.noSuchMethod(Invocation.getter(#profileApi),
-          returnValue: _FakeProfileApi_0()) as _i2.ProfileApi);
-  @override
-  _i5.Future<_i3.Either<_i6.Profile>> updateProfile(
-          {_i7.EditProfileForm? profileForm}) =>
+  _i4.Future<_i2.Either<_i5.Profile>> updateProfile(
+          {_i6.EditProfileForm? profileForm}) =>
       (super.noSuchMethod(
           Invocation.method(#updateProfile, [], {#profileForm: profileForm}),
-          returnValue: Future<_i3.Either<_i6.Profile>>.value(
-              _FakeEither_1<_i6.Profile>())) as _i5
-          .Future<_i3.Either<_i6.Profile>>);
+          returnValue: Future<_i2.Either<_i5.Profile>>.value(
+              _FakeEither_0<_i5.Profile>())) as _i4
+          .Future<_i2.Either<_i5.Profile>>);
   @override
-  _i5.Future<_i3.Either<_i6.Profile>> getProfile() =>
+  _i4.Future<_i2.Either<_i5.Profile>> getProfile() =>
       (super.noSuchMethod(Invocation.method(#getProfile, []),
-              returnValue: Future<_i3.Either<_i6.Profile>>.value(
-                  _FakeEither_1<_i6.Profile>()))
-          as _i5.Future<_i3.Either<_i6.Profile>>);
+              returnValue: Future<_i2.Either<_i5.Profile>>.value(
+                  _FakeEither_0<_i5.Profile>()))
+          as _i4.Future<_i2.Either<_i5.Profile>>);
   @override
-  _i5.Future<_i3.Either<void>> deleteAccount() => (super.noSuchMethod(
+  _i4.Future<_i2.Either<void>> deleteAccount() => (super.noSuchMethod(
           Invocation.method(#deleteAccount, []),
-          returnValue: Future<_i3.Either<void>>.value(_FakeEither_1<void>()))
-      as _i5.Future<_i3.Either<void>>);
+          returnValue: Future<_i2.Either<void>>.value(_FakeEither_0<void>()))
+      as _i4.Future<_i2.Either<void>>);
 }

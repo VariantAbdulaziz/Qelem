@@ -57,7 +57,7 @@ class App extends StatelessWidget {
             state.location != Routes.splashScreen) {
           return Routes.splashScreen;
         }
-
+        
         return null;
       },
       routes: [
@@ -117,6 +117,13 @@ class App extends StatelessWidget {
             final qid = int.parse(state.params['id']!);
             return QuestionDetailPage(questionId: qid);
           },
+        ),
+        // Admin Dashboard
+        GoRoute(
+          path: Routes.adminDashboard,
+          builder: (context, state) => const MainScreen(
+            index: 3,
+          ),
         ),
       ],
     );

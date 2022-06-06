@@ -1,11 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:qelem/infrastructure/question/question_repository.dart';
+import 'package:qelem/domain/question/question_repository_interface.dart';
 
 import 'questions_list_event.dart';
 import 'questions_list_state.dart';
 
 class QuestionsListBloc extends Bloc<QuestionsListEvent, QuestionsListState> {
-  final QuestionRepository questionRepository;
+  final QuestionRepositoryInterface questionRepository;
 
   QuestionsListBloc({required this.questionRepository})
       : super(const QuestionsListStateInitial()) {

@@ -20,7 +20,7 @@ mixin _$AnswerState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Answer> answers) loadedAnswers,
+    required TResult Function(List<Answer> answers, int userId) loadedAnswers,
     required TResult Function(Error error) error,
     required TResult Function(String message) success,
   }) =>
@@ -29,7 +29,7 @@ mixin _$AnswerState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Answer> answers)? loadedAnswers,
+    TResult Function(List<Answer> answers, int userId)? loadedAnswers,
     TResult Function(Error error)? error,
     TResult Function(String message)? success,
   }) =>
@@ -38,7 +38,7 @@ mixin _$AnswerState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Answer> answers)? loadedAnswers,
+    TResult Function(List<Answer> answers, int userId)? loadedAnswers,
     TResult Function(Error error)? error,
     TResult Function(String message)? success,
     required TResult orElse(),
@@ -133,7 +133,7 @@ class _$AnswerStateInitial implements AnswerStateInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Answer> answers) loadedAnswers,
+    required TResult Function(List<Answer> answers, int userId) loadedAnswers,
     required TResult Function(Error error) error,
     required TResult Function(String message) success,
   }) {
@@ -145,7 +145,7 @@ class _$AnswerStateInitial implements AnswerStateInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Answer> answers)? loadedAnswers,
+    TResult Function(List<Answer> answers, int userId)? loadedAnswers,
     TResult Function(Error error)? error,
     TResult Function(String message)? success,
   }) {
@@ -157,7 +157,7 @@ class _$AnswerStateInitial implements AnswerStateInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Answer> answers)? loadedAnswers,
+    TResult Function(List<Answer> answers, int userId)? loadedAnswers,
     TResult Function(Error error)? error,
     TResult Function(String message)? success,
     required TResult orElse(),
@@ -256,7 +256,7 @@ class _$AnswerStateLoading implements AnswerStateLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Answer> answers) loadedAnswers,
+    required TResult Function(List<Answer> answers, int userId) loadedAnswers,
     required TResult Function(Error error) error,
     required TResult Function(String message) success,
   }) {
@@ -268,7 +268,7 @@ class _$AnswerStateLoading implements AnswerStateLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Answer> answers)? loadedAnswers,
+    TResult Function(List<Answer> answers, int userId)? loadedAnswers,
     TResult Function(Error error)? error,
     TResult Function(String message)? success,
   }) {
@@ -280,7 +280,7 @@ class _$AnswerStateLoading implements AnswerStateLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Answer> answers)? loadedAnswers,
+    TResult Function(List<Answer> answers, int userId)? loadedAnswers,
     TResult Function(Error error)? error,
     TResult Function(String message)? success,
     required TResult orElse(),
@@ -341,7 +341,7 @@ abstract class _$$AnswerStateLoadedAnswersCopyWith<$Res> {
   factory _$$AnswerStateLoadedAnswersCopyWith(_$AnswerStateLoadedAnswers value,
           $Res Function(_$AnswerStateLoadedAnswers) then) =
       __$$AnswerStateLoadedAnswersCopyWithImpl<$Res>;
-  $Res call({List<Answer> answers});
+  $Res call({List<Answer> answers, int userId});
 }
 
 /// @nodoc
@@ -359,12 +359,17 @@ class __$$AnswerStateLoadedAnswersCopyWithImpl<$Res>
   @override
   $Res call({
     Object? answers = freezed,
+    Object? userId = freezed,
   }) {
     return _then(_$AnswerStateLoadedAnswers(
       answers == freezed
           ? _value._answers
           : answers // ignore: cast_nullable_to_non_nullable
               as List<Answer>,
+      userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -372,7 +377,7 @@ class __$$AnswerStateLoadedAnswersCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AnswerStateLoadedAnswers implements AnswerStateLoadedAnswers {
-  const _$AnswerStateLoadedAnswers(final List<Answer> answers)
+  const _$AnswerStateLoadedAnswers(final List<Answer> answers, this.userId)
       : _answers = answers;
 
   final List<Answer> _answers;
@@ -383,8 +388,11 @@ class _$AnswerStateLoadedAnswers implements AnswerStateLoadedAnswers {
   }
 
   @override
+  final int userId;
+
+  @override
   String toString() {
-    return 'AnswerState.loadedAnswers(answers: $answers)';
+    return 'AnswerState.loadedAnswers(answers: $answers, userId: $userId)';
   }
 
   @override
@@ -392,12 +400,15 @@ class _$AnswerStateLoadedAnswers implements AnswerStateLoadedAnswers {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AnswerStateLoadedAnswers &&
-            const DeepCollectionEquality().equals(other._answers, _answers));
+            const DeepCollectionEquality().equals(other._answers, _answers) &&
+            const DeepCollectionEquality().equals(other.userId, userId));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_answers));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_answers),
+      const DeepCollectionEquality().hash(userId));
 
   @JsonKey(ignore: true)
   @override
@@ -411,11 +422,11 @@ class _$AnswerStateLoadedAnswers implements AnswerStateLoadedAnswers {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Answer> answers) loadedAnswers,
+    required TResult Function(List<Answer> answers, int userId) loadedAnswers,
     required TResult Function(Error error) error,
     required TResult Function(String message) success,
   }) {
-    return loadedAnswers(answers);
+    return loadedAnswers(answers, userId);
   }
 
   @override
@@ -423,11 +434,11 @@ class _$AnswerStateLoadedAnswers implements AnswerStateLoadedAnswers {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Answer> answers)? loadedAnswers,
+    TResult Function(List<Answer> answers, int userId)? loadedAnswers,
     TResult Function(Error error)? error,
     TResult Function(String message)? success,
   }) {
-    return loadedAnswers?.call(answers);
+    return loadedAnswers?.call(answers, userId);
   }
 
   @override
@@ -435,13 +446,13 @@ class _$AnswerStateLoadedAnswers implements AnswerStateLoadedAnswers {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Answer> answers)? loadedAnswers,
+    TResult Function(List<Answer> answers, int userId)? loadedAnswers,
     TResult Function(Error error)? error,
     TResult Function(String message)? success,
     required TResult orElse(),
   }) {
     if (loadedAnswers != null) {
-      return loadedAnswers(answers);
+      return loadedAnswers(answers, userId);
     }
     return orElse();
   }
@@ -488,10 +499,12 @@ class _$AnswerStateLoadedAnswers implements AnswerStateLoadedAnswers {
 }
 
 abstract class AnswerStateLoadedAnswers implements AnswerState {
-  const factory AnswerStateLoadedAnswers(final List<Answer> answers) =
+  const factory AnswerStateLoadedAnswers(
+          final List<Answer> answers, final int userId) =
       _$AnswerStateLoadedAnswers;
 
   List<Answer> get answers => throw _privateConstructorUsedError;
+  int get userId => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$AnswerStateLoadedAnswersCopyWith<_$AnswerStateLoadedAnswers>
       get copyWith => throw _privateConstructorUsedError;
@@ -564,7 +577,7 @@ class _$AnswerStateError implements AnswerStateError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Answer> answers) loadedAnswers,
+    required TResult Function(List<Answer> answers, int userId) loadedAnswers,
     required TResult Function(Error error) error,
     required TResult Function(String message) success,
   }) {
@@ -576,7 +589,7 @@ class _$AnswerStateError implements AnswerStateError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Answer> answers)? loadedAnswers,
+    TResult Function(List<Answer> answers, int userId)? loadedAnswers,
     TResult Function(Error error)? error,
     TResult Function(String message)? success,
   }) {
@@ -588,7 +601,7 @@ class _$AnswerStateError implements AnswerStateError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Answer> answers)? loadedAnswers,
+    TResult Function(List<Answer> answers, int userId)? loadedAnswers,
     TResult Function(Error error)? error,
     TResult Function(String message)? success,
     required TResult orElse(),
@@ -717,7 +730,7 @@ class _$AnswerStateSuccess implements AnswerStateSuccess {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Answer> answers) loadedAnswers,
+    required TResult Function(List<Answer> answers, int userId) loadedAnswers,
     required TResult Function(Error error) error,
     required TResult Function(String message) success,
   }) {
@@ -729,7 +742,7 @@ class _$AnswerStateSuccess implements AnswerStateSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Answer> answers)? loadedAnswers,
+    TResult Function(List<Answer> answers, int userId)? loadedAnswers,
     TResult Function(Error error)? error,
     TResult Function(String message)? success,
   }) {
@@ -741,7 +754,7 @@ class _$AnswerStateSuccess implements AnswerStateSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Answer> answers)? loadedAnswers,
+    TResult Function(List<Answer> answers, int userId)? loadedAnswers,
     TResult Function(Error error)? error,
     TResult Function(String message)? success,
     required TResult orElse(),

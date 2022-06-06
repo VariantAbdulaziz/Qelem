@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qelem/application/profile/edit_profile/edit_profile_event.dart';
 import 'package:qelem/application/profile/edit_profile/edit_profile_state.dart';
-import 'package:qelem/infrastructure/profile/profile_repository.dart';
+import 'package:qelem/domain/profile/profile_repository_interface.dart';
 
 class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
-  final ProfileRepository _profileRepository;
+  final ProfileRepositoryInterface _profileRepository;
 
   EditProfileBloc(this._profileRepository)
       : super(const EditProfileState.initial()) {

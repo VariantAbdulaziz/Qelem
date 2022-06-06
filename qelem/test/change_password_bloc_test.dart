@@ -4,20 +4,20 @@ import 'package:mockito/mockito.dart';
 import 'package:qelem/application/change_password/change_password_bloc.dart';
 import 'package:qelem/application/change_password/change_password_event.dart';
 import 'package:qelem/application/change_password/change_password_state.dart';
+import 'package:qelem/domain/auth/auth_repository_interface.dart';
 import 'package:qelem/domain/auth/change_password_form.dart';
 import 'package:qelem/domain/auth/password.dart';
-import 'package:qelem/infrastructure/auth/auth_repository.dart';
 import 'package:qelem/util/either.dart';
 import 'package:qelem/util/error.dart';
 
 import 'change_password_bloc_test.mocks.dart';
 
-@GenerateMocks([AuthRepository])
+@GenerateMocks([AuthRepositoryInterface])
 void main() {
-  late MockAuthRepository mockAuthRepository;
+  late MockAuthRepositoryInterface mockAuthRepository;
 
   setUp(() {
-    mockAuthRepository = MockAuthRepository();
+    mockAuthRepository = MockAuthRepositoryInterface();
   });
 
   group("ChangePasswordBloc", () {
@@ -29,11 +29,13 @@ void main() {
         newPassword: Password("newPassword"),
       );
 
-      when(mockAuthRepository.changePassword(changePasswordForm: changePasswordForm))
+      when(mockAuthRepository.changePassword(
+              changePasswordForm: changePasswordForm))
           .thenAnswer((_) async => Either());
 
       final changePasswordBloc = ChangePasswordBloc(mockAuthRepository);
-      changePasswordBloc.add(ChangePasswordEvent.changePassword(changePasswordForm));
+      changePasswordBloc
+          .add(ChangePasswordEvent.changePassword(changePasswordForm));
 
       expectLater(
           changePasswordBloc.stream,
@@ -51,11 +53,13 @@ void main() {
         newPassword: Password("newPassword"),
       );
 
-      when(mockAuthRepository.changePassword(changePasswordForm: changePasswordForm))
+      when(mockAuthRepository.changePassword(
+              changePasswordForm: changePasswordForm))
           .thenAnswer((_) async => Either(error: Error("error")));
 
       final changePasswordBloc = ChangePasswordBloc(mockAuthRepository);
-      changePasswordBloc.add(ChangePasswordEvent.changePassword(changePasswordForm));
+      changePasswordBloc
+          .add(ChangePasswordEvent.changePassword(changePasswordForm));
 
       expectLater(
           changePasswordBloc.stream,

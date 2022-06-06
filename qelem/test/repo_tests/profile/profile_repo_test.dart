@@ -5,18 +5,18 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:qelem/domain/profile/edit_profile_form.dart';
 import 'package:qelem/domain/profile/profile.dart';
-import 'package:qelem/infrastructure/profile/profile_repository.dart';
+import 'package:qelem/domain/profile/profile_repository_interface.dart';
 import 'package:qelem/util/either.dart';
 
 import 'profile_repo_test.mocks.dart';
 
-@GenerateMocks([ProfileRepository])
+@GenerateMocks([ProfileRepositoryInterface])
 void main() {
-  late MockProfileRepository mockProfileRepository;
+  late MockProfileRepositoryInterface mockProfileRepository;
   late Profile mockProfile;
 
   setUp(() {
-    mockProfileRepository = MockProfileRepository();
+    mockProfileRepository = MockProfileRepositoryInterface();
     mockProfile = Profile(
         id: 1,
         userName: 'userName',
@@ -46,7 +46,8 @@ void main() {
       when(mockProfileRepository.updateProfile(profileForm: editProfileForm))
           .thenAnswer((_) async => Either(val: mockProfile));
 
-      final result = await mockProfileRepository.updateProfile(profileForm: editProfileForm);
+      final result = await mockProfileRepository.updateProfile(
+          profileForm: editProfileForm);
 
       expect(result, isA<Either<Profile>>());
       expect(result.val, mockProfile);

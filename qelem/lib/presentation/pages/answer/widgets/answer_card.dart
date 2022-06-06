@@ -40,7 +40,7 @@ class AnswerCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CircleAvatar(
-                    radius: 20,
+                    radius: 15,
                     backgroundImage:
                         NetworkImage(answer.author.profilePicture)),
                 Padding(
